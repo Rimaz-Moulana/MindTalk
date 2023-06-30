@@ -32,6 +32,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
+  justify-items: center;
 }
 
 h1 {
@@ -70,6 +72,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+
+/* Your other CSS code goes here */
 
 
 @tailwind base;
