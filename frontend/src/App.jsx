@@ -1,4 +1,8 @@
 import styles from './style';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/shared/Layout'
+import Dashboard from './pages/Dashboard'
+
 
 
 
@@ -16,40 +20,42 @@ import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Test
 
 
 const App = () => (
-    <div className="bg-primary w-full overflow-hidden">
-        <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-            <div className={`${styles.boxWidth}`}>
-                <Navbar />
-            </div>
+  <><Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+      </Route>
+      <Route path="login" element={<div>this is login page</div>} />
+    </Routes>
+  </Router><div className="bg-primary w-full overflow-hidden">
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Navbar />
         </div>
+      </div>
 
-        <div className={`bg-primary ${styles.flexStart}`}>
-            <div className={`${styles.boxWidth}`}>
-                <Hero />
-            </div>
+      <div className={`bg-primary ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Hero />
         </div>
+      </div>
 
 
-        <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
-            <div className={`${styles.boxWidth}`}>
-                <Stats />
-                <Diagnosetest />
-                <Aboutus />
-                <Counselorregistration />
-                <Testimonials />
-                <Clients />
-                <CTA />
-                <Footer />
-            </div>
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Stats />
+          <Diagnosetest />
+          <Aboutus />
+          <Counselorregistration />
+          <Testimonials />
+          <Clients />
+          <CTA />
+          <Footer />
         </div>
+      </div>
+    </div></>
 
 
-
-
-
-
-
-    </div>
 );
 
 
