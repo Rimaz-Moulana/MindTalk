@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/shared/Layout'
 import ClientProfile from './pages/client/ClientProfile'
 import Dashboard from './pages/client/Dashboard'
-import ClientCounsellors from './pages/client/ClientCounsellors';
+import ClientCounsellors from './pages/client/ClientCounsellors'
+import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 
 
 
@@ -27,13 +28,14 @@ const App = () => (
       <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="clientprofile" element={<ClientProfile />} />
-          <Route path="clientcounsellors" element={<ClientCounsellors />} />
+        <Route path="clientcounsellors" element={<ClientCounsellors />} />
+        <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
       </Route>
       <Route path="login" element={<div>this is login page</div>}/>
       <Route path="logout" element={<div>this is logout page</div>} />
   </Routes>
 </Router>
-<div className="bg-primary w-full overflow-hidden">
+<div className="w-full overflow-hidden bg-primary">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
