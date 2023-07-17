@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/diagnostic-test" component={DiagnosticTestPage} />
+        <Route path="/diagnostictest" component={DiagnosticTestPage} />
         {/* Other routes */}
       </Switch>
     </BrowserRouter>
