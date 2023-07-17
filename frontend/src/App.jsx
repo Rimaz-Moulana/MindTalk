@@ -1,29 +1,36 @@
 import styles from './style';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/shared/Layout';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Layout from './components/shared/Layout'
 import Dashboard from './pages/Dashboard';
-import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage';
-import TestQuestion from './components/Diagnose Test/TestQuestion';
+import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
+import ClientProfile from './pages/client/ClientProfile'
+import Dashboard from './pages/client/Dashboard'
+import ClientCounsellors from './pages/client/ClientCounsellors';
+
+
+
+
+
 import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Testimonials, Clients, CTA, Footer } from './components';
 
 
 
 const App = () => (
-  <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-        </Route>
-        <Route path="/diagnostic-test" element={<DiagnosticTestPage />}>
+  <><Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Dashboard />} />
+        <Route path="clientprofile" element={<ClientProfile />} />
+          <Route path="clientcounsellors" element={<ClientCounsellors />} />
+      </Route>
+      <Route path="/diagnostic-test" element={<DiagnosticTestPage />}>
         </Route>
         <Route path="/test-questions" element={<TestQuestion />}>
         </Route>
-        <Route path="login" element={<div>this is login page</div>} />
-      </Routes>
-    </Router>
-    
-    <div className="bg-primary w-full overflow-hidden">
+      <Route path="login" element={<div>this is login page</div>} />
+      <Route path="logout" element={<div>this is logout page</div>} />
+    </Routes>
+  </Router><div className="bg-primary w-full overflow-hidden">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />

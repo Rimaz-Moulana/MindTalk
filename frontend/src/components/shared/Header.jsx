@@ -9,7 +9,7 @@ export default function Header() {
     
   return (
     <div className='bg-white w-full top-0 z-0'>
-        <div className='md:flex float-right items-center py-4 pr-2 h-[64px] min-h-[64px]'>
+        <div className='sm:flex md:flex float-right items-center py-4 pr-2 h-[64px] min-h-[64px]'>
     
             <div className='flex float-right items-center gap-2 mr-2'>
             <Popover className="relative">
@@ -70,19 +70,8 @@ export default function Header() {
                                     active && 'bg-gray-100',
                                     'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                                     )}
-                                    onClick={() => navigate('/profile')}>
+                                    onClick={() => navigate('/clientprofile')}>
                                     Your Profile 
-                                </div>
-                            )}
-                        </Menu.Item>
-                        <Menu.Item>
-                            {({ active }) => (
-                                <div className={classNames(
-                                    active && 'bg-gray-100',
-                                    'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
-                                    )}
-                                    onClick={() => navigate('/settings')}>
-                                    Settings
                                 </div>
                             )}
                         </Menu.Item>
