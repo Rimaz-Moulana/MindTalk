@@ -8,7 +8,7 @@ export default function Header() {
     const navigate = useNavigate()
     
   return (
-    <div className='bg-white w-full top-0 z-50'>
+    <div className='bg-white w-full top-0 z-0'>
         <div className='sm:flex md:flex float-right items-center py-4 pr-2 h-[64px] min-h-[64px]'>
     
             <div className='flex float-right items-center gap-2 mr-2'>

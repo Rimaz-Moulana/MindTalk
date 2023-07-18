@@ -1,0 +1,12 @@
+Changes Done
+
+Tailwind.config.js -> tailwindcss/forms
+
+Installed packages
+
+headlessui  npm install @headlessui/react
+react-icons  npm install react-icons --save
+react-router-dom   npm i react-router-dom
+classnames   npm install classnames
+tailwind forms   npm install -D @tailwindcss/forms
+npm i -s react-fetch-hook

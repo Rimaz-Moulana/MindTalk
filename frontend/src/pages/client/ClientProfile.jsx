@@ -1,5 +1,4 @@
 import React from 'react';
-import sky from '../../assets/sky.jpg';
 import logo from '../../assets/logo.png';
 import { FiClipboard } from 'react-icons/fi';
 
@@ -309,8 +308,11 @@ export default function Dashboard() {
 
         <div className="bg-white rounded-xl shadow-md overflow-hidden text-center pb-5">
 
-          <img src={sky} alt="sky" className="w-full h-48 object-cover" />
-          <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto mt-[-10]" />
+          {/* <img src={sky} alt="sky" className="w-full h-48 object-cover" /> */}
+          <div className='h-48 w-full bg-sky-500 bg-cover bg-no-repeat bg-center' 
+            style={{background: 'url("https://source.unsplash.com/650x200?sky")'}}>
+          </div>
+          <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto -mt-10" />
           <span className="font-bold text-xl text-blue-900">John Doe</span>
 
         </div>

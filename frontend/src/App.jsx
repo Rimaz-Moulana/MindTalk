@@ -8,6 +8,7 @@ import Dashboard from './pages/client/Dashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
+import ClientRelaxation from './pages/client/ClientRelaxation';
 
 
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
           <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
+          <Route path='clientrelaxation' element={<ClientRelaxation />} />
       </Route>
       <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>

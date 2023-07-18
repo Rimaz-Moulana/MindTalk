@@ -28,7 +28,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'relaxation',
 		label: 'Relaxation',
-		path: '/relaxation',
+		path: '/clientrelaxation',
 		icon: <FiSlack />
 	},
 	{
