@@ -8,8 +8,12 @@ import Dashboard from './pages/client/Dashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
-import ClientRelaxation from './pages/client/ClientRelaxation';
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import ClientMusic from './pages/client/ClientMusic';
+import ClientMeditation from './pages/client/ClientMeditation';
+import CounsellorLayout from "./components/shared/CounsellorLayout";
+import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard"
+
 
 
 
@@ -38,8 +42,13 @@ const App = () => (
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
           <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
-          <Route path='clientrelaxation' element={<ClientRelaxation />} />
+          <Route path='clientmusic' element={<ClientMusic />} />
+          <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="counsellorProfile" element={<CounsellorProfile />} />
+      </Route>
+      <Route path="counsellor" element={<CounsellorLayout />}>
+        <Route index element={<CounsellorDashboard />} />
+        <Route path="counsellorprofile" element={<CounsellorProfile />} /> 
       </Route>
       <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>
