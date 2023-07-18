@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f364a62c-f82c-4f2d-a6e6-c27937b5d558" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2SiGEf0ssa4XAVB8eiHrt8j9Fza" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f364a62c-f82c-4f2d-a6e6-c27937b5d558" name="Changes" comment="" />
+      <created>1689621877141</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689621877141</updated>
+      <workItem from="1689621878454" duration="647000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

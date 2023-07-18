@@ -9,7 +9,8 @@ import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
 import ClientRelaxation from './pages/client/ClientRelaxation';
-import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import CounsellorProfile from './pages/counsellor/CounsellorProfile';
+import TestEmail from './components/Diagnose Test/TestEmail';
 
 
 
@@ -28,60 +29,65 @@ import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Test
 
 
 
-const App = () => (
-  <>
-    <Router>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/message" element={<ChatApp />} />
-          <Route path="clientprofile" element={<ClientProfile />} />
-          <Route path="clientcounsellors" element={<ClientCounsellors />} />
-          <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
-          <Route path='clientrelaxation' element={<ClientRelaxation />} />
-          <Route path="counsellorProfile" element={<CounsellorProfile />} />
-      </Route>
-      <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
-        </Route>
-        <Route path="/test-questions" element={<TestQuestion />}>
-        </Route>
-      <Route path="login" element={<div>this is login page</div>} />
-      <Route path="logout" element={<div>this is logout page</div>} />
-  </Routes>
-    </Router>
-  
-    
-    
-    {/* <div className="w-full overflow-hidden bg-primary">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar />
-        </div>
-      </div>
 
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Hero />
-        </div>
-      </div>
+function App() {
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/message" element={<ChatApp />} />
+            <Route path="clientprofile" element={<ClientProfile />} />
+            <Route path="clientcounsellors" element={<ClientCounsellors />} />
+            <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
+            <Route path='clientrelaxation' element={<ClientRelaxation />} />
+            <Route path="counsellorProfile" element={<CounsellorProfile />} />
+          </Route>
+          <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+          </Route>
+          <Route path='/testemail' element={<TestEmail />}></Route>
+          <Route path="/test-questions" element={<TestQuestion />}>
+          </Route>
+
+          <Route path="login" element={<div>this is login page</div>} />
+          <Route path="logout" element={<div>this is logout page</div>} />
+        </Routes>
+      </Router>
 
 
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Stats />
-          <Diagnosetest />
-          <Aboutus />
-          <Counselorregistration />
-          <Testimonials />
-          <Clients />
-          <CTA />
-          <Footer />
-        </div>
-      </div>
-    </div></> */}
+
+      {/* <div className="w-full overflow-hidden bg-primary">
+              <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+                <div className={`${styles.boxWidth}`}>
+                  <Navbar />
+                </div>
+              </div>
+        
+              <div className={`bg-primary ${styles.flexStart}`}>
+                <div className={`${styles.boxWidth}`}>
+                  <Hero />
+                </div>
+              </div>
+        
+        
+              <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+                <div className={`${styles.boxWidth}`}>
+                  <Stats />
+                  <Diagnosetest />
+                  <Aboutus />
+                  <Counselorregistration />
+                  <Testimonials />
+                  <Clients />
+                  <CTA />
+                  <Footer />
+                </div>
+              </div>
+            </div></> */}
 
     </>
-);
+  );
+}
 
 
 export default App
