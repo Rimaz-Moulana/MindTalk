@@ -1,8 +1,8 @@
 import styles from './style';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/shared/Layout'
-import Dashboard from './pages/Dashboard';
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
+import TestQuestion from './components/Diagnose Test/TestQuestion';
 import ClientProfile from './pages/client/ClientProfile'
 import Dashboard from './pages/client/Dashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
