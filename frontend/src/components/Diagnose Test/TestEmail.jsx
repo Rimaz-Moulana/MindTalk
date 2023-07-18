@@ -11,7 +11,7 @@ const testEmail = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <h1 className="text-3xl text-blue-500 font-semibold text-center" >THANK YOU</h1>
-          <p className="mt-10 text-center text-lg text-center">
+          <p className="block mt-10 text-center text-lg">
             We are working on  your test results<br />
             Please provide the email here.
             We would sent you the result email as soon as possible<br />
