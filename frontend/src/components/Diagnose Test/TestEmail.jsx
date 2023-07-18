@@ -10,7 +10,7 @@ const testEmail = () => {
 
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <h1 className="text-3xl text-blue-500 font-semibold text-center" >Thank You</h1>
+          <h1 className="text-3xl text-blue-500 font-semibold text-center" >THANK YOU</h1>
           <p className="mt-10 text-center text-lg text-center">
             We are working on  your test results<br />
             Please provide the email here.
