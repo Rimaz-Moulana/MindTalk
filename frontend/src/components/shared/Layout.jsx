@@ -9,7 +9,7 @@ export default function Layout() {
       <Sidebar />
       <div className='flex-1 h-screen flex flex-col'>
         <Header />
-        <div className='p-4 min-h-0 overflow-auto'>
+        <div className='p-4 min-h-0 overflow-auto' style={{ height: 'calc(100% - 64px)' }}>
           {<Outlet/>}
         </div>
       </div>

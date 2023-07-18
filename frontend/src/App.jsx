@@ -1,4 +1,4 @@
-import styles from './style';
+import styles from './style'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './components/shared/Layout'
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
@@ -16,11 +16,20 @@ import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Test
 
 
 
+
+
+
+
+
+
+
+
 const App = () => (
   <><Router>
     <Routes>
       <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
+          <Route path="/message" element={<ChatApp />} />
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
           <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
@@ -32,7 +41,7 @@ const App = () => (
       <Route path="login" element={<div>this is login page</div>} />
       <Route path="logout" element={<div>this is logout page</div>} />
   </Routes>
-</Router><div className="bg-primary w-full overflow-hidden">
+  </Router><div className="bg-primary w-full overflow-hidden">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
@@ -44,6 +53,7 @@ const App = () => (
           <Hero />
         </div>
       </div>
+
 
       <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
         <div className={`${styles.boxWidth}`}>
@@ -57,9 +67,10 @@ const App = () => (
           <Footer />
         </div>
       </div>
-    </div>
-  </>
+    </div></>
+
+
 );
 
-export default App;
 
+export default App
