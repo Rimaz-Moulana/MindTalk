@@ -55,6 +55,8 @@ const App = () => (
         </Route>
         <Route path="/test-questions" element={<TestQuestion />}>
         </Route>
+        <Route path="/testemail" element={<TestEmail />}>
+        </Route>
       <Route path="login" element={<div>this is login page</div>} />
       <Route path="logout" element={<div>this is logout page</div>} />
   </Routes>
