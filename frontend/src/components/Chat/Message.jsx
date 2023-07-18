@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-// import './messageStyle.css'
 import Searchbar from '../shared/Searchbar'
 import placeholderPNG from '../../assets/Chat/chatting.png'
 import { FaPaperclip, FaSmile, FaPaperPlane, FaArrowLeft } from 'react-icons/fa'
 
 const ChatApp = () => {
+    //store information about chats
     const chats = [
         {
             id: 1,
@@ -23,10 +23,11 @@ const ChatApp = () => {
         }
     ]
 
+    //to track whether chat box is open
     const [isChatBoxOpen, setChatBoxOpen] = useState(false)
-
     const [activeChat, setActiveChat] = useState(null)
     const [showChatList, setShowChatList] = useState(true)
+    //get selected chat's info
     const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
     const [selectedChatName, setSelectedChatName] = useState('')
 
@@ -36,7 +37,6 @@ const ChatApp = () => {
         if (window.innerWidth < 700 && activeChat) {
             setShowChatList(false)
         }
-        // setShowChatList(true)
 
         const selectedChat = chats.find((chat) => chat.id === chatId)
         setSelectedChatAvatar(selectedChat.avatar)
@@ -51,6 +51,7 @@ const ChatApp = () => {
     return (
         <div className="flex h-full">
             {window.innerWidth >= 700 && showChatList && !activeChat && (
+                //chat list (left side component)
                 <div className={`bg-white p-4 rounded-xl mr-4 w-96 ${showChatList ? '' : 'hidden'}`}>
                     <div className="text-blue-500 font-medium text-2xl mb-4">
                         <span>Messages</span>
@@ -79,6 +80,7 @@ const ChatApp = () => {
             )}
 
             {isChatBoxOpen && activeChat ? (
+                // chat box (right side component)
                 <div className="flex flex-col p-4 h-full bg-white rounded-xl">
                     <div className="flex items-center p-4 ">
                         <div className="flex flex-row w-12 h-12 rounded-full items-center">
@@ -129,7 +131,8 @@ const ChatApp = () => {
                     </div>
                 </div>
             ) : window.innerWidth >= 900 && !activeChat ? (
-                <div className="flex-1 p-4">
+                //placeholder picture
+                <div className="flex-1 p-4 items-center">
                     <img src={placeholderPNG} alt="placeholderpic" className="h-full" />
                 </div>
             ) : null}
