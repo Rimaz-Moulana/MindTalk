@@ -1,4 +1,4 @@
-import {FiAirplay, FiBookOpen, FiEdit, FiMessageCircle, FiPhone, FiSlack, FiUsers} from "react-icons/fi"
+import {FiAirplay, FiBookOpen, FiEdit, FiMessageCircle, FiMusic, FiPhone, FiSlack, FiUsers} from "react-icons/fi"
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -26,9 +26,15 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <FiUsers />
 	},
 	{
-		key: 'relaxation',
-		label: 'Relaxation',
-		path: '/clientrelaxation',
+		key: 'music',
+		label: 'Music',
+		path: '/clientmusic',
+		icon: <FiMusic />
+	},
+	{
+		key: 'meditation',
+		label: 'Meditation',
+		path: '/clientmeditation',
 		icon: <FiSlack />
 	},
 	{
