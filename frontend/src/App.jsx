@@ -8,12 +8,13 @@ import Dashboard from './pages/client/Dashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
+
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import ClientMusic from './pages/client/ClientMusic';
 import ClientMeditation from './pages/client/ClientMeditation';
 import CounsellorLayout from "./components/shared/CounsellorLayout";
 import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard"
-
+import TestEmail from './components/Diagnose Test/TestEmail';
 
 
 
@@ -90,7 +91,7 @@ const App = () => (
     </div></> */}
 
     </>
-);
+  );
 
 
 export default App
