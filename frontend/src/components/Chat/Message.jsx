@@ -101,8 +101,8 @@ const ChatApp = () => {
             </div>
 
             {activeChat ? (
-                <div className="flex-1 p-4 bg-white rounded-xl">
-                    <div className="flex items-center mb-4">
+                <div className="flex flex-col p-4 h-full bg-white rounded-xl">
+                    <div className="flex items-center p-4">
                         <div className="w-12 h-12 rounded-full">
                             <img src={selectedChatAvatar} alt="avatar" />
                         </div>
@@ -147,9 +147,15 @@ const ChatApp = () => {
                             placeholder="Type message"
                             className="flex-1 px-4 py-2 border border-gray-300 rounded-xl mr-4"
                         />
-                        <a href="#!">{/* <FaPaperclip /> */}</a>
-                        <a href="#!">{/* <FaSmile /> */}</a>
-                        <a href="#!">{/* <FaPaperPlane /> */}</a>
+                        <a href="#!" className="pr-2 text-gray-500 hover:text-blue-500">
+                            <FaPaperclip />
+                        </a>
+                        <a href="#!" className="pr-2 text-gray-500 hover:text-blue-500">
+                            <FaSmile />
+                        </a>
+                        <a href="#!" className="pr-2 text-gray-500 hover:text-blue-500">
+                            <FaPaperPlane />
+                        </a>
                     </div>
                 </div>
             ) : (
