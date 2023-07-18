@@ -7,6 +7,7 @@ import ClientProfile from './pages/client/ClientProfile'
 import Dashboard from './pages/client/Dashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
+import ChatApp from './components/Chat/Message';
 
 
 
