@@ -11,16 +11,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.15",
+    "@iconscout/react-unicons": "^2.0.2",
+    "@mui/material": "^5.14.1",
+    "apexcharts": "^3.41.0",
     "classnames": "^2.3.2",
+    "framer-motion": "^10.12.22",
     "lottie-web": "^5.12.2",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.1",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-fetch-hook": "^1.9.5",
     "react-icons": "^4.10.1",
-    "react-router-dom": "^6.14.1"
+    "react-router-dom": "^6.14.2"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.4",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",

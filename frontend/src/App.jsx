@@ -36,34 +36,35 @@ import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Test
 const App = () => (
   <>
     <Router>
-    <Routes>
-      <Route path="/" element={<Layout />}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="/message" element={<ChatApp />} />
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
           <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
+          <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="counsellorProfile" element={<CounsellorProfile />} />
-      </Route>
-      <Route path="counsellor" element={<CounsellorLayout />}>
-        <Route index element={<CounsellorDashboard />} />
-        <Route path="counsellorprofile" element={<CounsellorProfile />} /> 
-      </Route>
-      <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+        </Route>
+        <Route path="counsellor" element={<CounsellorLayout />}>
+          {/* <Route index element={<CounsellorDashboard />} /> */}
+          <Route path="counsellorprofile" element={<CounsellorProfile />} />
+        </Route>
+        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>
         <Route path="/test-questions" element={<TestQuestion />}>
         </Route>
         <Route path="/testemail" element={<TestEmail />}>
         </Route>
-      <Route path="login" element={<div>this is login page</div>} />
-      <Route path="logout" element={<div>this is logout page</div>} />
-  </Routes>
+        <Route path="login" element={<div>this is login page</div>} />
+        <Route path="logout" element={<div>this is logout page</div>} />
+      </Routes>
     </Router>
-  
-    
-    
+
+
+
     {/* <div className="w-full overflow-hidden bg-primary">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
@@ -92,8 +93,8 @@ const App = () => (
       </div>
     </div></> */}
 
-    </>
-  );
+  </>
+);
 
 
 export default App

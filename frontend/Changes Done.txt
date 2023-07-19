@@ -10,3 +10,14 @@ react-router-dom   npm i react-router-dom
 classnames   npm install classnames
 tailwind forms   npm install -D @tailwindcss/forms
 npm i -s react-fetch-hook
+npm install framer-motion
+npm install react-circular-progressbar
+npm install @iconscout/react-unicons
+npm install react-apexcharts apexcharts
+npm install @mui/material
+npm install @emotion/styled
+
+
+
+
+
