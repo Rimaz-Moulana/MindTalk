@@ -16,6 +16,8 @@ npm install @iconscout/react-unicons
 npm install react-apexcharts apexcharts
 npm install @mui/material
 npm install @emotion/styled
+npm install @emotion/react
+
 
 
 
