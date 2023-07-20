@@ -27,7 +27,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	},
 	{
 		key: 'music',
-		label: 'Music',
+		label: 'Music / Videos',
 		path: '/clientmusic',
 		icon: <FiMusic />
 	},

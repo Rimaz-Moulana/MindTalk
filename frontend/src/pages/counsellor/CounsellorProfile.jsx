@@ -15,7 +15,7 @@ const CounsellorProfile = () => {
             <div className="">
 
               <div className="pb-4 ">
-                <h1 className="text-2xl ml-8 font-bold text-gray-900">Personal Information</h1>
+                <h1 className="ml-8 text-2xl font-bold text-gray-900">Personal Information</h1>
 
                 <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-6 sm:grid-cols-6">
 
@@ -110,71 +110,12 @@ const CounsellorProfile = () => {
                     </div>
                   </div>
 
-                  {/* <div className="col-span-full">
-                    <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
-                      Address
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="address"
-                        id="address"
-                        autoComplete="address"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div> */}
-
-                  {/* <div className="sm:col-span-2 sm:col-start-1">
-                    <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
-                      City
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div> */}
-
-                  {/* <div className="sm:col-span-2">
-                    <label htmlFor="district" className="block text-sm font-medium leading-6 text-gray-900">
-                      District
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="district"
-                        id="district"
-                        autoComplete="address-level1"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div> */}
-
-                  {/* <div className="sm:col-span-2">
-                    <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
-                      ZIP
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="postal-code"
-                        id="postal-code"
-                        autoComplete="postal-code"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div> */}
                 </div>
 
               </div>
 
               <div className="pt-5 pb-12 border-b border-gray-900/10">
-                <h1 className="text-2xl ml-10 font-bold text-gray-900">Professional Information</h1>
+                <h1 className="ml-10 text-2xl font-bold text-gray-900">Professional Information</h1>
 
                 <div className="grid grid-cols-1 mt-8 gap-x-6 gap-y-6 sm:grid-cols-6">
 
@@ -261,12 +202,12 @@ const CounsellorProfile = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4  ">
+      <div className="flex flex-col gap-4 ">
 
         <div className="pb-5 overflow-hidden h-[52rem] text-center bg-white shadow-md rounded-xl">
 
           <img src={sky} alt="sky" className="object-cover w-full h-48" />
-          <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto -mt-10" />
+          <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
             <span className="text-xl font-bold text-blue-900">John Doe</span>
             
             <div className="mt-1 text-center">
@@ -278,7 +219,6 @@ const CounsellorProfile = () => {
                 <IconComponent />
               </div>
               <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
-                {/* <i className="mr-2 text-lg fas fa-briefcase text-blueGray-400"></i> */}
                 Solution Manager - Creative Team Officer
               </div>
               <div className="mb-2 text-blueGray-600">
@@ -304,28 +244,6 @@ const CounsellorProfile = () => {
             </div>
 
         </div>
-
-        {/* <div className="p-5 overflow-hidden text-center bg-white shadow-md rounded-xl ">
-          <div className='pb-5 border-b border-gray-900/10'>
-            <span className="text-lg text-blue-900 ">Let us get to know about you. Upload your previous medical files if any.  </span>
-            <div className="flex justify-center px-6 m-2 border border-dashed rounded-lg border-gray-900/25 py-53">
-              <div className="text-center">
-                <FiClipboard className="w-12 h-12 mx-auto mt-2 text-gray-300" aria-hidden="true" />
-                <div className="flex mt-2 text-sm leading-6 text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative font-semibold text-blue-700 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-900"
-                  >
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-                <p className="text-xs leading-5 text-gray-600">PDF, DOC</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
 
       </div>
 
