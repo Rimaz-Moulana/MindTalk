@@ -70,7 +70,7 @@ export default function CounsellorHeader() {
                                     active && 'bg-gray-100',
                                     'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                                     )}
-                                    onClick={() => navigate('/counsellorprofile')}>
+                                    onClick={() => navigate('/counsellor/counsellorprofile')}>
                                     Your Profile 
                                 </div>
                             )}

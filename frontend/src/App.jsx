@@ -8,7 +8,6 @@ import ClientDashboard from './pages/client/ClientDashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
-
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import ClientMusic from './pages/client/ClientMusic';
 import ClientMeditation from './pages/client/ClientMeditation';
@@ -42,14 +41,13 @@ const App = () => (
           <Route path="/message" element={<ChatApp />} />
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
-          <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
+          <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
           <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
-          <Route path="counsellorProfile" element={<CounsellorProfile />} />
         </Route>
-        <Route path="counsellor" element={<CounsellorLayout />}>
-          {/* <Route index element={<CounsellorDashboard />} /> */}
+        <Route path="/counsellor" element={<CounsellorLayout />}>
+          <Route index element={<CounsellorDashboard />} />
           <Route path="counsellorprofile" element={<CounsellorProfile />} />
         </Route>
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
