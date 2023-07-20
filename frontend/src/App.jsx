@@ -4,7 +4,7 @@ import Layout from './components/shared/Layout'
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
 import TestQuestion from './components/Diagnose Test/TestQuestion';
 import ClientProfile from './pages/client/ClientProfile'
-import Dashboard from './pages/client/Dashboard'
+import ClientDashboard from './pages/client/ClientDashboard'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
 import ChatApp from './components/Chat/Message';
@@ -38,7 +38,7 @@ const App = () => (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<ClientDashboard />} />
           <Route path="/message" element={<ChatApp />} />
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
