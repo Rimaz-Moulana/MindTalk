@@ -24,6 +24,9 @@ import twitter from "./twitter.svg";
 import people01 from "./people01.png";
 import people02 from "./people02.png";
 import people03 from "./people03.png";
+import img1 from "./img1.png";
+import img2 from "./img2.png";
+import img3 from "./img3.png";
 
 export {
   who,
@@ -52,4 +55,7 @@ export {
   people01,
   people02,
   people03,
+  img1,
+  img2,
+  img3,
 };
