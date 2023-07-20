@@ -1,100 +1,80 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
+import GOOGLE_ICON from '../assets/google.svg';
+import LOGIN from '../assets/login.jpg';
+import LOGO from '../assets/Logo Dark.svg';
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+
+// eslint-disable-next-line no-unused-vars
+const colors = {
+  primarty : "#060606",
+  background: "#E0E0E0",
+  display: "#090909"
+}
 export default function Login() {
-    return (
-      <>
-        {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
-          </div>
-  
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                    Password
-                  </label>
-                  <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Forgot password?
-                    </a>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Sign in
-                </button>
-              </div>
-            </form>
-  
-            <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?{' '}
-              <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                Start a 14 day free trial
-              </a>
-            </p>
-          </div>
-        </div>
-      </>
-    )
-  }
-  
+  return (
+    <div className='w-full h-screen flex items-start'>
+    <div className='relative w-full h-full flex flex-col'>
+    <div className='absolute top-[25%] left-[10%] flex flex-col'>
+    
+
+    <h1 className='text-2xl text-black font-extrabold my-4'>Turn to Peace</h1>
+    <p className='text-base text-black font-semibold'>start for free and get attarctive offer from the community.</p>
+    </div>
+      <img src={LOGIN} className='w-full h-full object-cover' />
+    </div>
+     <div className='w-3/4 h-full bg-[#f3f3f3] flex flex-col p-20 justify-between  items-center'>
+     <h2 className='text-xl font-semibold text-[#060606]'>MindTalk</h2><img className='w-[50px] h-[50px] rounded-full' src={LOGO}/>
+     
+
+    <div className='w-full flex flex-col max-w-[400px]'>
+    <div className='w-full flex flex-col mb-2'>
+    <h3 className='text-3xl font-semibold mb-4'>Login</h3>
+    <p className='tex-base mb-2'>Welcome to MindTalk, Please enter your details</p>
+    </div>
+    <div className='w-full flex flex-col'>
+    <input
+    type='email'
+    placeholder='Email'
+    className='w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none' />
+
+    <input
+    type='password'
+    placeholder='Password'
+    className='w-full text-black py-2 my-2 bg-transparent border-b border-black outline-none focus:outline-none' />
+    
+    </div>
+<div className='w-full flex items-center justify-between'>
+<div className='w-full flex'>
+<input type='checkbox' className='w-4 h-4 mr-2' />
+<p className='text-sm'>Remember Me 30 days</p>
+</div>
+<p className='text-sm font-medium whitespace-nowrap cursor-pointer underline underline-effect-2'>Forgot Password</p>
+</div>
+
+<div className='w-full flex flex-col my-4'>
+<button className='w-full text-white my-2 bg-[#060606] hover:bg-[#4d4d4d] rounded-md p-4 text-center flex items-center justify-center'>
+  Login 
+</button>
+<button className='w-full text-black  my-2 border-2 hover:bg-[#f7f7f7] border-black bg-[white] rounded-md p-4 text-center flex items-center justify-center'>
+    Register
+</button>
+</div>
+
+<div className='w-full flex items-center justify-center relative py-2'>
+<div className='w-full h-[1px] bg-black/40'></div>
+<p className='text-lg absolute text-black-50 bg-[#E0E0E0]'>or</p>
+</div>
+ <button className='w-full text-black  my-2 border-2 border-black/40 hover:bg-[#f7f7f7] bg-[white] rounded-md p-4 text-center flex items-center justify-center'>
+ <img src={GOOGLE_ICON} className='w-[25px] h-[25px] mr-2' />
+    Sign in with google
+</button>
+    </div>
+    <div className='w-full flex items-center justify-center'>
+    <p className='text-sm font-normal text-[#0606006]'>Dont have a account?<span className='font-semibold underline underline-effect-2 cursor-pointer'>Sign up for free</span> </p>
+    </div>
+   
+     </div>
+    </div>
+  )
+}
