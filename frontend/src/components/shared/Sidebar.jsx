@@ -39,7 +39,7 @@ export default function Sidebar() {
           </div>
 
           <div className={`flex flex-col gap-0.5 pt-2 border-t border-neutral-300 ${!open && "scale-0"} overflow-hidden`}>
-            <span className='text-neutral-400 text-center overflow-hidden'>MindTalk - Group 31</span>
+            <span className='text-neutral-400 text-center overflow-hidden'>MindTalk</span>
           </div>
 
         </div>
