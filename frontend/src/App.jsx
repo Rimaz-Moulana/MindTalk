@@ -1,28 +1,52 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import ChatApp from './components/Chat/Message';
+import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage';
+import TestEmail from './components/Diagnose Test/TestEmail';
+import TestQuestion from './components/Diagnose Test/TestQuestion';
+import CounsellorLayout from "./components/shared/CounsellorLayout";
+import Layout from './components/shared/Layout';
+import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
+import ClientCounsellors from './pages/client/ClientCounsellors';
+import ClientDashboard from './pages/client/ClientDashboard';
+import ClientMeditation from './pages/client/ClientMeditation';
+import ClientMusic from './pages/client/ClientMusic';
+import ClientProfile from './pages/client/ClientProfile';
+import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard";
+import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 
-import Login from './pages/Login';
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 const App = () => (
   <>
-  <Login/>
-    {/* <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<ClientDashboard />} />
           <Route path="/message" element={<ChatApp />} />
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
-          <Route path="clientcounsellorprofile" element={<ClientCounsellorProfile />} />
+          <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
           <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
-          <Route path="counsellorProfile" element={<CounsellorProfile />} />
         </Route>
-        <Route path="counsellor" element={<CounsellorLayout />}>
-          {/* <Route index element={<CounsellorDashboard />} /> */}
-          {/* <Route path="counsellorprofile" element={<CounsellorProfile />} />
+        <Route path="/counsellor" element={<CounsellorLayout />}>
+          <Route index element={<CounsellorDashboard />} />
+          <Route path="counsellorprofile" element={<CounsellorProfile />} />
         </Route>
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>
@@ -33,7 +57,7 @@ const App = () => (
         <Route path="login" element={<div>this is login page</div>} />
         <Route path="logout" element={<div>this is logout page</div>} />
       </Routes>
-    </Router> */} 
+    </Router>
 
 
 
