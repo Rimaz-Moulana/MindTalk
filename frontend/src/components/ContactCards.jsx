@@ -1,41 +1,51 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ContactCards = ({contactList}) => {
-
-  contactList && console.log(contactList)  
+const ContactCards = ({ contactList }) => {
+  contactList && console.log(contactList);
 
   return (
     <>
       {contactList?.map((contact, index) => (
         <figure key={index} className='bg-white rounded-lg shadow-md pt-7 pb-7'>
-            <img 
-                alt="user"
-                className='w-32 h-32 rounded-full mx-auto'
-                src={contact.picture.large} 
-            />
-            <figcaption className='text-center mt-5 flex-wrap'>
-                <p className='text-gray-700 font-semibold text-xl mb-2'>
-                    {contact.name.first} {contact.name.last}
-                </p>
-                <p className='text-gray-500 truncate'>
-                    {/* <span className='font-medium'>email:</span>  */}
-                    {contact.email}
-                </p>
-                <p className='text-gray-500'>
-                    {/* <span className='font-medium'>phone:</span>  */}
-                    {contact.cell} 
-                </p>
-                <p className='text-gray-500'>
-                    {/* <span className='font-medium'>city:</span>  */}
-                    {contact.location.city}
-                </p>
-            </figcaption>
+          <img
+            alt="user"
+            className='w-32 h-32 rounded-full mx-auto'
+            src={contact.picture.large}
+          />
+          <figcaption className='text-center mt-5 flex-wrap'>
+            <p className='text-gray-700 font-semibold text-xl mb-2'>
+              {contact.name.first} {contact.name.last}
+            </p>
+            <p className='text-gray-500 truncate'>
+              {contact.email}
+            </p>
+            <p className='text-gray-500'>
+              {contact.cell} 
+            </p>
+            <p className='text-gray-500'>
+              {contact.location.city}
+            </p>
+            <div className="flex justify-center grid md:grid-cols-2 gap-10 m-5 truncate">
+              <Link
+                to={`profile`}
+                // to={`clientcounsellorprofile/${contact.name.first}-${contact.name.last}`}
+                className="bg-blue-700 hover:bg-blue-900 text-white font-base p-2 rounded"
+              >
+                Profile
+              </Link>
+              <Link
+                to={'appointments'} 
+                className="bg-green-700 hover:bg-green-900 text-white font-base p-2 rounded"
+              >
+                Appointments
+              </Link>
+            </div>
+          </figcaption>
         </figure>
-      ))
-        
-      }
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default ContactCards
+export default ContactCards;
