@@ -15,7 +15,7 @@ import CounsellorLayout from "./components/shared/CounsellorLayout";
 import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard"
 import TestEmail from './components/Diagnose Test/TestEmail';
 import Blogs from './pages/client/Blogs';
-
+import PostBlog from './pages/PostBlog'
 
 
 
@@ -47,6 +47,7 @@ const App = () => (
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="blogs" element={<Blogs />} />
+          <Route path="/postblog" element={<PostBlog />} />
         </Route>
         <Route path="/counsellor" element={<CounsellorLayout />}>
           <Route index element={<CounsellorDashboard />} />
