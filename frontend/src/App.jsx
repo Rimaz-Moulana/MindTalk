@@ -15,6 +15,8 @@ import CounsellorLayout from "./components/shared/CounsellorLayout";
 import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard"
 import TestEmail from './components/Diagnose Test/TestEmail';
 import Blogs from './pages/client/Blogs';
+import Wallet from './components/Payments/Wallet';
+import WalletLayout from './components/Payments/WalletLayout';
 
 
 
@@ -46,20 +48,28 @@ const App = () => (
           <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
-          <Route path="blogs" element={<Blogs />} />
+          <Route path="/wallet" element={<Wallet />}>
+            <Route path="blogs" element={<Blogs />} />
+          </Route>
+          <Route path="/counsellor" element={<CounsellorLayout />}>
+            <Route index element={<CounsellorDashboard />} />
+            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+          </Route>
+         
         </Route>
-        <Route path="/counsellor" element={<CounsellorLayout />}>
-          <Route index element={<CounsellorDashboard />} />
-          <Route path="counsellorprofile" element={<CounsellorProfile />} />
-        </Route>
-        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
-        </Route>
-        <Route path="/test-questions" element={<TestQuestion />}>
-        </Route>
-        <Route path="/testemail" element={<TestEmail />}>
-        </Route>
+
+        <Route path="/wallet" element={<WalletLayout />}>
+            <Route index element={<Wallet />} />
+            <Route path="counsellordashboard" element={<CounsellorDashboard />} />
+          </Route>
         <Route path="login" element={<div>this is login page</div>} />
         <Route path="logout" element={<div>this is logout page</div>} />
+        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+          </Route>
+          <Route path="/test-questions" element={<TestQuestion />}>
+          </Route>
+          <Route path="/testemail" element={<TestEmail />}>
+          </Route>
       </Routes>
     </Router>
 
