@@ -1,28 +1,28 @@
-import {FiAirplay, FiMessageCircle,  FiPhone, FiUsers} from "react-icons/fi"
+import {FiAirplay, FiCheck, FiCheckCircle, FiCreditCard, FiDollarSign, FiPocket, FiUsers} from "react-icons/fi"
 
 export const WALLET_SIDEBAR_LINKS = [
 	{
 		key: 'wallet',
 		label: 'Wallet',
 		path: '/wallet',
-		icon: <FiAirplay />
+		icon: <FiPocket />
 	},
 	{
 		key: 'transhistory',
 		label: 'Transaction History',
 		path: '/transhistory',
-		icon: <FiMessageCircle />
+		icon: <FiDollarSign />
 	},
 	{
 		key: 'withdraw',
 		label: 'Withdraw',
 		path: '/withdraw',
-		icon: <FiPhone />
+		icon: <FiCreditCard />
 	},
 	{
 		key: 'dashoboard',
 		label: 'Dashboard',
 		path: '/',
-		icon: <FiUsers />
+		icon: <FiAirplay />
 	}
 ]
