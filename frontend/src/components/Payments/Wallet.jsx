@@ -1,28 +1,45 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
-
-function Wallet() {
-  const navigate = useNavigate();
-
-  const handleAnswerClick = () => {
-    navigate('/');
-  };
-
-  const handleAnswerClickBack = () => {
-    navigate('/');
-  };
-
+export default function Wallet() {
   return (
-    <div className="sky bg-white h-screen">
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="content absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-blue-500 z-10">
-          <h1 className="text-3xl font-bold mb-8">wallet</h1>
-        
+    <div className="flex flex-col gap-4 w-full">
+      {/* wallet name */}
+      <div className="bg-white rounded-xl md:col-span-3">
+        <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-20">
+          {/* Wallet name content goes here */}
+        </div>
+      </div>
+
+      {/* Three cards and an additional card */}
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-1">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-60">
+            {/* Card content goes here */}
+          </div>
+        </div>
+        <div className="col-span-1">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-60">
+            {/* Card content goes here */}
+          </div>
+        </div>
+        <div className="col-span-1">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-60">
+            {/* Card content goes here */}
+          </div>
+        </div>
+
+        <div className="col-span-1">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40">
+            {/* Card content goes here */}
+          </div>
+        </div>
+
+        <div className="col-span-4 md:col-span-3">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center h-80">
+            {/* Content for the single area goes here */}
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Wallet;
