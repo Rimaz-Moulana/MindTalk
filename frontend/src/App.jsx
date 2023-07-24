@@ -52,7 +52,6 @@ const App = () => (
           <Route path="/postblog" element={<PostBlog />} />
         </Route>
         <Route path="/wallet" element={<WalletLayout />}>
-        <Route index element={<Wallet />} />
       </Route>
         <Route path="/counsellor" element={<CounsellorLayout />}>
           <Route index element={<CounsellorDashboard />} />
