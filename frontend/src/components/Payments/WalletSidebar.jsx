@@ -1,9 +1,10 @@
 import React from 'react'
-import { WALLET_SIDEBAR_LINKS } from './WalletNav'
+import { WALLET_SIDEBAR_LINKS } from '../../lib/consts/WalletNavigation';
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { useState } from "react";
 import logo from '../../assets/logo.png'
+
 
 const linkClasses = 'flex items-center gap-2 px-3 py-2 hover:bg-blue-400 hover:no-underline active:bg-blue-700 rounded-md text-lg'
 
@@ -11,9 +12,7 @@ export default function WalletSidebar() {
   const [open, setOpen] = useState(true);
 
   const toggleWalletSidebar = () => {
-    console.log('Before toggle:', open);
     setOpen(!open);
-    console.log('After toggle:', open);
   };
   
 

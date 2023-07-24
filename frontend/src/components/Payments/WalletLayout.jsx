@@ -1,19 +1,20 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import WalletSidebar from './WalletSidebar';
-import Header from '../shared/Header';
+import WalletHeader from './WalletHeader';
 
 
-export default function WalletLayout() {
+export default function Layout() {
   return (
     <div className='flex flex-row bg-slate-100 h-screen w-screen overflow-hidden'>
       <WalletSidebar />
       <div className='flex-1 h-screen flex flex-col'>
-        <Header />
+        <WalletHeader />
         <div className='p-4 min-h-0 overflow-auto'>
-          {<Outlet/>}
+          {<Outlet />}
         </div>
       </div>
     </div>
-  )
+  );
+  
 }
