@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import ChatApp from './components/Chat/Message';
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage';
 import TestEmail from './components/Diagnose Test/TestEmail';
+
 import TestQuestion from './components/Diagnose Test/TestQuestion';
 import CounsellorLayout from "./components/shared/CounsellorLayout";
 import Layout from './components/shared/Layout';
@@ -16,11 +17,20 @@ import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 import styles from './style';
 
 
+import WalletLayout from './components/Payments/WalletLayout';
+import PostBlog from './pages/PostBlog';
+import Blogs from './pages/client/Blogs';
+
+
+
 
 
 
 
 import { Aboutus, CTA, Clients, Counselorregistration, Diagnosetest, Footer, Hero, Navbar, Stats, Testimonials } from './components';
+
+import Wallet from './components/Payments/wallet';
+
 
 
 
@@ -45,7 +55,12 @@ const App = () => (
           <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="/postblog" element={<PostBlog />} />
         </Route>
+        <Route path="/wallet" element={<WalletLayout />}>
+        <Route index element={<Wallet />} />
+      </Route>
         <Route path="/counsellor" element={<CounsellorLayout />}>
           <Route index element={<CounsellorDashboard />} />
           <Route path="counsellorprofile" element={<CounsellorProfile />} />
@@ -56,8 +71,6 @@ const App = () => (
         </Route>
         <Route path="/testemail" element={<TestEmail />}>
         </Route>
-        <Route path="login" element={<div>this is login page</div>} />
-        <Route path="logout" element={<div>this is logout page</div>} />
       </Routes>
     </Router>
 

@@ -6,7 +6,7 @@ const ProfileDetails = () => {
       
       <div className='w-full bg-top bg-no-repeat bg-cover h-60 rounded-t-xl bg-sky-500 max-md:hidden' 
                                 style={{background: 'url("https://source.unsplash.com/1500x250?mountain")'}}>
-                        </div>
+      </div>
 
       <div className=''>
         <div className='grid grid-cols-2 gap-5'>
@@ -33,7 +33,7 @@ const ProfileDetails = () => {
         </div>
 
        
-
+      <div className='grid grid-cols-2 gap-5'>
         <div className='p-5 mt-5 ml-5 mr-5 transition-transform bg-blue-50 drop-shadow-lg rounded-xl'>
            <h3 class="max-sm:2xl text-3xl font-bold mt-4 mb-4">Contact</h3>
             <ul class="list-none list-inside">
@@ -42,6 +42,11 @@ const ProfileDetails = () => {
               <li><span className="text-xl font-bold">Website   :</span> <span className='ml-5 text-lg'>www.example.com</span></li>
             </ul>
         </div>
+
+        <div>
+          
+        </div>
+      </div>
       </div>   
     </>
   )
