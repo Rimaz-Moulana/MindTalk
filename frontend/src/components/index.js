@@ -1,13 +1,13 @@
-import Navbar from "./Navbar";
-import Aboutus from "./Aboutus";
-import Counselorregistration from "./Counselorregistration";
-import Diagnosetest from "./Diagnosetest";
-import Clients from "./Clients";
-import CTA from "./CTA";
-import Stats from "./Stats";
-import Footer from "./Footer";
-import Testimonials from "./Testimonials";
-import Hero from "./Hero";
+import Navbar from "./landingpage/Navbar";
+import Aboutus from "./landingpage/Aboutus";
+import Counselorregistration from "./landingpage/Counselorregistration";
+import Diagnosetest from "./landingpage/Diagnosetest";
+import Clients from "./landingpage/Clients";
+import CTA from "./landingpage/CTA";
+import Stats from "./landingpage/Stats";
+import Footer from "./landingpage/Footer";
+import Testimonials from "./landingpage/Testimonials";
+import Hero from "./landingpage/Hero";
 
 export {
     Navbar,

@@ -17,7 +17,7 @@ import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-// import styles from './style';
+
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 
@@ -25,16 +25,10 @@ import TransHistory from './components/Payments/TransactionHistory';
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
 import Blogs from './pages/client/Blogs';
+import Landingpage from './pages/Landingpage';
 
 
 
-
-
-
-
-
-
-import { Aboutus, CTA, Clients, Counselorregistration, Diagnosetest, Footer, Hero, Navbar, Stats, Testimonials } from './components';
 
 
 
@@ -79,38 +73,14 @@ const App = () => (
         </Route>
         <Route path="/testemail" element={<TestEmail />}>
         </Route>
+        <Route path="/landingpage" element={<Landingpage />}>
+        </Route>
       </Routes>
     </Router>
 
 
 
-    {/* <div className="w-full overflow-hidden bg-primary">
-      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Navbar />
-        </div>
-      </div>
-
-      <div className={`bg-primary ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Hero />
-        </div>
-      </div>
-
-
-      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
-        <div className={`${styles.boxWidth}`}>
-          <Stats />
-          <Diagnosetest />
-          <Aboutus />
-          <Counselorregistration />
-          <Testimonials />
-          <Clients />
-          <CTA />
-          <Footer />
-        </div>
-      </div>
-    </div> */}
+   
     </>
 );
 

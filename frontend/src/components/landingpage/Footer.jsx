@@ -1,6 +1,6 @@
-import styles from "../style";
-import { logolight } from '../assets';
-import { footerLinks, socialMedia } from "../constants";
+import styles from "../../style";
+import { logolight } from '../../assets';
+import { footerLinks, socialMedia } from "../../constants";
 
 
 const Footer = () => (
