@@ -17,13 +17,14 @@ import TestEmail from './components/Diagnose Test/TestEmail';
 import Blogs from './pages/client/Blogs';
 import PostBlog from './pages/PostBlog'
 import WalletLayout from './components/Payments/WalletLayout';
-
+import Wallet from './components/Payments/wallet';
+import TransHistory from './components/Payments/TransactionHistory';
 
 
 
 
 import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Testimonials, Clients, CTA, Footer } from './components';
-import Wallet from './components/Payments/wallet';
+
 
 
 
@@ -53,6 +54,7 @@ const App = () => (
         </Route>
         <Route path="/wallet" element={<WalletLayout />}>
         <Route index element={<Wallet />} />
+        <Route path="/wallet/transhistory" element={<TransHistory />} />
       </Route>
         <Route path="/counsellor" element={<CounsellorLayout />}>
           <Route index element={<CounsellorDashboard />} />

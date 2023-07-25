@@ -10,7 +10,7 @@ export const WALLET_SIDEBAR_LINKS = [
 	{
 		key: 'transhistory',
 		label: 'Transaction History',
-		path: '/transhistory',
+		path: '/wallet/transhistory',
 		icon: <FiDollarSign />
 	},
 	{
