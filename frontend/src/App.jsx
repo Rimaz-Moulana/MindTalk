@@ -21,7 +21,7 @@ import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
-import Blogs from './pages/client/Blogs';
+import Blogs from './pages/Blogs';
 import Landingpage from './pages/Landingpage'
 
 
