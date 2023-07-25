@@ -1,5 +1,5 @@
-import { apple, bill, google } from '../assets';
-import styles, { layout } from '../style';
+import { apple, bill, google } from '../../assets';
+import styles, { layout } from '../../style';
 
 const Aboutus = () => (
   <section id="product" className={layout.sectionReverse}>
@@ -30,7 +30,7 @@ const Aboutus = () => (
 
       <div className="flex flex-row flex-wrap sm:mt-10 mt-6">
 
-        
+
         <img src={apple} alt="apple_store" className="w-[128px] h-[42px] object-contain mr-5 cursor-pointer" />
         <img src={google} alt="google_play" className="w-[128px] h-[42px] object-contain cursor-pointer" />
 

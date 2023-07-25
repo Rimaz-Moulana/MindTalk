@@ -1,5 +1,5 @@
-import styles from '../style';
-import Button from './Button';
+import styles from '../../style';
+import Button from '../Button';
 
 const CTA = () => (
   <section className={`${styles.flexCenter} ${styles.marginY} ${styles.padding} sm:flex-row flex-col bg-white rounded-[20px] box-shadow `}>
