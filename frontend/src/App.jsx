@@ -14,7 +14,10 @@ import ClientMusic from './pages/client/ClientMusic';
 import ClientProfile from './pages/client/ClientProfile';
 import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard";
 import CounsellorProfile from './pages/counsellor/CounsellorProfile';
-import styles from './style';
+import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
+import CounsellorClients from './pages/counsellor/CounsellorClients'
+import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
+// import styles from './style';
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 
@@ -54,7 +57,6 @@ const App = () => (
           <Route path="clientprofile" element={<ClientProfile />} />
           <Route path="clientcounsellors" element={<ClientCounsellors />} />
           <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
-          <Route path="counsellordashboard" element={<CounsellorDashboard />} />
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="blogs" element={<Blogs />} />
@@ -67,6 +69,9 @@ const App = () => (
         <Route path="/counsellor" element={<CounsellorLayout />}>
           <Route index element={<CounsellorDashboard />} />
           <Route path="counsellorprofile" element={<CounsellorProfile />} />
+          <Route path='counsellordoctors' element={<CounsellorDoctors/>} />
+          <Route path="counsellorclients" element={<CounsellorClients/>} />
+          <Route path="counsellorclients/profile" element={<CounsellorClientProfile/>} />
         </Route>
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>
@@ -79,7 +84,7 @@ const App = () => (
 
 
 
-    <div className="w-full overflow-hidden bg-primary">
+    {/* <div className="w-full overflow-hidden bg-primary">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
@@ -105,7 +110,7 @@ const App = () => (
           <Footer />
         </div>
       </div>
-    </div>
+    </div> */}
     </>
 );
 

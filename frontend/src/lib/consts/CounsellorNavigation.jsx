@@ -22,13 +22,13 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'clients',
 		label: 'Clients',
-		path: '/counsellorclients',
+		path: '/counsellor/counsellorclients',
 		icon: <FiUsers />
 	},
 	{
 		key: 'doctors',
 		label: 'Doctors',
-		path: '/counsellordoctors',
+		path: '/counsellor/counsellordoctors',
 		icon: <FiUsers />
 	},
 	{
