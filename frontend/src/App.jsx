@@ -17,28 +17,13 @@ import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 
 
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
-import Blogs from './pages/client/Blogs';
-import Landingpage from './pages/Landingpage';
-
-
-
-
-
-
-
-
-
-
-
-
-
+import Blogs from './pages/Blogs';
 
 
 const App = () => (
@@ -77,10 +62,6 @@ const App = () => (
         </Route>
       </Routes>
     </Router>
-
-
-
-   
     </>
 );
 
