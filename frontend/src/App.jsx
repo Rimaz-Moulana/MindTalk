@@ -15,6 +15,8 @@ import ClientProfile from './pages/client/ClientProfile';
 import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard";
 import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 import styles from './style';
+import Wallet from './components/Payments/wallet';
+import TransHistory from './components/Payments/TransactionHistory';
 
 
 import WalletLayout from './components/Payments/WalletLayout';
@@ -28,9 +30,8 @@ import Blogs from './pages/client/Blogs';
 
 
 
-import { Aboutus, CTA, Clients, Counselorregistration, Diagnosetest, Footer, Hero, Navbar, Stats, Testimonials } from './components';
 
-import Wallet from './components/Payments/wallet';
+import { Aboutus, CTA, Clients, Counselorregistration, Diagnosetest, Footer, Hero, Navbar, Stats, Testimonials } from './components';
 
 
 
