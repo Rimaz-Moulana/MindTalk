@@ -1,4 +1,4 @@
-import {FiAirplay, FiEdit, FiMessageCircle, FiPhone, FiUsers} from "react-icons/fi"
+import {FiAirplay, FiBookOpen, FiMessageCircle, FiPhone, FiUsers} from "react-icons/fi"
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -32,9 +32,9 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <FiUsers />
 	},
 	{
-		key: 'diagnostic test',
-		label: 'Diagnostic Test',
-		path: '/diagnostictest',
-		icon: <FiEdit />
-	},
+		key: 'blogs',
+		label: 'Blogs',
+		path: '/blogs',
+		icon: <FiBookOpen />
+	}
 ]
