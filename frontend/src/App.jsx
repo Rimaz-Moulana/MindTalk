@@ -17,14 +17,14 @@ import CounsellorProfile from './pages/counsellor/CounsellorProfile';
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-// import styles from './style';
+import styles from './style';
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 
 
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
-import Blogs from './pages/client/Blogs';
+import Blogs from './pages/Blogs';
 
 
 
@@ -84,7 +84,7 @@ const App = () => (
 
 
 
-    {/* <div className="w-full overflow-hidden bg-primary">
+    <div className="w-full overflow-hidden bg-primary">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
@@ -110,7 +110,7 @@ const App = () => (
           <Footer />
         </div>
       </div>
-    </div> */}
+    </div>
     </>
 );
 
