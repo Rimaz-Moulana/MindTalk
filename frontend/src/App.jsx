@@ -1,29 +1,36 @@
-import styles from './style'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './components/shared/Layout'
-import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
-import TestQuestion from './components/Diagnose Test/TestQuestion';
-import ClientProfile from './pages/client/ClientProfile'
-import ClientDashboard from './pages/client/ClientDashboard'
-import ClientCounsellors from './pages/client/ClientCounsellors'
-import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import ChatApp from './components/Chat/Message';
-import CounsellorProfile from './pages/counsellor/CounsellorProfile'
-import ClientMusic from './pages/client/ClientMusic';
-import ClientMeditation from './pages/client/ClientMeditation';
-import CounsellorLayout from "./components/shared/CounsellorLayout";
-import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard"
+import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage';
 import TestEmail from './components/Diagnose Test/TestEmail';
-import Blogs from './pages/client/Blogs';
-import PostBlog from './pages/PostBlog'
+
+import TestQuestion from './components/Diagnose Test/TestQuestion';
+import CounsellorLayout from "./components/shared/CounsellorLayout";
+import Layout from './components/shared/Layout';
+import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
+import ClientCounsellors from './pages/client/ClientCounsellors';
+import ClientDashboard from './pages/client/ClientDashboard';
+import ClientMeditation from './pages/client/ClientMeditation';
+import ClientMusic from './pages/client/ClientMusic';
+import ClientProfile from './pages/client/ClientProfile';
+import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard";
+import CounsellorProfile from './pages/counsellor/CounsellorProfile';
+import styles from './style';
+
+
 import WalletLayout from './components/Payments/WalletLayout';
+import PostBlog from './pages/PostBlog';
+import Blogs from './pages/client/Blogs';
+
+
+
+
+
+
+
+
+import { Aboutus, CTA, Clients, Counselorregistration, Diagnosetest, Footer, Hero, Navbar, Stats, Testimonials } from './components';
+
 import Wallet from './components/Payments/wallet';
-import TransHistory from './components/Payments/TransactionHistory';
-
-
-
-
-import { Navbar, Hero, Stats, Diagnosetest, Aboutus, Counselorregistration, Testimonials, Clients, CTA, Footer } from './components';
 
 
 
@@ -71,7 +78,7 @@ const App = () => (
 
 
 
-    {/* <div className="w-full overflow-hidden bg-primary">
+    <div className="w-full overflow-hidden bg-primary">
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           <Navbar />
@@ -97,9 +104,8 @@ const App = () => (
           <Footer />
         </div>
       </div>
-    </div></> */}
-
-  </>
+    </div>
+    </>
 );
 
 
