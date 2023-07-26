@@ -23,6 +23,8 @@ import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
 import Blogs from './pages/Blogs';
 import Landingpage from './pages/Landingpage'
+import ClientAppointments from './pages/client/ClientAppointments';
+import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
 
 
 const App = () => (
@@ -38,7 +40,8 @@ const App = () => (
           <Route path='clientmusic' element={<ClientMusic />} />
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="blogs" element={<Blogs />} />
-          <Route path="/postblog" element={<PostBlog />} />
+          <Route path="blogs/postblog" element={<PostBlog />} />
+          <Route path='clientappointments' element={<ClientAppointments/>} />
         </Route>
         <Route path="/wallet" element={<WalletLayout />}>
         <Route index element={<Wallet />} />
@@ -50,6 +53,9 @@ const App = () => (
           <Route path='counsellordoctors' element={<CounsellorDoctors/>} />
           <Route path="counsellorclients" element={<CounsellorClients/>} />
           <Route path="counsellorclients/profile" element={<CounsellorClientProfile/>} />
+          <Route path="counsellorappointments" element={<CounsellorAppointments/>} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/postblog" element={<PostBlog />} />
         </Route>
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>

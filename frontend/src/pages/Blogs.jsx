@@ -98,7 +98,7 @@ const Blogs = () => {
               </div>
 
                 <div className="flex justify-end mr-10 ">
-                  <Link to="/postblog" >
+                  <Link to="postblog" >
                     <button className="px-8 py-3 font-bold text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-black">
                       <span className="hidden sm:inline">Post a Blog</span>
                       <span className="md:hidden">
