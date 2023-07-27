@@ -1,28 +1,29 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import ChatApp from './components/Chat/Message';
-import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage';
-import TestEmail from './components/Diagnose Test/TestEmail';
-
-import TestQuestion from './components/Diagnose Test/TestQuestion';
-import CounsellorLayout from "./components/shared/CounsellorLayout";
-import Layout from './components/shared/Layout';
-import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile';
-import ClientCounsellors from './pages/client/ClientCounsellors';
-import ClientDashboard from './pages/client/ClientDashboard';
-import ClientMeditation from './pages/client/ClientMeditation';
-import ClientMusic from './pages/client/ClientMusic';
-import ClientProfile from './pages/client/ClientProfile';
-import CounsellorDashboard from "./pages/counsellor/CounsellorDashboard";
-import CounsellorProfile from './pages/counsellor/CounsellorProfile';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import ChatApp from './components/Chat/Message'
+import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
+import TestEmail from './components/Diagnose Test/TestEmail'
+import TestQuestion from './components/Diagnose Test/TestQuestion'
+import CounsellorLayout from './components/shared/CounsellorLayout'
+import Layout from './components/shared/Layout'
+import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile'
+import ClientCounsellors from './pages/client/ClientCounsellors'
+import ClientDashboard from './pages/client/ClientDashboard'
+import ClientMeditation from './pages/client/ClientMeditation'
+import ClientMusic from './pages/client/ClientMusic'
+import ClientProfile from './pages/client/ClientProfile'
+import CounsellorDashboard from './pages/counsellor/CounsellorDashboard'
+import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-import Wallet from './components/Payments/wallet';
-import TransHistory from './components/Payments/TransactionHistory';
-import WalletLayout from './components/Payments/WalletLayout';
-import PostBlog from './pages/PostBlog';
-import Blogs from './pages/Blogs';
+import Wallet from './components/Payments/wallet'
+import TransHistory from './components/Payments/TransactionHistory'
+import WalletLayout from './components/Payments/WalletLayout'
+import PostBlog from './pages/PostBlog'
+import Blogs from './pages/Blogs'
 import Landingpage from './pages/Landingpage'
+import ModeratorLayout from './components/ModeratorDashboard/ModeratorLayout'
+import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import ClientAppointments from './pages/client/ClientAppointments';
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
 
@@ -57,6 +58,9 @@ const App = () => (
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
         </Route>
+        <Route path="/moderator" element={<ModeratorLayout />}>
+           <Route index element={<ModeratorDashboard />}></Route>
+        </Route>
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
         </Route>
         <Route path="/test-questions" element={<TestQuestion />}>
@@ -67,9 +71,7 @@ const App = () => (
         </Route>
       </Routes>
     </Router>
-
     </>
-);
-
+)
 
 export default App
