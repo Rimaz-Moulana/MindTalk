@@ -7,7 +7,6 @@ import CounsellorLayout from './components/shared/CounsellorLayout'
 import Layout from './components/shared/Layout'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile'
 import ClientCounsellors from './pages/client/ClientCounsellors'
-import ClientDashboard from './pages/client/ClientDashboard'
 import ClientMeditation from './pages/client/ClientMeditation'
 import ClientMusic from './pages/client/ClientMusic'
 import ClientProfile from './pages/client/ClientProfile'
@@ -26,6 +25,8 @@ import ModeratorLayout from './components/ModeratorDashboard/ModeratorLayout'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import ClientAppointments from './pages/client/ClientAppointments';
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
+import ClientDashboard from './pages/client/ClientDashboard'
+
 
 
 const App = () => (
