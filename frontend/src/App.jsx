@@ -30,7 +30,8 @@ import CounsellorHome from './pages/counsellor/CounsellorHome';
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
-
+import Login2 from './pages/Loging2'
+import SignInSignUpForm from './components/LoginSignup/login'
 
 
 const App = () => (
@@ -79,9 +80,12 @@ const App = () => (
           </Route>
           <Route path="/landingpage" element={<Landingpage />}>
           </Route>
+           {/* <Route path="/login" element={<Login2 />}></Route> */}
+          <Route path="/login" element={<SignInSignUpForm />}></Route>
       </Routes>
     </Router>
   </>
+
 )
 
 export default App
