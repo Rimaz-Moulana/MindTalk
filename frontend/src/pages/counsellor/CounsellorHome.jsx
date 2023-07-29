@@ -14,15 +14,15 @@ const CounsellorHome = () => {
                 <div className="w-full">
                     <CounsellorHead />
                 </div>
-                <div className="my-2" />
+                
                 <div className="flex flex-wrap gap-4">
                     <CounsellorCards />
                 </div>
-                <div className="my-2" />
+                
                 <div className="flex flex-col gap-4 w-full">
                     <CounsellorAppoinments />
                 </div>
-                <div className="my-2" />
+       
                 <div className="flex flex-col gap-4 w-full">
                     <div className="flex flex-wrap w-full">
                         <div className="flex-1 max-w-md">
@@ -38,7 +38,7 @@ const CounsellorHome = () => {
                         </div>
                     </div>
                 </div>
-                <div className="my-2" />
+         
                 <div className="flex flex-col gap-4 w-full">
                     <CounsellorGraph />
                 </div>
