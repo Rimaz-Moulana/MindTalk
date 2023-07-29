@@ -26,7 +26,7 @@ const SignInSignUpForm = () => {
                         }`}
                     >
                         <h2 className="title text-blue-900 text-4xl mb-4">Sign in</h2>
-                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4">
+                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4 items-center pl-4">
                             <FaUser />
                             <input
                                 type="text"
@@ -36,7 +36,7 @@ const SignInSignUpForm = () => {
                                 className="leading-none font-medium text-blue-900 bg-transparent outline-none"
                             />
                         </div>
-                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4">
+                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4 items-center pl-4">
                             <FaLock />
                             <input
                                 type="text"
@@ -58,12 +58,6 @@ const SignInSignUpForm = () => {
                                 href="#"
                                 className="h-12 w-12 my-0 mx-2 border border-blue-800 text-blue-800 flex justify-center rounded-full social-icon"
                             >
-                                <FaFacebook />
-                            </a>
-                            <a
-                                href="#"
-                                className="h-12 w-12 my-0 mx-2 border border-blue-800 text-blue-800 flex justify-center rounded-full social-icon"
-                            >
                                 <FaGoogle />
                             </a>
                         </div>
@@ -76,7 +70,7 @@ const SignInSignUpForm = () => {
                         }`}
                     >
                         <h2 className="text-blue-900 text-4xl mb-4 title">Sign up</h2>
-                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4">
+                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4 items-center pl-4">
                             <FaUser className="text-gray-400" />
                             <input
                                 type="text"
@@ -86,7 +80,7 @@ const SignInSignUpForm = () => {
                                 className="leading-none font-medium text-blue-900 bg-transparent outline-none"
                             />
                         </div>
-                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4">
+                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 mb-4 items-center pl-4">
                             <FaEnvelope />
                             <input
                                 type="text"
@@ -96,7 +90,7 @@ const SignInSignUpForm = () => {
                                 className="leading-none font-medium text-blue-900 bg-transparent outline-none"
                             />
                         </div>
-                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400">
+                        <div className="input-feild max-w-xs w-full h-12 bg-white my-1 mx-0 rounded-xl grid p-2 text-gray-400 items-center pl-4">
                             <FaLock />
                             <input
                                 type="password"
@@ -114,12 +108,6 @@ const SignInSignUpForm = () => {
 
                         <p className="text-base py-3 px-0 social-text">Or Sign up with</p>
                         <div className="flex justify-center social-media">
-                            <a
-                                href="#"
-                                className="h-12 w-12 my-0 mx-2 border border-blue-800 text-blue-800 flex justify-center rounded-full social-icon"
-                            >
-                                <FaFacebook />
-                            </a>
                             <a
                                 href="#"
                                 className="h-12 w-12 my-0 mx-2 border border-blue-800 text-blue-800 flex justify-center rounded-full social-icon"
