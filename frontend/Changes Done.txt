@@ -18,6 +18,7 @@ npm install @mui/material
 npm install @emotion/styled
 npm install @emotion/react
 npm install react-quill
+npm i victory-pie
 
 
 

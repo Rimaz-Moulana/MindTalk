@@ -75,7 +75,7 @@ const Blogs = () => {
     <>
       <div className=' rounded-xl'>
         <div className='bg-white rounded-2xl'>
-          <div className="py-4 rounded-2xl sm:py-6 bg-gradient-to-br from-blue-200 to-green-50">
+          <div className="py-4 rounded-t-2xl sm:py-6 bg-gradient-to-br from-blue-200 to-green-50">
             <div className="px-6 mx-auto max-w-7xl lg:px-4">
               <div className="flex flex-col items-center justify-center">
                 <div className="max-w-2xl mx-auto lg:mx-0">
@@ -98,7 +98,7 @@ const Blogs = () => {
               </div>
 
                 <div className="flex justify-end mr-10 ">
-                  <Link to="/postblog" >
+                  <Link to="postblog" >
                     <button className="px-8 py-3 font-bold text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-black">
                       <span className="hidden sm:inline">Post a Blog</span>
                       <span className="md:hidden">

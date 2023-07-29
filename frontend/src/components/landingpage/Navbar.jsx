@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { close, logodark, logolight, menu } from '../assets';
-import { navLinks } from '../constants';
+import { close, logodark, logolight, menu } from '../../assets';
+import { navLinks } from '../../constants';
 
 const Navbar = () => {
     const [toggle, setToggle] = useState(false);
