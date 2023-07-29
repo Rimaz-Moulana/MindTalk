@@ -36,6 +36,7 @@
     "react-router-dom": "^6.14.2",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
+    "victory": "^36.6.11",
     "victory-pie": "^36.6.11"
   },
   "devDependencies": {

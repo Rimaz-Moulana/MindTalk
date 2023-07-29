@@ -29,6 +29,7 @@ import ClientDashboard from './pages/client/ClientDashboard'
 import CounsellorHome from './pages/counsellor/CounsellorHome';
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
+import UserHandle from './pages/Admin/UserHandle'
 
 
 
@@ -54,6 +55,7 @@ const App = () => (
         </Route>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
+          <Route path="/admin/userhandle" element={<UserHandle />} />
         </Route>
           <Route path="/counsellor" element={<CounsellorLayout />}>
             <Route index element={<CounsellorDashboard />} />
