@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="728d8391-d608-4ec9-bfee-66383e3a1644" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2DdNJ9B6ZlmLt5GVZIEmlnX9U8p" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Moulana/Desktop/New folder/javacorner-admin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "21232f297a57a5a743894a0e4a801fc3",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="JavacornerAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.javacorner.admin.JavacornerAdminApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="728d8391-d608-4ec9-bfee-66383e3a1644" name="Changes" comment="" />
+      <created>1661024926580</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1661024926580</updated>
+      <workItem from="1661024927816" duration="13234000" />
+      <workItem from="1661103622198" duration="5867000" />
+      <workItem from="1661173097373" duration="1978000" />
+      <workItem from="1661186350185" duration="1363000" />
+      <workItem from="1661193851437" duration="2000" />
+      <workItem from="1661193858467" duration="8706000" />
+      <workItem from="1661268949418" duration="7367000" />
+      <workItem from="1661335018579" duration="2888000" />
+      <workItem from="1661343955345" duration="1994000" />
+      <workItem from="1661695272430" duration="1000" />
+      <workItem from="1661695456363" duration="795000" />
+      <workItem from="1668770477047" duration="310000" />
+      <workItem from="1668770929654" duration="20061000" />
+      <workItem from="1668854001389" duration="13564000" />
+      <workItem from="1668874627771" duration="1714000" />
+      <workItem from="1668940857321" duration="5314000" />
+      <workItem from="1668979493368" duration="1496000" />
+      <workItem from="1669151693341" duration="693000" />
+      <workItem from="1669466145059" duration="4690000" />
+      <workItem from="1669496640896" duration="5830000" />
+      <workItem from="1669568318390" duration="8347000" />
+      <workItem from="1669658346918" duration="3742000" />
+      <workItem from="1669809485349" duration="3206000" />
+      <workItem from="1690516496399" duration="442000" />
+      <workItem from="1690520051332" duration="3764000" />
+      <workItem from="1690524158512" duration="22624000" />
+      <workItem from="1690597802962" duration="6277000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
