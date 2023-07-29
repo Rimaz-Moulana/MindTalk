@@ -26,6 +26,7 @@ import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import ClientAppointments from './pages/client/ClientAppointments';
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
 import ClientDashboard from './pages/client/ClientDashboard'
+import CounsellorHome from './pages/counsellor/CounsellorHome'
 
 
 
@@ -58,6 +59,7 @@ const App = () => (
           <Route path="counsellorappointments" element={<CounsellorAppointments/>} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
+          <Route path="home" element={<CounsellorHome />} />
         </Route>
         <Route path="/moderator" element={<ModeratorLayout />}>
            <Route index element={<ModeratorDashboard />}></Route>
