@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import { ImFlag } from 'react-icons/im';
+import { BiSpa } from 'react-icons/bi';
 
 const ClientdashCards = () => {
   const [visibleCards, setVisibleCards] = useState(4); // Initially show 4 cards
 
   const cardsData = [
     {
-      icon: <ImFlag className="icon text-3xl group-hover:text-blue-700" />,
+      icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Meditation Therapy',
       date: '2023.09.01',
     },
     {
-      icon: <ImFlag className="icon text-3xl group-hover:text-blue-700" />,
+      icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Positive Thinking',
       date: '2023.10.03',
     },
     {
-      icon: <ImFlag className="icon text-3xl group-hover:text-blue-700" />,
+      icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Happy Therapy ',
       date: '2023.10.10',
     },
     {
-      icon: <ImFlag className="icon text-3xl group-hover:text-blue-700" />,
+      icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Annual Therapy',
       date: '2023.11.02',
     },
@@ -41,7 +41,7 @@ const ClientdashCards = () => {
               {card.icon}
             </div>
             <div className="content mt-4 flex flex-col justify-end group-hover:text-blue-700 ">
-              <p className="font-bold text-s">{card.title}</p>
+              <p className="text-s">{card.title}</p>
               <p className="text-s ">{card.date}</p> {/* Replace count with date */}
             </div>
           </div>
