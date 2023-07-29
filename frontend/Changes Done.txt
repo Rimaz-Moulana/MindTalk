@@ -18,6 +18,11 @@ npm install @mui/material
 npm install @emotion/styled
 npm install @emotion/react
 npm install react-quill
+npm i victory-pie
+npm i victory
+npm install victory --save
+npm i moment
+npm i react-big-calendar
 
 
 

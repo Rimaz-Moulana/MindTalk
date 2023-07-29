@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f364a62c-f82c-4f2d-a6e6-c27937b5d558" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/DiagnosticTestPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Diagnose Test/TestQuestion.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +30,30 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/kanishka/OneDrive - stu.ucsc.cmb.ac.lk/Desktop/Mind Talk/MindTalk",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="MindTalk" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="MindTalk" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689621877141</updated>
       <workItem from="1689621878454" duration="647000" />
+      <workItem from="1690581717817" duration="610000" />
     </task>
     <servers />
   </component>
