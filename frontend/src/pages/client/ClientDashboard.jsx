@@ -8,7 +8,7 @@ const ClientDashboard = () => {
   return (
     <>
       <div className="flex flex-col gap-4 w-full">
-        <ClientHead />
+
      
         <div className="flex flex-wrap gap-4">
           <ClientdashCards />

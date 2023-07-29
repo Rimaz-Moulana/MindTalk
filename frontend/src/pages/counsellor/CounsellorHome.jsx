@@ -11,9 +11,6 @@ const CounsellorHome = () => {
     return (
         <>
             <div className="flex flex-col gap-4 w-full">
-                <div className="w-full">
-                    <CounsellorHead />
-                </div>
                 
                 <div className="flex flex-wrap gap-4">
                     <CounsellorCards />
