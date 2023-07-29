@@ -26,7 +26,9 @@ import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import ClientAppointments from './pages/client/ClientAppointments';
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
 import ClientDashboard from './pages/client/ClientDashboard'
-import CounsellorHome from './pages/counsellor/CounsellorHome'
+import CounsellorHome from './pages/counsellor/CounsellorHome';
+import AdminLayout from './components/AdminDashboard/AdminLayout'
+import AdminDashboard from './pages/Admin/AdminDashboard'
 
 
 
@@ -44,37 +46,40 @@ const App = () => (
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
-          <Route path='clientappointments' element={<ClientAppointments/>} />
+          <Route path='clientappointments' element={<ClientAppointments />} />
         </Route>
         <Route path="/wallet" element={<WalletLayout />}>
-        <Route index element={<Wallet />} />
-        <Route path="/wallet/transhistory" element={<TransHistory />} />
-      </Route>
-        <Route path="/counsellor" element={<CounsellorLayout />}>
-          <Route index element={<CounsellorDashboard />} />
-          <Route path="counsellorprofile" element={<CounsellorProfile />} />
-          <Route path='counsellordoctors' element={<CounsellorDoctors/>} />
-          <Route path="counsellorclients" element={<CounsellorClients/>} />
-          <Route path="counsellorclients/profile" element={<CounsellorClientProfile/>} />
-          <Route path="counsellorappointments" element={<CounsellorAppointments/>} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/postblog" element={<PostBlog />} />
-          <Route path="home" element={<CounsellorHome />} />
+          <Route index element={<Wallet />} />
+          <Route path="/wallet/transhistory" element={<TransHistory />} />
         </Route>
-        <Route path="/moderator" element={<ModeratorLayout />}>
-           <Route index element={<ModeratorDashboard />}></Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
         </Route>
-        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
-        </Route>
-        <Route path="/test-questions" element={<TestQuestion />}>
-        </Route>
-        <Route path="/testemail" element={<TestEmail />}>
-        </Route>
-        <Route path="/landingpage" element={<Landingpage />}>
-        </Route>
+          <Route path="/counsellor" element={<CounsellorLayout />}>
+            <Route index element={<CounsellorDashboard />} />
+            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+            <Route path='counsellordoctors' element={<CounsellorDoctors />} />
+            <Route path="counsellorclients" element={<CounsellorClients />} />
+            <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+            <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="blogs/postblog" element={<PostBlog />} />
+            <Route path="home" element={<CounsellorHome />} />
+          </Route>
+          <Route path="/moderator" element={<ModeratorLayout />}>
+            <Route index element={<ModeratorDashboard />}></Route>
+          </Route>
+          <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+          </Route>
+          <Route path="/test-questions" element={<TestQuestion />}>
+          </Route>
+          <Route path="/testemail" element={<TestEmail />}>
+          </Route>
+          <Route path="/landingpage" element={<Landingpage />}>
+          </Route>
       </Routes>
     </Router>
-    </>
+  </>
 )
 
 export default App
