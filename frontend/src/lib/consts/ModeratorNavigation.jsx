@@ -4,13 +4,13 @@ export const ADMIN_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
 		label: 'Dashboard',
-		path: '/admin',
+		path: '/moderator',
 		icon: <FiAirplay />
 	},
     {
 		key: 'message',
 		label: 'User Handle',
-		path: '/admin/userhandle',
+		path: '/moderator/userhandle',
 		icon: <FiSettings />
 	}
 ]

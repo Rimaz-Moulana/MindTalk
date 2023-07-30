@@ -36,7 +36,7 @@ import SignInSignUpForm from './components/LoginSignup/login'
 const App = () => (
   <>
     <Router>
-      <Routes></Routes>
+      <Routes>
 
         <Route path="/" element={<Layout />}>
           <Route index element={<ClientDashboard />} />

@@ -40,13 +40,13 @@ const Contacts = () => {
             type="text" 
             placeholder="Search..." 
             name="search"
-            className='rounded-md'
+            className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'
             onChange={event => setFilterQuery(event.target.value)}
             />
         </form>
 
         <form>
-          <select className='rounded-md'>
+          <select className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'>
             <option disabled selected>District</option>
             <option value="Colombo" >Colombo</option>
             <option value="Gampaha">Gampaha</option>
@@ -77,7 +77,7 @@ const Contacts = () => {
         </form>
 
         <form>
-          <select className='rounded-md'>
+          <select className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'>
             <option disabled selected>Speciality</option>
             <option value="Marriage and family">Marriage and family</option>
             <option value="Career">Career</option>
