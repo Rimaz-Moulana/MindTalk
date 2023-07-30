@@ -17,8 +17,6 @@ import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
-
-
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
 import Blogs from './pages/Blogs';
@@ -38,7 +36,8 @@ import SignInSignUpForm from './components/LoginSignup/login'
 const App = () => (
   <>
     <Router>
-      <Routes>
+      <Routes></Routes>
+
         <Route path="/" element={<Layout />}>
           <Route index element={<ClientDashboard />} />
           <Route path="/message" element={<ChatApp />} />
@@ -51,38 +50,49 @@ const App = () => (
           <Route path="blogs/postblog" element={<PostBlog />} />
           <Route path='clientappointments' element={<ClientAppointments />} />
         </Route>
+
         <Route path="/wallet" element={<WalletLayout />}>
           <Route index element={<Wallet />} />
           <Route path="/wallet/transhistory" element={<TransHistory />} />
         </Route>
+
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/userhandle" element={<UserHandle />} />
         </Route>
-          <Route path="/counsellor" element={<CounsellorLayout />}>
-            <Route index element={<CounsellorDashboard />} />
-            <Route path="counsellorprofile" element={<CounsellorProfile />} />
-            <Route path='counsellordoctors' element={<CounsellorDoctors />} />
-            <Route path="counsellorclients" element={<CounsellorClients />} />
-            <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
-            <Route path="counsellorappointments" element={<CounsellorAppointments />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="blogs/postblog" element={<PostBlog />} />
-            <Route path="home" element={<CounsellorHome />} />
-          </Route>
-          <Route path="/moderator" element={<ModeratorLayout />}>
-            <Route index element={<ModeratorDashboard />}></Route>
-          </Route>
-          <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
-          </Route>
-          <Route path="/test-questions" element={<TestQuestion />}>
-          </Route>
-          <Route path="/testemail" element={<TestEmail />}>
-          </Route>
-          <Route path="/landingpage" element={<Landingpage />}>
-          </Route>
-           {/* <Route path="/login" element={<Login2 />}></Route> */}
-          <Route path="/login" element={<SignInSignUpForm />}></Route>
+
+        <Route path="/counsellor" element={<CounsellorLayout />}>
+          <Route index element={<CounsellorDashboard />} />
+          <Route path="counsellorprofile" element={<CounsellorProfile />} />
+          <Route path='counsellordoctors' element={<CounsellorDoctors />} />
+          <Route path="counsellorclients" element={<CounsellorClients />} />
+          <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+          <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/postblog" element={<PostBlog />} />
+          <Route path="home" element={<CounsellorHome />} />
+        </Route>
+
+        <Route path="/moderator" element={<ModeratorLayout />}>
+          <Route index element={<ModeratorDashboard />}></Route>
+        </Route>
+
+        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+        </Route>
+
+        <Route path="/test-questions" element={<TestQuestion />}>
+        </Route>
+
+        <Route path="/testemail" element={<TestEmail />}>
+        </Route>
+
+        <Route path="/landingpage" element={<Landingpage />}>
+        </Route>
+
+          {/* <Route path="/login" element={<Login2 />}></Route> */}
+        <Route path="/login" element={<SignInSignUpForm />}>
+        </Route>
+
       </Routes>
     </Router>
   </>
