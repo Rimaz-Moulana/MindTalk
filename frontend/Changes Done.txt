@@ -4,11 +4,11 @@ Tailwind.config.js -> tailwindcss/forms
 
 Installed packages
 
-headlessui  npm install @headlessui/react
-react-icons  npm install react-icons --save
-react-router-dom   npm i react-router-dom
-classnames   npm install classnames
-tailwind forms   npm install -D @tailwindcss/forms
+npm install @headlessui/react
+npm install react-icons --save
+npm i react-router-dom
+npm install classnames
+npm install -D @tailwindcss/forms
 npm i -s react-fetch-hook
 npm install framer-motion
 npm install react-circular-progressbar
@@ -18,6 +18,11 @@ npm install @mui/material
 npm install @emotion/styled
 npm install @emotion/react
 npm install react-quill
+npm i victory-pie
+npm i victory
+npm install victory --save
+npm i moment
+npm i react-big-calendar
 
 
 
