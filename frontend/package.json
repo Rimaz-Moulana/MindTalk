@@ -18,14 +18,15 @@
     "@iconscout/react-unicons": "^2.0.2",
     "@mui/material": "^5.14.1",
     "apexcharts": "^3.41.0",
+    "axios": "^1.4.0",
     "chart.js": "^4.3.2",
     "classnames": "^2.3.2",
     "framer-motion": "^10.13.1",
     "lottie-web": "^5.12.2",
-    "moment": "^2.29.4",
+    // "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
-    "react-big-calendar": "^1.8.1",
+    // "react-big-calendar": "^1.8.1",
     "react-chartjs-2": "^5.2.0",
     "react-circle": "^1.1.1",
     "react-circular-progressbar": "^2.1.0",
@@ -36,12 +37,9 @@
     "react-router-dom": "^6.14.2",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
-
-    "tw-elements-react": "^1.0.0-alpha1",
-
-    "victory": "^36.6.11",
-
-    "victory-pie": "^36.6.11"
+    "tw-elements-react": "^1.0.0-alpha1"
+    // "victory": "^36.6.11",
+    // "victory-pie": "^36.6.11"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.4",
