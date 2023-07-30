@@ -32,6 +32,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
 import Login2 from './pages/Loging2'
 import SignInSignUpForm from './components/LoginSignup/login'
+import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 
 const App = () => (
   <>
@@ -48,7 +49,8 @@ const App = () => (
           <Route path='clientmeditation' element={<ClientMeditation />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
-          <Route path='clientappointments' element={<ClientAppointments />} />
+          <Route path='clientappointments' element={<ClientAppointments />} />                    
+          <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments/>} />
         </Route>
 
         <Route path="/wallet" element={<WalletLayout />}>
@@ -62,7 +64,7 @@ const App = () => (
         </Route>
 
         <Route path="/counsellor" element={<CounsellorLayout />}>
-          <Route index element={<CounsellorDashboard />} />
+          {/* <Route index element={<CounsellorDashboard />} /> */}
           <Route path="counsellorprofile" element={<CounsellorProfile />} />
           <Route path='counsellordoctors' element={<CounsellorDoctors />} />
           <Route path="counsellorclients" element={<CounsellorClients />} />
@@ -71,6 +73,7 @@ const App = () => (
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
           <Route path="home" element={<CounsellorHome />} />
+          <Route path="counsellorappointments" element={<CounsellorAppointments/>} />
         </Route>
 
         <Route path="/moderator" element={<ModeratorLayout />}>
