@@ -20,7 +20,7 @@ import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
 import Wallet from './components/Payments/wallet';
 import TransHistory from './components/Payments/TransactionHistory';
 
-
+import Landingpage from './pages/Landingpage';
 import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
 import Blogs from './pages/Blogs';
