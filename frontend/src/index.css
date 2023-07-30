@@ -34,8 +34,8 @@
 
 .bg-blue-gradient {
   background: linear-gradient(135deg,
-      #00B4D8 33%,
-      #0077B6 66%);
+       #def9fa 0.89%,
+      #bef3f5 17.23%);
 }
 
 .bg-black-gradient {
@@ -135,7 +135,7 @@
 
 .bg-primary {
   --tw-bg-opacity: 1;
-  background-color: rgb(202 240 248 / var(--tw-bg-opacity));
+  background-color: rgb(255, 255, 255 / var(--tw-bg-opacity));
 }
 
 .text-darkblue {
