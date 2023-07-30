@@ -15,11 +15,13 @@ import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-import Wallet from './components/Payments/wallet'
-import TransHistory from './components/Payments/TransactionHistory'
-import WalletLayout from './components/Payments/WalletLayout'
-import PostBlog from './pages/PostBlog'
-import Blogs from './pages/Blogs'
+import Wallet from './components/Payments/wallet';
+import TransHistory from './components/Payments/TransactionHistory';
+
+
+import WalletLayout from './components/Payments/WalletLayout';
+import PostBlog from './pages/PostBlog';
+import Blogs from './pages/Blogs';
 import Landingpage from './pages/Landingpage'
 import ModeratorLayout from './components/ModeratorDashboard/ModeratorLayout'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
@@ -32,7 +34,6 @@ import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
 import Login2 from './pages/Loging2'
 import SignInSignUpForm from './components/LoginSignup/login'
-
 
 const App = () => (
   <>

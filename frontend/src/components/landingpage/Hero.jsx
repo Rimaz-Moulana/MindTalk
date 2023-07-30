@@ -30,7 +30,7 @@ const Hero = () => (
 
 
         <div className="ss:flex hidden md:mr-4 mr-0">
-          <GetStarted />
+          {/* <GetStarted /> */}
 
         </div>
       </div>
@@ -48,7 +48,7 @@ const Hero = () => (
 
 
     <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative `}>
-      <img src={robot} alt="billing" className="w-[100%] h-[100%] relative z-[5]" />
+      <img src={robot} alt="billing" className="w-[100%] h-[100%] relative z-[5] "  />
 
 
 
@@ -62,7 +62,7 @@ const Hero = () => (
 
 
     <div className={`ss:hidden ${styles.flexCenter}`}>
-      <GetStarted />
+      {/* <GetStarted /> */}
 
 
 
