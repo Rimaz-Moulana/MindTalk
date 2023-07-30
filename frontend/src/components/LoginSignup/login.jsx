@@ -13,12 +13,12 @@ const SignInSignUpForm = () => {
 
     return (
         <div
-            className={`relative overflow-hidden w-full h-screen bg-blue-50 container ${
+            className={`relative overflow-hidden w-full h-screen bg-blue-50 login-container ${
                 isSignUpMode ? 'sign-up-mode' : ''
             }`}
         >
             <div className="forms-container absolute w-full h-full top-0 left-0 ">
-                <div className="signin-signup absolute top-1/2 left-3/4 grid ">
+                <div className="signin-signup absolute grid ">
                     <form
                         action=""
                         className={`sign-in-form flex flex-col justify-center align-middle py-0 px-20 overflow-hidden  ${
