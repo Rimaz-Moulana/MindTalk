@@ -31,10 +31,7 @@
     z-index: 5;
     transition: 1s 0.7s ease-in-out;
 }
-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.signin-signup form{
     overflow: hidden;
     align-items: center;
     grid-column: 1 / 2;
@@ -52,46 +49,46 @@ form{
     grid-template-columns: 15% 85%;
     
 }
-.input-feild input::placeholder{
+.signin-signup .input-feild input::placeholder{
     color: #aaa;
     font-weight: 500;
 }
-.btn{
+.signin-signup .btn{
     width: 150px;
     height: 49px;
     transition:  .5s;
 }
-.social-icon{
+.signin-signup .social-icon{
     color: #333;
     align-items: center;
     font-size: 1.1rem;
     transition: 0.3s;
 }
-.social-icon:hover{
+.signin-signup .social-icon:hover{
     color: #5994fd;
     border-color: #5994fd;
 }
 
-.panel{
+.login-panels-container .panel{
     z-index: 7;
 }
-.panel .content{
+.login-panels-container .panel .content{
     transition: .9s .6s ease-in-out;
 }
 
-.left-panel{
+.login-panels-container .left-panel{
     pointer-events: all;
     padding: 3rem 17% 2rem 12%;
 }
-.right-panel{
+.login-panels-container .right-panel{
     pointer-events: none;
     padding: 3rem 17% 2rem 12%;
 }
-.image{
+.login-panels-container .image{
     width: 75%;
     transition: 1.1s .4s ease-in-out;
 }
-.right-panel .content, .right-panel .image{
+.login-panels-container .right-panel .content, .login-panels-container .right-panel .image{
     transform: translateX(800px);
 }
 
@@ -175,7 +172,7 @@ form{
         height: 35px;
         font-size: 0.7rem;
     }
-    .image{
+    .login-panels-container .image{
         width: 0px;
         transition: 0.9s 0.6s ease-in-out;
     }
@@ -186,7 +183,7 @@ form{
     .right-panel{
         grid-row: 3 / 4;
     }
-    .right-panel .content, .right-panel .image{
+    .login-panels-container .right-panel .content, .login-panels-container .right-panel .image{
         transform: translateY(300px);
     }
     .login-container.sign-up-mode::before{
@@ -208,10 +205,10 @@ form{
     form{
         padding: 0 1.5rem;
     }
-    .image{
+    .login-panels-container .image{
         display: none;
     }
-    .panel .content{
+    .login-panels-container .panel .content{
         padding: 0.5rem 1rem;
     }
     .login-container::before{

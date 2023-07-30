@@ -7,7 +7,7 @@ const chartData = [
     { x: 'Group C', y: 300 }
 ]
 const customColorScale = [
-    '#051367', // Group A
+    '#04befe', // Group A
     '#2D31FA', // Group B
     '#DDE6ED' // Group C
 ]
