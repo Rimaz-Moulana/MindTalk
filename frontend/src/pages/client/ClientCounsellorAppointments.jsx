@@ -1,7 +1,7 @@
 import React from 'react'
 import AppointmentCalendar from '../../components/AppointmentCalendar'
 
-function CounsellorAppointments() {
+function ClientCounsellorAppointments() {
   return (
     <div className='bg-white rounded-xl p-5'>
       <AppointmentCalendar />
@@ -9,4 +9,4 @@ function CounsellorAppointments() {
   )
 }
 
-export default CounsellorAppointments
+export default ClientCounsellorAppointments
