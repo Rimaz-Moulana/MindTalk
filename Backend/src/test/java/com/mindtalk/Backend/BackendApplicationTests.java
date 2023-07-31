@@ -1,10 +1,10 @@
-package com.backend.MindTalk;
+package com.mindtalk.Backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MindTalkApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
