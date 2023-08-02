@@ -1,4 +1,4 @@
-package com.mindtalk.Backend.model;
+package com.mindtalk.Backend.dao;
 
 import com.mindtalk.Backend.entity.User;
 import jakarta.persistence.*;
