@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaPercent } from 'react-icons/fa';
-import { Circle } from 'react-circle';
+
 
 const CounsellorCards = () => {
     const completed = 70;
