@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,19 +16,19 @@ public class Token {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    public Integer id;
 
-    private  String token;
+    @Column(unique = true)
+    public String token;
 
     @Enumerated(EnumType.STRING)
-    private TokenType tokenType;
+    public TokenType tokenType = TokenType.BEARER;
 
-    private boolean expired;
+    public boolean revoked;
 
-    private boolean revoked;
+    public boolean expired;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
-
+    public User user;
 }
