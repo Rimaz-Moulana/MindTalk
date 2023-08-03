@@ -10,7 +10,7 @@ import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientMeditation from './pages/client/ClientMeditation'
 import ClientMusic from './pages/client/ClientMusic'
 import ClientProfile from './pages/client/ClientProfile'
-import CounsellorDashboard from './pages/counsellor/CounsellorDashboard'
+// import CounsellorDashboard from './pages/counsellor/CounsellorDashboard'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
@@ -21,7 +21,7 @@ import WalletLayout from './components/Payments/WalletLayout';
 import PostBlog from './pages/PostBlog';
 import Blogs from './pages/Blogs';
 import Landingpage from './pages/Landingpage'
-import ModeratorLayout from './components/ModeratorDashboard/ModeratorLayout'
+import ModeratorLayout from './components/shared/ModeratorLayout'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import ClientAppointments from './pages/client/ClientAppointments';
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
@@ -30,7 +30,7 @@ import CounsellorHome from './pages/counsellor/CounsellorHome';
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
-import Login2 from './pages/Loging2'
+// import Login2 from './pages/Loging2'
 import SignInSignUpForm from './components/LoginSignup/login'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 
@@ -77,7 +77,7 @@ const App = () => (
         </Route>
 
         <Route path="/moderator" element={<ModeratorLayout />}>
-          <Route index element={<ModeratorDashboard />}></Route>
+          <Route index element={<ModeratorDashboard />} />
         </Route>
 
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>

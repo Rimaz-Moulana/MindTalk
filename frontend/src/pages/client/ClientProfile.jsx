@@ -3,6 +3,25 @@ import logo from '../../assets/logo.png';
 import { FiClipboard } from 'react-icons/fi';
 
 export default function Dashboard() {
+
+  const pdfData = [
+    {
+      id: 1,
+      title:'abc.pdf',
+      date: '07/07/2023'
+    },
+    {
+      id: 2,
+      title:'xyz.pdf',
+      date: '10/07/2023'
+    },
+    {
+      id: 3,
+      title:'msg.doc',
+      date: '17/07/2023'
+    },
+  ];
+
   return (
     <div className="flex flex-col-reverse gap-4 w-full grid md:grid-cols-4">
 
@@ -340,17 +359,22 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className='border-t border-gray-900/10 pt-3 pb-3'>
-            <span className='text-gray-400'>abc.pdf</span>
-            <span className='text-gray-400 float-right'>07/07/2023</span>
-          </div>
-          <div className='border-t border-gray-900/10 pt-3 pb-3'>
-            <span className='text-gray-400 '>abc.pdf</span>
-            <span className='text-gray-400 float-right'>07/07/2023</span>
-          </div>
-          <div className='border-t border-gray-900/10 pt-3 pb-3'>
-            <span className='text-gray-400 '>abc.pdf</span>
-            <span className='text-gray-400 float-right'>07/07/2023</span>
+          <div className="overflow-hidden pb-5 ">
+            <table className="min-w-full text-black text-sm font-light">
+              <tbody>
+                {
+                  pdfData.map((item) => (
+                    <tr
+                      key={ item.id }
+                      className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-neutral-300"
+                    >
+                      <td className="whitespace-nowrap text-left px-6 py-4">{item.title}</td>
+                      <td className="whitespace-nowrap text-right px-6 py-4">{item.date}</td>
+                    </tr>
+                  ) )
+                }
+              </tbody>
+            </table>
           </div>
 
         </div>
