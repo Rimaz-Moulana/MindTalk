@@ -1,4 +1,5 @@
-import React from 'react'
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
 import Aboutus from '../components/landingpage/Aboutus';
 import CTA from '../components/landingpage/CTA';
 import Clients from '../components/landingpage/Clients';
@@ -15,8 +16,8 @@ import styles from '../style';
 const Landingpage = () => {
   return (
     <div className="w-full overflow-hidden bg-primary">
-    <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-      <div className={`${styles.boxWidth}`}>
+    <div className={` ${styles.paddingX} ${styles.flexCenter}`}>
+      <div className={` ${styles.boxWidth}`}>
         <Navbar />
       </div>
     </div>
