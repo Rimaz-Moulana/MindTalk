@@ -1,4 +1,4 @@
-package com.mindtalk.Backend.controller.managment;
+package com.mindtalk.Backend.controller.moderator;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/management")
 @Tag(name = "Management")
-public class ManagementController {
+public class ModeratorController {
 
 
     @Operation(
-            description = "Get endpoint for manager",
-            summary = "This is a summary for management get endpoint",
+            description = "Get endpoint for moderator",
+            summary = "This is a summary for moderator get endpoint",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -33,18 +33,18 @@ public class ManagementController {
     )
     @GetMapping
     public String get() {
-        return "GET:: management controller";
+        return "GET:: moderator controller";
     }
     @PostMapping
     public String post() {
-        return "POST:: management controller";
+        return "POST:: moderator controller";
     }
     @PutMapping
     public String put() {
-        return "PUT:: management controller";
+        return "PUT:: moderator controller";
     }
     @DeleteMapping
     public String delete() {
-        return "DELETE:: management controller";
+        return "DELETE:: moderator controller";
     }
 }

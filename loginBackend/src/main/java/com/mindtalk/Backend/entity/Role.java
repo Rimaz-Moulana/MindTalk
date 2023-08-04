@@ -22,18 +22,18 @@ public enum Role {
                     ADMIN_UPDATE,
                     ADMIN_DELETE,
                     ADMIN_CREATE,
-                    MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
+                    MODERATOR_READ,
+                    MODERATOR_UPDATE,
+                    MODERATOR_DELETE,
+                    MODERATOR_CREATE
             )
     ),
-    MANAGER(
+    MODERATOR(
             Set.of(
-                    MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
+                    MODERATOR_READ,
+                    MODERATOR_UPDATE,
+                    MODERATOR_DELETE,
+                    MODERATOR_CREATE
             )
     )
 
