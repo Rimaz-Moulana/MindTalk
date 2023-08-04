@@ -2,7 +2,7 @@ import {FiAirplay, FiSettings} from "react-icons/fi"
 
 export const ADMIN_SIDEBAR_LINKS = [
 	{
-		key: 'dashoboard',
+		key: 'dashboard',
 		label: 'Dashboard',
 		path: '/admin',
 		icon: <FiAirplay />
