@@ -1,6 +1,6 @@
 import {FiAirplay, FiSettings} from "react-icons/fi"
 
-export const ADMIN_SIDEBAR_LINKS = [
+export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'dashboard',
 		label: 'Dashboard',

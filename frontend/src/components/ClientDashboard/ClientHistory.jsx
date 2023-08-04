@@ -37,7 +37,7 @@ export default function ClientHistory() {
           <div className="flex justify-center mt-4">
             <button
               className={`mr-2 px-4 py-2 rounded-md ${
-                selectedMode === 'music' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
+                selectedMode === 'music' ? 'bg-blue-700 text-white' : 'bg-gray-200 text-gray-600'
               }`}
               onClick={() => handleModeChange('music')}
             >
@@ -45,7 +45,7 @@ export default function ClientHistory() {
             </button>
             <button
               className={`ml-2 px-4 py-2 rounded-md ${
-                selectedMode === 'meditation' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-600'
+                selectedMode === 'meditation' ? 'bg-blue-700 text-white' : 'bg-gray-200 text-gray-600'
               }`}
               onClick={() => handleModeChange('meditation')}
             >

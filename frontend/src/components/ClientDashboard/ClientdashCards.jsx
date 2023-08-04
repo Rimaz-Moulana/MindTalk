@@ -36,7 +36,7 @@ const ClientdashCards = () => {
     
       {cardsData.slice(0, visibleCards).map((card, index) => (
         <div key={index} className="flex-1">
-          <div className="group bg-white rounded-xl shadow-md hover:border-blue-500 border shadow-md  overflow-hidden text-center p-5 h-40 flex flex-col justify-between cursor-pointer items-center">
+          <div className="group bg-white rounded-xl shadow-md hover:border-blue-700 border shadow-md  overflow-hidden text-center p-5 h-40 flex flex-col justify-between cursor-pointer items-center">
             <div className="flex icon-container relative bg-gray-100 rounded-full h-14 w-14 flex items-center justify-center group-hover:bg-blue-100">
               {card.icon}
             </div>
@@ -51,7 +51,7 @@ const ClientdashCards = () => {
       {visibleCards < cardsData.length && (
         <div className="flex-1">
           <div
-            className="group bg-white rounded-xl shadow-md hover:border-blue-500 border shadow-md  overflow-hidden text-center p-5 h-40 flex flex-col justify-between cursor-pointer items-center"
+            className="group bg-white rounded-xl shadow-md hover:border-blue-700 border shadow-md  overflow-hidden text-center p-5 h-40 flex flex-col justify-between cursor-pointer items-center"
             onClick={handleShowMoreCards}
           >
             <div className="flex icon-container relative bg-gray-100 rounded-full h-14 w-14 flex items-center justify-center group-hover:bg-blue-100">
