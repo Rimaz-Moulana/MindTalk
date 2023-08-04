@@ -11,27 +11,32 @@ import ClientMeditation from './pages/client/ClientMeditation'
 import ClientMusic from './pages/client/ClientMusic'
 import ClientProfile from './pages/client/ClientProfile'
 // import CounsellorDashboard from './pages/counsellor/CounsellorDashboard'
-import CounsellorProfile from './pages/counsellor/CounsellorProfile'
-import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
-import CounsellorClients from './pages/counsellor/CounsellorClients'
-import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
-import Wallet from './components/Payments/wallet';
-import TransHistory from './components/Payments/TransactionHistory';
-import WalletLayout from './components/Payments/WalletLayout';
-import PostBlog from './pages/PostBlog';
-import Blogs from './pages/Blogs';
-import Landingpage from './pages/Landingpage'
-import ModeratorLayout from './components/shared/ModeratorLayout'
-import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
-import ClientAppointments from './pages/client/ClientAppointments';
-import CounsellorAppointments from './pages/counsellor/CounsellorAppointments';
-import ClientDashboard from './pages/client/ClientDashboard'
-import CounsellorHome from './pages/counsellor/CounsellorHome';
 import AdminLayout from './components/AdminDashboard/AdminLayout'
+import TransHistory from './components/Payments/TransactionHistory'
+import WalletLayout from './components/Payments/WalletLayout'
+import Wallet from './components/Payments/wallet'
+import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
+import Blogs from './pages/Blogs'
+import Landingpage from './pages/Landingpage'
+import PostBlog from './pages/PostBlog'
+import ClientAppointments from './pages/client/ClientAppointments'
+import ClientDashboard from './pages/client/ClientDashboard'
+import CounsellorAppointments from './pages/counsellor/CounsellorAppointments'
+import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
+import CounsellorClients from './pages/counsellor/CounsellorClients'
+import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
+import CounsellorHome from './pages/counsellor/CounsellorHome'
+import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import SignInSignUpForm from './components/LoginSignup/login'
+import AdminCrudClient from './pages/Admin/AdminCrudClient'
+import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
+import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
+import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
+import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 
 const App = () => (
@@ -61,6 +66,11 @@ const App = () => (
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="/admin/userhandle" element={<UserHandle />} />
+          <Route path="/admin/user" element={<AdminCrudUser/>} />
+          <Route path="/admin/counselors" element={<AdminCrudCounselors/>} />
+          <Route path="/admin/moderators" element={<AdminCrudModerators/>} />
+          <Route path="/admin/doctors" element={<AdminCrudDoctors/>} />
+          <Route path="/admin/clients" element={<AdminCrudClient/>} />
         </Route>
 
         <Route path="/counsellor" element={<CounsellorLayout />}>
