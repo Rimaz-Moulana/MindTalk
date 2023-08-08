@@ -40,6 +40,7 @@ import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
+import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
 const App = () => (
   <>
@@ -78,19 +79,19 @@ const App = () => (
         <Route path="/counsellor" element={<CounsellorLayout />}>
           {/* <Route index element={<CounsellorDashboard />} /> */}
           <Route path="counsellorprofile" element={<CounsellorProfile />} />
-          <Route path='counsellordoctors' element={<CounsellorDoctors />} />
           <Route path="counsellorclients" element={<CounsellorClients />} />
           <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+          <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors/>} />
           <Route path="counsellorappointments" element={<CounsellorAppointments />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
           <Route path="home" element={<CounsellorHome />} />
-          <Route path="counsellorappointments" element={<CounsellorAppointments />} />
-          <Route path="counsellorregisterclient" element={<RegisterClient />} />
+          <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
         </Route>
 
         <Route path="/moderator" element={<ModeratorLayout />}>
           <Route index element={<ModeratorDashboard />} />
+          <Route path="userhandle" element={<ModeratorUserHandle />} />
         </Route>
 
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>

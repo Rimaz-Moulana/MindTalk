@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ClientCards from '../../components/ClientCards'
 import useFetch from 'react-fetch-hook';
+import { Link } from 'react-router-dom';
 
 const Clients = () => {
 
@@ -33,17 +34,31 @@ const Clients = () => {
 
   return (
     <div className='bg-gray-100'>
+
       <section>
-        <form>
-          <input 
-            type="text" 
-            placeholder="Search..." 
-            name="search"
-            className='ml-5 mt-6 rounded-md p-2'
-            onChange={event => setFilterQuery(event.target.value)}
-            />
-        </form>
+        <div className='flex flex-row w-full flex-auto'>
+          <div className='flex-grow'>
+            <form className='flex'>
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                name="search"
+                className='ml-5 mt-6 rounded-md p-2'
+                onChange={event => setFilterQuery(event.target.value)}
+              />
+            </form>
+          </div>
+          <div className='ml-auto'>
+            <Link
+              to={'registerclient'} >
+              <button className='bg-blue-700 mt-6 rounded-md p-2 border text-white mr-5 hover:bg-white hover:border-blue-700 hover:text-black'>
+                Add Client
+              </button>
+            </Link>
+          </div>
+        </div>
       </section>
+
       <section className='p-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
         {clientList?.length < 1 && (
           <h1>No Data Matches Your Search</h1>
