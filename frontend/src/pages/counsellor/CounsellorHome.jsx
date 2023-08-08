@@ -13,7 +13,7 @@ const CounsellorHome = () => {
             <div className="flex flex-col gap-4 w-full">
                 
                 <div className="flex flex-wrap gap-4">
-                    <CounsellorCards />
+                   
                 </div>
                 
                 <div className="flex flex-col gap-4 w-full">

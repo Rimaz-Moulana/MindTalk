@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaPercent } from 'react-icons/fa';
-import { Circle } from 'react-circle';
+
 
 const CounsellorCards = () => {
     const completed = 70;
@@ -12,7 +12,7 @@ const CounsellorCards = () => {
         <>
             {/* Card 1 */}
             <div className="flex-1">
-                <div className="group bg-white rounded-xl shadow-md hover:border-blue-500 border shadow-md  overflow-hidden text-center p-5 h-50 flex flex-col justify-between cursor-pointer items-center">
+                <div className="group bg-white rounded-xl shadow-md hover:border-blue-700 border shadow-md  overflow-hidden text-center p-5 h-50 flex flex-col justify-between cursor-pointer items-center">
                     <div className="flex flex-col items-start justify-start w-full h-full">
                         <div className="flex icon-container relative bg-gray-100 rounded-full h-24 w-24 flex items-center justify-center group-hover:bg-blue-100">
                             <Circle

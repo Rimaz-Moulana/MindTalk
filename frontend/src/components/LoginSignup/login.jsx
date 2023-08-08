@@ -13,15 +13,15 @@ const SignInSignUpForm = () => {
 
     return (
         <div
-            className={`relative overflow-hidden w-full h-screen bg-blue-50 container ${
+            className={`relative overflow-hidden w-full h-screen bg-blue-50 login-container ${
                 isSignUpMode ? 'sign-up-mode' : ''
             }`}
         >
             <div className="forms-container absolute w-full h-full top-0 left-0 ">
-                <div className="signin-signup absolute top-1/2 left-3/4 grid ">
+                <div className="signin-signup absolute grid ">
                     <form
                         action=""
-                        className={`sign-in-form flex flex-col justify-center align-middle py-0 px-20 overflow-hidden  ${
+                        className={`sign-in-form flex flex-col justify-center align-middle align-center py-0 px-20 overflow-hidden  ${
                             isSignUpMode ? 'hidden' : ''
                         }`}
                     >
@@ -65,7 +65,7 @@ const SignInSignUpForm = () => {
 
                     <form
                         action=""
-                        className={`flex flex-col justify-center align-middle py-0 px-20 overflow-hidden sign-up-form ${
+                        className={`flex flex-col justify-center align-middle align-center py-0 px-20 overflow-hidden sign-up-form ${
                             isSignUpMode ? '' : 'hidden'
                         }`}
                     >
@@ -119,7 +119,7 @@ const SignInSignUpForm = () => {
                 </div>
             </div>
 
-            <div className="absolute w-full h-full top-0 left-0 grid grid-cols-2 panels-container">
+            <div className="absolute w-full h-full top-0 left-0 grid grid-cols-2 login-panels-container">
                 <div className="flex flex-col text-center justify-around items-end panel left-panel">
                     <div className=" content flex flex-col justify-center items-center pt-8 text-white ">
                         <h3 className="font-semibold text-white text-3xl">New Here ?</h3>

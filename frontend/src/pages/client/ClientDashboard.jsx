@@ -2,14 +2,12 @@ import React from 'react'
 import ClientdashCards from '../../components/ClientDashboard/ClientdashCards'
 import ClientHistory from '../../components/ClientDashboard/ClientHistory'
 import ClientCalender from '../../components/ClientDashboard/ClientCalender'
-import ClientHead from '../../components/ClientDashboard/ClientHead'
+
 
 const ClientDashboard = () => {
   return (
     <>
       <div className="flex flex-col gap-4 w-full">
-
-     
         <div className="flex flex-wrap gap-4">
           <ClientdashCards />
         </div>

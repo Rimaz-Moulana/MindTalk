@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { close, logodark, logolight, menu } from '../../assets';
+import { close, logodark, menu } from '../../assets';
 import { navLinks } from '../../constants';
 
 const Navbar = () => {
