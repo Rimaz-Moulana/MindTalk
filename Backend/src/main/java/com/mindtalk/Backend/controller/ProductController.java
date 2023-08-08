@@ -6,10 +6,7 @@ import com.mindtalk.Backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/products")
@@ -22,5 +19,16 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO){
         Product createdProduct = productService.createProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+    }
+
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProductById(@PathVariable Integer productId){
+        Product product =productService.getProductById(productId);
+
+        if(product != null){
+            return ResponseEntity.ok(product);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -19,4 +19,8 @@ public class ProductService {
 
         return productRepo.save(product);
     }
+
+    public Product getProductById(Integer productId){
+        return productRepo.findById(productId).orElse(null);
+    }
 }
