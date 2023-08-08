@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { close, logodark, logolight, menu } from '../../assets';
+import { close, logodark, menu } from '../../assets';
 import { navLinks } from '../../constants';
 
 const Navbar = () => {
@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
-            <img src={logodark} alt="hoobank" className="w-[240px] h-[150px] rounded-[20px] " />
+            <img src={logodark} alt="hoobank" className="w-[100px] h-[100px] rounded-full" />
 
             {/* Mobile navbar */}
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">

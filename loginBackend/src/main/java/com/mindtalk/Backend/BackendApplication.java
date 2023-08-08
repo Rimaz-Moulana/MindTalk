@@ -25,8 +25,7 @@ public class BackendApplication {
     ) {
         return args -> {
             var admin = RegisterRequest.builder()
-                    .firstname("Admin")
-                    .lastname("Admin")
+                    .username("Admin")
                     .email("admin@mail.com")
                     .password("password")
                     .role(ADMIN)
@@ -34,8 +33,7 @@ public class BackendApplication {
             System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
             var moderator = RegisterRequest.builder()
-                    .firstname("Admin")
-                    .lastname("Admin")
+                    .username("Admin")
                     .email("moderator@mail.com")
                     .password("password")
                     .role(MODERATOR)
