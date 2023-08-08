@@ -23,4 +23,17 @@ public class ProductService {
     public Product getProductById(Integer productId){
         return productRepo.findById(productId).orElse(null);
     }
+
+    public Product updateProduct(Integer productId, ProductDTO productDTO){
+        Product existingProduct = productRepo.findById(productId).orElse(null);
+
+        if(existingProduct !=null){
+            existingProduct.setName(productDTO.getName());
+            existingProduct.setPrice(productDTO.getPrice());
+            return productRepo.save(existingProduct);
+        }
+        return null; // Product not found
+    }
+
+    
 }
