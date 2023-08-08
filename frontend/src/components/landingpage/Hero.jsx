@@ -1,7 +1,6 @@
 import { discount, robot } from '../../assets';
 import styles from '../../style';
-
-
+import GetStarted from '../GetStarted';
 
 const Hero = () => (
   <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
@@ -47,7 +46,9 @@ const Hero = () => (
 
 
     <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative `}>
-      <img src={robot} alt="billing" className="w-[100%] h-[100%] relative z-[5] rounded-[50%] border border-double border-dark border-r-8 border-b-8 border-x-8 border-y-8 border-blue-950"  />
+      <div className="w-100% h-100%">
+      <img src={robot} alt="billing" className=" block z-[5]   w-full rounded-lg"  />
+      </div>
 
 
 

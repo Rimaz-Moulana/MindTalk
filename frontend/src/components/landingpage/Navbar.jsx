@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <nav className="w-full flex py-6 justify-between items-center navbar">
-            <img src={logodark} alt="hoobank" className="w-[100px] h-[100px] rounded-full" />
+            <img src={logodark} alt="MindTalk" className="w-[240px] h-[150px] rounded-full " />
 
             {/* Mobile navbar */}
             <ul className="list-none sm:flex hidden justify-end items-center flex-1">

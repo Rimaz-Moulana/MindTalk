@@ -39,6 +39,7 @@ import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
 import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
+import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 
 const App = () => (
   <>
@@ -84,7 +85,8 @@ const App = () => (
           <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/postblog" element={<PostBlog />} />
           <Route path="home" element={<CounsellorHome />} />
-          <Route path="counsellorappointments" element={<CounsellorAppointments/>} />
+          <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+          <Route path="counsellorregisterclient" element={<RegisterClient />} />
         </Route>
 
         <Route path="/moderator" element={<ModeratorLayout />}>
