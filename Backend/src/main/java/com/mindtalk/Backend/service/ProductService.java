@@ -35,5 +35,14 @@ public class ProductService {
         return null; // Product not found
     }
 
-    
+    public boolean deleteProduct(Integer productId){
+        Product existingproduct = productRepo.findById(productId).orElse(null);
+
+        if(existingproduct !=null){
+            productRepo.delete(existingproduct);
+            return true; // Product deleted
+        }
+
+        return false; // Product not found
+    }
 }
