@@ -39,6 +39,7 @@ import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
 import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
+import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
@@ -88,7 +89,8 @@ const App = () => (
           <Route path="home" element={<CounsellorHome />} />
           <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
         </Route>
-
+        <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
+        
         <Route path="/moderator" element={<ModeratorLayout />}>
           <Route index element={<ModeratorDashboard />} />
           <Route path="userhandle" element={<ModeratorUserHandle />} />
