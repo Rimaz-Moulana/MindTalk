@@ -23,7 +23,7 @@ npm i victory
 npm install victory --save
 npm i moment
 npm i react-big-calendar
-
+npm i sweetalert2
 
 
 

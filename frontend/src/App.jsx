@@ -41,6 +41,7 @@ import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import ModeratorMusic from './pages/moderator/ModeratorMusic'
 
 const App = () => (
   <>
@@ -92,6 +93,8 @@ const App = () => (
         <Route path="/moderator" element={<ModeratorLayout />}>
           <Route index element={<ModeratorDashboard />} />
           <Route path="userhandle" element={<ModeratorUserHandle />} />
+          <Route path="moderatormusic" element={<ModeratorMusic />} />
+
         </Route>
 
         <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
