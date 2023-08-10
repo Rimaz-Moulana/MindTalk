@@ -67,7 +67,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Form submitted!");  // Add this line
+        console.log("Form submitted!");  
 
         const v1 = true;
         const v2 = true;
