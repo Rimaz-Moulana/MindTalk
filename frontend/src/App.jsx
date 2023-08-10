@@ -41,6 +41,7 @@ import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import Loginn from './components/LoginSignup/Loginn'
 
 const App = () => (
   <>
@@ -107,7 +108,7 @@ const App = () => (
         </Route>
 
           {/* <Route path="/login" element={<Login2 />}></Route> */}
-        <Route path="/login" element={<SignInSignUpForm />}>
+        <Route path="/login" element={<Loginn />}>
         </Route>
 
         <Route path="/register" element={<Register />}>
