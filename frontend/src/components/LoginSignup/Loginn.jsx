@@ -2,9 +2,12 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 const Loginn = () => {
     const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -35,7 +38,7 @@ const Loginn = () => {
         setLoginSuccess(false);// Reset the login success state
 
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/auth/authenticate',
+            const response = await axiosPrivate.post('http://localhost:8080/api/v1/auth/authenticate',
                 JSON.stringify({ email: email, password: password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
