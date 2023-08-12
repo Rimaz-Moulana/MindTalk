@@ -54,7 +54,7 @@ const Loginn = () => {
             if (roles.includes('ROLE_ADMIN')) {
                 navigate('/admin');
             } else if (roles.includes('ROLE_CLIENT')) {
-                navigate('/');
+                navigate('/client');
             } else if (roles.includes('ROLE_MODERATOR')) {
                 navigate('/moderator');
             }
