@@ -3,8 +3,8 @@ import ChatApp from './components/Chat/Message'
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
 import TestEmail from './components/Diagnose Test/TestEmail'
 import TestQuestion from './components/Diagnose Test/TestQuestion'
-import CounsellorLayout from './components/shared/CounsellorLayout'
 import ClientLayout from './components/shared/ClientLayout'
+import CounsellorLayout from './components/shared/CounsellorLayout'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile'
 import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientMeditation from './pages/client/ClientMeditation'
@@ -31,7 +31,7 @@ import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
-import SignInSignUpForm from './components/LoginSignup/login'
+import Loginn from './components/LoginSignup/Loginn'
 import Register from './components/LoginSignup/register'
 import AdminCrudClient from './pages/Admin/AdminCrudClient'
 import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
@@ -39,12 +39,11 @@ import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
 import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
+import CounsellorAddDetails from './pages/counsellor/CounsellorAddDetalils'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
-import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
-import Loginn from './components/LoginSignup/Loginn'
-import RequireAuth from './components/LoginSignup/RequireAuth'
+import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
 const ROLES = {
   'Client': 'client',
@@ -112,6 +111,7 @@ const App = () => (
           <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
         </Route>
         <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
+        <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
 
 
 
