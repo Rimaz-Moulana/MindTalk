@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
-import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 
 
 
@@ -11,6 +13,9 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
 const Register = () => {
+    const navigate = useNavigate();
+    const [RegisterSuccess, setRegisterSuccess] = useState(false);
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -66,8 +71,9 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log("Form submitted!");  
+        
+        setRegisterSuccess(false);// Reset the Register success state
+        console.log("Form submitted!");
 
         const v1 = true;
         const v2 = true;
@@ -75,33 +81,44 @@ const Register = () => {
         console.log("v1:", v1);
         console.log("v2:", v2);
 
-        if (!v1 || !v2) {
+        if (!(validName && validEmail)) {
             setErrMsg("Invalid Entry");
             return;
         }
 
 
-        try {
-            const response = await axios.post('http://localhost:8080/api/v1/auth/register', 
-            JSON.stringify({ user: username, email, password: password }), 
-            {
-                headers: { 'Content-Type': 'application/json' },
-                withCredentials: true
-            });
-        
 
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
-            setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
-            setUser('');
-            setPwd('');
-            setMatchPwd('');
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/auth/register',
+                JSON.stringify({ username: username, email: email, password: password, role: "CLIENT" }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                });
+
+            if (response.status === 200) {
+                // Registration was successful
+
+                console.log(response?.data);
+                console.log(response?.accessToken);
+                console.log(JSON.stringify(response))
+                seSuccess(true);
+                setRegisterSuccess(true);
+                //clear state and controlled inputs
+                //need value attrib on inputs for this
+                setUser('');
+                setPwd('');
+                setMatchPwd('');
+                console.log("Before navigation");
+                navigate("/login");
+                console.log("After navigation");
+
+            } else {
+                // Handle other status codes
+            }
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+
             } else if (err.response?.status === 409) {
                 setErrMsg('Username Taken');
             } else {
@@ -120,6 +137,12 @@ const Register = () => {
                     <p className="text-blue-600">
                         <a href="#" className="hover:underline">Sign In</a>
                     </p>
+                    {/* Success message */}
+                {RegisterSuccess && (
+                    <p className="successmsg" aria-live="polite">
+                        Register successful!
+                    </p>
+                )}
                 </section>
             ) : (
                 <div className="min-h-screen flex items-center justify-center bg-gray-100">

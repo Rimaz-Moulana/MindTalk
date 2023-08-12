@@ -33,10 +33,10 @@
     "react-fetch-hook": "^1.9.5",
     "react-icons": "^4.10.1",
     "react-quill": "^2.0.0",
-    "react-router-dom": "^6.14.2",
+    "react-router-dom": "^6.15.0",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
-    "sweetalert2": "^11.7.20",
+    "sweetalert2": "^11.7.21",
     "tw-elements-react": "^1.0.0-alpha1",
     "victory": "^36.6.11",
     "victory-pie": "^36.6.11"

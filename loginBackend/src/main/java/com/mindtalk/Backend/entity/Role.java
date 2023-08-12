@@ -25,7 +25,11 @@ public enum Role {
                     MODERATOR_READ,
                     MODERATOR_UPDATE,
                     MODERATOR_DELETE,
-                    MODERATOR_CREATE
+                    MODERATOR_CREATE,
+                    CLIENT_READ,
+                    CLIENT_UPDATE,
+                    CLIENT_DELETE,
+                    CLIENT_CREATE
             )
     ),
     MODERATOR(
@@ -34,6 +38,14 @@ public enum Role {
                     MODERATOR_UPDATE,
                     MODERATOR_DELETE,
                     MODERATOR_CREATE
+            )
+    ),
+    CLIENT(
+            Set.of(
+                    CLIENT_READ,
+                    CLIENT_UPDATE,
+                    CLIENT_DELETE,
+                    CLIENT_CREATE
             )
     )
 
