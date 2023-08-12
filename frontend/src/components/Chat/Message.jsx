@@ -3,7 +3,30 @@ import Searchbar from '../shared/Searchbar'
 import placeholderPNG from '../../assets/Chat/chatting.png'
 import { FaPaperclip, FaSmile, FaPaperPlane, FaArrowLeft } from 'react-icons/fa'
 import ChatBoxInput from './ChatBoxInput'
+import Stomp from 'stompjs'
 
+//create websocket connection
+const socket = new WebSocket('ws://localhost:8080/ws')
+const stompClient = Stomp.over(socket)
+
+stompClient.connect({}, () => {
+    //do something when the websocket connection is established
+})
+
+//subscribe to the appropriate topic(channel) to receive messages from spring boot server
+stompClient.subscribe('/topic/public', (message) => {
+    const chatMessage = JSON.parse(message.body)
+    //handle received chat message in react component
+})
+
+// const sendMessage = (messageContent) => {
+//     const chatMessage = {
+//         content: messageContent,
+//         sender: 'userName',
+//         type: 'CHAT'
+//     }
+//     stompClient.send('app/chat.sendMessage', {}, JSON.stringify(chatMessage))
+// }
 const ChatApp = () => {
     //store information about chats
     const chats = [
