@@ -1,5 +1,11 @@
-import React from 'react'
-import AddMusic from '../../components/moderator/AddMusic'
+import React from 'react';
+import AddMusic from '../../components/moderator/AddMusic';
+
+const videoLinks = [
+  'https://www.youtube.com/embed/pd8CycEyD1Q',
+  'https://www.youtube.com/embed/pd8CycEyD1Q',
+  // Add more video links here
+];
 
 function ModeratorMusic() {
   return (
@@ -10,17 +16,14 @@ function ModeratorMusic() {
           <AddMusic />
         </div>
         <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
-            <iframe className='w-full aspect-[3/2]' src='https://www.youtube.com/embed/pd8CycEyD1Q' title='video1' allowFullScreen> </iframe>
+          {videoLinks.map((link, index) => (
+            <iframe key={index} className='w-full aspect-[3/2]' src={link} title={`video${index + 1}`} allowFullScreen> </iframe>
+          ))}
         </div>
       </div>
   
     </div>
-  )
+  );
 }
 
-export default ModeratorMusic
+export default ModeratorMusic;

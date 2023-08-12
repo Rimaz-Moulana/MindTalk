@@ -22,6 +22,7 @@
     "chart.js": "^4.3.2",
     "classnames": "^2.3.2",
     "framer-motion": "^10.13.1",
+    "input": "^1.0.1",
     "lottie-web": "^5.12.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
