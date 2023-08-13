@@ -19,6 +19,7 @@ public class Message {
     private String content;
     private String senderName;
     private LocalDateTime timestamp;
+    private MessageType type;
 
     @ManyToOne
     @JoinColumn(name = "chatId")

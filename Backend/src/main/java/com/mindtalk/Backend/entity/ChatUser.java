@@ -8,15 +8,16 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "chats")
-public class Chat {
+@Data
+@Table(name = "chatUser")
+public class ChatUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int chatId;
-//    @ManyToOne
-//    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
-//    private List<Message> messages;
+    private int chatUserId;
+    private String name;
+    private String userRole;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Chat> chats;
 }
