@@ -40,6 +40,7 @@ import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 import CounsellorAddDetails from './pages/counsellor/CounsellorAddDetalils'
+import CounsellorDetailsAdd from './pages/counsellor/CounsellorDetailsAdd'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
@@ -65,6 +66,7 @@ const App = () => (
         <Route path="/register" element={<Register />} />
         <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
         <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
+        <Route path="/counsellor/adddetails" element={<CounsellorDetailsAdd />} />
 
         {/* Routes that require authentication */}
 

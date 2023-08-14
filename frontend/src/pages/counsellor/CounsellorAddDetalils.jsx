@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 
 export default function CounsellorAddDetalils() {
@@ -51,6 +52,26 @@ export default function CounsellorAddDetalils() {
         name='licenseNo'
         className='w-full px-3 py-2 border border-black rounded-md focus:outline-none focus:ring focus:border-blue-300'
       />
+      </div>
+      <div className="mb-4">
+          <label htmlFor="licenseImage" className="block text-sm font-medium mb-1">
+            License Image
+          </label>
+          <input
+            type="file"
+            id="licenseImage"
+            name="licenseImage"
+            accept="image/*"
+            className="w-full px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+        <div className='w-full'>
+        <button
+          type="submit"
+          className="bg-blue-500 w-full text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Submit
+        </button>
       </div>
     </form>
 
