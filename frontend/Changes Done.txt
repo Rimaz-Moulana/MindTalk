@@ -24,9 +24,11 @@ npm install victory --save
 npm i moment
 npm i react-big-calendar
 yarn add axios  or npm install axios
+npm install tw-elements-react
+npm i sweetalert2
+npm install stompjs
 
-
-
+npm i input
 
 
 

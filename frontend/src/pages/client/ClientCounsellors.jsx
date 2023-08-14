@@ -40,40 +40,9 @@ const Contacts = () => {
             type="text" 
             placeholder="Search..." 
             name="search"
-            className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'
+            className='rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'
             onChange={event => setFilterQuery(event.target.value)}
             />
-        </form>
-
-        <form>
-          <select className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'>
-            <option disabled selected>District</option>
-            <option value="Colombo" >Colombo</option>
-            <option value="Gampaha">Gampaha</option>
-            <option value="Kalutara">Kalutara</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Matale">Matale</option>
-            <option value="Nuwara Eliya">Nuwara Eliya</option>
-            <option value="Galle">Galle</option>
-            <option value="Matara">Matara</option>
-            <option value="Hambantota">Hambantota</option>
-            <option value="Jaffna">Jaffna</option>
-            <option value="Kilinochchi">Kilinochchi</option>
-            <option value="Mannar">Mannar</option>
-            <option value="Vavuniya">Vavuniya</option>
-            <option value="Mullaitivu">Mullaitivu</option>
-            <option value="Batticaloa">Batticaloa</option>
-            <option value="Ampara">Ampara</option>
-            <option value="Trincomalee">Trincomalee</option>
-            <option value="Kurunegala">Kurunegala</option>
-            <option value="Puttalam">Puttalam</option>
-            <option value="Anuradhapura">Anuradhapura</option>
-            <option value="Polonnaruwa">Polonnaruwa</option>
-            <option value="Badulla">Badulla</option>
-            <option value="Moneragala">Moneragala</option>
-            <option value="Ratnapura">Ratnapura</option>
-            <option value="Kegalle">Kegalle</option>
-          </select>
         </form>
 
         <form>
@@ -85,6 +54,16 @@ const Contacts = () => {
             <option value="Mental health">Mental health</option>
             <option value="Substance abuse">Substance abuse</option>
             <option value="Educational">Educational</option>
+          </select>
+        </form>
+        
+        <form>
+          <select className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'>
+            <option disabled selected>Price Range</option>
+            <option value="Free" >Free</option>
+            <option value="1000">1000-1999</option>
+            <option value="2000">2000-2999</option>
+            <option value="3000">3000-3999</option>
           </select>
         </form>
 

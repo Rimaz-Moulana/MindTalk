@@ -32,12 +32,6 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <FiUsers />
 	},
 	{
-		key: 'doctors',
-		label: 'Doctors',
-		path: '/counsellor/counsellordoctors',
-		icon: <FiUsers />
-	},
-	{
 		key: 'blogs',
 		label: 'Blogs',
 		path: '/counsellor/blogs',

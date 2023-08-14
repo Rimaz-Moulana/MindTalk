@@ -11,11 +11,11 @@ const Navbar = () => {
 
 
     return (
-        <nav className="w-full flex py-6 justify-between items-center navbar">
-            <img src={logodark} alt="MindTalk" className="w-[240px] h-[150px] rounded-full " />
+        <nav className="flex items-center justify-between w-full py-6 navbar">
+            <img src={logodark} alt="MindTalk" className="w-[150px] h-[150px] flex rounded-full " />
 
             {/* Mobile navbar */}
-            <ul className="list-none sm:flex hidden justify-end items-center flex-1">
+            <ul className="items-center justify-end flex-1 hidden list-none sm:flex">
                 {navLinks.map((nav, index) => (
                     <li
 
@@ -30,7 +30,7 @@ const Navbar = () => {
                 ))}
             </ul>
 
-            <div className="sm:hidden flex flex-1 justify-end items-center">
+            <div className="flex items-center justify-end flex-1 sm:hidden">
                 <img src={toggle ? close : menu}
                     alt="menu"
                     className="w-[28px] h-[28px]
@@ -46,7 +46,7 @@ const Navbar = () => {
                 >
 
 
-                    <ul className="list-none flex flex-col justify-end items-center flex-1">
+                    <ul className="flex flex-col items-center justify-end flex-1 list-none">
                         {navLinks.map((nav, index) => (
                             <li
 

@@ -3,6 +3,7 @@ import { Popover, Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
+import axios from 'axios';
 
 const notificationList = [
   'Appointment Reminder 01',
@@ -12,8 +13,25 @@ const notificationList = [
 
 export default function Header() {
     const [notifications, setNotifications] = useState(notificationList);
+    const [user, setUser] = useState(null); // User-related data state 
     const navigate = useNavigate()
     
+    const handleLogout = async () => {
+        try {
+            // Make a request to your logout endpoint
+            await axios.post('http://localhost:8080/api/v1/auth/logout', null, {
+                withCredentials: true, // Include credentials
+            });
+
+            // If logout is successful, navigate to the login page or perform other actions
+            navigate('/login');
+        } catch (error) {
+            console.error("Error during logout:", error);
+            // Handle any error that might occur during the logout process
+        }
+    };
+    
+
   return (
     <div className='bg-white w-full top-0 z-50'>
         <div className='sm:flex md:flex float-right items-center py-4 pr-2 h-[64px] min-h-[64px]'>
@@ -96,7 +114,8 @@ export default function Header() {
                                         active && 'bg-gray-100',
                                         'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
                                         )}
-                                        onClick={() => navigate('/logout')}>
+                                        onClick={handleLogout} // Call the logout function
+                                        >
                                         Logout
                                     </div>
                                 )}

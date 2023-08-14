@@ -8,8 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import static com.mindtalk.Backend.entity.Role.ADMIN;
-import static com.mindtalk.Backend.entity.Role.MODERATOR;
+import static com.mindtalk.Backend.entity.Role.*;
 
 
 @SpringBootApplication
@@ -33,12 +32,20 @@ public class BackendApplication {
             System.out.println("Admin token: " + service.register(admin).getAccessToken());
 
             var moderator = RegisterRequest.builder()
-                    .username("Admin")
+                    .username("Moderator")
                     .email("moderator@mail.com")
                     .password("password")
                     .role(MODERATOR)
                     .build();
             System.out.println("Moderator token: " + service.register(moderator).getAccessToken());
+
+            var client = RegisterRequest.builder()
+                    .username("Client")
+                    .email("client@mail.com")
+                    .password("password")
+                    .role(CLIENT)
+                    .build();
+            System.out.println("Client token: " + service.register(client).getAccessToken());
 
         };
     }

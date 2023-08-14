@@ -6,6 +6,7 @@ import CounsellorAppoinments from '../../components/CounsellorDashboard/Counsell
 import CounsellorTest from '../../components/CounsellorDashboard/CounsellorTest';
 import CounsellorCalender from '../../components/CounsellorDashboard/CounsellorCalender';
 import CounsellorGraph from '../../components/CounsellorDashboard/CounsellorGraph';
+import Users from '../../components/Users';
 
 const CounsellorHome = () => {
     return (
@@ -13,7 +14,7 @@ const CounsellorHome = () => {
             <div className="flex flex-col gap-4 w-full">
                 
                 <div className="flex flex-wrap gap-4">
-                   
+                   <Users />
                 </div>
                 
                 <div className="flex flex-col gap-4 w-full">

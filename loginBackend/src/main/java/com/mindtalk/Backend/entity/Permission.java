@@ -13,9 +13,12 @@ public enum Permission {
     MODERATOR_READ("moderator:read"),
     MODERATOR_UPDATE("moderator:update"),
     MODERATOR_CREATE("moderator:create"),
-    MODERATOR_DELETE("moderator:delete")
+    MODERATOR_DELETE("moderator:delete"),
 
-    ;
+    CLIENT_READ("client:read"),
+    CLIENT_UPDATE("client:update"),
+    CLIENT_DELETE("client:delete"),
+    CLIENT_CREATE("client:create");
 
     @Getter
     private final String permission;
