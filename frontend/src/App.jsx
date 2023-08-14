@@ -45,6 +45,7 @@ import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import Loginn from './components/LoginSignup/Loginn'
 import RequireAuth from './components/LoginSignup/RequireAuth'
+import { AuthProvider } from './context/AuthProvider'
 
 const ROLES = {
   'Client': 'client',
@@ -57,87 +58,91 @@ const ROLES = {
 
 const App = () => (
   <>
-    <Router>
-      <Routes>
-        {/* Routes that don't require authentication */}
-        <Route path="/" element={<Landingpage />} />
-        <Route path="/login" element={<Loginn />} />
-        <Route path="/register" element={<Register />} />
+    <AuthProvider>
+      <Router>
 
-        {/* Routes that require authentication */}
+        <Routes>
+          {/* Routes that don't require authentication */}
+          <Route path="/" element={<Landingpage />} />
+          <Route path="/login" element={<Loginn />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route path="/client" element={<ClientLayout />}>
-          <Route index element={<ClientDashboard />} />
-          <Route path="message" element={<ChatApp />} />
-          <Route path="clientprofile" element={<ClientProfile />} />
-          <Route path="clientcounsellors" element={<ClientCounsellors />} />
-          <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
-          <Route path='clientmusic' element={<ClientMusic />} />
-          <Route path='clientmeditation' element={<ClientMeditation />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/postblog" element={<PostBlog />} />
-          <Route path='clientappointments' element={<ClientAppointments />} />
-          <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
-        </Route>
+          {/* Routes that require authentication */}
 
-
-        <Route path="/wallet" element={<WalletLayout />}>
-          <Route index element={<Wallet />} />
-          <Route path="/wallet/transhistory" element={<TransHistory />} />
-        </Route>
+          <Route path="/client" element={<ClientLayout />}>
+            <Route index element={<ClientDashboard />} />
+            <Route path="message" element={<ChatApp />} />
+            <Route path="clientprofile" element={<ClientProfile />} />
+            <Route path="clientcounsellors" element={<ClientCounsellors />} />
+            <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
+            <Route path='clientmusic' element={<ClientMusic />} />
+            <Route path='clientmeditation' element={<ClientMeditation />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="blogs/postblog" element={<PostBlog />} />
+            <Route path='clientappointments' element={<ClientAppointments />} />
+            <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
+          </Route>
 
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="/admin/userhandle" element={<UserHandle />} />
-          <Route path="/admin/user" element={<AdminCrudUser />} />
-          <Route path="/admin/counselors" element={<AdminCrudCounselors />} />
-          <Route path="/admin/moderators" element={<AdminCrudModerators />} />
-          <Route path="/admin/doctors" element={<AdminCrudDoctors />} />
-          <Route path="/admin/clients" element={<AdminCrudClient />} />
-        </Route>
+          <Route path="/wallet" element={<WalletLayout />}>
+            <Route index element={<Wallet />} />
+            <Route path="/wallet/transhistory" element={<TransHistory />} />
+          </Route>
 
 
-
-        <Route path="/counsellor" element={<CounsellorLayout />}>
-          {/* <Route index element={<CounsellorDashboard />} /> */}
-          <Route path="counsellorprofile" element={<CounsellorProfile />} />
-          <Route path="counsellorclients" element={<CounsellorClients />} />
-          <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
-          <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
-          <Route path="counsellorappointments" element={<CounsellorAppointments />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="blogs/postblog" element={<PostBlog />} />
-          <Route path="home" element={<CounsellorHome />} />
-          <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
-        </Route>
-        <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="/admin/userhandle" element={<UserHandle />} />
+            <Route path="/admin/user" element={<AdminCrudUser />} />
+            <Route path="/admin/counselors" element={<AdminCrudCounselors />} />
+            <Route path="/admin/moderators" element={<AdminCrudModerators />} />
+            <Route path="/admin/doctors" element={<AdminCrudDoctors />} />
+            <Route path="/admin/clients" element={<AdminCrudClient />} />
+          </Route>
 
 
 
-        <Route path="/moderator" element={<ModeratorLayout />}>
-          <Route index element={<ModeratorDashboard />} />
-          <Route path="userhandle" element={<ModeratorUserHandle />} />
-          <Route path="moderatormusic" element={<ModeratorMusic />} />
-
-
-        </Route>
-
-
-        <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
-        </Route>
-
-        <Route path="/test-questions" element={<TestQuestion />}>
-        </Route>
-
-        <Route path="/testemail" element={<TestEmail />}>
-        </Route>
+          <Route path="/counsellor" element={<CounsellorLayout />}>
+            {/* <Route index element={<CounsellorDashboard />} /> */}
+            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+            <Route path="counsellorclients" element={<CounsellorClients />} />
+            <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+            <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
+            <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="blogs/postblog" element={<PostBlog />} />
+            <Route path="home" element={<CounsellorHome />} />
+            <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
+          </Route>
+          <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
 
 
 
-      </Routes>
-    </Router>
+          <Route path="/moderator" element={<ModeratorLayout />}>
+            <Route index element={<ModeratorDashboard />} />
+            <Route path="userhandle" element={<ModeratorUserHandle />} />
+            <Route path="moderatormusic" element={<ModeratorMusic />} />
+
+
+          </Route>
+
+
+          <Route path="/diagnostictest" element={<DiagnosticTestPage />}>
+          </Route>
+
+          <Route path="/test-questions" element={<TestQuestion />}>
+          </Route>
+
+          <Route path="/testemail" element={<TestEmail />}>
+          </Route>
+
+
+
+        </Routes>
+      </Router>
+    </AuthProvider>
   </>
+
 
 )
 

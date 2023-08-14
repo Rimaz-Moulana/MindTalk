@@ -1,17 +1,20 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import AuthContext from "../../context/AuthProvider";
+
 
 const Loginn = () => {
-    const { setAuth } = useAuth();
+    const { setAuth } = useContext(AuthContext);
     const axiosPrivate = useAxiosPrivate();
 
 
     const navigate = useNavigate();
     const location = useLocation();
     const [loginSuccess, setLoginSuccess] = useState(false);
+    const [loggedInUsername, setLoggedInUsername] = useState(""); // New state to store the logged-in username
 
     const from = location.state?.from?.pathname || "/";
 
@@ -47,17 +50,30 @@ const Loginn = () => {
             );
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
+            console.log("Response data:", response?.data);
+            const accessToken = response?.data?.access_token;
+            console.log("accessToken:", accessToken);
+
             const roles = response?.data?.roles;
+            const username = response?.data?.username;
+            setLoggedInUsername(username);
             setLoginSuccess(true);
-            //setAuth({ email, password, roles, accessToken })
+            console.log("email:", email);
+            console.log("password:", password);
+            console.log("roles:", roles);
+            console.log("username:", username);
+            console.log("accessToken:", accessToken);
+
+            setAuth({ email, password, roles, username, accessToken });
+
+
             setUser("");
             setPwd("");
             // Role-based navigation
             if (roles.includes('ROLE_ADMIN')) {
                 navigate('/admin');
             } else if (roles.includes('ROLE_CLIENT')) {
-                navigate('/client');
+                navigate('/client', { state: { loggedInUsername } });
             } else if (roles.includes('ROLE_MODERATOR')) {
                 navigate('/moderator');
             }
