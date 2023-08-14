@@ -18,7 +18,14 @@ public enum Permission {
     CLIENT_READ("client:read"),
     CLIENT_UPDATE("client:update"),
     CLIENT_DELETE("client:delete"),
-    CLIENT_CREATE("client:create");
+    CLIENT_CREATE("client:create"),
+
+    COUNSELLOR_READ("counsellor:read"),
+    COUNSELLOR_UPDATE("counsellor:update"),
+    COUNSELLOR_DELETE("counsellor:delete"),
+    COUNSELLOR_CREATE("counsellor:create");
+
+
 
     @Getter
     private final String permission;

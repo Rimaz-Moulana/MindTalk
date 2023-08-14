@@ -47,6 +47,7 @@ import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
+import TestResult from './components/Diagnose Test/TestResult'
 
 const ROLES = {
   'Client': 'client',
@@ -138,6 +139,9 @@ const App = () => (
           </Route>
 
           <Route path="/testemail" element={<TestEmail />}>
+          </Route>
+
+          <Route path="/testresult" element={<TestResult />}>
           </Route>
 
 
