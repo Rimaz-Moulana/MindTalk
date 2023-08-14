@@ -62,6 +62,8 @@ const App = () => (
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Loginn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
+        <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
 
         {/* Routes that require authentication */}
 
@@ -110,8 +112,7 @@ const App = () => (
           <Route path="home" element={<CounsellorHome />} />
           <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
         </Route>
-        <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
-        <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
+       
 
 
 
