@@ -25,7 +25,7 @@ const TestQuestion = () => {
             const totalScore = updatedScores.reduce((total, score) => total + score, 0);
             // Now you can navigate to a result page with the calculated totalScore
             console.log(totalScore);
-            navigate(`/testemail?score=${totalScore}`);
+            navigate(`/testresult?score=${totalScore}`);
         }
     };
 

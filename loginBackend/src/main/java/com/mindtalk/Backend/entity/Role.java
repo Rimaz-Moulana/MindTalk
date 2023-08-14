@@ -29,7 +29,11 @@ public enum Role {
                     CLIENT_READ,
                     CLIENT_UPDATE,
                     CLIENT_DELETE,
-                    CLIENT_CREATE
+                    CLIENT_CREATE,
+                    COUNSELLOR_READ,
+                    COUNSELLOR_UPDATE,
+                    COUNSELLOR_DELETE,
+                    COUNSELLOR_CREATE
             )
     ),
     MODERATOR(
@@ -46,6 +50,14 @@ public enum Role {
                     CLIENT_UPDATE,
                     CLIENT_DELETE,
                     CLIENT_CREATE
+            )
+    ),
+    COUNSELLOR(
+            Set.of(
+                    COUNSELLOR_READ,
+                    COUNSELLOR_UPDATE,
+                    COUNSELLOR_DELETE,
+                    COUNSELLOR_CREATE
             )
     )
 

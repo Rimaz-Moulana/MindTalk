@@ -52,13 +52,13 @@ public class SecurityConfiguration {
                 .permitAll()
 
 
-                .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MODERATOR.name())
+                .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MODERATOR.name(), CLIENT.name(),COUNSELLOR.name())
 
 
-                .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MODERATOR_READ.name(),CLIENT_READ.name())
-                .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MODERATOR_CREATE.name(),CLIENT_CREATE.name())
-                .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MODERATOR_UPDATE.name(),CLIENT_UPDATE.name())
-                .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MODERATOR_DELETE.name(),CLIENT_DELETE.name())
+                .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MODERATOR_READ.name(),CLIENT_READ.name(),COUNSELLOR.name())
+                .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MODERATOR_CREATE.name(),CLIENT_CREATE.name(),COUNSELLOR.name())
+                .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MODERATOR_UPDATE.name(),CLIENT_UPDATE.name(),COUNSELLOR.name())
+                .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MODERATOR_DELETE.name(),CLIENT_DELETE.name(),COUNSELLOR.name())
 
 
                 /* .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
