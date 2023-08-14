@@ -23,6 +23,8 @@ npm i victory
 npm install victory --save
 npm i moment
 npm i react-big-calendar
+yarn add axios  or npm install axios
+
 
 
 

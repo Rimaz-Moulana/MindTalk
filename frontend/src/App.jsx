@@ -33,6 +33,7 @@ import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import SignInSignUpForm from './components/LoginSignup/login'
 import Register from './components/LoginSignup/register'
+import RegisterModertaor from './components/LoginSignup/Registermoderator'
 import AdminCrudClient from './pages/Admin/AdminCrudClient'
 import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
 import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
@@ -109,6 +110,11 @@ const App = () => (
 
         <Route path="/register" element={<Register />}>
         </Route>
+
+        <Route path="/registermoderator" element={<RegisterModertaor />}>
+        </Route>
+
+        
 
       </Routes>
     </Router>

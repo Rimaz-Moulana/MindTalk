@@ -4,14 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --blue-gradient: linear-gradient(-90deg,
       #00B4D8 0%,
       #90E0EF 50%,
       #CAF0F8 100%);
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
 
-}
+} */
 
 * {
   scroll-behavior: smooth;
@@ -122,10 +122,10 @@
   filter: blur(900px);
 }
 
-.green__gradient {
+/* .green__gradient {
   background: linear-gradient(90deg, #c4f4dd 0%, #67fccf 100%);
   filter: blur(900px);
-}
+} */
 
 .white__gradient {
   background: rgba(255, 255, 255, 0.6);
