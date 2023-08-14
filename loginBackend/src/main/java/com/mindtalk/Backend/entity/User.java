@@ -49,6 +49,10 @@ public class User implements UserDetails {
         return email;
     }
 
+    // Use the custom method to get the username
+    public String gettingUsername() {
+        return username;
+    }
 
     @Override
     public boolean isAccountNonExpired() {

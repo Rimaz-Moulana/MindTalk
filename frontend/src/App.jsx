@@ -45,6 +45,7 @@ import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
+// eslint-disable-next-line no-unused-vars
 const ROLES = {
   'Client': 'client',
   'Admin': 'admin',

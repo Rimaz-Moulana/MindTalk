@@ -1,7 +1,7 @@
 import who from "./WHO.png";
 import bill from "./bill.jpg";
 import medicaid from "./medicaid.jpg";
-import card from "./card.png";
+import counsellor from "./Counsellor.jpg";
 import healthline from "./healthline.jpeg";
 import dropbox from "./united.jpg";
 import logolight from "./Logo Light.svg";
@@ -32,7 +32,7 @@ export {
   who,
   bill,
   medicaid,
-  card,
+  counsellor,
   healthline,
   dropbox,
   logolight,

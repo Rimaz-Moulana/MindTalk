@@ -1,4 +1,4 @@
-import { card } from '../../assets';
+import { counsellor } from '../../assets';
 import styles, { layout } from '../../style';
 import Button from '../Button';
 
@@ -23,7 +23,7 @@ const Counselorregistration = () => (
 
 
     <div className={layout.sectionImg}>
-      <img src={card} alt="card" className="w-[100%] h-[100%] sm:w-[500px] sm:ml-auto sm:mr-0 mr-auto" />
+      <img src={counsellor} alt="counsellor" className=" block z-[5]   w-full rounded-lg" />
 
     </div>
 

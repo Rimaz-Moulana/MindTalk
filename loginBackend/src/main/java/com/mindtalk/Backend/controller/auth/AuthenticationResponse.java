@@ -19,6 +19,8 @@ public class AuthenticationResponse {
     @JsonProperty("refresh_token")
     private String refreshToken;
 
+    private String username;
+
     private List<String> roles; // Add this field
 
     // Other constructors, methods, and getters/setters
@@ -31,6 +33,13 @@ public class AuthenticationResponse {
         this.roles = roles;
     }
 
+    public String gettingUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 }
 

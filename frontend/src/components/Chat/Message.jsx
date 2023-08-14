@@ -1,28 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Searchbar from '../shared/Searchbar'
 import placeholderPNG from '../../assets/Chat/chatting.png'
 import { FaPaperclip, FaSmile, FaPaperPlane, FaArrowLeft } from 'react-icons/fa'
 import ChatBoxInput from './ChatBoxInput'
+import axios from 'axios'
 
 const ChatApp = () => {
-    //store information about chats
-    const chats = [
-        {
-            id: 1,
-            avatar: '../../../src/assets/Chat/profilePic1.jpg',
-            name: 'Marie Horwitz'
-        },
-        {
-            id: 2,
-            avatar: '../../../src/assets/Chat/profilePic2.jpg',
-            name: 'Alexa Chung'
-        },
-        {
-            id: 3,
-            avatar: '../../../src/assets/Chat/profilePic3.jpg',
-            name: 'Mia Maples'
+    const [chats, setChats] = useState([])
+
+    useEffect(() => {
+        //fetch datafrom backend
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://localhost:8080/api/chatuser/getChatCounsellors')
+                const newChats = response.data // Assign the response data to a new variable
+
+                // Update the state directly with the new data
+                setChats(newChats)
+            } catch (error) {
+                console.error('Error fetching data:', error)
+            }
         }
-    ]
+        fetchData()
+    }, [])
 
     //to track whether chat box is open
     const [isChatBoxOpen, setChatBoxOpen] = useState(false)
@@ -39,7 +39,7 @@ const ChatApp = () => {
             setShowChatList(false)
         }
 
-        const selectedChat = chats.find((chat) => chat.id === chatId)
+        const selectedChat = chats.find((chat) => chat.chatUserId === chatId)
         setSelectedChatAvatar(selectedChat.avatar)
         setSelectedChatName(selectedChat.name)
     }
@@ -58,16 +58,22 @@ const ChatApp = () => {
                         <span>Messages</span>
                     </div>
                     <Searchbar />
+                    {/* Iterate over chats array and render chat items */}
                     {chats.map((chat, index) => (
                         <div
-                            key={chat.id}
-                            onClick={() => handleChatItemClick(chat.id, index)}
+                            key={chat.chatUserId}
+                            onClick={() => handleChatItemClick(chat.chatUserId, index)}
                             className={`flex items-center p-4 cursor-pointer bg-white rounded-2xl border-b border-gray-200 hover:bg-blue-100 ${
-                                activeChat === chat.id ? 'active' : ''
+                                activeChat === chat.chatUserId ? 'active' : ''
                             }`}
                         >
                             <div className="relative">
-                                <img src={chat.avatar} alt="avatar" className="w-16 h-16 rounded-full mr-4" />
+                                <img
+                                    src="../../../src/assets/Chat/profilePic3.jpg"
+                                    alt="avatar"
+                                    className="w-16 h-16 rounded-full mr-4"
+                                />
+                                {/* <img src={chat.avatar} alt="avatar" className="w-16 h-16 rounded-full mr-4" /> */}
                                 <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-warning"></span>
                             </div>
                             <div className="flex-1">

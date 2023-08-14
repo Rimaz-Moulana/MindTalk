@@ -7,17 +7,25 @@ const TestQuestion = () => {
     const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [questions, setQuestions] = useState([]);
+    const [scores, setScores] = useState(Array(questionsData.length).fill(0));
 
     useEffect(() => {
         setQuestions(questionsData);
     }, []);
 
-    const handleAnswerClick = () => {
+    const handleAnswerClick = (score) => {
+        const updatedScores = [...scores];
+        updatedScores[currentQuestion] = score;
+        setScores(updatedScores);
+
         const nextQuestion = currentQuestion + 1;
         if (nextQuestion < questions.length) {
             setCurrentQuestion(nextQuestion);
         } else {
-            navigate('/testemail');
+            const totalScore = updatedScores.reduce((total, score) => total + score, 0);
+            // Now you can navigate to a result page with the calculated totalScore
+            console.log(totalScore);
+            navigate(`/testresult?score=${totalScore}`);
         }
     };
 
@@ -62,7 +70,7 @@ const TestQuestion = () => {
                             <button
                                 key={index}
                                 className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200"
-                                onClick={handleAnswerClick}
+                                onClick={() => handleAnswerClick(index)} 
                             >
                                 {answer}
                             </button>
