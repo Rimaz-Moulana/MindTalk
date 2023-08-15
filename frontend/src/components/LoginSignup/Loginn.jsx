@@ -76,6 +76,8 @@ const Loginn = () => {
                 navigate('/client', { state: { loggedInUsername } });
             } else if (roles.includes('ROLE_MODERATOR')) {
                 navigate('/moderator');
+            } else if (roles.includes('ROLE_COUNSELLOR')) {
+                navigate('/counsellor/home');
             }
         } catch (err) {
             console.error("Caught error:", err);
