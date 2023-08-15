@@ -33,6 +33,7 @@ import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import Loginn from './components/LoginSignup/Loginn'
 import Register from './components/LoginSignup/register'
+import { AuthProvider } from './context/AuthProvider'
 import AdminCrudClient from './pages/Admin/AdminCrudClient'
 import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
 import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
@@ -40,12 +41,11 @@ import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
 import CounsellorAddDetails from './pages/counsellor/CounsellorAddDetalils'
+import CounsellorDetailsAdd from './pages/counsellor/CounsellorDetailsAdd'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
-import RequireAuth from './components/LoginSignup/RequireAuth'
-import { AuthProvider } from './context/AuthProvider'
 
 const ROLES = {
   'Client': 'client',
@@ -56,7 +56,9 @@ const ROLES = {
 
 
 
+
 const App = () => (
+
   <>
     <AuthProvider>
       <Router>
@@ -67,7 +69,12 @@ const App = () => (
           <Route path="/login" element={<Loginn />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Routes that require authentication */}
+          <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
+          <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
+          <Route path="/counsellor/addDetails" element={<CounsellorDetailsAdd />} />
+
+          {/* <Route path="/table" element={<TableData />}  /> */}
+           {/* Routes that require authentication */}
 
           <Route path="/client" element={<ClientLayout />}>
             <Route index element={<ClientDashboard />} />
@@ -114,8 +121,7 @@ const App = () => (
             <Route path="home" element={<CounsellorHome />} />
             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
           </Route>
-          <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
-          <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
+          
 
 
 
