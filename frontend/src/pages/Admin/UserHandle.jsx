@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AddUser from '../../components/AdminDashboard/AddUser';
+import AddModerator from '../../components/AdminDashboard/AddModerator';
 import UpdateUser from '../../components/AdminDashboard/UpdateUser';
 
 const UserHandle = () => {
@@ -14,7 +15,7 @@ const UserHandle = () => {
       case 'add':
         return <div><AddUser /></div>;
       case 'view':
-        return <div>Content for View User section</div>;
+        return <div><AddModerator /></div>;
       case 'update':
         return <div><UpdateUser /></div>;
       case 'delete':
@@ -42,7 +43,7 @@ const UserHandle = () => {
           }`}
           onClick={() => handleSectionClick('view')}
         >
-          View User
+          Add Moderator
         </div>
         <div
           className={`cursor-pointer flex-1 p-2 rounded-lg text-center ${
