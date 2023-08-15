@@ -4,7 +4,7 @@ import com.mindtalk.Backend.dto.chat.ChatUserDTO;
 import com.mindtalk.Backend.dto.chat._CounsellorDTO;
 import com.mindtalk.Backend.entity.ChatUser;
 import com.mindtalk.Backend.entity._Counsellor;
-import com.mindtalk.Backend.repo.ChatCounsellorRepository;
+//import com.mindtalk.Backend.repo.ChatCounsellorRepository;
 import com.mindtalk.Backend.repo.ChatUserRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -19,8 +19,8 @@ import java.util.List;
 public class ChatUserService {
     @Autowired
     private ChatUserRepository chatUserRepository;
-    @Autowired
-    private ChatCounsellorRepository chatCounsellorRepository;
+//    @Autowired
+//    private ChatCounsellorRepository chatCounsellorRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -37,10 +37,10 @@ public class ChatUserService {
 //        List<ChatUser> counsellors = chatUserRepository.findAllByUserRole("Counsellor");
 //        return  modelMapper.map(counsellors,new TypeToken<List<ChatUserDTO>>(){}.getType());
 //    }
-    public List<_CounsellorDTO> getAllChatCounsellors(){
-        List<_Counsellor> counsellors = chatCounsellorRepository.findAll();
-        return  modelMapper.map(counsellors,new TypeToken<List<_CounsellorDTO>>(){}.getType());
-    }
+//    public List<_CounsellorDTO> getAllChatCounsellors(){
+//        List<_Counsellor> counsellors = chatCounsellorRepository.findAll();
+//        return  modelMapper.map(counsellors,new TypeToken<List<_CounsellorDTO>>(){}.getType());
+//    }
 //    public List<ChatUserDTO> getAllChatClients(){
 //        List<ChatUser> clients = chatUserRepository.findAllByUserRole("user");
 //        return  modelMapper.map(clients,new TypeToken<List<ChatUserDTO>>(){}.getType());
