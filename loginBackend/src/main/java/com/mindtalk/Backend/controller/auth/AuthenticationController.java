@@ -24,7 +24,7 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true") // Add this line
+    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
@@ -32,7 +32,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true") // Add this line
+    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
@@ -40,7 +40,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh-token")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true") // Add this line
+    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true") 
     public void refreshToken(
             HttpServletRequest request,
             HttpServletResponse response

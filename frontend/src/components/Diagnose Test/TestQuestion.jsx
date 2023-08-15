@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import questionsData from './questions.json';
+import axios from 'axios';
 
 const TestQuestion = () => {
     const navigate = useNavigate();
@@ -23,9 +24,7 @@ const TestQuestion = () => {
             setCurrentQuestion(nextQuestion);
         } else {
             const totalScore = updatedScores.reduce((total, score) => total + score, 0);
-            // Now you can navigate to a result page with the calculated totalScore
-            console.log(totalScore);
-            navigate(`/testresult?score=${totalScore}`);
+            sendTestResultsToBackend(totalScore);
         }
     };
 
@@ -35,6 +34,26 @@ const TestQuestion = () => {
             setCurrentQuestion(previousQuestion);
         }
     };
+
+    
+    const sendTestResultsToBackend = async (totalScore) => {
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/test/send-test-results', {
+                userId: 123, 
+                score: totalScore,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json', 
+                },
+            });
+    
+            console.log(response.data); 
+            navigate(`/testresult?score=${totalScore}`);
+        } catch (error) {
+            console.error('Error sending test results:', error);
+        }
+    };
+    
 
     if (questions.length === 0) {
         return <div>Loading...</div>; // Add a loading state if needed
