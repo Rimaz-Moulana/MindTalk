@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function Searchbar() {
+export default function Searchbar({ onSearch }) {
+    const [searchTerm, setSearchTerm] = useState('')
+
+    const handleSearchChange = (event) => {
+        const newSearchTerm = event.target.value
+        setSearchTerm(newSearchTerm)
+        onSearch(newSearchTerm)
+    }
     return (
         <div className="mb-3 xl:w-80">
             <div className="relative mb-4 flex w-full flex-wrap items-stretch">
@@ -10,6 +17,8 @@ export default function Searchbar() {
                     placeholder="Search..."
                     aria-label="Search"
                     aria-describedby="button-addon2"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
                 />
 
                 {/* <!--Search icon--> */}
