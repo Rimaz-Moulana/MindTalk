@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
-import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa'
+import { FaCheck, FaInfoCircle, FaTimes } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+
 
 
 
@@ -10,7 +12,10 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
-const Registermoderator = () => {
+const Register = () => {
+    const navigate = useNavigate();
+    const [RegisterSuccess, setRegisterSuccess] = useState(false);
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -67,7 +72,8 @@ const Registermoderator = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log("Form submitted!");  // Add this line
+        setRegisterSuccess(false);// Reset the Register success state
+        console.log("Form submitted!");
 
         const v1 = true;
         const v2 = true;
@@ -75,33 +81,44 @@ const Registermoderator = () => {
         console.log("v1:", v1);
         console.log("v2:", v2);
 
-        if (!v1 || !v2) {
+        if (!(validName && validEmail)) {
             setErrMsg("Invalid Entry");
             return;
         }
 
 
+
         try {
             const response = await axios.post('http://localhost:8080/api/v1/auth/register',
-                JSON.stringify({ user: username, email, password: password }),
+                JSON.stringify({ username: username, email: email, password: password, role: "MODERATORR" }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 });
 
+            if (response.status === 200) {
+                // Registration was successful
 
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
-            setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
-            setUser('');
-            setPwd('');
-            setMatchPwd('');
+                console.log(response?.data);
+                console.log(response?.accessToken);
+                console.log(JSON.stringify(response))
+                seSuccess(true);
+                setRegisterSuccess(true);
+                //clear state and controlled inputs
+                //need value attrib on inputs for this
+                setUser('');
+                setPwd('');
+                setMatchPwd('');
+                console.log("Before navigation");
+                navigate("/login");
+                console.log("After navigation");
+
+            } else {
+                // Handle other status codes
+            }
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+
             } else if (err.response?.status === 409) {
                 setErrMsg('Username Taken');
             } else {
@@ -120,6 +137,12 @@ const Registermoderator = () => {
                     <p className="text-blue-600">
                         <a href="#" className="hover:underline">Sign In</a>
                     </p>
+                    {/* Success message */}
+                    {RegisterSuccess && (
+                        <p className="successmsg" aria-live="polite">
+                            Register successful!
+                        </p>
+                    )}
                 </section>
             ) : (
                 <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -218,7 +241,7 @@ const Registermoderator = () => {
                                     className={`bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded mt-4 ${!(validName && validEmail && validPwd && validMatch) ? "opacity-50 cursor-not-allowed" : ""}`}
                                     disabled={!(validName && validEmail && validPwd && validMatch)}
                                 >
-                                    Moderator Verify
+                                    Sign Up
                                 </button>
                             </div>
 
@@ -238,7 +261,7 @@ const Registermoderator = () => {
     );
 }
 
-export default Registermoderator;
+export default Register;
 
 
 

@@ -1,7 +1,17 @@
 import React, { useState } from 'react'
 import { FaPaperclip, FaSmile, FaPaperPlane } from 'react-icons/fa'
 
-export default function ChatBoxInput() {
+export default function ChatBoxInput({ onSendMessage }) {
+    const [inputMessage, setInputMessage] = useState('')
+
+    const handleInputChange = (event) => {
+        setInputMessage(event.target.value)
+    }
+
+    const handleSendClick = () => {
+        onSendMessage(inputMessage)
+        setInputMessage('')
+    }
     return (
         <>
             <div className="flex items-center p-4 bg-white rounded-xl mt-2">
@@ -15,9 +25,11 @@ export default function ChatBoxInput() {
                     type="text"
                     placeholder="Type message"
                     className="flex-1 px-4 py-2 border border-gray-300 rounded-xl mr-4"
+                    value={inputMessage}
+                    onChange={handleInputChange}
                 />
 
-                <a href="#!" className="pr-2 text-2xl text-gray-500 hover:text-blue-500">
+                <a href="#!" className="pr-2 text-2xl text-gray-500 hover:text-blue-500" onClick={handleSendClick}>
                     <FaPaperPlane />
                 </a>
             </div>

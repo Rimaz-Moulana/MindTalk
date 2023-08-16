@@ -1,29 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Searchbar from '../shared/Searchbar'
 import placeholderPNG from '../../assets/Chat/chatting.png'
+import chatUserPNG from '../../assets/Chat/chatUser.png'
 import { FaPaperclip, FaSmile, FaPaperPlane, FaArrowLeft } from 'react-icons/fa'
 import ChatBoxInput from './ChatBoxInput'
 import axios from 'axios'
+import AuthContext from '../../context/AuthProvider'
+import { useLocation } from 'react-router-dom'
 
 const ChatApp = () => {
+    const { auth } = useContext(AuthContext)
+    const [accessToken, setAccessToken] = useState('')
+
     const [chats, setChats] = useState([])
-
-    useEffect(() => {
-        //fetch datafrom backend
-        async function fetchData() {
-            try {
-                const response = await axios.get('http://localhost:8080/api/chatuser/getChatCounsellors')
-                const newChats = response.data // Assign the response data to a new variable
-
-                // Update the state directly with the new data
-                setChats(newChats)
-            } catch (error) {
-                console.error('Error fetching data:', error)
-            }
-        }
-        fetchData()
-    }, [])
-
+    const [filteredChats, setFilteredChats] = useState([])
+    const [searchTerm, setSearchTerm] = useState('')
+    const [messages, setMessages] = useState([])
     //to track whether chat box is open
     const [isChatBoxOpen, setChatBoxOpen] = useState(false)
     const [activeChat, setActiveChat] = useState(null)
@@ -31,6 +23,116 @@ const ChatApp = () => {
     //get selected chat's info
     const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
     const [selectedChatName, setSelectedChatName] = useState('')
+
+    // useEffect(() => {
+    //     //get accessTocken from localstorage
+    //     const storedAuthData = localStorage.getItem('authData')
+    //     if (storedAuthData) {
+    //         const { accessToken } = JSON.parse(storedAuthData)
+    //         setAccessToken(accessToken)
+
+    //         console.log(storedAuthData)
+    //         //fetch datafrom backend
+    //         async function fetchData() {
+    //             try {
+    //                 const config = {
+    //                     headers: {
+    //                         Authorization: `Bearer ${accessToken}`,
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 }
+    //                 const response = await axios.get(
+    //                     'http://localhost:8080/api/counsellor/details/getCounsellor',
+    //                     config
+    //                 )
+    //                 const newChats = response.data // Assign the response data to a new variable
+    //                 console.log(response)
+
+    //                 // Update the state directly with the new data
+    //                 setChats(newChats)
+    //             } catch (error) {
+    //                 console.error('Error fetching data:', error)
+    //             }
+    //         }
+    //         fetchData()
+    //     }
+    // }, [])
+    //useEffect(() => {
+    const fetchCounsellors = async () => {
+        try {
+            const authData = localStorage.getItem('authData')
+            if (authData) {
+                const { accessToken } = JSON.parse(authData)
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+
+                const response = await axios.get('http://localhost:8080/api/counsellor/details/getCounsellor', config)
+
+                const newChats = response.data.map((counsellor) => ({
+                    id: counsellor.id,
+                    name: `${counsellor.firstname} ${counsellor.lastname}`
+                }))
+
+                console.log(newChats)
+
+                setChats(newChats)
+                setFilteredChats(newChats)
+                // const newChats = response.data
+                // console.log(newChats)
+
+                // setChats(newChats)
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error)
+        }
+    }
+    useEffect(() => {
+        fetchCounsellors()
+    }, [])
+
+    useEffect(() => {
+        // Filter chats based on the search term and set the filteredChats state
+        setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    }, [chats, searchTerm])
+
+    //}, [])
+
+    const handleSendMessage = async (message) => {
+        const storedAuthData = localStorage.getItem('authData')
+        if (storedAuthData) {
+            const { accessToken } = JSON.parse(storedAuthData)
+            setAccessToken(accessToken)
+        }
+        if (message.trim() !== '') {
+            const newMessage = {
+                content: message,
+                sender: 'user'
+            }
+            setMessages((prevMessages) => [...prevMessages, newMessage])
+            // setMessages([...message, newMessage])
+
+            // Send the message to the backend
+            try {
+                const response = await axios.post('http://localhost:8080/api/v1/messages', newMessage, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                })
+
+                console.log('Message sent successfully:', response.data)
+
+                // Update messages state
+                setMessages((prevMessages) => [...prevMessages, newMessage])
+            } catch (error) {
+                console.error('Error sending message:', error)
+            }
+        }
+    }
 
     const handleChatItemClick = (chatId) => {
         setChatBoxOpen(true)
@@ -48,32 +150,30 @@ const ChatApp = () => {
         setShowChatList(true)
         setChatBoxOpen(false)
     }
+    // useEffect(() => {
+    //     setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    // }, [chats, searchTerm])
 
     return (
-        <div className="flex h-full">
+        <div className="flex h-full w-full">
             {window.innerWidth >= 700 && showChatList && !activeChat && (
                 //chat list (left side component)
                 <div className={`bg-white p-4 rounded-xl mr-4 w-96 ${showChatList ? '' : 'hidden'}`}>
                     <div className="text-blue-500 font-medium text-2xl mb-4">
                         <span>Messages</span>
                     </div>
-                    <Searchbar />
+                    <Searchbar onSearch={setSearchTerm} />
                     {/* Iterate over chats array and render chat items */}
-                    {chats.map((chat, index) => (
+                    {filteredChats.map((chat, index) => (
                         <div
-                            key={chat.chatUserId}
-                            onClick={() => handleChatItemClick(chat.chatUserId, index)}
+                            key={chat.id}
+                            onClick={() => handleChatItemClick(chat.id, index)}
                             className={`flex items-center p-4 cursor-pointer bg-white rounded-2xl border-b border-gray-200 hover:bg-blue-100 ${
-                                activeChat === chat.chatUserId ? 'active' : ''
+                                activeChat === chat.id ? 'active' : ''
                             }`}
                         >
                             <div className="relative">
-                                <img
-                                    src="../../../src/assets/Chat/profilePic3.jpg"
-                                    alt="avatar"
-                                    className="w-16 h-16 rounded-full mr-4"
-                                />
-                                {/* <img src={chat.avatar} alt="avatar" className="w-16 h-16 rounded-full mr-4" /> */}
+                                <img src={chatUserPNG} alt="avatar" className="w-16 h-16 rounded-full mr-4" />
                                 <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-warning"></span>
                             </div>
                             <div className="flex-1">
@@ -88,7 +188,7 @@ const ChatApp = () => {
 
             {isChatBoxOpen && activeChat ? (
                 // chat box (right side component)
-                <div className="flex flex-col p-4 h-full bg-white rounded-xl">
+                <div className="flex flex-col p-4 h-full bg-white rounded-xl w-full">
                     <div className="flex items-center p-4 ">
                         <div className="flex flex-row w-12 h-12 rounded-full items-center">
                             <div className="pr-4" onClick={handleShowChatList}>
@@ -96,35 +196,38 @@ const ChatApp = () => {
                                     <FaArrowLeft />
                                 </a>
                             </div>
-                            <img src={selectedChatAvatar} alt="avatar" className="w-14 h-14 rounded-full " />
+                            <img src={chatUserPNG} alt="avatar" className="w-14 h-14 rounded-full " />
+                            {/* <img src={selectedChatAvatar} alt="avatar" className="w-14 h-14 rounded-full " /> */}
                             <div className="ml-4 w-40">
                                 <p className="text-2xl font-medium whitespace-nowrap">{selectedChatName}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex-1 bg-gray-200 p-4 rounded-xl overflow-y-auto">
-                        <div className="flex flex-row space-y-4 mb-5">
-                            <p className="flex items-start bg-blue-50 p-2 rounded-2xl rounded-tl-none">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            <p className="text-xs text-opacity-25 pl-2">12:00 PM | Aug 13</p>
-                        </div>
-                        <div className="flex flex-row-reverse space-y-4 mb-5">
-                            <p className="flex items-start bg-white p-2 rounded-2xl rounded-tr-none">
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat.
-                            </p>
-                            <p className="text-xs text-opacity-25 pr-2">12:00 PM | Aug 13</p>
-                        </div>
+                    <div className="flex-1 bg-gray-100 p-4 rounded-xl overflow-y-auto">
+                        {messages.map((message, index) => (
+                            <div
+                                key={index}
+                                className={`${message.sender === 'user' ? 'text-right' : 'text-left'} mb-2`}
+                            >
+                                <div
+                                    className={`bg-blue-600 text-white font-medium py-2 px-7 rounded-2xl inline-block`}
+                                >
+                                    {message.content}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <ChatBoxInput />
+                    <ChatBoxInput onSendMessage={handleSendMessage} />
                 </div>
             ) : window.innerWidth >= 900 && !activeChat ? (
                 //placeholder picture
-                <div className="flex flex-1 p-4 justify-center align-middle">
+                <div className="flex flex-1 flex-col p-4 justify-center items-center bg-white rounded-xl">
                     <img src={placeholderPNG} alt="placeholderpic" className="h-4/5" />
+                    <div className="text-blue-700">
+                        {/* <p>Every Chat a Step Towards Healing and Hope</p> <br /> */}
+                        <p>Let's Navigate this Journey Together.</p>
+                    </div>
                 </div>
             ) : null}
         </div>

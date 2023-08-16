@@ -59,7 +59,7 @@ const Clients = () => {
         </div>
       </section>
 
-      <section className='p-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      <section className='p-5 '>
         {clientList?.length < 1 && (
           <h1>No Data Matches Your Search</h1>
         )}
