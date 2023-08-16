@@ -12,35 +12,95 @@ const ChatApp = () => {
     const { auth } = useContext(AuthContext)
     const [accessToken, setAccessToken] = useState('')
 
-    useEffect(() => {
-        //get accessTocken from localstorage
-        const storedAuthData = localStorage.getItem('authData')
-        if (storedAuthData) {
-            const { accessToken } = JSON.parse(storedAuthData)
-            setAccessToken(accessToken)
+    const [chats, setChats] = useState([])
+    const [filteredChats, setFilteredChats] = useState([])
+    const [searchTerm, setSearchTerm] = useState('')
+    const [messages, setMessages] = useState([])
+    //to track whether chat box is open
+    const [isChatBoxOpen, setChatBoxOpen] = useState(false)
+    const [activeChat, setActiveChat] = useState(null)
+    const [showChatList, setShowChatList] = useState(true)
+    //get selected chat's info
+    const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
+    const [selectedChatName, setSelectedChatName] = useState('')
 
-            console.log(storedAuthData)
-            //fetch datafrom backend
-            async function fetchData() {
-                try {
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${accessToken}`
-                        }
-                    }
-                    const response = await axios.get('http://localhost:8080/api/v1/chat/getCounsellors', config)
-                    const newChats = response.data // Assign the response data to a new variable
-                    console.log(response)
+    // useEffect(() => {
+    //     //get accessTocken from localstorage
+    //     const storedAuthData = localStorage.getItem('authData')
+    //     if (storedAuthData) {
+    //         const { accessToken } = JSON.parse(storedAuthData)
+    //         setAccessToken(accessToken)
 
-                    // Update the state directly with the new data
-                    setChats(newChats)
-                } catch (error) {
-                    console.error('Error fetching data:', error)
+    //         console.log(storedAuthData)
+    //         //fetch datafrom backend
+    //         async function fetchData() {
+    //             try {
+    //                 const config = {
+    //                     headers: {
+    //                         Authorization: `Bearer ${accessToken}`,
+    //                         'Content-Type': 'application/json'
+    //                     }
+    //                 }
+    //                 const response = await axios.get(
+    //                     'http://localhost:8080/api/counsellor/details/getCounsellor',
+    //                     config
+    //                 )
+    //                 const newChats = response.data // Assign the response data to a new variable
+    //                 console.log(response)
+
+    //                 // Update the state directly with the new data
+    //                 setChats(newChats)
+    //             } catch (error) {
+    //                 console.error('Error fetching data:', error)
+    //             }
+    //         }
+    //         fetchData()
+    //     }
+    // }, [])
+    //useEffect(() => {
+    const fetchCounsellors = async () => {
+        try {
+            const authData = localStorage.getItem('authData')
+            if (authData) {
+                const { accessToken } = JSON.parse(authData)
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
                 }
+
+                const response = await axios.get('http://localhost:8080/api/counsellor/details/getCounsellor', config)
+
+                const newChats = response.data.map((counsellor) => ({
+                    id: counsellor.id,
+                    name: `${counsellor.firstname} ${counsellor.lastname}`
+                }))
+
+                console.log(newChats)
+
+                setChats(newChats)
+                setFilteredChats(newChats)
+                // const newChats = response.data
+                // console.log(newChats)
+
+                // setChats(newChats)
             }
-            fetchData()
+        } catch (error) {
+            console.error('Error fetching data:', error)
         }
+    }
+    useEffect(() => {
+        fetchCounsellors()
     }, [])
+
+    useEffect(() => {
+        // Filter chats based on the search term and set the filteredChats state
+        setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    }, [chats, searchTerm])
+
+    //}, [])
 
     const handleSendMessage = async (message) => {
         const storedAuthData = localStorage.getItem('authData')
@@ -74,18 +134,6 @@ const ChatApp = () => {
         }
     }
 
-    const [chats, setChats] = useState([])
-    const [filteredChats, setFilteredChats] = useState([])
-    const [searchTerm, setSearchTerm] = useState('')
-    const [messages, setMessages] = useState([])
-    //to track whether chat box is open
-    const [isChatBoxOpen, setChatBoxOpen] = useState(false)
-    const [activeChat, setActiveChat] = useState(null)
-    const [showChatList, setShowChatList] = useState(true)
-    //get selected chat's info
-    const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
-    const [selectedChatName, setSelectedChatName] = useState('')
-
     const handleChatItemClick = (chatId) => {
         setChatBoxOpen(true)
         setActiveChat(chatId)
@@ -102,9 +150,9 @@ const ChatApp = () => {
         setShowChatList(true)
         setChatBoxOpen(false)
     }
-    useEffect(() => {
-        setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    }, [chats, searchTerm])
+    // useEffect(() => {
+    //     setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
+    // }, [chats, searchTerm])
 
     return (
         <div className="flex h-full w-full">
@@ -118,15 +166,14 @@ const ChatApp = () => {
                     {/* Iterate over chats array and render chat items */}
                     {filteredChats.map((chat, index) => (
                         <div
-                            key={chat.chatUserId}
-                            onClick={() => handleChatItemClick(chat.chatUserId, index)}
+                            key={chat.id}
+                            onClick={() => handleChatItemClick(chat.id, index)}
                             className={`flex items-center p-4 cursor-pointer bg-white rounded-2xl border-b border-gray-200 hover:bg-blue-100 ${
-                                activeChat === chat.chatUserId ? 'active' : ''
+                                activeChat === chat.id ? 'active' : ''
                             }`}
                         >
                             <div className="relative">
                                 <img src={chatUserPNG} alt="avatar" className="w-16 h-16 rounded-full mr-4" />
-                                {/* <img src={chat.avatar} alt="avatar" className="w-16 h-16 rounded-full mr-4" /> */}
                                 <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-warning"></span>
                             </div>
                             <div className="flex-1">

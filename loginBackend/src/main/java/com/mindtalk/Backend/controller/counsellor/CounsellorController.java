@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/counsellor/details")
+//@CrossOrigin("http://127.0.0.1:5173")
 public class CounsellorController {
 
     @Autowired
@@ -33,5 +36,9 @@ public class CounsellorController {
             return ResponseEntity.status(500).body("An error");
         }
     }
-
+    @GetMapping("/getCounsellor")
+    @CrossOrigin(origins = "http://127.0.0.1:5173",allowCredentials = "true")
+    public List<CounsellorDTO> getCounsellors(){
+        return counsellorInfoService.getAllCounsellors();
+    }
 }
