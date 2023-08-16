@@ -25,7 +25,7 @@ const PostBlog = () => {
   return (
     <>
     <div className='p-3 bg-white rounded-2xl'>
-        <div className='flex justify-center p-10 mt-1 bg-gradient-to-br from-blue-200 to-green-50 rounded-t-xl'>
+        <div className='flex justify-center p-10 mt-1 bg-gradient-to-br'>
           <h1 className='text-4xl font-bold md:text-6xl '>Write a Blog</h1>
         </div>
         <div className="px-4 py-10 mx-8 md:mx-0 rounded-3xl sm:p-10">
