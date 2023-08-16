@@ -47,6 +47,14 @@ public class BackendApplication {
                     .build();
             System.out.println("Client token: " + service.register(client).getAccessToken());
 
+            var counsellor = RegisterRequest.builder()
+                    .username("Counsellor")
+                    .email("counsellor@mail.com")
+                    .password("password")
+                    .role(COUNSELLOR)
+                    .build();
+            System.out.println("Counsellor token: " + service.register(counsellor).getAccessToken());
+
         };
     }
 }

@@ -15,12 +15,10 @@ import lombok.NoArgsConstructor;
 public class Counsellor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String firstname;
     private String lastname;
     private String email;
-    private String password;
     private Long licenseNo;
     private String licenseImage;
 
@@ -54,14 +52,6 @@ public class Counsellor {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Long getLicenseNo() {

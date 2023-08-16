@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import questionsData from './questions.json';
+import axios from 'axios';
 
 const TestQuestion = () => {
     const navigate = useNavigate();
@@ -23,9 +24,8 @@ const TestQuestion = () => {
             setCurrentQuestion(nextQuestion);
         } else {
             const totalScore = updatedScores.reduce((total, score) => total + score, 0);
-            // Now you can navigate to a result page with the calculated totalScore
-            console.log(totalScore);
-            navigate(`/testemail?score=${totalScore}`);
+            sendTestResultsToBackend(totalScore);
+            navigate(`/testresult?score=${totalScore}`);
         }
     };
 
@@ -35,6 +35,38 @@ const TestQuestion = () => {
             setCurrentQuestion(previousQuestion);
         }
     };
+
+
+    const sendTestResultsToBackend = async (totalScore) => {
+        try {
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken, id } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                const requestData = {
+                    userId: id,
+                    score: totalScore
+                };
+                const response = await axios.post(
+                    'http://localhost:8080/api/v1/test/send-test-results',
+                    requestData, // Pass the request data directly
+                    config // Pass the config object
+                );
+
+                console.log(response.data);
+            }
+        } catch (error) {
+            console.error('Error sending test results:', error);
+        }
+    };
+
 
     if (questions.length === 0) {
         return <div>Loading...</div>; // Add a loading state if needed
@@ -70,7 +102,7 @@ const TestQuestion = () => {
                             <button
                                 key={index}
                                 className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200"
-                                onClick={() => handleAnswerClick(index)} 
+                                onClick={() => handleAnswerClick(index)}
                             >
                                 {answer}
                             </button>

@@ -54,6 +54,7 @@ const Loginn = () => {
             const accessToken = response?.data?.access_token;
             console.log("accessToken:", accessToken);
 
+            const id = response?.data?.id;
             const roles = response?.data?.roles;
             const username = response?.data?.username;
             setLoggedInUsername(username);
@@ -63,9 +64,11 @@ const Loginn = () => {
             console.log("roles:", roles);
             console.log("username:", username);
             console.log("accessToken:", accessToken);
+            console.log("id:", id);
+            
 
-            setAuth({ email, password, roles, username, accessToken });
-
+            setAuth({ email, password, roles, username, accessToken, id });
+            localStorage.setItem("authData", JSON.stringify({ email, password, roles, username, accessToken, id }));
 
             setUser("");
             setPwd("");
@@ -76,6 +79,8 @@ const Loginn = () => {
                 navigate('/client', { state: { loggedInUsername } });
             } else if (roles.includes('ROLE_MODERATOR')) {
                 navigate('/moderator');
+            } else if (roles.includes('ROLE_COUNSELLOR')) {
+                navigate('/counsellor/home');
             }
         } catch (err) {
             console.error("Caught error:", err);

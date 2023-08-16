@@ -5,7 +5,7 @@ import Button from '../Button';
 
 
 const FeatureCard = ({ icon, title, content, index }) => (
-  <div className={`flex flex-row p-6 rounded-[20px] ${index !== features.length - 1} ? "mb-6" :"mb-0"} feature-card`}>
+  <div className={`hover:bg-white flex flex-row p-6 rounded-[20px] ${index !== features.length - 1} ? "mb-6" :"mb-0"} feature-card`}>
 
     <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-black `}>
 
@@ -44,7 +44,7 @@ const Diagnosetest = () => {
   return (
     <section id="features" className={layout.section}>
 
-      <div className={layout.sectionInfo}>
+      <div className={layout.sectionInfo} >
         <h2 className={styles.heading2}>Empowering tools, personalized activities, <br className="sm:block hidden" />
           and a supportive community awaits.</h2>
 
@@ -53,11 +53,14 @@ const Diagnosetest = () => {
         </p>
 
 
-        <Button style="mt-10" />
+        {/* <Button style="mt-10" /> */}
+        <button type="button" className={`py-4 px-6  font-poppins font-medium text-[18px] text-primary ${styles} rounded-[10px] text-white bg-sky-800 `}>
+          Take Diagnose Test
+        </button>
 
       </div>
 
-      <div className={`${layout.sectionImg} flex-col`}>
+      <div className={`${layout.sectionImg} flex-col bg-sky-100 rounded-[20px]`}>
 
         {features.map((feature, index) => (
           <FeatureCard key={feature.id} {...feature} index={index} />
