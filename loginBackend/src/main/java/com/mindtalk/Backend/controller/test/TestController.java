@@ -1,6 +1,7 @@
 package com.mindtalk.Backend.controller.test;
 
 import com.mindtalk.Backend.dto.test.TestDTO;
+import com.mindtalk.Backend.service.EmailService;
 import com.mindtalk.Backend.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ public class TestController {
     @Autowired
     private TestService testService;
 
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping("/send-test-results")
     @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
     public ResponseEntity<String> sendTestResults(@RequestBody TestDTO testDTO) {
@@ -21,6 +25,12 @@ public class TestController {
 
         testService.saveTestResult(userId, score);
 
-        return ResponseEntity.ok("Test results saved successfully");
+        String userEmail = testService.getEmail(userId);
+
+        String subject = "Test Results";
+        String content = "Your test results have been saved successfully.";
+        emailService.sendEmail(userEmail, subject, content);
+
+        return ResponseEntity.ok("Test results saved and email sent successfully");
     }
 }

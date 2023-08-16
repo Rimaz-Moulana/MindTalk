@@ -45,7 +45,7 @@ import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import TestResult from './components/Diagnose Test/TestResult'
-import RequireAuth from './components/LoginSignup/RequireAuth'
+// import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
 
 const ROLES = {
@@ -72,7 +72,7 @@ const App = () => (
 
           <Route path="/client" element={<ClientLayout />}>
             <Route index element={<ClientDashboard />} />
-            <Route path="message" element={<ChatApp />} />
+``            <Route path="message" element={<ChatApp />} />
             <Route path="clientprofile" element={<ClientProfile />} />
             <Route path="clientcounsellors" element={<ClientCounsellors />} />
             <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
@@ -104,7 +104,8 @@ const App = () => (
 
 
           <Route path="/counsellor" element={<CounsellorLayout />}>
-            {/* <Route index element={<CounsellorDashboard />} /> */}
+            <Route index element={<CounsellorHome />} />
+            {/* <Route path="l" element={<CounsellorHome />} /> */}
             <Route path="counsellorprofile" element={<CounsellorProfile />} />
             <Route path="counsellorclients" element={<CounsellorClients />} />
             <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
@@ -112,7 +113,7 @@ const App = () => (
             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
             <Route path="blogs" element={<Blogs />} />
             <Route path="blogs/postblog" element={<PostBlog />} />
-            <Route path="home" element={<CounsellorHome />} />
+            {/* <Route path="home" element={<CounsellorHome />} /> */}
             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
           </Route>
           <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
