@@ -50,6 +50,7 @@ import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import AddMusic from './components/moderator/AddMusic';
 import Dash from './components/Calls/Dash'
 import Calls from "./pages/Calls";
+import Registermoderator from './components/LoginSignup/Registermoderator'
 
 
 const ROLES = {
@@ -73,6 +74,8 @@ const App = () => (
           <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<Loginn />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/registermoderator" element={<Registermoderator />} />
+
 
           <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
           <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
