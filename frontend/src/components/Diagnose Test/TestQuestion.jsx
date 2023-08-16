@@ -25,6 +25,7 @@ const TestQuestion = () => {
         } else {
             const totalScore = updatedScores.reduce((total, score) => total + score, 0);
             sendTestResultsToBackend(totalScore);
+            navigate(`/testresult?score=${totalScore}`);
         }
     };
 
@@ -35,25 +36,37 @@ const TestQuestion = () => {
         }
     };
 
-    
+
     const sendTestResultsToBackend = async (totalScore) => {
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/test/send-test-results', {
-                userId: 123, 
-                score: totalScore,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json', 
-                },
-            });
-    
-            console.log(response.data); 
-            navigate(`/testresult?score=${totalScore}`);
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken, id } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                const requestData = {
+                    userId: id,
+                    score: totalScore
+                };
+                const response = await axios.post(
+                    'http://localhost:8080/api/v1/test/send-test-results',
+                    requestData, // Pass the request data directly
+                    config // Pass the config object
+                );
+
+                console.log(response.data);
+            }
         } catch (error) {
             console.error('Error sending test results:', error);
         }
     };
-    
+
 
     if (questions.length === 0) {
         return <div>Loading...</div>; // Add a loading state if needed
@@ -89,7 +102,7 @@ const TestQuestion = () => {
                             <button
                                 key={index}
                                 className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200"
-                                onClick={() => handleAnswerClick(index)} 
+                                onClick={() => handleAnswerClick(index)}
                             >
                                 {answer}
                             </button>

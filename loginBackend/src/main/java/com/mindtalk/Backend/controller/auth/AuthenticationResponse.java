@@ -21,6 +21,8 @@ public class AuthenticationResponse {
 
     private String username;
 
+    private Integer Id;
+
     private List<String> roles; // Add this field
 
     // Other constructors, methods, and getters/setters
@@ -39,6 +41,15 @@ public class AuthenticationResponse {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        this.Id = Id;
     }
 
 }

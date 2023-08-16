@@ -1,20 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ClientdashCards from '../../components/ClientDashboard/ClientdashCards'
 import ClientHistory from '../../components/ClientDashboard/ClientHistory'
 import ClientCalender from '../../components/ClientDashboard/ClientCalender'
 import ClientHead from '../../components/ClientDashboard/ClientHead'
-  import AuthContext from '../../context/AuthProvider';
+import AuthContext from '../../context/AuthProvider';
 
 const ClientDashboard = () => {
   const { auth } = useContext(AuthContext);
+  const [username, setUsername] = useState('');
   
-  console.log('Auth Data:', auth);
+  // console.log('Auth Data:', auth);
 
-  console.log("Username:", auth.username);
+  // console.log("Username:", auth.username);
+
+  useEffect(() => {
+    // Retrieve username from local storage
+    const storedAuthData = localStorage.getItem("authData");
+    if (storedAuthData) {
+      const { username } = JSON.parse(storedAuthData);
+      setUsername(username);
+    }
+  }, []);
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <ClientHead username={auth.username} />
+      <ClientHead username={username || auth.username} />
       <div className="flex flex-wrap gap-4">
         <ClientdashCards />
       </div>

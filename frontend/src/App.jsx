@@ -31,6 +31,7 @@ import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
+import TestResult from './components/Diagnose Test/TestResult'
 import Loginn from './components/LoginSignup/Loginn'
 import Register from './components/LoginSignup/register'
 import { AuthProvider } from './context/AuthProvider'
@@ -141,6 +142,9 @@ const App = () => (
           </Route>
 
           <Route path="/testemail" element={<TestEmail />}>
+          </Route>
+
+          <Route path="/testresult" element={<TestResult />}>
           </Route>
 
 
