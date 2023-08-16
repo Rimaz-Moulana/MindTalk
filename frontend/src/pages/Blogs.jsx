@@ -75,19 +75,19 @@ const Blogs = () => {
     <>
       <div className=' rounded-xl'>
         <div className='bg-white rounded-2xl'>
-          <div className="py-4 rounded-t-2xl sm:py-6 bg-gradient-to-br from-blue-200 to-green-50">
+          <div className="py-4 rounded-t-2xl sm:py-6 ">
             <div className="px-6 mx-auto max-w-7xl lg:px-4">
               <div className="flex flex-col items-center justify-center">
                 <div className="max-w-2xl mx-auto lg:mx-0">
-                  <h2 className="text-4xl font-bold tracking-tight text-center text-gray-900 underline sm:text-5xl underline-offset-8">From the blog</h2>
-                  <p className="mt-4 leading-8 text-gray-600 text-md">Learn how to grow your business with our expert advice.</p>
+                  <h2 className="text-4xl font-bold tracking-tight text-center text-gray-900 underline sm:text-5xl underline-offset-8">Blogs</h2>
+                  <p className="mt-4 leading-8 text-gray-600 text-md"> Empowering Minds, Elevating Spirits: Your Path to Positivity! </p>
                 </div>
               </div>
 
               <div className="flex items-center justify-center py-4 my-5 ">
                           <input
                               type="text"
-                              className="p-2 mr-2 text-gray-600 bg-white rounded-full font-base border-blue max-md:py-1 focus:outline-none focus:ring focus:border-blue-300"
+                              className="p-2 mr-2 text-gray-600 rounded-full bg-blue-50 font-base border-blue max-md:py-1 focus:outline-none focus:ring focus:border-blue-300"
                               placeholder="Search..."
                               onChange={(e) => onChange(e.target.value)}
                           />
