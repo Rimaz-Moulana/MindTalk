@@ -14,7 +14,7 @@ public class TestController {
     private TestService testService;
 
     @PostMapping("/send-test-results")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<String> sendTestResults(@RequestBody TestDTO testDTO) {
         int userId = testDTO.getUserId();
         int score = testDTO.getScore();
