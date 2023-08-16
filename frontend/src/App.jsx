@@ -47,6 +47,8 @@ import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import AddMusic from './components/moderator/AddMusic';
+
 
 const ROLES = {
   'Client': 'client',
@@ -130,7 +132,7 @@ const App = () => (
             <Route index element={<ModeratorDashboard />} />
             <Route path="userhandle" element={<ModeratorUserHandle />} />
             <Route path="moderatormusic" element={<ModeratorMusic />} />
-
+            <Route path='add-music/:id' element = {<AddMusic />} />
 
           </Route>
 
