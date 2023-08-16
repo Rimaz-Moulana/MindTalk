@@ -3,14 +3,18 @@ package com.mindtalk.Backend;
 
 import com.mindtalk.Backend.controller.auth.RegisterRequest;
 import com.mindtalk.Backend.service.AuthenticationService;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import static com.mindtalk.Backend.entity.Role.*;
 
 
+@ComponentScan(basePackages = "com.mindtalk.Backend.service")
+@ComponentScan(basePackages = "com.mindtalk.Backend.controller")
 @SpringBootApplication
 public class BackendApplication {
 
@@ -18,6 +22,10 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
     }
 
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
     @Bean
     public CommandLineRunner commandLineRunner(
             AuthenticationService service

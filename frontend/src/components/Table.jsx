@@ -112,7 +112,8 @@ export default function Table() {
                     className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
                     <td className="whitespace-nowrap px-6 py-4 font-medium">
                     <div className="flex items-center gap-x-2">
-                        <img className="object-cover w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="" />
+                        <img className="object-cover w-8 h-8 rounded-full" src="
+                        " alt="" />
                             <div>
                             <h2 className="text-sm font-medium text-gray-800 dark:text-white ">Andi Lane</h2>
                             <p className="text-xs font-normal text-gray-600 dark:text-gray-400">andi@example.com</p>
