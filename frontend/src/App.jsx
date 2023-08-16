@@ -48,6 +48,9 @@ import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
 import TestResult from './components/Diagnose Test/TestResult'
+// import React from "react";
+import Dash from './components/Calls/Dash'
+import Calls from "./pages/Calls";
 
 const ROLES = {
   'Client': 'client',
@@ -85,6 +88,7 @@ const App = () => (
             <Route path="blogs/postblog" element={<PostBlog />} />
             <Route path='clientappointments' element={<ClientAppointments />} />
             <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
+            <Route path='calls' element={<Dash/>} />
           </Route>
 
 
