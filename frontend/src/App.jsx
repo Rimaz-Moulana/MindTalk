@@ -44,6 +44,7 @@ import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import TestResult from './components/Diagnose Test/TestResult'
 import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
 
@@ -135,6 +136,9 @@ const App = () => (
           </Route>
 
           <Route path="/testemail" element={<TestEmail />}>
+          </Route>
+
+          <Route path="/testresult" element={<TestResult />}>
           </Route>
 
 

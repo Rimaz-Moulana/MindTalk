@@ -70,6 +70,7 @@ public class AuthenticationService {
                 .collect(Collectors.toList());
 
         return AuthenticationResponse.builder()
+                .Id(user.getId())
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
                 .username(user.gettingUsername())
