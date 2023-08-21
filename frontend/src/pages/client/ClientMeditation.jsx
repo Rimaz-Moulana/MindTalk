@@ -2,8 +2,9 @@ import React from 'react';
 
 const videoLinks = [
   'https://www.youtube.com/embed/hAkgumAMOIg',
-  'https://www.youtube.com/embed/another-video-link',
-  // Add more video links here
+  'https://www.youtube.com/embed/RtGkfAGXA3k',
+  'https://www.youtube.com/embed/S7AgWdlw1X0'
+
 ];
 
 function ClientMusic() {

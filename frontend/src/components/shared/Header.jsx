@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import axios from 'axios';
+import dp from '../../assets/dp.png'
 
 const notificationList = [
   'Appointment Reminder 01',
@@ -81,8 +82,8 @@ export default function Header() {
                     <div>
                         <Menu.Button className="ml-2 inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-blue-700">
                             <span className='sr-only'>open user menu</span>
-                            <div className='h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center' 
-                                    style={{background: 'url("https://source.unsplash.com/50x50?face")'}}>
+                            <div className='h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center' >
+                                <img src={dp} alt="avatar" className='w-18 h-18 rounded-full' />
                                 <span className='sr-only'> Hugh jackman</span>
                             </div>
                         </Menu.Button>

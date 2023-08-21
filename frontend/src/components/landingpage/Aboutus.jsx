@@ -4,7 +4,7 @@ import styles, { layout } from '../../style';
 const Aboutus = () => (
   <section id="product" className={layout.sectionReverse}>
 
-    <div className={layout.sectionImgReverse}>
+    {/* <div className={layout.sectionImgReverse}>
       <img src={bill} alt="billing" className=" block z-[5]   w-full rounded-lg" />
 
 
@@ -14,18 +14,18 @@ const Aboutus = () => (
       <div className="absolute z-[0] -left-1/2 bottom-0 w-[50%] h-[50%] rounded-full pink__gradient " />
 
 
-    </div>
+    </div> */}
 
 
 
     <div className={layout.sectionInfo}>
 
-      <h2 className={styles.heading2}>Be in Charge <br className="sm:block hidden" />of yourself.</h2>
+      {/* <h2 className={styles.heading2}>Be in Charge <br className="sm:block hidden" />of yourself.</h2> */}
 
 
-      <p className={`${styles.paragraph} max-w-[470px] mt-5 `}>
+      {/* <p className={`${styles.paragraph} max-w-[470px] mt-5 `}>
         Take charge of your happiness and embrace joy with MindTalk. Empower yourself with personalized activities and join a supportive community. Start your journey to a brighter future today.
-      </p>
+      </p> */}
 
 
       <div className="flex flex-row flex-wrap sm:mt-10 mt-6">

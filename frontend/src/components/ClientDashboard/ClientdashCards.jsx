@@ -9,21 +9,25 @@ const ClientdashCards = () => {
       icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Meditation Therapy',
       date: '2023.09.01',
+      time: '10am - 11am',
     },
     {
       icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Positive Thinking',
       date: '2023.10.03',
+      time: '8am - 9am',
     },
     {
       icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Happy Therapy ',
       date: '2023.10.10',
+      time: '8pm - 9pm',
     },
     {
       icon: <BiSpa className="icon text-3xl group-hover:text-blue-700" />,
       title: 'Annual Therapy',
       date: '2023.11.02',
+      time: '10am - 11am',
     },
   ];
 
@@ -42,7 +46,8 @@ const ClientdashCards = () => {
             </div>
             <div className="content mt-4 flex flex-col justify-end group-hover:text-blue-700 ">
               <p className="text-s">{card.title}</p>
-              <p className="text-s ">{card.date}</p> {/* Replace count with date */}
+              <p className="text-s ">{card.date}</p>
+              <p className="text-s ">{card.time}</p>
             </div>
           </div>
         </div>

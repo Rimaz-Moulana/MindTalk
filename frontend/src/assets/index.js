@@ -28,6 +28,7 @@ import img1 from "./img1.png";
 import img2 from "./img2.png";
 import img3 from "./img3.png";
 import videocall from "./videocall.png";
+import test from "./test.jpg";
 
 export {
   who,
@@ -60,4 +61,5 @@ export {
   img2,
   img3,
   videocall,
+  test,
 };

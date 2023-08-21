@@ -34,7 +34,7 @@ import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 import TestResult from './components/Diagnose Test/TestResult'
 import Loginn from './components/LoginSignup/Loginn'
 import Register from './components/LoginSignup/register'
-import { AuthProvider } from './context/AuthProvider'
+
 import AdminCrudClient from './pages/Admin/AdminCrudClient'
 import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
 import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
@@ -47,7 +47,7 @@ import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
-import TestResult from './components/Diagnose Test/TestResult'
+
 // import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
 import AddMusic from './components/moderator/AddMusic';

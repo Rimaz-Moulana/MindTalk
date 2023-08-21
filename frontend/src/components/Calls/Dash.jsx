@@ -22,7 +22,8 @@ const Dash = () => {
         <div className="dashboard-container flex justify-center items-start h-screen bg-gray-100 py-20">
             <div className="text-center">
                 <h1 className="text-4xl font-bold mb-4">Video Conference</h1>
-                <p className="text-lg mb-6">Let's meet your counsellor now!</p>
+                <p className="text-lg mb-6">You have a counselling session now</p>
+                <p className="text-lg mb-6">Only you and counsellor will join to the meeting</p>
                 <a
                     href='https://mindtalkcounsellingsession.netlify.app/'
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"

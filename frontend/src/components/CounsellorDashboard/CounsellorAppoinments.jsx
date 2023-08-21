@@ -6,30 +6,23 @@ export default function CounsellorAppointments() {
   const Requests = [
     {
       id: 1,
-      avatar: '../../../src/assets/people01.png',
+      avatar: '../../../src/assets/img1.png',
       ID :22045678,
-      name: 'Mark Otto',
+      name: 'Kaveesha Muthukuda',
       date: '2023.10.01',
     },
     {
       id: 2,
-      avatar: '../../../src/assets/people02.png',
+      avatar: '../../../src/assets/img3.png',
       ID :22045349,
-      name: 'Jacob Thornton',
+      name: 'Pathum Lakshan',
       date: '2023.10.01',
     },
     {
       id: 3,
-      avatar: '../../../src/assets/people03.png',
+      avatar: '../../../src/assets/img2.png',
       ID :22045809,
-      name: 'Larry Wild',
-      date: '2023.10.01',
-    },
-    {
-      id: 4,
-      avatar: '../../../src/assets/Chat/profilePic1.jpg',
-      ID :22045384,
-      name: 'Marie Horwitz',
+      name: 'Michelle Perera',
       date: '2023.10.01',
     },
   ];

@@ -6,38 +6,38 @@ export default function RequestTable() {
     const Requests = [
         {
             id: 1,
-            avatar: '../../../src/assets/people01.png',
-            name: 'Mark Otto',
-            date: '2023.10.01'
+            avatar: '../../../src/assets/dp.png',
+            name: 'Pathum Lakshan',
+            date: '2023.08.21'
         },
         {
             id: 2,
-            avatar: '../../../src/assets/people02.png',
-            name: 'Jacob Thornton',
-            date: '2023.10.01'
+            avatar: '../../../src/assets/dp.png',
+            name: 'Michelle Nikeetha',
+            date: '2023.08.23'
         },
         {
             id: 3,
-            avatar: '../../../src/assets/people03.png',
-            name: 'Larry Wild',
-            date: '2023.10.01'
+            avatar: '../../../src/assets/dp.png',
+            name: 'Rochelle Perera',
+            date: '2023.09.01'
         },
         {
             id: 4,
-            avatar: '../../../src/assets/Chat/profilePic1.jpg',
-            name: 'Marie Horwitz',
-            date: '2023.10.01'
+            avatar: '../../../src/assets/dp.png',
+            name: 'Kaveesha Muthukuda',
+            date: '2023.08.24'
         },
         {
             id: 5,
-            avatar: '../../../src/assets/Chat/profilePic2.jpg',
-            name: 'Alexa Chung',
-            date: '2023.10.01'
+            avatar: '../../../src/assets/dp.png',
+            name: 'Rimaz Moulana',
+            date: '2023.09.04'
         },
         {
             id: 6,
-            avatar: '../../../src/assets/Chat/profilePic3.jpg',
-            name: 'Mia Maples',
+            avatar: '../../../src/assets/dp.png',
+            name: 'Kivi Amarakoon',
             date: '2023.10.01'
         }
     ]

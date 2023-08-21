@@ -2,19 +2,17 @@ import React from 'react'
 import { VictoryPie } from 'victory-pie'
 
 const chartData = [
-    { x: 'Group A', y: 900 },
-    { x: 'Group B', y: 400 },
-    { x: 'Group C', y: 300 }
+    { x: 'Volunteer', y: 800 },
+    { x: 'Professional', y: 400 }
 ]
 const customColorScale = [
     '#04befe', // Group A
     '#2D31FA', // Group B
-    '#DDE6ED' // Group C
 ]
 const Piechart = () => {
     return (
         <div className="">
-            <h4 className="text-xl font-semibold">Pie Chart Example</h4>
+            <h4 className="text-xl font-semibold">Registerd Counsellors</h4>
             <div className="mt-4">
                 <VictoryPie data={chartData} colorScale={customColorScale} radius={100} />
             </div>

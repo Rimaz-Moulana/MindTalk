@@ -12,11 +12,11 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		label: 'Music / Videos',
 		path: '/moderator/moderatormusic',
 		icon: <FiMusic />
-	},
-    {
-		key: 'message',
-		label: 'User Handle',
-		path: '/moderator/userhandle',
-		icon: <FiSettings />
 	}
+    // {
+	// 	key: 'message',
+	// 	label: 'User Handle',
+	// 	path: '/moderator/userhandle',
+	// 	icon: <FiSettings />
+	// }
 ]

@@ -80,7 +80,7 @@ const Loginn = () => {
             } else if (roles.includes('ROLE_MODERATOR')) {
                 navigate('/moderator');
             } else if (roles.includes('ROLE_COUNSELLOR')) {
-                navigate('/counsellor/home');
+                navigate('/counsellor');
             }
         } catch (err) {
             console.error("Caught error:", err);

@@ -14,7 +14,7 @@ const ClientCards = ({ clientList }) => {
                 <img
                   alt="user"
                   className='w-20 h-20 rounded-full mx-auto'
-                  src={client.picture.large}
+                  src={client.picture.medium}
                 />
               </td>
               <td className="p-4 whitespace-nowrap">
