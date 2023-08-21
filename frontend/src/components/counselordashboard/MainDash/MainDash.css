@@ -1,0 +1,12 @@
+.MainDash {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.heading {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}

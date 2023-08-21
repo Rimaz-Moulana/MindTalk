@@ -1,0 +1,25 @@
+.RightSide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+
+}
+
+.heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.money {
+    color: white;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    background-color: #03045E;
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: center;
+}
