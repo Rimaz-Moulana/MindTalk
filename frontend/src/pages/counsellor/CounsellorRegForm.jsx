@@ -81,10 +81,10 @@ export default function CounsellorRegForm() {
                       >
                         Remember me
                       </label>
-                    <div className=''>
+                    <div className='mt-4 mr-10 flex items-center justify-between'>
                     <button
           type="submit"
-          className="bg-blue-500 lg:w-[350px] mr-4 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          className="bg-blue-500 lg:w-[380px] text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
         >
           Sign in
         </button>
