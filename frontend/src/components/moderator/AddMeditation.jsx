@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import MusicService from '../../services/MusicService';
+import MeditationService from '../../services/MeditationService';
 
-export default function AddMusic() {
+export default function AddMeditation() {
     const { id } = useParams();
 
-    const [music, setMusic] = useState({
+    const [meditation, setMeditation] = useState({
         title: '',
         category: '',
         description: '',
@@ -16,51 +16,51 @@ export default function AddMusic() {
         if (id === '-1') {
             return;
         } else {
-            MusicService.getMusicById(id).then((res) => {
-                let musicData = res.data;
-                setMusic({
-                    title: musicData.title,
-                    category: musicData.category,
-                    description: musicData.description,
-                    link: musicData.link
+            MeditationService.getMeditationById(id).then((res) => {
+                let meditationData = res.data;
+                setMeditation({
+                    title: meditationData.title,
+                    category: meditationData.category,
+                    description: meditationData.description,
+                    link: meditationData.link
                 });
             });
         }
     }, [id]);
 
-    const saveMusic = (e) => {
+    const saveMeditation = (e) => {
         e.preventDefault();
-        const updatedMusic = {
-            title: music.title,
-            category: music.category,
-            description: music.description,
-            link: music.link
+        const updatedMeditation = {
+            title: meditation.title,
+            category: meditation.category,
+            description: meditation.description,
+            link: meditation.link
         };
 
         if (id === '-1') {
-            MusicService.addMusic(updatedMusic).then(() => {
-                window.location.href = '/moderator/moderatormusic';
+            MeditationService.addMeditation(updatedMeditation).then(() => {
+                window.location.href = '/moderator/moderatormeditation';
             });
         } else {
-            MusicService.updateMusic(updatedMusic, id).then(() => {
-                window.location.href = '/moderator/moderatormusic';
+            MeditationService.updateMeditation(updatedMeditation, id).then(() => {
+                window.location.href = '/moderator/moderatormeditation';
             });
         }
     };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setMusic((prevMusic) => ({
-            ...prevMusic,
+        setMeditation((prevMeditation) => ({
+            ...prevMeditation,
             [name]: value
         }));
     };
 
     const getTitle = () => {
         if (id === '-1') {
-            return <h3 className="text-2xl font-semibold mb-4">Add Music</h3>;
+            return <h3 className="text-2xl font-semibold mb-4">Add Meditation</h3>;
         } else {
-            return <h3 className="text-2xl font-semibold mb-4">Update Music</h3>;
+            return <h3 className="text-2xl font-semibold mb-4">Update Meditation</h3>;
         }
     };
 
@@ -75,7 +75,7 @@ export default function AddMusic() {
                             placeholder="Title"
                             name="title"
                             className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            value={music.title}
+                            value={meditation.title}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -85,7 +85,7 @@ export default function AddMusic() {
                             placeholder="Category"
                             name="category"
                             className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            value={music.category}
+                            value={meditation.category}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -95,7 +95,7 @@ export default function AddMusic() {
                             placeholder="Description"
                             name="description"
                             className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            value={music.description}
+                            value={meditation.description}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -105,19 +105,19 @@ export default function AddMusic() {
                             placeholder="Link"
                             name="link"
                             className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            value={music.link}
+                            value={meditation.link}
                             onChange={handleInputChange}
                         />
                     </div>
                     <div className="flex justify-end">
                         <button
                             className="px-4 py-2 mr-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-                            onClick={saveMusic}
+                            onClick={saveMeditation}
                         >
                             Save
                         </button>
                         <Link
-                            to="/moderator/moderatormusic"
+                            to="/moderator/moderatormeditation"
                             className="px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
                         >
                             Cancel
