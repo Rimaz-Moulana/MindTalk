@@ -20,66 +20,49 @@ function ModeratorMusic() {
   }, []);
 
   return (
-    
-      <div className="flex flex-col w-full bg-white rounded-xl mb-5">
+    <div className="flex flex-col w-full bg-white rounded-xl mb-5">
 
-        <div className='m-5'>
-            <Link to="/moderator/add-music/-1" className="bg-blue-700 rounded-md p-2 border text-white hover:bg-white hover:border-blue-700 hover:text-black">
-                Add Music
-            </Link>
-        </div>
-
-        <div className="px-5 pb-5">
-          <table className="border-collapse border border-gray-300 text-sm">
-              <thead>
-                  <tr className="p-2 border border-1 text-sm font-thin text-gray-500">
-                      <th className="border border-gray-300 p-2">Title</th>
-                      <th className="border border-gray-300 p-2">Category</th>
-                      <th className="border border-gray-300 p-2">Description</th>
-                      <th className="border border-gray-300 p-2">Link</th>
-                      <th className="border border-gray-300 p-2">Actions</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {music.map(music =>
-                      <tr key={music.id} className="border border-gray-300">
-                          <td className="border border-gray-300 p-2">{music.title}</td>
-                          <td className="border border-gray-300 p-2">{music.category}</td>
-                          <td className="border border-gray-300 p-2">{music.description}</td>
-                          <td className="border border-gray-300 p-2">
-                              {music.link && (
-                                  <iframe
-                                      title={music.title}
-                                      width="200"
-                                      height="100"
-                                      src={music.link}
-                                      allowFullScreen
-                                  ></iframe>
-                              )}
-                          </td>
-                          <td className="p-2 flex space-x-1">
-                            <Link
-                                to={`/moderator/add-music/${music.id}`}
-                                className="bg-blue-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
-                            >
-                                <FiEdit3 />
-                            </Link>
-                            <button
-                                onClick={() => deleteMusic(music.id)}
-                                className='bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black'
-                            >
-                                <FiTrash2 />
-                            </button>
-                          </td>
-
-                      </tr>
-                  )}
-              </tbody>
-          </table>
-        </div>
-
+      <div className='m-5'>
+          <Link to="/moderator/add-music/-1" className="bg-blue-700 rounded-md p-2 border text-white hover:bg-white hover:border-blue-700 hover:text-black">
+              Add Music
+          </Link>
       </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5 pb-5">
+        {music.map(music => (
+          <div key={music.id} className="bg-gray-100 p-4 rounded-md shadow-md">
+            <h3 className="text-xl font-semibold mb-2">{music.title}</h3>
+            <p className="text-gray-600 mb-2">{music.category}</p>
+            <p className="text-gray-700 mb-4">{music.description}</p>
+            {music.link && (
+              <div className="aspect-w-16 aspect-h-9 mb-4">
+                <iframe
+                  title={music.title}
+                  src={music.link}
+                  allowFullScreen
+                  className="w-full h-full rounded-md shadow-md"
+                ></iframe>
+              </div>
+            )}
+            <div className="flex space-x-2">
+              <Link
+                to={`/moderator/add-music/${music.id}`}
+                className="bg-blue-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
+              >
+                <FiEdit3 />
+              </Link>
+              <button
+                onClick={() => deleteMusic(music.id)}
+                className='bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black'
+              >
+                <FiTrash2 />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
   );
 }
 
