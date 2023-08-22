@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <nav className="flex items-center justify-between w-full py-6 navbar">
-            <img src={logodark} alt="MindTalk" className="w-[150px] h-[150px] flex rounded-full " />
+            <img src={logodark} alt="MindTalk" className="w-[80px] h-[80px] flex rounded-full " />
 
             {/* Mobile navbar */}
             <ul className="items-center justify-end flex-1 hidden list-none sm:flex">
@@ -20,7 +20,7 @@ const Navbar = () => {
                     <li
 
                         key={nav.id}
-                        className={`font-poppins font-normal cursor-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-darkblue `}
+                        className={`font-poppins text-xl font-semibold cursor-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-darkblue `}
                     >
                         <a href={`#${nav.id}`} >
                             {nav.title}

@@ -80,8 +80,11 @@ export default function CounsellorRegForm() {
                         htmlFor="exampleCheck2"
                       >
                         Remember me
-                      </label>
-                    <div className='mt-4 mr-10 flex items-center justify-between'>
+                      </label> 
+                    </div>
+                   
+                  </div>
+                  <div className='mt-4 mr-10 flex items-center justify-between'>
                     <button
           type="submit"
           className="bg-blue-500 lg:w-[380px] text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
@@ -89,10 +92,6 @@ export default function CounsellorRegForm() {
           Sign in
         </button>
                     </div>
-                     
-                    </div>
-        
-                  </div>
                 </form>
               </div>
             </div>
