@@ -55,6 +55,7 @@ import AddMusic from './components/moderator/AddMusic';
 import Dash from './components/Calls/Dash'
 import Calls from "./pages/Calls";
 import Registermoderator from './components/LoginSignup/Registermoderator'
+import AddMeditation from './components/moderator/AddMeditation'
 
 const ROLES = {
   'Client': 'client',
@@ -144,6 +145,7 @@ const App = () => (
             <Route path="moderatormusic" element={<ModeratorMusic />} />
             <Route path='add-music/:id' element = {<AddMusic />} />
             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
+            <Route path="add-meditation/:id" element = {<AddMeditation />} />
           </Route>
 
 
