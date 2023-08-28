@@ -92,9 +92,10 @@ const Contacts = () => {
           <select className='block w-full rounded-md border-0 py-1.5 pl-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 max-sm:text-sm sm:leading-6'>
             <option disabled selected>Price Range</option>
             <option value="Free" >Free</option>
-            <option value="1000">1000-1999</option>
-            <option value="2000">2000-2999</option>
-            <option value="3000">3000-3999</option>
+            <option value="3500">3500-3999</option>
+            <option value="4000">4000-4499</option>
+            <option value="4500">4500-4999</option>
+            <option value="5000">5000-5499</option>
           </select>
         </form> */}
 

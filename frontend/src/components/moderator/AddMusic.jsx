@@ -5,6 +5,8 @@ import MusicService from '../../services/MusicService';
 export default function AddMusic() {
     const { id } = useParams();
 
+    const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
+
     const [music, setMusic] = useState({
         title: '',
         category: '',
@@ -81,13 +83,19 @@ export default function AddMusic() {
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600">Category:</label>
-                        <input
-                            placeholder="Category"
+                        <select
                             name="category"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.category}
                             onChange={handleInputChange}
-                        />
+                        >
+                            <option value="">Select a category</option>
+                            {categories.map((category) => (
+                                <option key={category} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600">Description:</label>
