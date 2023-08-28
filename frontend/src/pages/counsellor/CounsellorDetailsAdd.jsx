@@ -28,7 +28,7 @@ const CounsellorDetailsAdd = ({onSubmit}) => {
         setLicenseNo("");
         setLicenseImage("");
 
-    }
+      }
   };
 
   return (

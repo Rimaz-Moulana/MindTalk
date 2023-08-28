@@ -56,6 +56,7 @@ import Dash from './components/Calls/Dash'
 import Calls from "./pages/Calls";
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import AddMeditation from './components/moderator/AddMeditation'
+import RequireAuth from './components/LoginSignup/RequireAuth'
 
 const ROLES = {
   'Client': 'client',
