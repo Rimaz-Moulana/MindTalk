@@ -58,13 +58,12 @@ export default function AddMusic() {
         }));
     };
 
-    const getTitle = () => {
-        if (id === '-1') {
-            return <h3 className="text-2xl font-semibold mb-4">Add Music</h3>;
-        } else {
-            return <h3 className="text-2xl font-semibold mb-4">Update Music</h3>;
-        }
-    };
+    const getTitle = () => (
+        <h3 className="text-2xl font-semibold mb-4">
+          {id === '-1' ? 'Add Music' : 'Update Music'}
+        </h3>
+      );
+      
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
