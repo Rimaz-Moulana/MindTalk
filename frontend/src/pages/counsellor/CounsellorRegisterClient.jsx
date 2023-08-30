@@ -17,10 +17,10 @@ const RegisterClient = ({ closeModal }) => {
     isOpen={true} // isOpen should be managed from the parent component
     onRequestClose={closeModal}
     contentLabel="Add Client Modal"
-    className="modal fixed top-0 left-0 w-full h-full flex items-center justify-center z-50"
+    className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full modal"
     overlayClassName="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50"
   >
-      <div className="bg-gradient-to-br from-blue-200 to-green-50 h-[51rem] rounded-2xl md:col-span-3 ">
+      <div className="bg-white h-[51rem] rounded-2xl md:col-span-3 ">
         <div className="grid max-w-full px-6 py-5 mx-auto gap-x-8 lg:px-8">
 
           <form onSubmit={handleSubmit}>
