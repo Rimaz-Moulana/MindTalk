@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-fetch-hook": "^1.9.5",
     "react-icons": "^4.10.1",
+    "react-modal": "^3.16.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.15.0",
     "react-widgets-moment-localizer": "^1.0.2",
