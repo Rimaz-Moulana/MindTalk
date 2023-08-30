@@ -26,7 +26,7 @@ const RegisterClient = ({ closeModal }) => {
           <form onSubmit={handleSubmit}>
 
               <div className="pb-2 ">
-                <h1 className="ml-4 text-4xl font-bold text-gray-900"> Information</h1>
+                <h1 className="ml-4 text-4xl font-bold text-gray-900"> Register Client </h1>
 
                 <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-6 sm:grid-cols-6">
 
