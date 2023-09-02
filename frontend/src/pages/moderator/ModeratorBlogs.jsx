@@ -15,7 +15,7 @@ const Blogs = () => {
       description: 'This blog post could explore the correlation between regular physical activity and reduced symptoms of depression. It could cover various exercises and their benefits, as well as provide practical tips on how to incorporate exercise into daily routines. The post can reference studies and expert opinions to support the information.',
       author: {
         imageUrl: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        name: 'Pathum Lakshan',
+        name: 'Pathum Lakshan ',
         href: '/author/1',
         role: 'Content Writer',
       },
@@ -51,7 +51,7 @@ const Blogs = () => {
             
             <div className="grid max-w-2xl grid-cols-1 pt-10 mx-auto mt-1 border-t gap-x-8 sm:m-8 sm:pt-8 lg:pb-16 lg:mx-6 lg:max-w-none lg:grid-cols-3">
               {posts.map((post) => (
-                <article key={post.id} className="flex flex-col items-start justify-between max-w-xl shadow-2xl bg-gradient-to-br from-blue-200 to-green-50 rounded-2xl">
+                <article key={post.id} className="flex flex-col justify-between max-w-xl shadow-2xl bg-gradient-to-br from-blue-200 to-green-50 rounded-2xl">
                   <div className='w-full pb-4'>
                     <img className='w-full h-60 rounded-t-xl' src='https://images.pexels.com/photos/697244/pexels-photo-697244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt="blog1" />
                   </div>
@@ -88,23 +88,23 @@ const Blogs = () => {
                         </a>
                       </p>
                       <p className="text-gray-600">{post.author.role}</p>
-                    </div>
-                          <div className='flex justify-end'>
-                              <button className="px-4 py-2 mr-2 text-white bg-green-900 rounded-full font-md hover:bg-green-500 hover:font-black">
-                                <span className="hidden sm:inline">Accept</span>
-                                <span className="md:hidden">
-                                    <AiOutlineCheckCircle />
-                                </span>
-                              </button>
-                              <button className="px-4 py-2 ml-2 text-white bg-red-900 rounded-full font-md hover:bg-red-500 hover:font-black">
-                                <span className="hidden sm:inline">Reject</span>
-                                <span className="md:hidden">
-                                    <AiOutlineCloseCircle />
-                                </span>
-                              </button>
-                          </div>
+                    </div>    
                   </div>
 
+                <div className='flex justify-end mb-4 mr-4'>
+                    <button className="px-4 py-2 mr-2 text-white bg-green-900 rounded-full font-md hover:bg-green-500 hover:font-lg">
+                    <span className="hidden sm:inline">Accept</span>
+                    <span className="md:hidden">
+                        <AiOutlineCheckCircle />
+                    </span>
+                    </button>
+                    <button className="px-4 py-2 ml-2 text-white bg-red-900 rounded-full font-md hover:bg-red-500 hover:font-lg">
+                    <span className="hidden sm:inline">Reject</span>
+                    <span className="md:hidden">
+                        <AiOutlineCloseCircle />
+                    </span>
+                    </button>
+                </div>
                 </article>
               ))}
             </div>
