@@ -86,7 +86,7 @@ const Blogs = () => {
 
               <div className="flex items-center justify-center py-4 my-5 ">
 
-                <select className='p-2 mr-20 text-gray-600 rounded-xl bg-blue-50 font-base border-blue max-md:py-1 focus:outline-none focus:ring focus:border-blue-300'>
+                <select className='p-2 mr-20 text-gray-600 rounded-xl bg-blue-50 font-base border-blue max-md:py-1 focus:ring focus:outline-none focus:border-blue-300' style={{ appearance: 'none'}}>
                   <option value="option0" disabled selected>Select Category</option>
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -94,6 +94,7 @@ const Blogs = () => {
                   <option value="option4">Option 4</option>
                   <option value="option5">Option 5</option>
                 </select>
+
                 
                 <input
                     type="text"
