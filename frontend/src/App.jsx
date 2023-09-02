@@ -48,6 +48,7 @@ import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
+import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 
 // import RequireAuth from './components/LoginSignup/RequireAuth'
 import { AuthProvider } from './context/AuthProvider'
@@ -146,7 +147,8 @@ const App = () => (
             <Route path="moderatormusic" element={<ModeratorMusic />} />
             <Route path='add-music/:id' element = {<AddMusic />} />
             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
-            <Route path="add-meditation/:id" element = {<AddMeditation />} />
+            <Route path="add-meditation/:id" element={<AddMeditation />} />
+            <Route path="moderatorblogs" element={<ModeratorBlogs />} />
           </Route>
 
 
