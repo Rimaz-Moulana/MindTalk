@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/counsellor/details")
+@RequestMapping(path ="/api/counsellor/details")
+//@RequestMapping(path = "/api/counsellor/details" , method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+//@TokenSecurity(allowWithoutToken = true)
 //@CrossOrigin("http://127.0.0.1:5173")
 public class CounsellorController {
 

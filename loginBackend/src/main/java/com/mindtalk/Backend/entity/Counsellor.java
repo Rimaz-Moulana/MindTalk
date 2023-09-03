@@ -76,6 +76,7 @@ public class Counsellor {
     }
 
     public void setStatus(Boolean status) {
+        status = false;
         this.status = status;
     }
 }

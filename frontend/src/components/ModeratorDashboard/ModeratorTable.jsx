@@ -1,7 +1,9 @@
-import React from 'react'
-import ModeratorButton from './ModeratorButton'
+import React from 'react';
+import ModeratorButton from './ModeratorButton';
 
 export default function RequestTable() {
+    // const [showModal, setShowModal] = React.useState(false);
+    
     // data from the database will store here
     const Requests = [
         {

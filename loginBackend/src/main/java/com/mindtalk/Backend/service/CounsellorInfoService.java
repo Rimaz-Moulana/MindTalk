@@ -2,7 +2,7 @@ package com.mindtalk.Backend.service;
 
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
 import com.mindtalk.Backend.entity.Counsellor;
-import com.mindtalk.Backend.repo.CounsellorRepository;
+import com.mindtalk.Backend.repo.CounselorRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class CounsellorInfoService {
     @Autowired
-    private CounsellorRepository counsellorRepository;
+    private CounselorRepository counsellorRepository;
 
     @Autowired
     private ModelMapper modelMapper;

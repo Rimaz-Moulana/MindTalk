@@ -29,6 +29,9 @@ npm install stompjs
 npm i @videosdk.live/rtc-js-prebuilt
 npm i input
 npm i react-modal
+npm install stompjs
+npm install sockjs-client
+
 
 
 
