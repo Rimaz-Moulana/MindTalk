@@ -1,6 +1,7 @@
 package com.mindtalk.Backend.controller.notification;
 
 import com.mindtalk.Backend.entity.Notification;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
