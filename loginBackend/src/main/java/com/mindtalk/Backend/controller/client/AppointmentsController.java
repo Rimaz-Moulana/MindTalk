@@ -18,7 +18,7 @@ public class AppointmentsController {
     private AppointmentService appointmentService;
 
     @PostMapping("/create-appointment")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         try {
             // Extract the fields from appointmentDTO
@@ -36,7 +36,7 @@ public class AppointmentsController {
     }
 
     @GetMapping("/get-appointments")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public List<AppointmentDTO> getAppointments() {
         return appointmentService.getAllAppointments();
     }

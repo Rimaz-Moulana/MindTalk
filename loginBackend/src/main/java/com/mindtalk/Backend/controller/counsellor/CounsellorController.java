@@ -21,7 +21,7 @@ public class CounsellorController {
     private CounsellorInfoService counsellorInfoService;
 
     @PostMapping("/add")
-    @CrossOrigin(origins = "http://127.0.0.1:5173",allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
     public ResponseEntity<String> registerCounsellor(@RequestBody CounsellorDTO counsellorDTO){
         try{
         Long id = counsellorDTO.getId();
@@ -39,7 +39,7 @@ public class CounsellorController {
         }
     }
     @GetMapping("/getCounsellor")
-    @CrossOrigin(origins = "http://127.0.0.1:5173",allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
     public List<CounsellorDTO> getCounsellors(){
         return counsellorInfoService.getAllCounsellors();
     }
