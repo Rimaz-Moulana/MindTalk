@@ -45,19 +45,18 @@ import CounsellorAddDetails from './pages/counsellor/CounsellorAddDetalils'
 import CounsellorDetailsAdd from './pages/counsellor/CounsellorDetailsAdd'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
+import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
+import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
-import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
-import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 
 // import RequireAuth from './components/LoginSignup/RequireAuth'
-import { AuthProvider } from './context/AuthProvider'
-import AddMusic from './components/moderator/AddMusic';
 import Dash from './components/Calls/Dash'
-import Calls from "./pages/Calls";
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import AddMeditation from './components/moderator/AddMeditation'
-import RequireAuth from './components/LoginSignup/RequireAuth'
+import AddMusic from './components/moderator/AddMusic'
+import { AuthProvider } from './context/AuthProvider'
+import AddTherapySession from './pages/moderator/AddTherapySession'
 
 const ROLES = {
   'Client': 'client',
@@ -149,6 +148,7 @@ const App = () => (
             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
             <Route path="add-meditation/:id" element={<AddMeditation />} />
             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
+            <Route path="addtherapysession" element={<AddTherapySession />} />
           </Route>
 
 
