@@ -51,12 +51,23 @@ const ClientMusic = () => {
           {music.map((item, index) => (
             <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
               <div className="aspect-w-16 aspect-h-9 mb-4"> {/* Updated aspect ratio here */}
-                <iframe
+                {/* <iframe
                   title={item.title}
                   src={item.link}
                   allowFullScreen
                   className="w-full h-full rounded-md shadow-md"
-                ></iframe>
+                >
+                </iframe> */}
+                <embed
+                  src={item.link}
+                  wmode="opaque"
+                  type='video/mp4'
+                  width='100%'
+                  height='100%'
+                  allow='autoplay; encrypted-media; picture-in-picture'
+                  
+                  title={item.title}
+                />
               </div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
               <p className="text-gray-600 mb-2">{item.category}</p>
