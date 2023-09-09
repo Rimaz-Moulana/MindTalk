@@ -43,10 +43,11 @@ const ModeratorMusic = () => {
           },
           withCredentials: true
         };
-        console.log(`Deleting music...`);
+        console.log(`Deleting music...`+id);
         const response = await axios.delete(`http://localhost:8080/api/testing/music/` + id, config);
 
         setMusic(prevMusic => prevMusic.filter(item => item.id !== id));
+        // window.location.href = '/moderator/moderatormusic';
 
       }
     } catch (error) {
@@ -54,6 +55,43 @@ const ModeratorMusic = () => {
       setLoading(false);
     }
   };
+
+  // const markMusicAsInactive = async (id) => {
+  //   try {
+  //     console.log("Marking music as inactive...");
+  //     const authData = localStorage.getItem('authData');
+  //     if (authData) {
+  //       const { accessToken } = JSON.parse(authData);
+  //       const config = {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           'Content-Type': 'application/json',
+  //         },
+  //         withCredentials: true,
+  //       };
+  //       console.log(`Marking music as inactive...` + id);
+  //       const response = await axios.put(
+  //         `http://localhost:8080/api/testing/music/${id}`,
+  //         null, // You can pass data here if needed
+  //         config
+  //       );
+  
+  //       // Handle the response as needed
+  //       if (response.status === 204) {
+  //         // Successfully marked as inactive
+  //         // You can update the UI or perform any other actions here
+  //         setMusic((prevMusic) =>
+  //           prevMusic.map((item) =>
+  //             item.id === id ? { ...item, status: false } : item
+  //           )
+  //         );
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error("Error marking music as inactive:", error);
+  //   }
+  // };
+  
 
   const fetchMusicData = async () => {
     try {

@@ -14,6 +14,8 @@ public class Music {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    //@Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
+    //private boolean status;
     private String title;
     private String category;
     private String description;
