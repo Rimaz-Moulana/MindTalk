@@ -30,6 +30,30 @@ const ModeratorMusic = () => {
   //   }
   // };
 
+  const deleteMusic = async (id) => {
+    try{
+      console.log("Fetching delete music data...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        };
+        console.log(`Deleting music...`);
+        const response = await axios.delete(`http://localhost:8080/api/testing/music/` + id, config);
+
+        setMusic(prevMusic => prevMusic.filter(item => item.id !== id));
+
+      }
+    } catch (error) {
+      console.error("Error fetching delete music:", error);
+      setLoading(false);
+    }
+  };
 
   const fetchMusicData = async () => {
     try {
