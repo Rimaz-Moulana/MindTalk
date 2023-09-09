@@ -41,25 +41,47 @@ const ClientMusic= () => {
   }, []);
 
   return (
-    <div className='rounded-xl'>
-      {/* Add filtering and other UI elements here */}
-      <section className='md:flex gap-5 sm:gap-y-5'>
-        {/* Add filtering form or select elements here */}
-      </section>
+    // <div className='rounded-xl'>
+    //   {/* Add filtering and other UI elements here */}
+    //   <section className='md:flex gap-5 sm:gap-y-5'>
+    //     {/* Add filtering form or select elements here */}
+    //   </section>
 
-      <section className='pt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
-        {music.map((item, index) => (
-          <iframe 
-            key={index} 
-            className='w-full aspect-[3/2]' 
-            src={item.link} 
-            title={`video${index + 1}`} 
-            allowFullScreen
-          > 
-          </iframe>
-        ))}
-      </section>
+    //   <section className='pt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
+    //     {music.map((item, index) => (
+    //       <iframe 
+    //         key={index} 
+    //         className='w-full aspect-[3/2]' 
+    //         src={item.link} 
+    //         title={`video${index + 1}`} 
+    //         allowFullScreen
+    //       > 
+    //       </iframe>
+    //     ))}
+    //   </section>
+    // </div>
+
+    <div className='flex flex-row'>
+
+      <div className='flex flex-col gap-4 w-full bg-white rounded-xl mb-5'>
+        <h1 className='text-xl font-bold pt-5 pl-5'>Music / Videos</h1>
+
+        <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
+          {music.map((item, index) => (
+            <iframe
+              key={index}
+              className="w-full aspect-[3/2]"
+              src={item.link}
+              title={`video${index+1}`}
+              allowfullscreen>
+            </iframe>
+          ))}
+        </div>
+
+      </div>
+
     </div>
+
   );
 }
 
