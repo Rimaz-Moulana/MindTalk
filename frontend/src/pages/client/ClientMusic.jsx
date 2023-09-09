@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const ClientMusic= () => {
+const ClientMusic = () => {
   const [isLoading, setLoading] = useState(true);
   const [music, setMusic] = useState([]);
 
@@ -20,16 +20,17 @@ const ClientMusic= () => {
         };
         const response = await axios.get(`http://localhost:8080/api/testing/music/all`, config);
 
-          const fetchedMusic = response.data.map(music => ({
-            id: music.id,
-            title: `${music.title}`,
-            category: `${music.category}`,
-            link: `${music.link}`
-          }));
+        const fetchedMusic = response.data.map(music => ({
+          id: music.id,
+          title: `${music.title}`,
+          category: `${music.category}`,
+          description: `${music.description}`,
+          link: `${music.link}`
+        }));
 
-          setMusic(fetchedMusic);
-          setLoading(false);
-        }
+        setMusic(fetchedMusic);
+        setLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching music:", error);
       setLoading(false);
@@ -41,47 +42,30 @@ const ClientMusic= () => {
   }, []);
 
   return (
-    // <div className='rounded-xl'>
-    //   {/* Add filtering and other UI elements here */}
-    //   <section className='md:flex gap-5 sm:gap-y-5'>
-    //     {/* Add filtering form or select elements here */}
-    //   </section>
-
-    //   <section className='pt-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
-    //     {music.map((item, index) => (
-    //       <iframe 
-    //         key={index} 
-    //         className='w-full aspect-[3/2]' 
-    //         src={item.link} 
-    //         title={`video${index + 1}`} 
-    //         allowFullScreen
-    //       > 
-    //       </iframe>
-    //     ))}
-    //   </section>
-    // </div>
-
     <div className='flex flex-row'>
 
       <div className='flex flex-col gap-4 w-full bg-white rounded-xl mb-5'>
-        <h1 className='text-xl font-bold pt-5 pl-5'>Music / Videos</h1>
+        <h1 className='text-2xl font-bold pt-5 pl-5'>Music / Videos</h1>
 
-        <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
           {music.map((item, index) => (
-            <iframe
-              key={index}
-              className="w-full aspect-[3/2]"
-              src={item.link}
-              title={`video${index+1}`}
-              allowfullscreen>
-            </iframe>
+            <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
+              <div className="aspect-w-16 aspect-h-9 mb-4"> {/* Updated aspect ratio here */}
+                <iframe
+                  title={item.title}
+                  src={item.link}
+                  allowFullScreen
+                  className="w-full h-full rounded-md shadow-md"
+                ></iframe>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-gray-600 mb-2">{item.category}</p>
+              {/* <p className="text-gray-700 mb-4">{item.description}</p> */}
+            </div>
           ))}
         </div>
-
       </div>
-
     </div>
-
   );
 }
 
