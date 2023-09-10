@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 import MusicService from '../../services/MusicService';
 
 export default function AddMusic() {
@@ -30,7 +31,7 @@ export default function AddMusic() {
         }
     }, [id]);
 
-    const saveMusic = (e) => {
+    const saveMusic = async (e) => {
         e.preventDefault();
         const updatedMusic = {
             title: music.title,
@@ -39,14 +40,49 @@ export default function AddMusic() {
             link: music.link
         };
 
-        if (id === '-1') {
-            MusicService.addMusic(updatedMusic).then(() => {
-                window.location.href = '/moderator/moderatormusic';
-            });
-        } else {
-            MusicService.updateMusic(updatedMusic, id).then(() => {
-                window.location.href = '/moderator/moderatormusic';
-            });
+        try {
+            if (id === '-1') {
+                await addMusicBackend(updatedMusic);
+            } else {
+                await updateMusicBackend(updatedMusic);
+            }
+            window.location.href = '/moderator/moderatormusic';
+        } catch (error) {
+            console.error('Error saving music:', error);
+        }
+    };
+
+    const addMusicBackend = async (musicData) => {
+        try {
+            const response = await axios.post(
+                'http://localhost:8080/api/testing/music',
+                musicData
+            );
+
+            if (response.status === 200) {
+                console.log('Music added successfully');
+            } else {
+                console.error('Error adding music');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
+    };
+
+    const updateMusicBackend = async (musicData) => {
+        try {
+            const response = await axios.put(
+                `http://localhost:8080/api/testing/music/${id}`,
+                musicData
+            );
+
+            if (response.status === 200) {
+                console.log('Music updated successfully');
+            } else {
+                console.error('Error updating music');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
         }
     };
 
@@ -60,13 +96,13 @@ export default function AddMusic() {
 
     const getTitle = () => (
         <h3 className="text-2xl font-semibold mb-4">
-          {id === '-1' ? 'Add Music' : 'Update Music'}
+            {id === '-1' ? 'Add Music' : 'Update Music'}
         </h3>
-      );
-      
+    );
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-            <div className="w-full max-w-md p-6 bg-white rounded-md shadow-lg">
+           <div className="w-full max-w-md p-6 bg-white rounded-md shadow-lg">
                 <form>
                     {getTitle()}
                     <div className="mb-4">

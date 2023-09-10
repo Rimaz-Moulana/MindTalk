@@ -138,7 +138,8 @@ const ModeratorMusic = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5 pb-5">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5 pb-5"> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
         {music.map((item, index) => (
           <div key={item.id} className="bg-gray-100 p-4 rounded-md shadow-md">
             <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
