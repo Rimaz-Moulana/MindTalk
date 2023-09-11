@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ContactCards from '../../components/ContactCards';
 import axios from 'axios';
-
+import { img3 } from '../../assets';
 
 const Contacts = () => {
   const [isLoading, setLoading] = useState(true);
@@ -12,6 +12,7 @@ const Contacts = () => {
   //useEffect(() => {
   const fetchCounselors = async () => {
     try {
+      console.log("Fetching counsellor data...");
       const authData = localStorage.getItem('authData')
       if (authData) {
         const { accessToken } = JSON.parse(authData)
@@ -22,10 +23,11 @@ const Contacts = () => {
           },
           withCredentials: true
         }
-        const response = await axios.get('http://localhost:8080/api/counsellor/details/getCounsellor', config);
+        const response = await axios.get('http://localhost:8080/api/counsellor/details/all', config);
 
         const fetchedCounselors = response.data.map(counsellor => ({
           id: counsellor.id,
+          dp: counsellor.license_image,
           name: `${counsellor.firstname} ${counsellor.lastname}`
         }))
 

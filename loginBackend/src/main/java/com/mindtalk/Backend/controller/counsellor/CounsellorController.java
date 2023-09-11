@@ -2,6 +2,7 @@ package com.mindtalk.Backend.controller.counsellor;
 
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
 
+import com.mindtalk.Backend.entity.Counsellor;
 import com.mindtalk.Backend.service.CounsellorInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,19 @@ public class CounsellorController {
     }
     @GetMapping("/getCounsellor")
     @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
-    public List<CounsellorDTO> getCounsellors(){
-        return counsellorInfoService.getAllCounsellors();
+    public List<CounsellorDTO> getCounsellor(){
+        return counsellorInfoService.getCounsellor();
+    }
+
+    @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
+    public ResponseEntity<List<Counsellor>> getAllCounsellors(){
+        List<Counsellor> allCounsellors = counsellorInfoService.getAllCounsellors();
+
+        if(!allCounsellors.isEmpty()){
+            return ResponseEntity.ok(allCounsellors);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
