@@ -10,7 +10,7 @@ const BlogView = () => {
 
   useEffect(() => {
     // Replace 'YOUR_API_ENDPOINT' with your actual backend API endpoint
-    axios.get(`http://localhost:8080/api/blogs/view/${blogId}`) // Use the blog ID in the URL to fetch the specific blog
+    axios.get(`http://localhost:8080/api/blogs/view/:blogId`) // Use the blog ID in the URL to fetch the specific blog
       .then(response => {
         setBlogData(response.data); // Assuming the data is the blog object itself
         setIsLoading(false);

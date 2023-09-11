@@ -29,14 +29,14 @@ const Blogs = () => {
 
       <div className='flex items-center justify-between mx-10 mt-4 space-x-4 m'>
         <div className='flex items-center space-x-2'>
-          <select  className='p-2 my-3 text-gray-600 rounded-xl bg-blue-50 font-base border-blue focus:ring focus:outline-none focus:border-blue-300'>
+          {/* <select  className='p-2 my-3 text-gray-600 rounded-xl bg-blue-50 font-base border-blue focus:ring focus:outline-none focus:border-blue-300'>
             <option value="option0" disabled selected>Select Category</option>
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
             <option value="option4">Option 4</option>
             <option value="option5">Option 5</option>
-          </select>
+          </select> */}
 
           <input
             type="text"
@@ -69,11 +69,12 @@ const Blogs = () => {
               <div className='p-4'>
                 <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
                 <p className='mt-2 text-gray-600 line-clamp-3'>{blog.article}</p>
-                <Link to="blogview/${blog.id}">
+                <Link to={`/counsellor/blogs/blogview/${blog.id}`}>
                   <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
                     <span className="hidden sm:inline">See more...</span>
                   </button>
                 </Link>
+
                 {/* <div className='flex items-center mt-4'>
                   <img
                     src={blog.author.imageUrl}

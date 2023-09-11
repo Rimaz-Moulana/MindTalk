@@ -19,6 +19,7 @@ import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
 import Blogs from './pages/Blogs'
+import BlogView from './pages/BlogView'
 import Landingpage from './pages/Landingpage'
 import PostBlog from './pages/PostBlog'
 import ClientAppointments from './pages/client/ClientAppointments'
@@ -98,6 +99,7 @@ const App = () => (
             <Route path='clientmusic' element={<ClientMusic />} />
             <Route path='clientmeditation' element={<ClientMeditation />} />
             <Route path="blogs" element={<Blogs />} />
+            <Route path="blogs/blogview/:blogId" element={<BlogView />} />
             <Route path="blogs/postblog" element={<PostBlog />} />
             <Route path='clientappointments' element={<ClientAppointments />} />
             <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
