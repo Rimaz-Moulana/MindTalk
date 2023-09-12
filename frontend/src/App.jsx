@@ -92,7 +92,7 @@ const App = () => (
           {/* Routes that require authentication */}
 
           <Route path="/client" element={<RequireAuth allowedRoles={[ROLES.Client]} />}>
-            <Route  element={<ClientLayout />}> {/* Wrap the layout */}
+            <Route element={<ClientLayout />}> {/* Wrap the layout */}
               <Route index element={<ClientDashboard />} />
               <Route path="message" element={<ChatApp />} />
               <Route path="clientprofile" element={<ClientProfile />} />
@@ -117,14 +117,16 @@ const App = () => (
           </Route>
 
 
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="/admin/userhandle" element={<UserHandle />} />
-            <Route path="/admin/user" element={<AdminCrudUser />} />
-            <Route path="/admin/counselors" element={<AdminCrudCounselors />} />
-            <Route path="/admin/moderators" element={<AdminCrudModerators />} />
-            <Route path="/admin/doctors" element={<AdminCrudDoctors />} />
-            <Route path="/admin/clients" element={<AdminCrudClient />} />
+          <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route element={<AdminLayout />}> {/* Wrap the layout */}
+              <Route index element={<AdminDashboard />} />
+              <Route path="/admin/userhandle" element={<UserHandle />} />
+              <Route path="/admin/user" element={<AdminCrudUser />} />
+              <Route path="/admin/counselors" element={<AdminCrudCounselors />} />
+              <Route path="/admin/moderators" element={<AdminCrudModerators />} />
+              <Route path="/admin/doctors" element={<AdminCrudDoctors />} />
+              <Route path="/admin/clients" element={<AdminCrudClient />} />
+            </Route>
           </Route>
 
 
