@@ -49,8 +49,9 @@ public class MusicService {
         Music existingMusic = musicRepo.findById(musicId).orElse(null);
 
         if(existingMusic != null){
-            musicRepo.delete(existingMusic);
-            return true; //Music Deleted
+            existingMusic.setStatus(false); // Set status to false
+            musicRepo.save(existingMusic); // Save the updated music entity
+            return true; // Music status updated
         }
         return false; //Music not deleted
     }

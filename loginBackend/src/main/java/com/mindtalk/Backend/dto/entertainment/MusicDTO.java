@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MusicDTO {
-    //private boolean status;
+    private boolean status;
     private String title;
     private String category;
     private String description;
