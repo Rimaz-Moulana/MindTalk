@@ -131,18 +131,20 @@ const App = () => (
 
 
 
-          <Route path="/counsellor" element={<CounsellorLayout />}>
-            <Route index element={<CounsellorHome />} />
-            {/* <Route path="l" element={<CounsellorHome />} /> */}
-            <Route path="counsellorprofile" element={<CounsellorProfile />} />
-            <Route path="counsellorclients" element={<CounsellorClients />} />
-            <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
-            <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
-            <Route path="counsellorappointments" element={<CounsellorAppointments />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="blogs/postblog" element={<PostBlog />} />
-            {/* <Route path="home" element={<CounsellorHome />} /> */}
-            <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
+          <Route path="/counsellor" element={<RequireAuth allowedRoles={[ROLES.Counsellor]} />}>
+            <Route element={<CounsellorLayout />}> {/* Wrap the layout */}
+              <Route index element={<CounsellorHome />} />
+              {/* <Route path="l" element={<CounsellorHome />} /> */}
+              <Route path="counsellorprofile" element={<CounsellorProfile />} />
+              <Route path="counsellorclients" element={<CounsellorClients />} />
+              <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+              <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
+              <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+              <Route path="blogs" element={<Blogs />} />
+              <Route path="blogs/postblog" element={<PostBlog />} />
+              {/* <Route path="home" element={<CounsellorHome />} /> */}
+              <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
+            </Route>
           </Route>
 
 
