@@ -66,9 +66,9 @@ public class MusicController {
     @DeleteMapping("/{musicId}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Void> deleteMusic(@PathVariable Integer musicId){
-        boolean isDeleted = musicService.deleteMusic(musicId);
+        boolean isUpdated = musicService.deleteMusic(musicId);
 
-        if(isDeleted){
+        if (isUpdated) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
