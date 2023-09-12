@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+
 import ChatApp from './components/Chat/Message'
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
 import TestEmail from './components/Diagnose Test/TestEmail'
@@ -51,7 +52,7 @@ import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
-// import RequireAuth from './components/LoginSignup/RequireAuth'
+import RequireAuth from './components/LoginSignup/RequireAuth'
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import AddMeditation from './components/moderator/AddMeditation'
@@ -60,7 +61,7 @@ import { AuthProvider } from './context/AuthProvider'
 import AddTherapySession from './pages/moderator/AddTherapySession'
 
 const ROLES = {
-  'Client': 'client',
+  'Client': 'ROLE_CLIENT',
   'Admin': 'admin',
   'Moderator': 'moderator',
   'Counsellor': 'counselor',
@@ -88,23 +89,26 @@ const App = () => (
           <Route path="/counsellor/addDetails" element={<CounsellorDetailsAdd />} />
 
           {/* <Route path="/table" element={<TableData />}  /> */}
-           {/* Routes that require authentication */}
+          {/* Routes that require authentication */}
 
-          <Route path="/client" element={<ClientLayout />}>
-            <Route index element={<ClientDashboard />} />
-``          <Route path="message" element={<ChatApp />} />
-            <Route path="clientprofile" element={<ClientProfile />} />
-            <Route path="clientcounsellors" element={<ClientCounsellors />} />
-            <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
-            <Route path='clientmusic' element={<ClientMusic />} />
-            <Route path='clientmeditation' element={<ClientMeditation />} />
-            <Route path="blogs" element={<Blogs />} />
-            <Route path="blogs/blogview/:blogId" element={<BlogView />} />
-            <Route path="blogs/postblog" element={<PostBlog />} />
-            <Route path='clientappointments' element={<ClientAppointments />} />
-            <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
-            <Route path='calls' element={<Dash/>} />
+          <Route path="/client" element={<RequireAuth allowedRoles={[ROLES.Client]} />}>
+            <Route  element={<ClientLayout />}> {/* Wrap the layout */}
+              <Route index element={<ClientDashboard />} />
+              <Route path="message" element={<ChatApp />} />
+              <Route path="clientprofile" element={<ClientProfile />} />
+              <Route path="clientcounsellors" element={<ClientCounsellors />} />
+              <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
+              <Route path='clientmusic' element={<ClientMusic />} />
+              <Route path='clientmeditation' element={<ClientMeditation />} />
+              <Route path="blogs" element={<Blogs />} />
+              <Route path="blogs/blogview/:blogId" element={<BlogView />} />
+              <Route path="blogs/postblog" element={<PostBlog />} />
+              <Route path='clientappointments' element={<ClientAppointments />} />
+              <Route path='clientcounsellors/appointments' element={<ClientCounsellorAppointments />} />
+              <Route path='calls' element={<Dash />} />
+            </Route>
           </Route>
+
 
 
           <Route path="/wallet" element={<WalletLayout />}>
@@ -138,7 +142,7 @@ const App = () => (
             {/* <Route path="home" element={<CounsellorHome />} /> */}
             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
           </Route>
-          
+
 
 
 
@@ -146,7 +150,7 @@ const App = () => (
             <Route index element={<ModeratorDashboard />} />
             <Route path="userhandle" element={<ModeratorUserHandle />} />
             <Route path="moderatormusic" element={<ModeratorMusic />} />
-            <Route path='add-music/:id' element = {<AddMusic />} />
+            <Route path='add-music/:id' element={<AddMusic />} />
             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
             <Route path="add-meditation/:id" element={<AddMeditation />} />
             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
