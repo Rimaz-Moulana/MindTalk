@@ -23,7 +23,7 @@ public class TestController {
 
     private final List<String> allowedOrigins;
 
-    @Autowired  
+    @Autowired
     public TestController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
         this.allowedOrigins = allowedOrigins;
     }
