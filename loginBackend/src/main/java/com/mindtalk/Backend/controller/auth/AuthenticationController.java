@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -21,10 +22,12 @@ public class AuthenticationController {
 
     private final LogoutService logoutService;
 
+    private final List<String> allowedOrigins;
+
 
 
     @PostMapping("/register")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
@@ -32,7 +35,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<AuthenticationResponse> authenticate(
             @RequestBody AuthenticationRequest request
     ) {
@@ -40,7 +43,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh-token")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public void refreshToken(
             HttpServletRequest request,
             HttpServletResponse response
@@ -49,7 +52,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/logout")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> logout(
             HttpServletRequest request,
             HttpServletResponse response,
