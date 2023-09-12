@@ -13,4 +13,8 @@ public class MusicDTO {
     private String category;
     private String description;
     private String link;
+
+    public boolean getStatus() {
+        return status=true;
+    }
 }

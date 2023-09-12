@@ -16,6 +16,7 @@ public class MusicService {
 
     public Music createMusic(MusicDTO musicDTO){
         Music music = new Music();
+        music.setStatus(musicDTO.getStatus());
         music.setTitle(musicDTO.getTitle());
         music.setCategory(musicDTO.getCategory());
         music.setDescription(musicDTO.getDescription());
