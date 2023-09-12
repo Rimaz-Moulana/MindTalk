@@ -62,9 +62,9 @@ import AddTherapySession from './pages/moderator/AddTherapySession'
 
 const ROLES = {
   'Client': 'ROLE_CLIENT',
-  'Admin': 'admin',
-  'Moderator': 'moderator',
-  'Counsellor': 'counselor',
+  'Admin': 'ROLE_ADMIN',
+  'Moderator': 'ROLE_MODERATOR',
+  'Counsellor': 'ROLE_COUNSELLOR',
 };
 
 
