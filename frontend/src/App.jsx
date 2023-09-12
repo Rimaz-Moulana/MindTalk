@@ -148,15 +148,17 @@ const App = () => (
 
 
 
-          <Route path="/moderator" element={<ModeratorLayout />}>
-            <Route index element={<ModeratorDashboard />} />
-            <Route path="userhandle" element={<ModeratorUserHandle />} />
-            <Route path="moderatormusic" element={<ModeratorMusic />} />
-            <Route path='add-music/:id' element={<AddMusic />} />
-            <Route path="moderatormeditation" element={<ModeratorMeditation />} />
-            <Route path="add-meditation/:id" element={<AddMeditation />} />
-            <Route path="moderatorblogs" element={<ModeratorBlogs />} />
-            <Route path="addtherapysession" element={<AddTherapySession />} />
+          <Route path="/moderator" element={<RequireAuth allowedRoles={[ROLES.Moderator]} />}>
+            <Route element={<ModeratorLayout />}> {/* Wrap the layout */}
+              <Route index element={<ModeratorDashboard />} />
+              <Route path="userhandle" element={<ModeratorUserHandle />} />
+              <Route path="moderatormusic" element={<ModeratorMusic />} />
+              <Route path='add-music/:id' element={<AddMusic />} />
+              <Route path="moderatormeditation" element={<ModeratorMeditation />} />
+              <Route path="add-meditation/:id" element={<AddMeditation />} />
+              <Route path="moderatorblogs" element={<ModeratorBlogs />} />
+              <Route path="addtherapysession" element={<AddTherapySession />} />
+            </Route>
           </Route>
 
 
