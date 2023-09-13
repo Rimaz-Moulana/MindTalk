@@ -41,6 +41,7 @@
     "react-fetch-hook": "^1.9.5",
     "react-icons": "^4.10.1",
     "react-modal": "^3.16.1",
+    "react-model": "^4.3.1",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.15.0",
     "react-stripe-checkout": "^2.6.3",
