@@ -12,16 +12,21 @@ public class AddTherapySessionController {
     private AddTherapySessionService addTherapySessionService;
 
     @PostMapping("/therapySession")
+
     @CrossOrigin(origins = "http://127.0.0.1:5173",allowCredentials = "true")
     public ResponseEntity<String> addTherapySession(@RequestBody AddTherapySessionDTO addTherapySessionDTO){
-        Long id = addTherapySessionDTO.getId();
-        String date = addTherapySessionDTO.getDate();
-        String time = addTherapySessionDTO.getTime();
-        String link = addTherapySessionDTO.getLink();
-        String counsellors = addTherapySessionDTO.getCounsellors();
-        String sessionType = addTherapySessionDTO.getSessionType();
+        try {
+            Long id = addTherapySessionDTO.getId();
+            String date = addTherapySessionDTO.getDate();
+            String time = addTherapySessionDTO.getTime();
+            String link = addTherapySessionDTO.getLink();
+            String counsellors = addTherapySessionDTO.getCounsellors();
+            String sessionType = addTherapySessionDTO.getSessionType();
 
-        addTherapySessionService.addSession(id,date,time,link,counsellors,sessionType);
-        return ResponseEntity.ok("adding succesfull");
+            addTherapySessionService.addSession(id, date, time, link, counsellors, sessionType);
+            return ResponseEntity.ok("adding successfully");
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("An error occurred");
+        }
     }
 }

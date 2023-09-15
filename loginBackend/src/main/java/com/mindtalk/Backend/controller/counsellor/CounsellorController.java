@@ -33,7 +33,7 @@ public class CounsellorController {
 
         counsellorInfoService.register(id,firstname,lastname,email,licenseNo,licenseImage);
 
-        return ResponseEntity.ok("adding succesfull");
+        return ResponseEntity.ok("adding successful");
         }catch (Exception e){
             return ResponseEntity.status(500).body("An error");
         }
