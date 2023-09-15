@@ -56,73 +56,74 @@ const ModeratorMusic = () => {
   //   }
   // };
 
-  const deleteMusic = async (id) => {
-    try{
-      const authData = localStorage.getItem('bauthData');
-      if(authData) {
-        const { accessToken } = JSON.parse(authData);
-        const config = {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          withCredentials: true
-        };
-        //Send a request to update the status to "false"
-        const response = await axios.delete(`http://localhost:8080/api/testing/music/${id}`, config);
+//   const deleteMusic = async (id) => {
+//     try{
+//       const authData = localStorage.getItem('bauthData');
+//       if(authData) {
+//         const { accessToken } = JSON.parse(authData);
+//         const config = {
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`,
+//             'Content-Type': 'application/json'
+//           },
+//           withCredentials: true
+//         };
+//         //Send a request to update the status to "false"
+//         const response = await axios.delete(`http://localhost:8080/api/testing/music/${id}`, config);
 
-        //check if status update was successful
-        if (response.status === 200){
-          setMusic((prevMusic) => 
-          prevMusic.map((item) =>
-            item.id === id ? { ...item, status: false } : item 
-          )
-        );
-      } else {
-        console.error('Error deleting music');
+//         //check if status update was successful
+//         if (response.status === 200){
+//           setMusic((prevMusic) => 
+//           prevMusic.map((item) =>
+//             item.id === id ? { ...item, status: false } : item 
+//           )
+//         );
+//       } else {
+//         console.error('Error deleting music');
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error updating music status:' , error);
+//   }
+// };
+
+const markMusicAsInactive = async (id) => {
+  try {
+      console.log("Marking music as inactive...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+          const { accessToken } = JSON.parse(authData);
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+          };
+          console.log(`Marking music as inactive...` + id);
+          const response = await axios.put(
+              `http://localhost:8080/api/testing/music/remove/${id}`,
+              // null, // You can pass data here if needed
+              config
+          );
+
+          // Handle the response as needed
+          if (response.status === 200) {
+              setMusic((prevMusic) =>
+                  prevMusic.map((item) =>
+                      item.id === id ? { ...item, status: false } : item
+                  )
+              );
+          } else {
+              console.error("Error marking music as inactive - Unexpected status code:", response.status);
+              console.error("Response data:", response.data);
+          }
       }
-    }
   } catch (error) {
-    console.error('Error updating music status:' , error);
+      console.error("Error marking music as inactive:", error);
   }
 };
 
-  // const markMusicAsInactive = async (id) => {
-  //   try {
-  //     console.log("Marking music as inactive...");
-  //     const authData = localStorage.getItem('authData');
-  //     if (authData) {
-  //       const { accessToken } = JSON.parse(authData);
-  //       const config = {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json',
-  //         },
-  //         withCredentials: true,
-  //       };
-  //       console.log(`Marking music as inactive...` + id);
-  //       const response = await axios.put(
-  //         `http://localhost:8080/api/testing/music/${id}`,
-  //         null, // You can pass data here if needed
-  //         config
-  //       );
-  
-  //       // Handle the response as needed
-  //       if (response.status === 204) {
-  //         // Successfully marked as inactive
-  //         // You can update the UI or perform any other actions here
-  //         setMusic((prevMusic) =>
-  //           prevMusic.map((item) =>
-  //             item.id === id ? { ...item, status: false } : item
-  //           )
-  //         );
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error marking music as inactive:", error);
-  //   }
-  // };
-  
 
   const fetchMusicData = async () => {
     try {
@@ -201,7 +202,7 @@ const ModeratorMusic = () => {
                   <FiEdit3 />
                 </Link>
                 <button
-                  onClick={() => deleteMusic(item.id)} 
+                  onClick={() => markMusicAsInactive(item.id)} 
                   className='bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black'
                 >
                   <FiTrash2 />

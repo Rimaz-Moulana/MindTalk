@@ -38,12 +38,23 @@ public class MusicService {
 
         if(existingMusic != null){
             existingMusic.setTitle(musicDTO.getTitle());
+//            existingMusic.setStatus(musicDTO.getStatus());
             existingMusic.setCategory(musicDTO.getCategory());
             existingMusic.setDescription(musicDTO.getDescription());
             existingMusic.setLink(musicDTO.getLink());
             return musicRepo.save(existingMusic);
         }
         return null; //Music not found
+    }
+
+    public Music removeMusic(Integer musicId, MusicDTO musicDTO){
+        Music existingMusic = musicRepo.findById(musicId).orElse(null);
+
+        if(existingMusic != null) {
+            existingMusic.setStatus(musicDTO.getStatus());
+            return musicRepo.save(existingMusic);
+        }
+        return null;
     }
 
     public boolean deleteMusic(Integer musicId){
