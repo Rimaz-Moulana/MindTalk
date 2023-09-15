@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
-import WalletHeader from '../Payments/WalletHeader';
+import Header from '../shared/Header';
 
 
 export default function Layout() {
@@ -9,7 +9,7 @@ export default function Layout() {
     <div className='flex flex-row bg-slate-100 h-screen w-screen overflow-hidden'>
       <AdminSidebar />
       <div className='flex-1 h-screen flex flex-col'>
-        <WalletHeader />
+        <Header />
         <div className='p-4 min-h-0 overflow-auto'>
           {<Outlet />}
         </div>

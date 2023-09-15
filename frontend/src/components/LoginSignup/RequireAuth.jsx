@@ -1,20 +1,21 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, Outlet } from "react-router-dom"; // Import Outlet from react-router-dom
 import useAuth from "../../../hooks/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
-    const location = useLocation();
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
-    console.log("Auth Roles:", auth?.roles);
-    console.log("Allowed Roles:", allowedRoles);
+  useEffect(() => {
+    if (!auth?.roles?.find(role => allowedRoles?.includes(role))) {
+      navigate('/login'); // Redirect to the login page
+    }
+  }, [auth, allowedRoles, navigate]);
 
-    return (
-        auth?.roles?.find(role => allowedRoles?.includes(role))
-            ? <Outlet />
-            : auth?.user
-                ? <Navigate to="/login" state={{ from: location }} replace />
-                : <Navigate to="/" state={{ from: location }} replace />
-    );
+  return (
+    auth?.roles?.some(role => allowedRoles?.includes(role)) ? <Outlet /> : null
+    // Use Outlet to render child routes
+  );
 }
 
 export default RequireAuth;

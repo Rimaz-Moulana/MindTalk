@@ -28,8 +28,12 @@ public class CounsellorInfoService {
         counsellorRepository.save(counsellor);
     }
 
-    public List<CounsellorDTO> getAllCounsellors(){
+    public List<CounsellorDTO> getCounsellor(){
         List<Counsellor> counsellors = counsellorRepository.findAll();
         return modelMapper.map(counsellors, new TypeToken<List<CounsellorDTO>>(){}.getType());
+    }
+
+    public List<Counsellor> getAllCounsellors() {
+        return counsellorRepository.findAll();
     }
 }

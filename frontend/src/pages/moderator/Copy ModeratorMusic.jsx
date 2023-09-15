@@ -30,36 +30,11 @@ const ModeratorMusic = () => {
   //   }
   // };
 
-  // const deleteMusic = async (id) => {
-  //   try{
-  //     console.log("Fetching delete music data...");
-  //     const authData = localStorage.getItem('authData');
-  //     if (authData) {
-  //       const { accessToken } = JSON.parse(authData);
-  //       const config = {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json'
-  //         },
-  //         withCredentials: true
-  //       };
-  //       console.log(`Deleting music...`+id);
-  //       const response = await axios.delete(`http://localhost:8080/api/testing/music/` + id, config);
-
-  //       setMusic(prevMusic => prevMusic.filter(item => item.id !== id));
-  //       // window.location.href = '/moderator/moderatormusic';
-
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching delete music:", error);
-  //     setLoading(false);
-  //   }
-  // };
-
   const deleteMusic = async (id) => {
     try{
-      const authData = localStorage.getItem('bauthData');
-      if(authData) {
+      console.log("Fetching delete music data...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
         const { accessToken } = JSON.parse(authData);
         const config = {
           headers: {
@@ -68,24 +43,18 @@ const ModeratorMusic = () => {
           },
           withCredentials: true
         };
-        //Send a request to update the status to "false"
-        const response = await axios.delete(`http://localhost:8080/api/testing/music/${id}`, config);
+        console.log(`Deleting music...`+id);
+        const response = await axios.delete(`http://localhost:8080/api/testing/music/` + id, config);
 
-        //check if status update was successful
-        if (response.status === 200){
-          setMusic((prevMusic) => 
-          prevMusic.map((item) =>
-            item.id === id ? { ...item, status: false } : item 
-          )
-        );
-      } else {
-        console.error('Error deleting music');
+        setMusic(prevMusic => prevMusic.filter(item => item.id !== id));
+        // window.location.href = '/moderator/moderatormusic';
+
       }
+    } catch (error) {
+      console.error("Error fetching delete music:", error);
+      setLoading(false);
     }
-  } catch (error) {
-    console.error('Error updating music status:' , error);
-  }
-};
+  };
 
   // const markMusicAsInactive = async (id) => {
   //   try {
@@ -141,7 +110,6 @@ const ModeratorMusic = () => {
 
         const fetchedMusic = response.data.map(music => ({
           id: music.id,
-          status: music.status,
           title: `${music.title}`,
           category: `${music.category}`,
           description: `${music.description}`,
@@ -161,8 +129,6 @@ const ModeratorMusic = () => {
     fetchMusicData();
   }, []);
 
-  console.log("Music data before filtering:", music);
-
   return (
     <div className="flex flex-col w-full bg-white rounded-xl mb-5">
 
@@ -174,40 +140,35 @@ const ModeratorMusic = () => {
 
       {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-5 pb-5"> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
-      {music
-          .filter(item => {
-            console.log("Filtering item:", item);
-            return item.status;
-          })
-          .map((item, index) => (
-            <div key={item.id} className="bg-gray-100 p-4 rounded-md shadow-md">
-              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-gray-600 mb-2">{item.category}</p>
-              <p className="text-gray-700 mb-4">{item.description}</p>
-              <div className="aspect-w-16 aspect-h-9 mb-4">
-                <iframe
-                  title={item.title}
-                  src={item.link}
-                  allowFullScreen
-                  className="w-full h-full rounded-md shadow-md"
-                >
-                </iframe>
-              </div>
-              <div className="flex space-x-2">
-                <Link
-                  to={`/moderator/add-music/${item.id}`} 
-                  className="bg-blue-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
-                >
-                  <FiEdit3 />
-                </Link>
-                <button
-                  onClick={() => deleteMusic(item.id)} 
-                  className='bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black'
-                >
-                  <FiTrash2 />
-                </button>
-              </div>
+        {music.map((item, index) => (
+          <div key={item.id} className="bg-gray-100 p-4 rounded-md shadow-md">
+            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+            <p className="text-gray-600 mb-2">{item.category}</p>
+            <p className="text-gray-700 mb-4">{item.description}</p>
+            <div className="aspect-w-16 aspect-h-9 mb-4">
+              <iframe
+                title={item.title}
+                src={item.link}
+                allowFullScreen
+                className="w-full h-full rounded-md shadow-md"
+              >
+              </iframe>
             </div>
+            <div className="flex space-x-2">
+              <Link
+                to={`/moderator/add-music/${item.id}`} 
+                className="bg-blue-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
+              >
+                <FiEdit3 />
+              </Link>
+              <button
+                onClick={() => deleteMusic(item.id)} 
+                className='bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black'
+              >
+                <FiTrash2 />
+              </button>
+            </div>
+          </div>
         ))}
       </div>
     </div>
