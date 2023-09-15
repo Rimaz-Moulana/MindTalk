@@ -13,7 +13,23 @@ const notificationList = [
 
 export default function CounsellorHeader() {
     const [notifications, setNotifications] = useState(notificationList);
+    const [user, setUser] = useState(null); // User-related data state 
     const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            // Make a request to your logout endpoint
+            await axios.post('http://localhost:8080/api/v1/auth/logout', null, {
+                withCredentials: true, // Include credentials
+            });
+
+            // If logout is successful, navigate to the login page or perform other actions
+            navigate('/login');
+        } catch (error) {
+            console.error("Error during logout:", error);
+            // Handle any error that might occur during the logout process
+        }
+    };
     
   return (
     <div className='bg-white w-full top-0 z-50'>
@@ -92,16 +108,17 @@ export default function CounsellorHeader() {
                             )}
                         </Menu.Item>
                         <Menu.Item>
-                            {({ active }) => (
-                                <div className={classNames(
-                                    active && 'bg-gray-100',
-                                    'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
-                                    )}
-                                    onClick={() => navigate('/logout')}>
-                                    Logout
-                                </div>
-                            )}
-                        </Menu.Item>
+                                {({ active }) => (
+                                    <div className={classNames(
+                                        active && 'bg-gray-100',
+                                        'text-gray-700 focus:bg-gray-200 cursor-pointer rounded-sm px-4 py-2'
+                                        )}
+                                        onClick={handleLogout} // Call the logout function
+                                        >
+                                        Logout
+                                    </div>
+                                )}
+                            </Menu.Item>
                     </Menu.Items>
               </Transition>
             </Menu>

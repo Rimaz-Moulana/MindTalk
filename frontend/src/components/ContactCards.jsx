@@ -11,7 +11,7 @@ const ContactCards = ({ contactList }) => {
     <>
       {contactList?.map((contact) => {
         // Log the image path to the console
-        console.log("Image Path:", contact.dp);
+        console.log("Image Path:", contact.license_image);
 
         return (
           <div key={contact.id} className="block">
@@ -19,7 +19,7 @@ const ContactCards = ({ contactList }) => {
               <img
                 alt="user"
                 className='w-32 h-32 rounded-full mx-auto'
-                src={contact.dp} // Use the default avatar image for all contacts
+                src={contact.license_image || avatarPNG} // Use the default avatar image for all contacts
                 onError={(e) => {
                   e.target.src = avatarPNG;
                 }}

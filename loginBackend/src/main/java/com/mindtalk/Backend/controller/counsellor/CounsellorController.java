@@ -6,6 +6,7 @@ import com.mindtalk.Backend.entity.Counsellor;
 import com.mindtalk.Backend.service.CounsellorInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +22,15 @@ public class CounsellorController {
     @Autowired
     private CounsellorInfoService counsellorInfoService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public CounsellorController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @PostMapping("/add")
-    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> registerCounsellor(@RequestBody CounsellorDTO counsellorDTO){
         try{
         Long id = counsellorDTO.getId();
@@ -34,19 +42,19 @@ public class CounsellorController {
 
         counsellorInfoService.register(id,firstname,lastname,email,licenseNo,licenseImage);
 
-        return ResponseEntity.ok("adding succesfull");
+        return ResponseEntity.ok("adding successful");
         }catch (Exception e){
             return ResponseEntity.status(500).body("An error");
         }
     }
     @GetMapping("/getCounsellor")
-    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public List<CounsellorDTO> getCounsellor(){
         return counsellorInfoService.getCounsellor();
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173",allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Counsellor>> getAllCounsellors(){
         List<Counsellor> allCounsellors = counsellorInfoService.getAllCounsellors();
 

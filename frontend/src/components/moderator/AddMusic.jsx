@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
-import MusicService from '../../services/MusicService';
+import axios from 'axios';
 
-export default function AddMusic() {
+const AddMusic = () => {
     const { id } = useParams();
 
     const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
@@ -19,17 +18,39 @@ export default function AddMusic() {
         if (id === '-1') {
             return;
         } else {
-            MusicService.getMusicById(id).then((res) => {
-                let musicData = res.data;
-                setMusic({
-                    title: musicData.title,
-                    category: musicData.category,
-                    description: musicData.description,
-                    link: musicData.link
-                });
-            });
+            fetchMusicData();
         }
     }, [id]);
+
+    const fetchMusicData = async () => {
+        try {
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                const response = await axios.get(`http://localhost:8080/api/testing/music/${id}`, config);
+
+                if (response.status === 200) {
+                    const musicData = response.data;
+                    setMusic({
+                        title: musicData.title,
+                        category: musicData.category,
+                        description: musicData.description,
+                        link: musicData.link
+                    });
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching music:', error);
+        }
+    };
 
     const saveMusic = async (e) => {
         e.preventDefault();
@@ -39,24 +60,41 @@ export default function AddMusic() {
             description: music.description,
             link: music.link
         };
+        console.log(updatedMusic);
 
         try {
-            if (id === '-1') {
-                await addMusicBackend(updatedMusic);
-            } else {
-                await updateMusicBackend(updatedMusic);
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                if (id === '-1') {
+                    await addMusicBackend(updatedMusic, config);
+                } else {
+                    await updateMusicBackend(updatedMusic, config);
+                }
+                window.location.href = '/moderator/moderatormusic';
             }
-            window.location.href = '/moderator/moderatormusic';
         } catch (error) {
             console.error('Error saving music:', error);
         }
     };
 
-    const addMusicBackend = async (musicData) => {
+    const addMusicBackend = async (musicData, config) => {
         try {
+            // Include the status field with a value of true
+            musicData.status = true;
+            
             const response = await axios.post(
                 'http://localhost:8080/api/testing/music',
-                musicData
+                musicData,
+                config
             );
 
             if (response.status === 200) {
@@ -69,11 +107,12 @@ export default function AddMusic() {
         }
     };
 
-    const updateMusicBackend = async (musicData) => {
+    const updateMusicBackend = async (musicData, config) => {
         try {
             const response = await axios.put(
                 `http://localhost:8080/api/testing/music/${id}`,
-                musicData
+                musicData,
+                config
             );
 
             if (response.status === 200) {
@@ -102,7 +141,7 @@ export default function AddMusic() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
-           <div className="w-full max-w-md p-6 bg-white rounded-md shadow-lg">
+            <div className="w-full max-w-md p-6 bg-white rounded-md shadow-lg">
                 <form>
                     {getTitle()}
                     <div className="mb-4">
@@ -170,3 +209,5 @@ export default function AddMusic() {
         </div>
     );
 }
+
+export default AddMusic;

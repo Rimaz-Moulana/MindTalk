@@ -149,7 +149,7 @@ const Loginn = () => {
                 <p className="text-center mt-4">
                     Need an Account?<br />
                     <span className="line">
-                        <a href="#" className="text-blue-700 hover:underline">
+                        <a href="/register" className="text-blue-700 hover:underline">
                             Sign Up
                         </a>
                     </span>

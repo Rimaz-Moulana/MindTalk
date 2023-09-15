@@ -9,6 +9,7 @@ import AuthContext from '../../context/AuthProvider'
 import { useLocation } from 'react-router-dom'
 
 const ChatApp = () => {
+    let senderId
     const { auth } = useContext(AuthContext)
     const [accessToken, setAccessToken] = useState('')
 
@@ -21,48 +22,15 @@ const ChatApp = () => {
     const [activeChat, setActiveChat] = useState(null)
     const [showChatList, setShowChatList] = useState(true)
     //get selected chat's info
-    const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
+    //const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
     const [selectedChatName, setSelectedChatName] = useState('')
 
-    // useEffect(() => {
-    //     //get accessTocken from localstorage
-    //     const storedAuthData = localStorage.getItem('authData')
-    //     if (storedAuthData) {
-    //         const { accessToken } = JSON.parse(storedAuthData)
-    //         setAccessToken(accessToken)
-
-    //         console.log(storedAuthData)
-    //         //fetch datafrom backend
-    //         async function fetchData() {
-    //             try {
-    //                 const config = {
-    //                     headers: {
-    //                         Authorization: `Bearer ${accessToken}`,
-    //                         'Content-Type': 'application/json'
-    //                     }
-    //                 }
-    //                 const response = await axios.get(
-    //                     'http://localhost:8080/api/counsellor/details/getCounsellor',
-    //                     config
-    //                 )
-    //                 const newChats = response.data // Assign the response data to a new variable
-    //                 console.log(response)
-
-    //                 // Update the state directly with the new data
-    //                 setChats(newChats)
-    //             } catch (error) {
-    //                 console.error('Error fetching data:', error)
-    //             }
-    //         }
-    //         fetchData()
-    //     }
-    // }, [])
-    //useEffect(() => {
     const fetchCounsellors = async () => {
         try {
             const authData = localStorage.getItem('authData')
             if (authData) {
                 const { accessToken } = JSON.parse(authData)
+                //console.log(accessToken)
                 const config = {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -73,6 +41,7 @@ const ChatApp = () => {
 
                 const response = await axios.get('http://localhost:8080/api/counsellor/details/getCounsellor', config)
 
+                console.log(response)
                 const newChats = response.data.map((counsellor) => ({
                     id: counsellor.id,
                     name: `${counsellor.firstname} ${counsellor.lastname}`
@@ -82,10 +51,6 @@ const ChatApp = () => {
 
                 setChats(newChats)
                 setFilteredChats(newChats)
-                // const newChats = response.data
-                // console.log(newChats)
-
-                // setChats(newChats)
             }
         } catch (error) {
             console.error('Error fetching data:', error)
@@ -105,31 +70,31 @@ const ChatApp = () => {
     const handleSendMessage = async (message) => {
         const storedAuthData = localStorage.getItem('authData')
         if (storedAuthData) {
-            const { accessToken } = JSON.parse(storedAuthData)
+            const { accessToken, id } = JSON.parse(storedAuthData)
             setAccessToken(accessToken)
-        }
-        if (message.trim() !== '') {
-            const newMessage = {
-                content: message,
-                sender: 'user'
-            }
-            setMessages((prevMessages) => [...prevMessages, newMessage])
-            // setMessages([...message, newMessage])
+            if (message.trim() !== '') {
+                const newMessage = {
+                    content: message,
+                    senderId: parseInt(id)
+                }
+                //setMessages((prevMessages) => [...prevMessages, newMessage])
+                // setMessages([...message, newMessage])
 
-            // Send the message to the backend
-            try {
-                const response = await axios.post('http://localhost:8080/api/v1/messages', newMessage, {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    }
-                })
+                // Send the message to the backend
+                try {
+                    const response = await axios.post('http://localhost:8080/api/v1/messages/save', newMessage, {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`
+                        }
+                    })
 
-                console.log('Message sent successfully:', response.data)
+                    console.log('Message sent successfully:', response.data)
 
-                // Update messages state
-                setMessages((prevMessages) => [...prevMessages, newMessage])
-            } catch (error) {
-                console.error('Error sending message:', error)
+                    // Update messages state
+                    setMessages((prevMessages) => [...prevMessages, newMessage])
+                } catch (error) {
+                    console.error('Error sending message:', error)
+                }
             }
         }
     }
@@ -141,18 +106,21 @@ const ChatApp = () => {
             setShowChatList(false)
         }
 
-        const selectedChat = chats.find((chat) => chat.chatUserId === chatId)
-        setSelectedChatAvatar(selectedChat.avatar)
-        setSelectedChatName(selectedChat.name)
+        console.log(chats)
+        const selectedChat = chats.find((chat) => chat.id === chatId)
+        if (selectedChat) {
+            setSelectedChatName(selectedChat.name)
+        } else {
+            console.log('Chat with ID ${chatId} not found')
+        }
+        //setSelectedChatAvatar(selectedChat.avatar)
+        //setSelectedChatName(selectedChat.name)
     }
     const handleShowChatList = () => {
         setActiveChat(false)
         setShowChatList(true)
         setChatBoxOpen(false)
     }
-    // useEffect(() => {
-    //     setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    // }, [chats, searchTerm])
 
     return (
         <div className="flex h-full w-full">
@@ -208,7 +176,9 @@ const ChatApp = () => {
                         {messages.map((message, index) => (
                             <div
                                 key={index}
-                                className={`${message.sender === 'user' ? 'text-right' : 'text-left'} mb-2`}
+                                className={`${
+                                    message.senderId === parseInt(senderId) ? 'text-right' : 'text-left'
+                                } mb-2`}
                             >
                                 <div
                                     className={`bg-blue-600 text-white font-medium py-2 px-7 rounded-2xl inline-block`}
