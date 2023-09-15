@@ -56,36 +56,36 @@ const ModeratorMusic = () => {
   //   }
   // };
 
-  // const deleteMusic = async (id) => {
-  //   try{
-  //     const authData = localStorage.getItem('bauthData');
-  //     if(authData) {
-  //       const { accessToken } = JSON.parse(authData);
-  //       const config = {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           'Content-Type': 'application/json'
-  //         },
-  //         withCredentials: true
-  //       };
+  const deleteMusic = async (id) => {
+    try{
+      const authData = localStorage.getItem('bauthData');
+      if(authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        };
         //Send a request to update the status to "false"
-        // const response = await axios.delete(`http://localhost:8080/api/testing/music/${id}`, config);
+        const response = await axios.delete(`http://localhost:8080/api/testing/music/${id}`, config);
 
         //check if status update was successful
-//         if (response.status === 200){
-//           setMusic((prevMusic) => 
-//           prevMusic.map((item) =>
-//             item.id === id ? { ...item, status: false } : item 
-//           )
-//         );
-//       } else {
-//         console.error('Error deleting music');
-//       }
-//     }
-//   } catch (error) {
-//     console.error('Error updating music status:' , error);
-//   }
-// };
+        if (response.status === 200){
+          setMusic((prevMusic) => 
+          prevMusic.map((item) =>
+            item.id === id ? { ...item, status: false } : item 
+          )
+        );
+      } else {
+        console.error('Error deleting music');
+      }
+    }
+  } catch (error) {
+    console.error('Error updating music status:' , error);
+  }
+};
 
   // const markMusicAsInactive = async (id) => {
   //   try {
