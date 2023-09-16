@@ -7,6 +7,7 @@ package com.mindtalk.Backend.controller.entertainment;
 //import com.example.mage.service.BlogsService;
 import com.mindtalk.Backend.dto.ResponseDTO;
 import com.mindtalk.Backend.dto.entertainment.BlogsDTO;
+import com.mindtalk.Backend.entity.entertainment.BlogsEntity;
 import com.mindtalk.Backend.service.entertainment.BlogsService;
 import com.mindtalk.Backend.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +54,13 @@ public class BlogsController {
 
     @GetMapping(value = "/view")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity getAllBlogs(){
+    public ResponseEntity <List<BlogsEntity>> getAllBlogs(){
         try {
-            List<BlogsDTO> blogsDTOList = blogsService.getAllBlogs();
+            List<BlogsEntity> allBlogs = blogsService.getAllBlogs();
             responseDTO.setCode(VarList.RSP_SUCCESS);
             responseDTO.setMessage("Success");
-            responseDTO.setContent(blogsDTOList);
-            return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+            responseDTO.setContent(allBlogs);
+            return  ResponseEntity.ok(allBlogs);
 
         }catch (Exception ex){
             responseDTO.setCode(VarList.RSP_ERROR);
@@ -70,38 +71,38 @@ public class BlogsController {
         }
     }
 
-    @PutMapping(value = "/update")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity updateBlogs(@RequestBody BlogsDTO blogsDTO){
-        try {
-            String res=blogsService.updateBlogs(blogsDTO);
-            if (res.equals("00")){
-                responseDTO.setCode(VarList.RSP_SUCCESS);
-                responseDTO.setMessage("Success");
-                responseDTO.setContent(blogsDTO);
-                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
-
-            }else if(res.equals("01")) {
-                responseDTO.setCode(VarList.RSP_DUPLICATED);
-                responseDTO.setMessage("Not A Registered Employee");
-                responseDTO.setContent(blogsDTO);
-                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-            }else {
-                responseDTO.setCode(VarList.RSP_FAIL);
-                responseDTO.setMessage("Error");
-                responseDTO.setContent(null);
-                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-            }
-
-        }catch (Exception ex){
-            responseDTO.setCode(VarList.RSP_ERROR);
-            responseDTO.setMessage(ex.getMessage());
-            responseDTO.setContent(null);
-            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
-
-    }
+//    @PutMapping(value = "/update")
+//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+//    public ResponseEntity updateBlogs(@RequestBody BlogsDTO blogsDTO){
+//        try {
+//            String res=blogsService.updateBlogs(blogsDTO);
+//            if (res.equals("00")){
+//                responseDTO.setCode(VarList.RSP_SUCCESS);
+//                responseDTO.setMessage("Success");
+//                responseDTO.setContent(blogsDTO);
+//                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+//
+//            }else if(res.equals("01")) {
+//                responseDTO.setCode(VarList.RSP_DUPLICATED);
+//                responseDTO.setMessage("Not A Registered Employee");
+//                responseDTO.setContent(blogsDTO);
+//                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+//            }else {
+//                responseDTO.setCode(VarList.RSP_FAIL);
+//                responseDTO.setMessage("Error");
+//                responseDTO.setContent(null);
+//                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+//            }
+//
+//        }catch (Exception ex){
+//            responseDTO.setCode(VarList.RSP_ERROR);
+//            responseDTO.setMessage(ex.getMessage());
+//            responseDTO.setContent(null);
+//            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+//
+//        }
+//
+//    }
 
     @DeleteMapping("/delete/{Id}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")

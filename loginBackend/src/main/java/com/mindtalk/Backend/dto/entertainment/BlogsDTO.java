@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class BlogsDTO {
-    private Long id;
     private String title;
     private String category;
     private String article;

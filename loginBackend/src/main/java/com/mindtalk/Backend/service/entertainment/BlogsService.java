@@ -30,28 +30,49 @@ public class BlogsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public String saveBlogs(BlogsDTO blogsDTO){
-        if(blogsRepo.existsById(blogsDTO.getId())){
-            return VarList.RSP_DUPLICATED;
-        }else{
-            blogsRepo.save(modelMapper.map(blogsDTO, BlogsEntity.class));
-            return VarList.RSP_SUCCESS;
-        }
+//    public String saveBlogs(BlogsDTO blogsDTO){
+//        if(blogsRepo.existsById(blogsDTO.getId())){
+//            return VarList.RSP_DUPLICATED;
+//        }else{
+//            blogsRepo.save(modelMapper.map(blogsDTO, BlogsEntity.class));
+//            return VarList.RSP_SUCCESS;
+//        }
+//    }
+
+    public String saveBlogs(BlogsDTO blogsDTO) {
+        // Create a new BlogsEntity without considering the id
+        BlogsEntity blogsEntity = modelMapper.map(blogsDTO, BlogsEntity.class);
+
+        // Save the new entity
+        blogsRepo.save(blogsEntity);
+
+        return VarList.RSP_SUCCESS;
     }
 
-    public List<BlogsDTO> getAllBlogs(){
-        List<BlogsEntity> blogsList = blogsRepo.findAll();
-        return modelMapper.map(blogsList, new TypeToken<ArrayList<BlogsDTO>>(){}.getType());
+
+//    public List<BlogsDTO> getAllBlogs(){
+//        List<BlogsEntity> blogsList = blogsRepo.findAll();
+//        return modelMapper.map(blogsList, new TypeToken<ArrayList<BlogsDTO>>(){}.getType());
+//    }
+
+//    public List<BlogsDTO> getAllBlogs() {
+//        List<BlogsEntity> blogsList = blogsRepo.findAll();
+//        return modelMapper.map(blogsList, List.class);
+//    }
+
+    public List<BlogsEntity> getAllBlogs() {
+        return blogsRepo.findAll();
     }
 
-    public String updateBlogs(BlogsDTO blogsDTO){
-        if(blogsRepo.existsById((blogsDTO.getId()))){
-            blogsRepo.save(modelMapper.map(blogsDTO,BlogsEntity.class));
-            return VarList.RSP_SUCCESS;
-        }else{
-            return VarList.RSP_NO_DATA_FOUND;
-        }
-    }
+
+//    public String updateBlogs(BlogsDTO blogsDTO){
+//        if(blogsRepo.existsById((blogsDTO.getId()))){
+//            blogsRepo.save(modelMapper.map(blogsDTO,BlogsEntity.class));
+//            return VarList.RSP_SUCCESS;
+//        }else{
+//            return VarList.RSP_NO_DATA_FOUND;
+//        }
+//    }
 
     public String deleteBlogs(Long Id) {
         if (blogsRepo.existsById(Id)) {
