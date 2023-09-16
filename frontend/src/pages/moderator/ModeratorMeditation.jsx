@@ -56,6 +56,7 @@ const ModeratorMeditation = () => {
 
         const fetchedMeditation = response.data.map(meditation => ({
           id: meditation.id,
+          status: meditation.status,
           title: `${meditation.title}`,
           category: `${meditation.category}`,
           description: `${meditation.description}`,
@@ -87,10 +88,10 @@ const ModeratorMeditation = () => {
       {/* <div className="grid grid-cols-1 gap-4 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3"> */}
       <div className="grid grid-cols-1 gap-4 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {meditation
-          // .filter(item => {
-          //   console.log("Filtering item:", item);
-          //   return item.status;
-          // })
+          .filter(item => {
+            console.log("Filtering item:", item);
+            return item.status;
+          })
           .map((item, index) => (
             <div key={item.id} className="p-4 bg-gray-100 rounded-md shadow-md">
               <h3 className="mb-2 text-xl font-semibold">{item.title}</h3>
