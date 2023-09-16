@@ -1,6 +1,26 @@
-import React from 'react';
+import axios from 'axios';
+import React, { React, useEffect, useParams, useState } from 'react';
 
 export default function AddTherapySession() {
+  const [session, setSession] = useState({
+    date:"",
+    time:"",
+    counselor:"",
+    typeOfSession:"",
+    link:""
+
+  })
+
+  const {id} = useParams();
+
+  useEffect(()=>{
+    loadSession();
+  })
+
+  const loadSession=async ()=>{
+    const result = await axios.get(`http://localhost:8080//api/moderator/getSession`)
+    setSession(result.data);
+  }
 
   return (
     <>
@@ -78,10 +98,10 @@ export default function AddTherapySession() {
               </thead>
               <tbody>
                 <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap  px-6 py-4 font-medium"></td>
-                  <td className="whitespace-nowrap  px-6 py-4">Mark</td>
-                  <td className="whitespace-nowrap  px-6 py-4">Otto</td>
-                  <td className="whitespace-nowrap  px-6 py-4">@mdo</td>
+                  <td className="whitespace-nowrap  px-6 py-4 font-medium">{session.date}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{session.typeOfSession}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{session.time}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{session.link}</td>
                 </tr>
                 {/* <tr className="border-b dark:border-neutral-500">
                   <td className="whitespace-nowrap  px-6 py-4 font-medium">2</td>
