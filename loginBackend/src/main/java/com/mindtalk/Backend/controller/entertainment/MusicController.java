@@ -63,6 +63,20 @@ public class MusicController {
         }
     }
 
+    @PutMapping("/remove/{musicId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public  ResponseEntity<Music> removeMusic(
+            @PathVariable Integer musicId,
+            @RequestBody MusicDTO musicDTO) {
+        Music removedMusic = musicService.removeMusic(musicId, musicDTO);
+
+        if (removedMusic != null) {
+            return ResponseEntity.ok(removedMusic);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{musicId}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Void> deleteMusic(@PathVariable Integer musicId){

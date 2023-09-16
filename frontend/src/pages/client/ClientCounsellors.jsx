@@ -66,7 +66,7 @@ const Contacts = () => {
 
   return (
     <div className='rounded-xl'>
-      <section className='md:flex gap-5 sm:gap-y-5'>
+      <section className='gap-5 md:flex sm:gap-y-5'>
 
         {/* <form>
           <input 
@@ -103,7 +103,7 @@ const Contacts = () => {
 
       </section>
 
-      { <section className='pt-5 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+      { <section className='grid gap-6 pt-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {/* {contactList?.length < 1 && (
           <h1>No Data Matches Your Search</h1>
         )}
