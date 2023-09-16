@@ -1,19 +1,33 @@
 package com.mindtalk.Backend.controller.moderator;
 
 import com.mindtalk.Backend.dto.TherapySession.AddTherapySessionDTO;
+import com.mindtalk.Backend.entity.AddTherapySession;
+import com.mindtalk.Backend.repo.AddTherapySessionRepository;
 import com.mindtalk.Backend.service.AddTherapySessionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/moderator/add")
+@RequestMapping("/api/moderator")
 public class AddTherapySessionController {
 
+    @Autowired
     private AddTherapySessionService addTherapySessionService;
 
-    @PostMapping("/therapySession")
+    @Autowired
+    private AddTherapySessionRepository addTherapySessionRepository;
+    private final List<String> allowedOrigins;
 
-    @CrossOrigin(origins = "http://127.0.0.1:5173",allowCredentials = "true")
+    public AddTherapySessionController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
+    @PostMapping("/addtherapySession")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}",allowCredentials = "true")
     public ResponseEntity<String> addTherapySession(@RequestBody AddTherapySessionDTO addTherapySessionDTO){
         try {
             Long id = addTherapySessionDTO.getId();
@@ -28,5 +42,11 @@ public class AddTherapySessionController {
         }catch(Exception e){
             return ResponseEntity.status(500).body("An error occurred");
         }
+    }
+
+    @GetMapping("/getSession")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}",allowCredentials = "true")
+    List<AddTherapySession> getAllSession(){
+        return addTherapySessionRepository.findAll();
     }
 }
