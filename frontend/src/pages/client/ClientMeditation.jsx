@@ -43,36 +43,32 @@ const ClientMeditation = () => {
   }, []);
 
   return (
-    <div className='flex flex-row'>
-      <div className='w-full bg-white rounded-xl mb-5'>
-        <h1 className='text-2xl font-bold pt-5 pl-5'>Meditation / Breathing Exercises</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
+    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">Meditation / Breathing Exercises</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {meditation
-          .filter(item => {
-            console.log("Filtering item:", item);
-            return item.status;
-          })
-          .map((item, index) => (
-            <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
-              <div className="aspect-w-16 aspect-h-9 mb-4">
+            .filter(item => item.status)
+            .map((item, index) => (
+              <div key={item.id} className="bg-white overflow-hidden shadow-sm rounded-lg">
                 <iframe
                   title={item.title}
                   src={item.link}
                   allowFullScreen
                   controls
-                  className="w-full h-full rounded-md shadow-md"
+                  className="w-full h-48 md:h-56 rounded-t-lg"
                 ></iframe>
+                <div className="p-4">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2">{item.title}</h2>
+                  <p className="text-sm text-gray-600 mb-2">{item.category}</p>
+                  <p className="text-sm text-gray-600">{item.description}</p>
+                </div>
               </div>
-              <div className="text-lg font-semibold mb-2">{item.title}</div>
-              <p className="text-sm text-gray-500">{item.category}</p>
-              <p className="text-sm text-gray-500">{item.description}</p>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default ClientMeditation;
