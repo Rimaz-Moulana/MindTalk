@@ -44,6 +44,7 @@ public class MeditationService {
             existingMeditation.setCategory(meditationDTO.getCategory());
             existingMeditation.setDescription(meditationDTO.getDescription());
             existingMeditation.setLink(meditationDTO.getLink());
+            return meditationRepo.save(existingMeditation);
         }
         return null; //meditation not found
     }

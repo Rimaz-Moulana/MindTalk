@@ -92,7 +92,7 @@ const AddMeditation = () => {
             meditationData.status = true;
             
             const response = await axios.post(
-                'http://localhost:8080/api/testing/meditation',
+                `http://localhost:8080/api/testing/meditation`,
                 meditationData,
                 config
             );
