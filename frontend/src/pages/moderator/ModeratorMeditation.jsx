@@ -1,69 +1,127 @@
 import React, { useEffect, useState } from 'react';
 import MeditationService from '../../services/MeditationService';
 import { Link } from 'react-router-dom';
-import { FiEdit3, FiTrash2 } from 'react-icons/fi';
+import { FiEdit3, FiTrash2 } from "react-icons/fi"
+import axios from 'axios';
 
-function ModeratorMeditation() {
+const ModeratorMeditation = () => {
+  const [isLoading, setLoading] = useState(true);
   const [meditation, setMeditation] = useState([]);
 
-  const deleteMeditation = (id) => {
-    MeditationService.deleteMeditation(id).then((res) => {
-      setMeditation((prevMeditation) => prevMeditation.filter((item) => item.id !== id));
-    });
+  const deleteMeditation = async (id) => {
+    try{
+      const authData = localStorage.getItem('bauthData');
+      if(authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        };
+        //Send a request to update the status to "false"
+        const response = await axios.delete(`http://localhost:8080/api/testing/meditation/${id}`, config);
+
+        //check if status update was successful
+        if (response.status === 200){
+          setMeditation((prevMeditation) => 
+          prevMeditation.map((item) =>
+            item.id === id ? { ...item, status: false } : item 
+          )
+        );
+      } else {
+        console.error('Error deleting meditation');
+      }
+    }
+  } catch (error) {
+    console.error('Error updating meditation status:' , error);
+  }
+};
+
+  const fetchMeditationData = async () => {
+    try {
+      console.log("Fetching meditation data...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          withCredentials: true
+        };
+        const response = await axios.get(`http://localhost:8080/api/testing/meditation/all`, config);
+
+        const fetchedMeditation = response.data.map(meditation => ({
+          id: meditation.id,
+          title: `${meditation.title}`,
+          category: `${meditation.category}`,
+          description: `${meditation.description}`,
+          link: `${meditation.link}`
+        }));
+
+        setMeditation(fetchedMeditation);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error fetching meditation data:", error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    MeditationService.getMeditation().then((res) => {
-      setMeditation(res.data);
-    });
+    fetchMeditationData();
   }, []);
 
   return (
-    <div className="bg-white rounded-xl mb-5 p-5">
-      <div className="mb-4">
-        <Link
-          to="/moderator/add-meditation/-1"
-          className="bg-blue-700 rounded-md p-2 border text-white hover:bg-white hover:border-blue-700 hover:text-black"
-        >
+    <div className="flex flex-col w-full mb-5 bg-white rounded-xl">
+
+      <div className='m-5'>
+        <Link to="/moderator/add-meditation/-1" className="p-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black">
           Add Meditation
         </Link>
       </div>
 
-      <ul className="space-y-4">
-        {meditation.map((meditation) => (
-          <li key={meditation.id} className="flex border-b pb-4">
-            {meditation.link && (
-              <div className="aspect-w-16 aspect-h-9 flex-shrink-0">
+      {/* <div className="grid grid-cols-1 gap-4 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3"> */}
+      <div className="grid grid-cols-1 gap-4 px-5 pb-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {meditation
+          // .filter(item => {
+          //   console.log("Filtering item:", item);
+          //   return item.status;
+          // })
+          .map((item, index) => (
+            <div key={item.id} className="p-4 bg-gray-100 rounded-md shadow-md">
+              <h3 className="mb-2 text-xl font-semibold">{item.title}</h3>
+              <p className="mb-2 text-gray-600">{item.category}</p>
+              <p className="mb-4 text-gray-700">{item.description}</p>
+              <div className="mb-4 aspect-w-16 aspect-h-9">
                 <iframe
-                  title={meditation.title}
-                  src={meditation.link}
+                  title={item.title}
+                  src={item.link}
                   allowFullScreen
                   className="w-full h-full rounded-md shadow-md"
-                ></iframe>
+                >
+                </iframe>
               </div>
-            )}
-            <div className="ml-4">
-              <h3 className="text-xl font-semibold mb-2 text-blue-700">{meditation.title}</h3>
-              <p className="text-gray-600 mb-1">{meditation.category}</p>
-              <p className="text-gray-700 mb-2">{meditation.description}</p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-2">
                 <Link
-                  to={`/moderator/add-meditation/${meditation.id}`}
-                  className="bg-blue-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
+                  to={`/moderator/add-meditation/${item.id}`} 
+                  className="flex items-center justify-center p-2 font-thin text-white bg-blue-700 border rounded-md text-md hover:bg-white hover:border-blue-700 hover:text-black"
                 >
                   <FiEdit3 />
                 </Link>
                 <button
-                  onClick={() => deleteMeditation(meditation.id)}
-                  className="bg-red-700 p-2 text-white text-md rounded-md font-thin border hover:bg-white hover:border-red-700 hover:text-black"
+                  onClick={() => deleteMeditation(item.id)} 
+                  className='p-2 font-thin text-white bg-red-700 border rounded-md text-md hover:bg-white hover:border-red-700 hover:text-black'
                 >
                   <FiTrash2 />
                 </button>
               </div>
             </div>
-          </li>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -22,7 +22,6 @@ const ClientMeditation = () => {
 
         const fetchedMeditation = response.data.map(meditation => ({
           id: meditation.id,
-          // status: meditation.status,
           title: `${meditation.title}`,
           category: `${meditation.category}`,
           description: `${meditation.description}`,
@@ -32,8 +31,7 @@ const ClientMeditation = () => {
         setMeditation(fetchedMeditation);
         setLoading(false);
       }
-    } 
-    catch (error) {
+    } catch (error) {
       console.error("Error fetching meditation data:", error);
       setLoading(false);
     }
@@ -45,30 +43,25 @@ const ClientMeditation = () => {
 
   return (
     <div className='flex flex-row'>
-      <div className='flex flex-col gap-4 w-full bg-white rounded-xl mb-5'>
+      <div className='w-full bg-white rounded-xl mb-5'>
         <h1 className='text-2xl font-bold pt-5 pl-5'>Meditation / Breathing Exercises</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
-          {meditation
-          // .filter(item => {
-          //   console.log("Filtering meditation item:", item);
-          //   return item.status;
-          // })
-          .map((item, index) => (
+          {meditation.map((item, index) => (
             <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
-              <div className="aspect-w-16 aspect-h-9 mb-4"> {/* Updated aspect ratio here */}
+              <div className="aspect-w-16 aspect-h-9 mb-4">
                 <iframe
                   title={item.title}
                   src={item.link}
                   allowFullScreen
                   controls
                   className="w-full h-full rounded-md shadow-md"
-                >
-                </iframe>
+                ></iframe>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-              <p className="text-gray-600 mb-2">{item.category}</p>
-             </div> 
+              <div className="text-lg font-semibold mb-2">{item.title}</div>
+              <p className="text-sm text-gray-500">{item.category}</p>
+              <p className="text-sm text-gray-500">{item.description}</p>
+            </div>
           ))}
         </div>
       </div>
