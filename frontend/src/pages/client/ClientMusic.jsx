@@ -32,7 +32,8 @@ const ClientMusic = () => {
         setMusic(fetchedMusic);
         setLoading(false);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching music:", error);
       setLoading(false);
     }

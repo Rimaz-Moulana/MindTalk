@@ -22,12 +22,14 @@ public class MeditationController {
     private MeditationService meditationService;
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Meditation> createMeditation(@RequestBody MeditationDTO meditationDTO){
         Meditation createdMeditation = meditationService.createMeditation(meditationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMeditation);
     }
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<List<Meditation>> getAllMeditation(){
         List<Meditation> allMeditation = meditationService.getAllMeditation();
 
