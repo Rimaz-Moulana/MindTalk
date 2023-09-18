@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @RestController
 @RequestMapping("/api/blogs")
 public class BlogsController {
@@ -34,43 +36,55 @@ public class BlogsController {
         }
     }
 
-//    @GetMapping("/all")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> getAllBlogs(){
-//        BlogsEntity allBlogs = blogsService.getAllBlogs();
-//
-//        if(!allBlogs.isEmpty()){
-//            return ResponseEntity.ok(allBlogs);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<List<BlogsEntity>> getAllBlogs(){
+        List<BlogsEntity> allBlogs = blogsService.getAllBlogs();
 
-//    @PutMapping("/{blogsId}")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> updateBlogs(
-//            @PathVariable Integer blogsId,
-//            @RequestBody BlogsDTO blogsDTO){
-//        BlogsEntity updatedBlogs = blogsService.updateBlogs(blogsId, blogsDTO);
-//
-//        if(updatedBlogs != null){
-//            return ResponseEntity.ok(updatedBlogs);
-//        }else{
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+        if(!allBlogs.isEmpty()){
+            return ResponseEntity.ok(allBlogs);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
-//    @PutMapping("/remove/{blogsId}")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> removeBlogs(
-//            @PathVariable Integer blogsId,
-//            @RequestBody BlogsDTO blogsDTO){
-//        BlogsEntity removedBlogs = blogsService.removeBlogs(blogsId, blogsDTO);
-//
-//        if(removedBlogs != null){
-//            return ResponseEntity.ok(removedBlogs);
-//        }else{
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @PutMapping("/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> updateBlogs(
+            @PathVariable Integer blogsId,
+            @RequestBody BlogsDTO blogsDTO){
+        BlogsEntity updatedBlogs = blogsService.updateBlogs(blogsId, blogsDTO);
+
+        if(updatedBlogs != null){
+            return ResponseEntity.ok(updatedBlogs);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/remove/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> removeBlogs(
+            @PathVariable Integer blogsId,
+            @RequestBody BlogsDTO blogsDTO){
+        BlogsEntity removedBlogs = blogsService.removeBlogs(blogsId, blogsDTO);
+
+        if(removedBlogs != null){
+            return ResponseEntity.ok(removedBlogs);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> deleteBlogs(@PathVariable Integer blogsId){
+        boolean isDeleted = blogsService.deleteBlogs(blogsId);
+
+        if(isDeleted){
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

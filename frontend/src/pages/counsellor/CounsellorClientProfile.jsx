@@ -29,7 +29,14 @@ const CounsellorClientProfile = () => {
       fname: '',
       lname:'',
       email :'',
-      phone: ''
+      phone: '',
+      city: '',
+      emName1: '',
+      emName2: '',
+      emName3: '',
+      emPhone1: '',
+      emPhone2: '',
+      emPhone3: ''
   });
 
   useEffect(() => {
@@ -58,7 +65,15 @@ const CounsellorClientProfile = () => {
                   fname: clientData.fname,
                   lname: clientData.lname ,
                   email: clientData.email,
-                  phone: clientData.phone
+                  phone: clientData.phone,
+                  city: clientData.city,
+                  //emergency contacts
+                  emName1: clientData.emName1,
+                  emName2: clientData.emName2,
+                  emName3: clientData.emName3,
+                  emPhone1: clientData.emPhone1,
+                  emPhone2: clientData.emPhone2,
+                  emPhone3: clientData.emPhone3
               });
           }
       }
