@@ -54,4 +54,14 @@ public class BlogsService {
         }
         return null;
     }
+
+    public boolean deleteBlogs(Integer blogsId){
+        BlogsEntity existingBlogs = blogsRepo.findById(blogsId).orElse(null);
+
+        if(existingBlogs != null){
+            blogsRepo.delete(existingBlogs);
+            return true;
+        }
+        return false;
+    }
 }

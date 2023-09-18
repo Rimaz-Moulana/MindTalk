@@ -75,4 +75,16 @@ public class BlogsController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> deleteBlogs(@PathVariable Integer blogsId){
+        boolean isDeleted = blogsService.deleteBlogs(blogsId);
+
+        if(isDeleted){
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
