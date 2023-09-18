@@ -22,17 +22,17 @@ public class BlogsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBlogs);
     }
 
-//    @GetMapping("/{blogsId}")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> getBlogsById(@PathVariable Integer blogsId){
-//        BlogsEntity blogs = blogsService.getBlogsById(blogsId);
-//
-//        if(blogs != null){
-//            return ResponseEntity.ok(blogs);
-//        }else{
-//            return (ResponseEntity<BlogsEntity>) ResponseEntity.noContent();
-//        }
-//    }
+    @GetMapping("/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> getBlogsById(@PathVariable Integer blogsId){
+        BlogsEntity blogs = blogsService.getBlogsById(blogsId);
+
+        if(blogs != null){
+            return ResponseEntity.ok(blogs);
+        }else{
+            return (ResponseEntity<BlogsEntity>) ResponseEntity.noContent();
+        }
+    }
 
 //    @GetMapping("/all")
 //    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")

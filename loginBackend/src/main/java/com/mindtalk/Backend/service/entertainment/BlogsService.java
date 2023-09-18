@@ -23,4 +23,7 @@ public class BlogsService {
     }
 
 
+    public BlogsEntity getBlogsById(Integer blogsId) {
+        return blogsRepo.findById(blogsId).orElse(null);
+    }
 }
