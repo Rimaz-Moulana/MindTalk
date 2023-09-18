@@ -33,13 +33,20 @@ function AppointmentCalendar() {
         );
 
         if (response.status === 200) {
-          const appointments = response.data.map((appointment) => ({
+        const appointments = response.data.map((appointment) => {
+          const startTime = moment(appointment.date + 'T' + appointment.timeSlot).format('hh:mma');
+          const endTime = moment(appointment.date + 'T' + appointment.timeSlot)
+            .add(1, 'hour')
+            .format('hh:mma');
+          const title = `${startTime}-${endTime} Appointment `;
+          return {
             id: appointment.id,
-            title: 'Appointment',
+            title: title,
             start: new Date(appointment.date + 'T' + appointment.timeSlot),
             end: new Date(appointment.date + 'T' + appointment.timeSlot),
-          }));
-          setEvents(appointments);
+          };
+        });
+        setEvents(appointments);
         }
       }
     } catch (error) {
@@ -54,8 +61,6 @@ function AppointmentCalendar() {
     const selectedDate = slotInfo.start.toISOString();
     const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
 
-  
-  
     // Store the selected date and time in localStorage
     localStorage.setItem('appointmentDate', selectedDate);
     localStorage.setItem('appointmentTime', selectedTime);
