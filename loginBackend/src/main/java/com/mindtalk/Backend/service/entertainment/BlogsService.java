@@ -44,4 +44,14 @@ public class BlogsService {
         }
         return null; //Blogs not found
     }
+
+    public BlogsEntity removeBlogs(Integer blogsId, BlogsDTO blogsDTO){
+        BlogsEntity existingBlogs = blogsRepo.findById(blogsId).orElse(null);
+
+        if(existingBlogs != null) {
+            existingBlogs.setStatus(blogsDTO.getStatus());
+            return blogsRepo.save(existingBlogs);
+        }
+        return null;
+    }
 }

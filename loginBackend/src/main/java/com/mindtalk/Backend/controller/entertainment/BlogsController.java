@@ -62,17 +62,17 @@ public class BlogsController {
         }
     }
 
-//    @PutMapping("/remove/{blogsId}")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> removeBlogs(
-//            @PathVariable Integer blogsId,
-//            @RequestBody BlogsDTO blogsDTO){
-//        BlogsEntity removedBlogs = blogsService.removeBlogs(blogsId, blogsDTO);
-//
-//        if(removedBlogs != null){
-//            return ResponseEntity.ok(removedBlogs);
-//        }else{
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @PutMapping("/remove/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> removeBlogs(
+            @PathVariable Integer blogsId,
+            @RequestBody BlogsDTO blogsDTO){
+        BlogsEntity removedBlogs = blogsService.removeBlogs(blogsId, blogsDTO);
+
+        if(removedBlogs != null){
+            return ResponseEntity.ok(removedBlogs);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
