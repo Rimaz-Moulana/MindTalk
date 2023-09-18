@@ -10,6 +10,10 @@ function AppointmentCalendar() {
   const [events, setEvents] = useState([]);
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [counselorName, setCounselorName] = useState('');
+  const [appointmentDate, setAppointmentDate] = useState('');
+  const [appointmentTime, setAppointmentTime] = useState('');
+  const [appointmentFee, setAppointmentFee] = useState('');
 
   useEffect(() => {
     fetchAppointments();
@@ -28,16 +32,24 @@ function AppointmentCalendar() {
           withCredentials: true,
         };
         const response = await axios.get(
-          'http://localhost:8080/api/client/appointment/get-appointments', config
+          `http://localhost:8080/api/client/appointment/get-appointments/${id}`,
+          config
         );
 
         if (response.status === 200) {
-          const appointments = response.data.map((appointment) => ({
-            id: appointment.id,
-            title: 'Appointment',
-            start: new Date(appointment.date + 'T' + appointment.timeSlot),
-            end: new Date(appointment.date + 'T' + appointment.timeSlot),
-          }));
+          const appointments = response.data.map((appointment) => {
+            const startTime = moment(appointment.date + 'T' + appointment.timeSlot).format('hh:mma');
+            const endTime = moment(appointment.date + 'T' + appointment.timeSlot)
+              .add(1, 'hour')
+              .format('hh:mma');
+            const title = `${startTime}-${endTime} Appointment `;
+            return {
+              id: appointment.id,
+              title: title,
+              start: new Date(appointment.date + 'T' + appointment.timeSlot),
+              end: new Date(appointment.date + 'T' + appointment.timeSlot),
+            };
+          });
           setEvents(appointments);
         }
       }
@@ -48,18 +60,27 @@ function AppointmentCalendar() {
 
   const handleSlotSelect = (slotInfo) => {
     setSelectedSlot(slotInfo);
-  
+
     // Extract the selected date and time from the slotInfo
     const selectedDate = slotInfo.start.toISOString();
     const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
 
-     // Adjust the time by adding 1 hour
-  const adjustedTime = moment(slotInfo.start).add(1, 'hour').format('HH:mm');
-  
+    const counselorName = localStorage.getItem('appcounsellorName');
+
+    // Extract only the date portion (YYYY-MM-DD)
+    const dateOnly = selectedDate.substring(0, 10);
+
+    setCounselorName(counselorName);
+    setAppointmentDate(dateOnly);
+    setAppointmentTime(selectedTime);
+    setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
+
+    setIsModalOpen(true);
+
     // Store the selected date and time in localStorage
-    localStorage.setItem('appointmentDate', selectedDate);
-    localStorage.setItem('appointmentTime', adjustedTime);
-  
+    localStorage.setItem('appointmentDate', dateOnly);
+    localStorage.setItem('appointmentTime', selectedTime);
+
     setIsModalOpen(true);
   };
 
@@ -68,20 +89,20 @@ function AppointmentCalendar() {
     if (selectedSlot) { // Ensure selectedSlot is defined
       const formattedDate = selectedSlot.start.toISOString();
       localStorage.setItem('appointmentDate', formattedDate); // Store the selected date in local storage
-  
+
       const newAppointment = {
         id: events.length + 1,
         title: 'Appointment',
         start: selectedSlot.start,
         end: selectedSlot.end,
       };
-  
+
       try {
         await addApoinmentBackend(selectedSlot); // Call the function
         setEvents([...events, newAppointment]);
         setSelectedSlot(null);
         setIsModalOpen(false);
-  
+
         // Navigate to day view with selected date
         setViewDate(selectedSlot.start);
       } catch (error) {
@@ -121,7 +142,7 @@ function AppointmentCalendar() {
 
         const requestData = {
           userId: id,
-          counsellorId: appCounsellorId, 
+          counsellorId: appCounsellorId,
           date: appointmentDate, // Correct format
           timeSlot: appointmentTime, // Correct format
         };
@@ -161,7 +182,18 @@ function AppointmentCalendar() {
           <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
             <div className="bg-white p-4 rounded">
               <h2 className="text-lg font-bold mb-2">Schedule Appointment</h2>
-              <p>Do you really want to schedule an appointment?</p>
+              <p>Counselor Name: {counselorName}</p>
+              <p>Appointment Date: {appointmentDate} </p>
+              <p>
+                Appointment Time: {moment(appointmentTime, 'HH:mm').format('hh:mm A')} -{' '}
+                {moment(appointmentTime, 'HH:mm')
+                  .add(60, 'minutes')
+                  .format('hh:mm A')}
+              </p>
+              <p>Appointment Fee: {appointmentFee}</p>
+              <br />
+              <p>Do you want to schedule the appointment?</p>
+              <br />
               <div className="mt-2 flex justify-end">
                 <button
                   type="button"
@@ -175,7 +207,7 @@ function AppointmentCalendar() {
                   className="px-3 py-1 bg-blue-500 text-white rounded"
                   onClick={handleModalConfirm}
                 >
-                  Confirm
+                  Pay Appointment fee
                 </button>
               </div>
             </div>
