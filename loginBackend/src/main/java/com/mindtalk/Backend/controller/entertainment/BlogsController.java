@@ -34,17 +34,17 @@ public class BlogsController {
         }
     }
 
-//    @GetMapping("/all")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity<BlogsEntity> getAllBlogs(){
-//        BlogsEntity allBlogs = blogsService.getAllBlogs();
-//
-//        if(!allBlogs.isEmpty()){
-//            return ResponseEntity.ok(allBlogs);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
+    @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> getAllBlogs(){
+        BlogsEntity allBlogs = blogsService.getAllBlogs();
+
+        if(!allBlogs.isEmpty()){
+            return ResponseEntity.ok(allBlogs);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 //    @PutMapping("/{blogsId}")
 //    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
