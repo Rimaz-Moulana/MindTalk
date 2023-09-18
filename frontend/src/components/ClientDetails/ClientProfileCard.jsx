@@ -161,7 +161,7 @@ import avatarPNG from '../../assets/Chat/chatUser.png';
 // }
 
 function ClientProfileCard({ clientData }) {
-  const { fname, lname, email, phone } = clientData;
+  const { fname, lname, email, phone, city, emName1, emName2, emName3, emPhone1, emPhone2, emPhone3} = clientData;
 
   return (
     <div>
@@ -177,7 +177,7 @@ function ClientProfileCard({ clientData }) {
           </p>
           <p className='text-gray-700 mb-2'>{phone}</p>
           <p className='text-gray-700 mb-2'>{email}</p>
-          <p className='text-gray-700 mb-2'>Colombo</p>
+          <p className='text-gray-700 mb-2'>{city}</p>
           <div className='ml-auto'>
             <Link to={'doctors'}>
               <button className='bg-blue-700 mb-2 rounded-md p-2 border text-white hover:bg-white hover:border-blue-700 hover:text-black'>
@@ -215,10 +215,10 @@ function ClientProfileCard({ clientData }) {
                    <tbody> 
                     <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        Udara Nishani
+                        {emName1}
                        </td>
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                         0713456789
+                         {emPhone1}
                        </td>
                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
@@ -227,10 +227,10 @@ function ClientProfileCard({ clientData }) {
 
                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                         Leelaratne Perera
+                         {emName2}
                        </td>
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                         0713456123
+                         {emPhone2}
                        </td>
                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
@@ -239,10 +239,10 @@ function ClientProfileCard({ clientData }) {
                     
                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                         Pathum Lakshan
+                         {emName3}
                        </td>
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                         0784569782
+                         {emPhone3}
                        </td>
                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
