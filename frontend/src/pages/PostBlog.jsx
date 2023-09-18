@@ -1,49 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
+import { Link, useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 
 const PostBlog = () => {
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
-  const [article, setArticle] = useState('');
+  const { id } = useParams();
+  const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [blogs, setBlogs] = useState({
+    title: '',
+    content: '',
+    category: '',
+  });
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('category', category);
-    formData.append('article', article);
-
-    try {
-      const authData = localStorage.getItem('authData');
-      if (authData) {
-        const { accessToken } = JSON.parse(authData);
-        const config = {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'multipart/form-data', // Use 'multipart/form-data' for file upload
-          },
-          withCredentials: true,
-        };
-
-        const response = await axios.post('http://localhost:5173/save', formData, config);
-
-        if (response.status === 202) {
-          setTitle('');
-          setCategory('');
-          setArticle('');
-          alert('Blog post successful!');
-        } else {
-          alert('Blog post failed. Please try again.');
-        }
-      }
-    } catch (error) {
-      console.error('Error saving blog:', error);
-      alert('An error occurred. Please try again later.');
+  useEffect(() => {
+    if (id === '-1') {
+      return;
+    } else {
+      fetchBlogData();
     }
-  };
+  }, [id]);
+
+  // const fetchBlogData = async () => {
+  //   try {
+  //     const authData = localStorage.getItem('authData');
+  //     if (authData) {
+  //       const { accessToken } = JSON.parse(authData);
+  //       const config = {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //         withCredentials: true,
+  //       };
+
+  //       const response = await axios.get(`http://localhost:8080/api/blogs/${id}`),
+
+  //       if (response.status === 200) {
+  //         const blogData = response.data;
+  //         setBlogs({
+  //           title: blogData.title,
+  //           content: blogData.content,
+  //           category: blogData.category,
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching blog:', error);
+  //   }
+  // };
+
+  // const [title, setTitle] = useState('');
+  // const [category, setCategory] = useState('');
+  // const [article, setArticle] = useState('');
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append('title', title);
+  //   formData.append('category', category);
+  //   formData.append('article', article);
+
+  //   try {
+  //     const authData = localStorage.getItem('authData');
+  //     if (authData) {
+  //       const { accessToken } = JSON.parse(authData);
+  //       const config = {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           'Content-Type': 'multipart/form-data', 
+  //         },
+  //         withCredentials: true,
+  //       };
+
+  //       const response = await axios.post('http://localhost:8080/api/blogs', formData, config);
+
+  //       if (response.status === 202) {
+  //         setTitle('');
+  //         setCategory('');
+  //         setArticle('');
+  //         alert('Blog post successful!');
+  //       } else {
+  //         alert('Blog post failed. Please try again.');
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error saving blog:', error);
+  //     alert('An error occurred. Please try again later.');
+  //   }
+  // };
 
   return (
     <div className='p-3 bg-white rounded-2xl'>
@@ -82,27 +129,19 @@ const PostBlog = () => {
           </div>
 
           <div>
-            <label htmlFor="article" className="block ml-10 text-lg font-medium text-gray-700">
-              Blog Article
-            </label>
-            <ReactQuill className='h-40 p-2'
-              theme="snow"
-              value={article}
-              onChange={setArticle}
-              required
-              modules={{
-                toolbar: [
-                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-                  [{ color: [] }, { background: [] }],
-                  [{ align: [] }],
-                  [{ list: 'ordered' }, { list: 'bullet' }],
-                  ['link', 'image'],
-                  ['clean'],
-                ],
-              }}
-            />
-          </div>
+              <label htmlFor="article" className="block ml-10 text-lg font-medium text-gray-700">
+                Blog Article
+              </label>
+              <textarea
+                id="article"
+                name="article"
+                rows={15}
+                className="block w-full p-2 mt-1 border-gray-300 rounded-md shadow-lg focus:ring-blue-500 focus:border-blue-500"
+                value={article}
+                onChange={(e) => setArticle(e.target.value)}
+                required
+              ></textarea>
+            </div>
 
           <div className='flex justify-end'>
             <button

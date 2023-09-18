@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { React, useEffect, useParams, useState } from 'react';
+import React, { useEffect, useParams, useState } from 'react';
 
 export default function AddTherapySession() {
   const [session, setSession] = useState({
