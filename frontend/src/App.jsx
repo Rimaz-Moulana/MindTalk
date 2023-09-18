@@ -132,7 +132,8 @@ const App = () => (
                             {/* <Route path="l" element={<CounsellorHome />} /> */}
                             <Route path="counsellorprofile" element={<CounsellorProfile />} />
                             <Route path="counsellorclients" element={<CounsellorClients />} />
-                            <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} />
+                            {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
+                            <Route path="view-client/:id" element={<CounsellorClientProfile />} />
                             <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
                             <Route path="blogs" element={<Blogs />} />

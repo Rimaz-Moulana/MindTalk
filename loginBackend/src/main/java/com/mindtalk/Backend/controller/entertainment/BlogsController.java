@@ -1,130 +1,76 @@
 package com.mindtalk.Backend.controller.entertainment;
 
-//import com.example.mage.dto.BlogsDTO;
-//import com.example.mage.dto.MageDTO;
-//import com.example.mage.dto.ResponseDTO;
-//import com.example.mage.entity.BlogsEntity;
-//import com.example.mage.service.BlogsService;
-import com.mindtalk.Backend.dto.ResponseDTO;
 import com.mindtalk.Backend.dto.entertainment.BlogsDTO;
 import com.mindtalk.Backend.entity.entertainment.BlogsEntity;
 import com.mindtalk.Backend.service.entertainment.BlogsService;
-import com.mindtalk.Backend.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-//@CrossOrigin
 @RestController
-@RequestMapping(value = "api/blogs")
+@RequestMapping("/api/blogs")
 public class BlogsController {
 
     @Autowired
     private BlogsService blogsService;
 
-    @Autowired
-    private ResponseDTO responseDTO;
-
-    @PostMapping(value = "/save")
+    @PostMapping
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity saveBlogs(@RequestBody BlogsDTO blogsDTO){
-        try{
-            String res = blogsService.saveBlogs(blogsDTO);
-            if(res.equals("00")){
-                responseDTO.setCode(VarList.RSP_SUCCESS);
-                responseDTO.setMessage("Success");
-                responseDTO.setContent(blogsDTO);
-                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
-            }else{
-                responseDTO.setCode(VarList.RSP_FAIL);
-                responseDTO.setMessage("Fail");
-                responseDTO.setContent(null);
-                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception ex){
-            responseDTO.setCode(VarList.RSP_ERROR);
-            responseDTO.setMessage(ex.getMessage());
-            responseDTO.setContent(null);
-            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<BlogsEntity> createBlogs(@RequestBody BlogsDTO blogsDTO){
+        BlogsEntity createdBlogs = blogsService.createBlogs(blogsDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBlogs);
+    }
+
+    @GetMapping("/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> getBlogsById(@PathVariable Integer blogsId){
+        BlogsEntity blogs = blogsService.getBlogsById(blogsId);
+
+        if(blogs != null){
+            return ResponseEntity.ok(blogs);
+        }else{
+            return (ResponseEntity<BlogsEntity>) ResponseEntity.noContent();
         }
     }
 
-    @GetMapping(value = "/view")
+    @GetMapping("/all")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity <List<BlogsEntity>> getAllBlogs(){
-        try {
-            List<BlogsEntity> allBlogs = blogsService.getAllBlogs();
-            responseDTO.setCode(VarList.RSP_SUCCESS);
-            responseDTO.setMessage("Success");
-            responseDTO.setContent(allBlogs);
-            return  ResponseEntity.ok(allBlogs);
+    public ResponseEntity<BlogsEntity> getAllBlogs(){
+        BlogsEntity allBlogs = blogsService.getAllBlogs();
 
-        }catch (Exception ex){
-            responseDTO.setCode(VarList.RSP_ERROR);
-            responseDTO.setMessage(ex.getMessage());
-            responseDTO.setContent(null);
-            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-
+        if(!allBlogs.isEmpty()){
+            return ResponseEntity.ok(allBlogs);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-//    @PutMapping(value = "/update")
+//    @PutMapping("/{blogsId}")
 //    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-//    public ResponseEntity updateBlogs(@RequestBody BlogsDTO blogsDTO){
-//        try {
-//            String res=blogsService.updateBlogs(blogsDTO);
-//            if (res.equals("00")){
-//                responseDTO.setCode(VarList.RSP_SUCCESS);
-//                responseDTO.setMessage("Success");
-//                responseDTO.setContent(blogsDTO);
-//                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
+//    public ResponseEntity<BlogsEntity> updateBlogs(
+//            @PathVariable Integer blogsId,
+//            @RequestBody BlogsDTO blogsDTO){
+//        BlogsEntity updatedBlogs = blogsService.updateBlogs(blogsId, blogsDTO);
 //
-//            }else if(res.equals("01")) {
-//                responseDTO.setCode(VarList.RSP_DUPLICATED);
-//                responseDTO.setMessage("Not A Registered Employee");
-//                responseDTO.setContent(blogsDTO);
-//                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-//            }else {
-//                responseDTO.setCode(VarList.RSP_FAIL);
-//                responseDTO.setMessage("Error");
-//                responseDTO.setContent(null);
-//                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-//            }
-//
-//        }catch (Exception ex){
-//            responseDTO.setCode(VarList.RSP_ERROR);
-//            responseDTO.setMessage(ex.getMessage());
-//            responseDTO.setContent(null);
-//            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-//
+//        if(updatedBlogs != null){
+//            return ResponseEntity.ok(updatedBlogs);
+//        }else{
+//            return ResponseEntity.notFound().build();
 //        }
-//
 //    }
 
-    @DeleteMapping("/delete/{Id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity deleteBlogs(@PathVariable Long Id){
-        try {
-            String res = blogsService.deleteBlogs(Id);
-            if (res !=null) {
-                responseDTO.setCode(VarList.RSP_SUCCESS);
-                responseDTO.setMessage("Success");
-                responseDTO.setContent(null);
-                return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
-            } else {
-                responseDTO.setCode(VarList.RSP_NO_DATA_FOUND);
-                responseDTO.setMessage("No Blogs to Delete!");
-                responseDTO.setContent(null);
-                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-            responseDTO.setCode(VarList.RSP_ERROR);
-            responseDTO.setMessage(e.getMessage());
-            responseDTO.setContent(e);
-            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PutMapping("/remove/{blogsId}")
+//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+//    public ResponseEntity<BlogsEntity> removeBlogs(
+//            @PathVariable Integer blogsId,
+//            @RequestBody BlogsDTO blogsDTO){
+//        BlogsEntity removedBlogs = blogsService.removeBlogs(blogsId, blogsDTO);
+//
+//        if(removedBlogs != null){
+//            return ResponseEntity.ok(removedBlogs);
+//        }else{
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }

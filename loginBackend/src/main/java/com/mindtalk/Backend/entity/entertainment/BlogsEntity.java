@@ -4,21 +4,20 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.w3c.dom.Text;
 
-
-
-@Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="blogs")
+@Data
+@Entity
+@Table(name = "blogs")
 public class BlogsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String title;
     private String category;
-    private String article;
-    @Column(name = "image_url")
-    private String coverImg;
+    private String content;
+    @Column(columnDefinition = "INT DEFAULT 0")
+    private int status;
 }
