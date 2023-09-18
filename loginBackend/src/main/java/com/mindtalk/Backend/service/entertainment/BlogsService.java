@@ -17,7 +17,7 @@ public class BlogsService {
 
     public BlogsEntity createBlogs(BlogsDTO blogsDTO){
         BlogsEntity blogsEntity = new BlogsEntity();
-        blogsEntity.setTitle(blogsDTO.getCategory());
+        blogsEntity.setTitle(blogsDTO.getTitle());
         blogsEntity.setCategory(blogsDTO.getCategory());
         blogsEntity.setContent(blogsDTO.getContent());
 
