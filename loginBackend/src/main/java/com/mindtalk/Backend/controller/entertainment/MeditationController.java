@@ -22,12 +22,14 @@ public class MeditationController {
     private MeditationService meditationService;
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Meditation> createMeditation(@RequestBody MeditationDTO meditationDTO){
         Meditation createdMeditation = meditationService.createMeditation(meditationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMeditation);
     }
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<List<Meditation>> getAllMeditation(){
         List<Meditation> allMeditation = meditationService.getAllMeditation();
 
@@ -39,6 +41,7 @@ public class MeditationController {
     }
 
     @GetMapping("/{meditationId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Meditation> getMeditationById(@PathVariable Integer meditationId){
         Meditation meditation = meditationService.getMeditationById(meditationId);
 
@@ -50,6 +53,7 @@ public class MeditationController {
     }
 
     @PutMapping("/{meditationId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Meditation> updateMeditation(
             @PathVariable Integer meditationId,
             @RequestBody MeditationDTO meditationDTO){
@@ -63,6 +67,7 @@ public class MeditationController {
     }
 
     @DeleteMapping("/{meditationId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Void> deleteMeditation(@PathVariable Integer meditationId){
         boolean isDeleted = meditationService.deleteMeditation(meditationId);
 

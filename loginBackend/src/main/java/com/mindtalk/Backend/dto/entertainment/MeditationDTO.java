@@ -8,8 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MeditationDTO {
+    private boolean status;
     private String title;
     private String category;
     private String description;
     private String link;
+
+    public boolean getStatus() {
+        return status=true;
+    }
 }

@@ -19,6 +19,7 @@ public class MeditationService {
 
     public Meditation createMeditation(MeditationDTO meditationDTO){
         Meditation meditation = new Meditation();
+        meditation.setStatus(meditationDTO.getStatus());
         meditation.setTitle(meditationDTO.getTitle());
         meditation.setCategory(meditationDTO.getCategory());
         meditation.setDescription(meditationDTO.getDescription());
@@ -43,6 +44,7 @@ public class MeditationService {
             existingMeditation.setCategory(meditationDTO.getCategory());
             existingMeditation.setDescription(meditationDTO.getDescription());
             existingMeditation.setLink(meditationDTO.getLink());
+            return meditationRepo.save(existingMeditation);
         }
         return null; //meditation not found
     }

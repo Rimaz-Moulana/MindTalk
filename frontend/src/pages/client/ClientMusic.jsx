@@ -18,7 +18,10 @@ const ClientMusic = () => {
           },
           withCredentials: true
         };
-        const response = await axios.get(`http://localhost:8080/api/testing/music/all`, config);
+        const response = await axios.get(
+          `http://localhost:8080/api/testing/music/all`, 
+          config
+        );
 
         const fetchedMusic = response.data.map(music => ({
           id: music.id,
@@ -32,7 +35,8 @@ const ClientMusic = () => {
         setMusic(fetchedMusic);
         setLoading(false);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching music:", error);
       setLoading(false);
     }
