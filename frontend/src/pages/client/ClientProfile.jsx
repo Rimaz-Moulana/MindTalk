@@ -1,8 +1,130 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../assets/logo.png';
 import { FiClipboard } from 'react-icons/fi';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-export default function Dashboard() {
+const Profile = () => {
+  const { id } = useParams();
+
+  const [user, setUser] = useState({
+    fname: '',
+    lname:'',
+    email :'',
+    phone: '',
+    city: '',
+    emName1: '',
+    emName2: '',
+    emName3: '',
+    emPhone1: '',
+    emPhone2: '',
+    emPhone3: ''
+  });
+
+  useEffect(() => {
+    fetchProfileData();
+  }, [id]);
+
+  const fetchProfileData = async () => {
+    try{
+      console.log(id);
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        };
+
+        const response = await axios.get(`http://localhost:8080/api/v1/client/${id}`, config);
+
+        if (response.status === 200) {
+            const userData = response.data;
+            setUser({
+              fname: userData.fname,
+              lname: userData.lname ,
+              email: userData.email,
+              phone: userData.phone,
+              city: userData.city,
+              //emergency contacts
+              emName1: userData.emName1,
+              emName2: userData.emName2,
+              emName3: userData.emName3,
+              emPhone1: userData.emPhone1,
+              emPhone2: userData.emPhone2,
+              emPhone3: userData.emPhone3
+            });
+        }
+      }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+    }
+  };
+
+  const saveUser = async (e) =>{
+    e.preventDefault();
+    const updatedUser = {
+      fname: user.fname,
+      lname: user.lname ,
+      email: user.email,
+      phone: user.phone,
+      city: user.city,
+      //emergency contacts
+      emName1: user.emName1,
+      emName2: user.emName2,
+      emName3: user.emName3,
+      emPhone1: user.emPhone1,
+      emPhone2: user.emPhone2,
+      emPhone3: user.emPhone3
+    };
+    console.log(updatedUser);
+
+    try {
+      const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+          await updateUserBackend(updatedUser, config);
+      }
+    } catch (error) {
+      console.error('Error saving user:', error);
+    }
+  };
+
+  const updateUserBackend = async (userData, config) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/client/${id}`,
+        userData,
+        config
+      );
+
+      if (response.status === 200) {
+        console.log('User updated successfully');
+      } else {
+          console.error('Error updating user');
+      }
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+        ...prevUser,
+        [name]: value
+    }));
+  };
 
   const pdfData = [
     {
@@ -384,3 +506,5 @@ export default function Dashboard() {
     </div>
   );
 }
+
+export default Profile;
