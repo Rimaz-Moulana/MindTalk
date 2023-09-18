@@ -9,15 +9,20 @@ const Profile = () => {
 
   const [user, setUser] = useState({
     fname: '',
-    lname:'',
-    email :'',
+    lname: '',
+    dob: '',
+    gender: '',
+    email: '',
     phone: '',
+    address: '',
     city: '',
-    emName1: '',
-    emName2: '',
-    emName3: '',
+    district: '', 
+    zip: '',
+    emName1: '', 
     emPhone1: '',
+    emName2: '',
     emPhone2: '',
+    emName3: '',
     emPhone3: ''
   });
 
@@ -46,9 +51,14 @@ const Profile = () => {
             setUser({
               fname: userData.fname,
               lname: userData.lname ,
+              dob: userData.dob,
+              gender: userData.gender,
               email: userData.email,
               phone: userData.phone,
+              address: userData.address,
               city: userData.city,
+              district: userData.district,
+              zip: userData.zip,
               //emergency contacts
               emName1: userData.emName1,
               emName2: userData.emName2,
@@ -69,10 +79,14 @@ const Profile = () => {
     const updatedUser = {
       fname: user.fname,
       lname: user.lname ,
+      dob: user.dob,
+      gender: user.gender,
       email: user.email,
       phone: user.phone,
+      address: user.address,
       city: user.city,
-      //emergency contacts
+      district: user.district,
+      zip: user.zip,
       emName1: user.emName1,
       emName2: user.emName2,
       emName3: user.emName3,
@@ -159,46 +173,51 @@ const Profile = () => {
                 <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="fname" className="block text-sm font-medium leading-6 text-gray-900">
                       First name
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="first-name"
-                        id="first-name"
+                        name="fname"
+                        id="fname"
                         autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.fname}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="lname" className="block text-sm font-medium leading-6 text-gray-900">
                       Last name
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="last-name"
-                        id="last-name"
+                        name="lname"
+                        id="lname"
                         autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.lname}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="birthday" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="dob" className="block text-sm font-medium leading-6 text-gray-900">
                       Birthday
                     </label>
                     <div className="mt-2">
                       <input
                         type="date"
-                        name="birthday"
-                        id="birthday"
+                        name="dob"
+                        id="dob"
                         autoComplete='birthday'
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.dob}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -212,6 +231,8 @@ const Profile = () => {
                         id="gender"
                         name="gender"
                         autoComplete="gender"
+                        value={user.gender}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       >
                         <option disabled selected></option>
@@ -232,7 +253,8 @@ const Profile = () => {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.email}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -247,7 +269,9 @@ const Profile = () => {
                         name="phone"
                         type="text"
                         autoComplete="phone"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value = {user.phone}
+                        onClick={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -262,7 +286,9 @@ const Profile = () => {
                         name="address"
                         id="address"
                         autoComplete="address"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.address}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -277,7 +303,9 @@ const Profile = () => {
                         name="city"
                         id="city"
                         autoComplete="address-level2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.city}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -287,27 +315,64 @@ const Profile = () => {
                       District
                     </label>
                     <div className="mt-2">
-                      <input
+                      {/* <input
                         type="text"
                         name="district"
                         id="district"
                         autoComplete="address-level1"
+                        value={user.district}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
+                      /> */}
+                      <select
+                        name="district"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.district}
+                        onChange={handleInputChange}
+                      >
+                        <option value="district" disabled selected>Select District</option>
+                        <option value="Colombo">Colombo</option>
+                        <option value="Gampaha">Gampaha</option>
+                        <option value="Kalutara">Kalutara</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Matale">Matale</option>
+                        <option value="Nuwara Eliya">Nuwara Eliya</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Hambantota">Hambantota</option>
+                        <option value="Jaffna">Jaffna</option>
+                        <option value="Kilinochchi">Kilinochchi</option>
+                        <option value="Mannar">Mannar</option>
+                        <option value="Vavuniya">Vavuniya</option>
+                        <option value="Mullaitivu">Mullaitivu</option>
+                        <option value="Batticaloa">Batticaloa</option>
+                        <option value="Ampara">Ampara</option>
+                        <option value="Trincomalee">Trincomalee</option>
+                        <option value="Kurunegala">Kurunegala</option>
+                        <option value="Puttalam">Puttalam</option>
+                        <option value="Anuradhapura">Anuradhapura</option>
+                        <option value="Polonnaruwa">Polonnaruwa</option>
+                        <option value="Badulla">Badulla</option>
+                        <option value="Moneragala">Moneragala</option>
+                        <option value="Ratnapura">Ratnapura</option>
+                        <option value="Kegalle">Kegalle</option>
+                      </select>
                     </div>
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="zip" className="block text-sm font-medium leading-6 text-gray-900">
                       ZIP
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="postal-code"
-                        id="postal-code"
+                        name="zip"
+                        id="zip"
                         autoComplete="postal-code"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.zip}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -321,29 +386,33 @@ const Profile = () => {
                 <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="name1" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emName1" className="block text-sm font-medium leading-6 text-gray-900">
                       Name
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="name1"
-                        id="name1"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emName1"
+                        id="emName1"
+                        value={user.emName1}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="phone1" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emPhone1" className="block text-sm font-medium leading-6 text-gray-900">
                       Phone
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="phone1"
-                        id="phone1"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emPhone1"
+                        id="emPhone1"
+                        value={user.emPhone1}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -358,29 +427,33 @@ const Profile = () => {
                 <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="name2" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emName2" className="block text-sm font-medium leading-6 text-gray-900">
                       Name
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="name2"
-                        id="name2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emName2"
+                        id="emName2"
+                        value = { user.emName2 }
+                        onChange= { handleInputChange }
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="phone2" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emPhone2" className="block text-sm font-medium leading-6 text-gray-900">
                       Phone
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="phone2"
-                        id="phone2"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emPhone2"
+                        id="emPhone2"
+                        value ={ user.emPhone2 }
+                        onChange= { handleInputChange }
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -395,29 +468,33 @@ const Profile = () => {
                 <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="name3" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emName3" className="block text-sm font-medium leading-6 text-gray-900">
                       Name
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="name3"
-                        id="name3"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emName3"
+                        id="emName3"
+                        value={user.emName3}
+                        onChange= {handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="phone3" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="emPhone3" className="block text-sm font-medium leading-6 text-gray-900">
                       Phone
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="phone3"
-                        id="phone3"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="emPhone3"
+                        id="emPhone3"
+                        value ={ user.emPhone3 }
+                        onChange= { handleInputChange }
+                        className="block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -435,6 +512,7 @@ const Profile = () => {
               </button>
               <button
                 type="submit"
+                onClick={saveUser}
                 className="rounded-lg bg-blue-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save
