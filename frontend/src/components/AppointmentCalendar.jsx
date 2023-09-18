@@ -73,7 +73,7 @@ function AppointmentCalendar() {
     setCounselorName(counselorName);
     setAppointmentDate(dateOnly);
     setAppointmentTime(selectedTime);
-    setAppointmentFee('XXXXXX'); // Replace with the actual appointment fee
+    setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
 
     setIsModalOpen(true);
 
@@ -207,7 +207,7 @@ function AppointmentCalendar() {
                   className="px-3 py-1 bg-blue-500 text-white rounded"
                   onClick={handleModalConfirm}
                 >
-                  Confirm
+                  Pay Appointment fee
                 </button>
               </div>
             </div>
