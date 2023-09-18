@@ -18,10 +18,14 @@ const ClientMusic = () => {
           },
           withCredentials: true
         };
-        const response = await axios.get(`http://localhost:8080/api/testing/music/all`, config);
+        const response = await axios.get(
+          `http://localhost:8080/api/testing/music/all`, 
+          config
+        );
 
         const fetchedMusic = response.data.map(music => ({
           id: music.id,
+          status: music.status,
           title: `${music.title}`,
           category: `${music.category}`,
           description: `${music.description}`,
@@ -31,7 +35,8 @@ const ClientMusic = () => {
         setMusic(fetchedMusic);
         setLoading(false);
       }
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching music:", error);
       setLoading(false);
     }
@@ -80,7 +85,12 @@ const ClientMusic = () => {
         </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
-          {music.map((item, index) => (
+          {music
+          .filter(item => {
+            console.log("Filtering item:" , item);
+            return item.status;
+          })
+          .map((item, index) => (
             <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
               <div className="aspect-w-16 aspect-h-9 mb-4"> {/* Updated aspect ratio here */}
                 <iframe
