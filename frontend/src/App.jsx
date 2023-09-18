@@ -91,7 +91,7 @@ const App = () => (
                             {/* Wrap the layout */}
                             <Route index element={<ClientDashboard />} />
                             <Route path="message" element={<ChatApp />} />
-                            <Route path="clientprofile" element={<ClientProfile />} />
+                            <Route path="clientprofile/:id" element={<ClientProfile />} />
                             <Route path="clientcounsellors" element={<ClientCounsellors />} />
                             <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
                             <Route path="clientmusic" element={<ClientMusic />} />
