@@ -48,31 +48,47 @@ function AppointmentCalendar() {
 
   const handleSlotSelect = (slotInfo) => {
     setSelectedSlot(slotInfo);
+  
+    // Extract the selected date and time from the slotInfo
+    const selectedDate = slotInfo.start.toISOString();
+    const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
+
+     // Adjust the time by adding 1 hour
+  const adjustedTime = moment(slotInfo.start).add(1, 'hour').format('HH:mm');
+  
+    // Store the selected date and time in localStorage
+    localStorage.setItem('appointmentDate', selectedDate);
+    localStorage.setItem('appointmentTime', adjustedTime);
+  
     setIsModalOpen(true);
   };
 
+
   const handleModalConfirm = async () => {
-    const newAppointment = {
-      id: events.length + 1,
-      title: 'Appointment',
-      start: selectedSlot.start,
-      end: selectedSlot.end,
-    };
-
-    try {
-      await addApoinmentBackend(selectedSlot); // Call the function
-      setEvents([...events, newAppointment]);
-      setSelectedSlot(null);
-      setIsModalOpen(false);
-
-      // Store the selected date and time in local storage
+    if (selectedSlot) { // Ensure selectedSlot is defined
       const formattedDate = selectedSlot.start.toISOString();
-      localStorage.setItem('appointmentDate', formattedDate);
-
-      // Navigate to day view with selected date
-      setViewDate(selectedSlot.start);
-    } catch (error) {
-      console.error('Error creating appointment:', error);
+      localStorage.setItem('appointmentDate', formattedDate); // Store the selected date in local storage
+  
+      const newAppointment = {
+        id: events.length + 1,
+        title: 'Appointment',
+        start: selectedSlot.start,
+        end: selectedSlot.end,
+      };
+  
+      try {
+        await addApoinmentBackend(selectedSlot); // Call the function
+        setEvents([...events, newAppointment]);
+        setSelectedSlot(null);
+        setIsModalOpen(false);
+  
+        // Navigate to day view with selected date
+        setViewDate(selectedSlot.start);
+      } catch (error) {
+        console.error('Error creating appointment:', error);
+      }
+    } else {
+      console.error('selectedSlot is not defined'); // Handle the case where selectedSlot is not defined
     }
   };
 
@@ -93,6 +109,8 @@ function AppointmentCalendar() {
       if (authData) {
         const { accessToken, id } = JSON.parse(authData);
         const appCounsellorId = localStorage.getItem('appcounsellorId');
+        const appointmentDate = localStorage.getItem('appointmentDate');
+        const appointmentTime = localStorage.getItem('appointmentTime');
         const config = {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -103,9 +121,9 @@ function AppointmentCalendar() {
 
         const requestData = {
           userId: id,
-          counsellorId: appCounsellorId, // Replace with actual counsellor ID
-          date: '2023-08-20', // Correct format
-          timeSlot: '08:30', // Correct format
+          counsellorId: appCounsellorId, 
+          date: appointmentDate, // Correct format
+          timeSlot: appointmentTime, // Correct format
         };
 
         const response = await axios.post(
@@ -137,6 +155,7 @@ function AppointmentCalendar() {
           startAccessor="start"
           endAccessor="end"
           selectable
+          step={60}
         />
         {isModalOpen && (
           <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">

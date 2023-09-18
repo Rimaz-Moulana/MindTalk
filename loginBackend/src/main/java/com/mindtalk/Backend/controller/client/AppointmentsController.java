@@ -3,6 +3,7 @@ package com.mindtalk.Backend.controller.client;
 import com.mindtalk.Backend.dto.AppointmentDTO;
 import com.mindtalk.Backend.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,15 @@ public class AppointmentsController {
     @Autowired
     private AppointmentService appointmentService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public AppointmentsController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @PostMapping("/create-appointment")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO appointmentDTO) {
         try {
             // Extract the fields from appointmentDTO
@@ -36,7 +44,7 @@ public class AppointmentsController {
     }
 
     @GetMapping("/get-appointments")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public List<AppointmentDTO> getAppointments() {
         return appointmentService.getAllAppointments();
     }

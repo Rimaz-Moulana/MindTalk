@@ -26,13 +26,15 @@ const Blogs = () => { // Define a functional component named Blogs
             withCredentials: true // Include credentials in the request
           };
 
-          const response = await axios.get(`http://localhost:8080/api/blogs/view`, config); // Make a GET request to the API endpoint
+          const response = await axios.get(`http://localhost:8080/api/blogs/all`, config); // Make a GET request to the API endpoint
 
           if (Array.isArray(response.data)) { // Check if the response data is an array
             const fetchedBlog = response.data.map(blog => ({ // Map the response data to a new format
               id: blog.id,
+              status:blog.status,
               title: `${blog.title}`,
-              article: `${blog.article}`
+              category:`${blog.category}`,
+              content: `${blog.content}`
             }));
             setBlogData(fetchedBlog); // Update the blogData state with the fetched data
           } else { // Handle the case where the response data is not an array
@@ -77,12 +79,16 @@ const Blogs = () => { // Define a functional component named Blogs
       </div>
 
       <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        {blogData.map((blog, index) => ( // Map over the blogData array and render blog items
+        {blogData
+          .filter(blog => blog.status === 1)
+          .map((blog, index) => ( // Map over the blogData array and render blog items
           <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md '>
             <img className='object-cover w-full h-52' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt={blog.title} />
             <div className='p-4'>
+              <h6 className='text-gray-700 font-semibold'>{blog.category}</h6>
               <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
-              <p className='mt-2 text-gray-600 line-clamp-3'>{blog.article}</p>
+              <p className='mt-2 text-gray-600 line-clamp-3'>{blog.content}</p>
+
               <Link to={`/counsellor/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
                 <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
                   <span className="hidden sm:inline">See more...</span>
