@@ -28,7 +28,8 @@ function AppointmentCalendar() {
           withCredentials: true,
         };
         const response = await axios.get(
-          'http://localhost:8080/api/client/appointment/get-appointments', config
+          `http://localhost:8080/api/client/appointment/get-appointments/${id}`,
+          config
         );
 
         if (response.status === 200) {
@@ -53,12 +54,11 @@ function AppointmentCalendar() {
     const selectedDate = slotInfo.start.toISOString();
     const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
 
-     // Adjust the time by adding 1 hour
-  const adjustedTime = moment(slotInfo.start).add(1, 'hour').format('HH:mm');
+  
   
     // Store the selected date and time in localStorage
     localStorage.setItem('appointmentDate', selectedDate);
-    localStorage.setItem('appointmentTime', adjustedTime);
+    localStorage.setItem('appointmentTime', selectedTime);
   
     setIsModalOpen(true);
   };
