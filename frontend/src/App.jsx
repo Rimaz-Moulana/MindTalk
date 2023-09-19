@@ -93,7 +93,8 @@ const App = () => (
                             <Route path="message" element={<ChatApp />} />
                             <Route path="clientprofile/:id" element={<ClientProfile />} />
                             <Route path="clientcounsellors" element={<ClientCounsellors />} />
-                            <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} />
+                            {/* <Route path="clientcounsellors/profile" element={<ClientCounsellorProfile />} /> */}
+                            <Route path="clientcounsellors/profile/:id" element={<ClientCounsellorProfile />} />
                             <Route path="clientmusic" element={<ClientMusic />} />
                             <Route path="clientmeditation" element={<ClientMeditation />} />
                             <Route path="blogs" element={<Blogs />} />

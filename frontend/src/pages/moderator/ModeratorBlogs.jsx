@@ -1,119 +1,95 @@
-import React from 'react';
-import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { AiOutlinePlusCircle, AiOutlineCloseCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
 const Blogs = () => {
-  // Define a sample 'posts' array
-  const posts = [
-    {
-      id: 1,
-      datetime: '2023-07-22',
-      date: 'July 22, 2023',
-      category: { href: '/category/1', title: 'Business' },
-      title: 'The Impact of Physical Activity on Depression: How Exercise Can Be a Natural Antidepressant',
-      href: '/blog/1',
-      description: 'This blog post could explore the correlation between regular physical activity and reduced symptoms of depression. It could cover various exercises and their benefits, as well as provide practical tips on how to incorporate exercise into daily routines. The post can reference studies and expert opinions to support the information.',
-      author: {
-        imageUrl: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        name: 'Pathum Lakshan ',
-        href: '/author/1',
-        role: 'Content Writer',
-      },
-    },
+  const [blogData, setBlogData] = useState([]);
 
-    {
-      id: 2,
-      datetime: '2023-07-22',
-      date: 'July 22, 2023',
-      category: { href: '/category/1', title: 'Technology' },
-      title: 'Mindfulness and Depression: The Role of Meditation in Mental Health',
-      href: '/blog/1',
-      description: 'This blog post could delve into the benefits of mindfulness and meditation in managing depression. It could explain different mindfulness techniques, how to practice them, and their impact on mental health. Real-life experiences and scientific studies could be used to emphasize the effectiveness of mindfulness in reducing depression.',
-      author: {
-        imageUrl: 'https://images.pexels.com/photos/5184327/pexels-photo-5184327.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        name: 'Michelle Nikeetha',
-        href: '/author/1',
-        role: 'Content Writer',
-      },
-    }
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const authData = localStorage.getItem('authData');
+        if (authData) {
+          const { accessToken } = JSON.parse(authData);
 
-   
-  ];
+          const config = {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          };
+
+          const response = await axios.get('http://localhost:8080/api/blogs/all', config);
+
+          if (Array.isArray(response.data)) {
+            const fetchedBlog = response.data.map(blog => ({
+              id: blog.id,
+              status: blog.status,
+              title: `${blog.title}`,
+              category: `${blog.category}`,
+              content: `${blog.content}`,
+            }));
+            setBlogData(fetchedBlog);
+          } else {
+            console.error('Response data is not an array:', response.data);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching blog data:', error);
+      }
+    };
+
+    fetchBlogData();
+  }, []);
+
+
 
   return (
-    <>
-      <div className=' rounded-xl'>
-        <div className='bg-white rounded-2xl'>
-           <div className="py-1 rounded-t-2xl ">
-            
-          </div> 
-      
-            
-            <div className="grid max-w-2xl grid-cols-1 pt-10 mx-auto mt-1 border-t gap-x-8 sm:m-8 sm:pt-8 lg:pb-16 lg:mx-6 lg:max-w-none lg:grid-cols-3">
-              {posts.map((post) => (
-                <article key={post.id} className="flex flex-col justify-between max-w-xl shadow-2xl bg-gradient-to-br from-blue-200 to-green-50 rounded-2xl">
-                  <div className='w-full pb-4'>
-                    <img className='w-full h-60 rounded-t-xl' src='https://images.pexels.com/photos/697244/pexels-photo-697244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt="blog1" />
-                  </div>
+    <div className='w-full py-8 bg-white rounded-xl'>
+      {/* ... rest of your JSX ... */}
+      <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
+        {blogData
+          .filter(blog => blog.status === 0)
+          .map((blog, index) => (
+            <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md '>
+              <img className='object-cover w-full h-52' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt={blog.title} />
+              <div className='p-4'>
+              <h6 className='text-gray-700 font-semibold'>{blog.category}</h6>
+              <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
+              <p className='mt-2 text-gray-600 line-clamp-3'>{blog.content}</p>
 
-                  <div className="flex items-center pl-8 text-xs gap-x-4">
-                    <time dateTime={post.datetime} className="text-gray-500">
-                      {post.date}
-                    </time>
-                    <a
-                      href={post.category.href}
-                      className="relative z-10 rounded-full  bg-gray-50 px-3 py-1.5 font-bold text-gray-600 hover:bg-gray-100">
-                      {post.category.title}
-                    </a>
-                    </div>
-                    
-
-                  <div className="relative group">
-                    <h3 className="pl-8 mt-3 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={post.href}>
-                        <span className="absolute inset-0 " />
-                        {post.title}
-                      </a>
-                    </h3>
-                    <p className="pl-8 mt-2 text-sm leading-6 text-gray-600 line-clamp-3">{post.description}</p>
-                  </div>
-
-                  <div className="relative flex items-center pl-8 my-6 gap-x-4">
-                    <img src={post.author.imageUrl} alt="" className="w-10 h-10 rounded-full bg-gray-50" />
-                    <div className="text-sm leading-6">
-                      <p className="font-bold text-gray-900">
-                        <a href={post.author.href}>
-                          <span className="absolute inset-0" />
-                          {post.author.name}
-                        </a>
-                      </p>
-                      <p className="text-gray-600">{post.author.role}</p>
-                    </div>    
-                  </div>
-
+              <Link to={`/counsellor/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
+                <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
+                  <span className="hidden sm:inline">See more...</span>
+                </button>
+              </Link>
+            </div>
                 <div className='flex justify-end mb-4 mr-4'>
-                    <button className="px-4 py-2 mr-2 text-white bg-green-900 rounded-full font-md hover:bg-green-500 hover:font-lg">
+                  <button
+                    className="px-4 py-2 mr-2 text-white bg-green-900 rounded-full font-md hover:bg-green-500 hover:font-lg"
+                    onClick={() => acceptBlog(blog.id)}
+                  >
                     <span className="hidden sm:inline">Accept</span>
                     <span className="md:hidden">
-                        <AiOutlineCheckCircle />
+                      <AiOutlineCheckCircle />
                     </span>
-                    </button>
-                    <button className="px-4 py-2 ml-2 text-white bg-red-900 rounded-full font-md hover:bg-red-500 hover:font-lg">
+                  </button>
+                  <button
+                    className="px-4 py-2 ml-2 text-white bg-red-900 rounded-full font-md hover:bg-red-500 hover:font-lg"
+                    onClick={() => rejectBlog(blog.id)}
+                  >
                     <span className="hidden sm:inline">Reject</span>
                     <span className="md:hidden">
-                        <AiOutlineCloseCircle />
+                      <AiOutlineCloseCircle />
                     </span>
-                    </button>
+                  </button>
                 </div>
-                </article>
-              ))}
-            </div>
-          
-        </div>
+              </div>
+          ))}
       </div>
-
-      
-    </>
+    </div>
   );
 };
 
