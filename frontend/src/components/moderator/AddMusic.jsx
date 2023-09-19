@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const AddMusic = () => {
     const { id } = useParams();
@@ -22,6 +25,26 @@ const AddMusic = () => {
         }
     }, [id]);
 
+    const [updateSuccess, setUpdateSuccess] = useState(false); // New state for update success
+
+    useEffect(() => {
+        // Show toast when updateSuccess becomes true
+        if (updateSuccess) {
+          toast.success('User information updated successfully!', {
+            position: 'top-right',
+            autoClose: 3000, // Close the notification after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+    
+          // Reset updateSuccess to false
+        setUpdateSuccess(false);
+    
+        }
+      }, [updateSuccess]);
+    
     const fetchMusicData = async () => {
         try {
             const authData = localStorage.getItem('authData');
@@ -76,13 +99,24 @@ const AddMusic = () => {
 
                 if (id === '-1') {
                     await addMusicBackend(updatedMusic, config);
+                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 } else {
                     await updateMusicBackend(updatedMusic, config);
+                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 }
-                window.location.href = '/moderator/moderatormusic';
+                //window.location.href = '/moderator/moderatormusic';
             }
         } catch (error) {
             console.error('Error saving music:', error);
+            // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         }
     };
 
@@ -125,7 +159,6 @@ const AddMusic = () => {
     //     }
     // };
     
-
     const addMusicBackend = async (musicData, config) => {
         try {
             // Include the status field with a value of true
@@ -139,11 +172,30 @@ const AddMusic = () => {
 
             if (response.status === 200) {
                 console.log('Music added successfully');
+                setUpdateSuccess(true); // Set updateSuccess to true upon success
             } else {
                 console.error('Error adding music');
+                // alert('Error updating user information. Please try again later.'); // Alert for update failure
+                toast.error('Error updating user information. Please try again later.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
             }
         } catch (error) {
             console.error('An error occurred:', error);
+            // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         }
     };
 
@@ -159,9 +211,27 @@ const AddMusic = () => {
                 console.log('Music updated successfully');
             } else {
                 console.error('Error updating music');
+                // alert('Error updating user information. Please try again later.'); // Alert for update failure
+                toast.error('Error updating user information. Please try again later.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
             }
         } catch (error) {
             console.error('An error occurred:', error);
+             // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         }
     };
 
@@ -246,6 +316,14 @@ const AddMusic = () => {
                     </div>
                 </form>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+                draggable={true}
+            />
         </div>
     );
 }

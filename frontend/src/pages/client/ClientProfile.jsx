@@ -581,13 +581,13 @@ const Profile = () => {
 
         </div>
         <ToastContainer
-      position="top-right"
-      autoClose={3000}
-      hideProgressBar={false}
-      closeOnClick={true}
-      pauseOnHover={true}
-      draggable={true}
-    />
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
       </div>
 
       <div className="flex flex-col gap-4 ">
