@@ -183,8 +183,13 @@ function AppointmentCalendar() {
             <div className="bg-white p-4 rounded">
               <h2 className="text-lg font-bold mb-2">Schedule Appointment</h2>
               <p>Counselor Name: {counselorName}</p>
-              <p>Appointment Date: {appointmentDate}</p>
-              <p>Appointment Time: {appointmentTime}</p>
+              <p>Appointment Date: {appointmentDate} </p>
+              <p>
+                Appointment Time: {moment(appointmentTime, 'HH:mm').format('hh:mm A')} -{' '}
+                {moment(appointmentTime, 'HH:mm')
+                  .add(60, 'minutes')
+                  .format('hh:mm A')}
+              </p>
               <p>Appointment Fee: {appointmentFee}</p>
               <br />
               <p>Do you want to schedule the appointment?</p>
