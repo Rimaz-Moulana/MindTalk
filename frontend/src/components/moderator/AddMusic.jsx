@@ -86,6 +86,46 @@ const AddMusic = () => {
         }
     };
 
+    // const saveMusic = async (e) => {
+    //     e.preventDefault();
+    
+    //     // Create a new FormData object
+    //     const formData = new FormData();
+    
+    //     // Add text data to the FormData object
+    //     formData.append('title', music.title);
+    //     formData.append('category', music.category);
+    //     formData.append('description', music.description);
+    //     formData.append('link', music.link);
+    
+    //     // Add the image file to the FormData object
+    //     formData.append('image', music.imageFile);
+    
+    //     try {
+    //         const authData = localStorage.getItem('authData');
+    //         if (authData) {
+    //             const { accessToken } = JSON.parse(authData);
+    //             const config = {
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`,
+    //                     // Do not set Content-Type here, it will be automatically set by FormData
+    //                 },
+    //                 withCredentials: true
+    //             };
+    
+    //             if (id === '-1') {
+    //                 await addMusicBackend(formData, config);
+    //             } else {
+    //                 await updateMusicBackend(formData, config);
+    //             }
+    //             // window.location.href = '/moderator/moderatormusic';
+    //         }
+    //     } catch (error) {
+    //         console.error('Error saving music:', error);
+    //     }
+    // };
+    
+
     const addMusicBackend = async (musicData, config) => {
         try {
             // Include the status field with a value of true
