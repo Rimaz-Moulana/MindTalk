@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import avatarPNG from '../assets/Chat/chatUser.png';
 
 const ContactCards = ({ contactList }) => {
-  const handleAppointmentClick = (id) => {
+  const handleAppointmentClick = (id , name) => {
     localStorage.setItem('appcounsellorId', id);
+    localStorage.setItem('appcounsellorName', name);
   };
 
   return (
@@ -31,10 +32,10 @@ const ContactCards = ({ contactList }) => {
                 <div className="flex justify-center mt-2 truncate">
                   <Link
                     to={`/client/clientappointments`}
-                    onClick={() => handleAppointmentClick(contact.id)}
+                    onClick={() => handleAppointmentClick(contact.id,contact.name)}
                     className="bg-blue-700 hover.bg-blue-900 text-white font-base p-2 rounded"
                   >
-                    Appointments
+                    Shedule Appointment
                   </Link>
                 </div>
               </figcaption>
