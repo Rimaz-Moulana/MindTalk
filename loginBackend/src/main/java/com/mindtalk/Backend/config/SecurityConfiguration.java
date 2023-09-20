@@ -1,5 +1,6 @@
-package com.mindtalk.Backend.dto.config;
+package com.mindtalk.Backend.config;
 
+import com.mindtalk.Backend.config.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

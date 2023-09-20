@@ -1,4 +1,4 @@
-package com.mindtalk.Backend.dto.config;
+package com.mindtalk.Backend.config;
 
 import com.mindtalk.Backend.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
