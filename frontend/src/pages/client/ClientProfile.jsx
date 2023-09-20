@@ -3,6 +3,9 @@ import logo from '../../assets/logo.png';
 import { FiClipboard } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const Profile = () => {
   const { id } = useParams();
@@ -25,6 +28,33 @@ const Profile = () => {
     emName3: '',
     emPhone3: ''
   });
+
+  const [updateSuccess, setUpdateSuccess] = useState(false); // New state for update success
+
+  // useEffect(() => {
+  //   // Show alert when updateSuccess becomes true
+  //   if (updateSuccess) {
+  //     alert('User information updated successfully!');
+  //   }
+  // }, [updateSuccess]);
+
+  useEffect(() => {
+    // Show toast when updateSuccess becomes true
+    if (updateSuccess) {
+      toast.success('User information updated successfully!', {
+        position: 'top-right',
+        autoClose: 3000, // Close the notification after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Reset updateSuccess to false
+    setUpdateSuccess(false);
+
+    }
+  }, [updateSuccess]);
 
   useEffect(() => {
     fetchProfileData();
@@ -108,9 +138,19 @@ const Profile = () => {
                     withCredentials: true
                 };
           await updateUserBackend(updatedUser, config);
+          setUpdateSuccess(true); // Set updateSuccess to true upon success
       }
     } catch (error) {
       console.error('Error saving user:', error);
+      // alert('Error updating user information. Please try again later.'); // Alert for update failure
+      toast.error('Error updating user information. Please try again later.', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -126,10 +166,28 @@ const Profile = () => {
         console.log('User updated successfully');
       } else {
           console.error('Error updating user');
-      }
+          // alert('Error updating user information. Please try again later.'); // Alert for update failure
+          toast.error('Error updating user information. Please try again later.', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
     } catch (error) {
         console.error('An error occurred:', error);
-    }
+        // alert('Error updating user information. Please try again later.'); // Alert for update failure
+        toast.error('Error updating user information. Please try again later.', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
   };
 
   const handleInputChange = (event) => {
@@ -522,6 +580,14 @@ const Profile = () => {
           </form>
 
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
       </div>
 
       <div className="flex flex-col gap-4 ">
