@@ -16,10 +16,10 @@ export default function ClientCounsellorProfile() {
   return (
     <>
       <div className='flex grid flex-col w-full gap-4 md:grid-cols-4'>
-        <div className='overflow-y-auto bg-white rounded-xl'>
+        {/* <div className='overflow-y-auto bg-white rounded-xl'>
           <ProfileCard/>
-        </div>
-        <div className='overflow-hidden bg-white md:col-span-3 rounded-xl'>
+        </div> */}
+        <div className='overflow-hidden bg-white md:col-span-4 rounded-xl'>
           <ProfileDetails />
         </div>
       </div>
