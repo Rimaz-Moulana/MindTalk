@@ -17,6 +17,8 @@
     "@headlessui/react": "^1.7.15",
     "@iconscout/react-unicons": "^2.0.2",
     "@mui/material": "^5.14.1",
+    "@stripe/react-stripe-js": "^2.3.0",
+    "@stripe/stripe-js": "^2.1.6",
     "@videosdk.live/rtc-js-prebuilt": "^0.3.34",
     "apexcharts": "^3.41.0",
     "axios": "^1.4.0",
