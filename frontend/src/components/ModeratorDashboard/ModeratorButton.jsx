@@ -7,10 +7,19 @@ export default function ModeratorButton() {
 
     const data = JSON.parse(localStorage.getItem('detailsData'));
 
-    console.log(data)
-    
+    // console.log(data[0].licenseImage)
+
+    for(let i = 0 ; i < data.length; i++){
+        if(data[i].licenseImage){
+            data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\', '');
+            console.log(data[i].licenseImage);
+        }
+    }
+
+    const path = 'C:\\Users\\Moulana\\Downloads\\';
     return (
         <>
+
             <button
                 type="button"
                 className="flex items-center rounded bg-white border border-blue-500 px-2 pb-1.5 pt-1.5 text-xs font-medium uppercase leading-normal text-blue-500 hover:bg-primary-600 "
@@ -59,8 +68,12 @@ export default function ModeratorButton() {
                                             eiusmod tempor incididunt ut labore
                                             et dolore magna aliqua.
                                         </p> */}
-                                        
+                                       
+                                        {data ?
+                                         (
+                                            
                                         <div className=''>
+                                        {console.log(path)}
                                         {data.map((item,index)=>(
                                             <div key={index}>
                                             <div>
@@ -73,16 +86,22 @@ export default function ModeratorButton() {
                                             <label key={index}>License Number: {item.licenseNo}</label>
                                             </div>
                                             <div>
-                                            <label key={index}>First Name: <img src={item.licenseImage} /></label>
+                                            <label key={index}>Email: {item.email}</label>
                                             </div>
+                                            <div>
+                                            <label key={index}>License Image:<img src={path+item.licenseImage} /></label>
+                                            </div>
+                                            {console.log(path)}
+                                            
                                             </div>
                                        
-                                            
+                                           
                                         ))} 
-                                        
                                        
                                         </div>
+                                        ):null
                                         
+                                        }
                                         <div className="items-center w-[100px] gap-2 mt-3 sm:flex">
                                             <button
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-indigo-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"

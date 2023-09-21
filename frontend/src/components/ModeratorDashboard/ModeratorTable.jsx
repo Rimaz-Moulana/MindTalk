@@ -81,6 +81,7 @@ export default function RequestTable() {
                                     </th>
                                 </tr>
                             </thead>
+                            {data ? (
                             <tbody>
                                 {data.map((request,index) => (
                                     <tr
@@ -98,6 +99,9 @@ export default function RequestTable() {
                                     </tr>
                                 ))}
                             </tbody>
+                            ):<div>
+                                <h1 className="text-xl font-semibold text-center ml-5 mt-48 ml-48">Counsellors Added details not yet!</h1>
+                            </div>}
                         </table>
                     </div>
                 </div>
