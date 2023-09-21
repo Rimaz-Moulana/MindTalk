@@ -251,7 +251,7 @@ const Register = () => {
                             <br />
                             Already registered?<br />
                             <span className="line">
-                                <a href="#" className="text-blue-700 hover:underline text-center">Sign In</a>
+                                <a href="/login" className="text-blue-700 hover:underline text-center">Sign In</a>
                             </span>
                         </p>
                     </section>

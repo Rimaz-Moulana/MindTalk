@@ -1,21 +1,23 @@
 import { features } from '../../constants';
 import styles, { layout } from '../../style';
 import Button from '../Button';
+// import test from '../../assets';
+import { discount, test } from '../../assets';
 
 
 
 const FeatureCard = ({ icon, title, content, index }) => (
   <div className={`hover:bg-white flex flex-row p-6 rounded-[20px] ${index !== features.length - 1} ? "mb-6" :"mb-0"} feature-card`}>
 
-    <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-black `}>
+    {/* <div className={`w-[64px] h-[64px] rounded-full ${styles.flexCenter} bg-black `}>
 
       <img src={icon} alt="icon" className="w-[50%] h=[50%] object-contain" />
 
 
-    </div>
+    </div> */}
 
 
-    <div className="flex-1 flex flex-col ml-3">
+    {/* <div className="flex-1 flex flex-col ml-3">
       <h4 className="font-poppins font-semibold text-black text-[18px] leading-[23px] mb-1">
         {title}
       </h4>
@@ -24,7 +26,7 @@ const FeatureCard = ({ icon, title, content, index }) => (
         {content}
       </p>
 
-    </div>
+    </div> */}
 
 
   </div>
@@ -60,14 +62,29 @@ const Diagnosetest = () => {
 
       </div>
 
-      <div className={`${layout.sectionImg} flex-col bg-sky-100 rounded-[20px]`}>
+      <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative `}>
+      <div className="w-100% h-100%">
+      <img src={test} alt="billing" className=" block z-[5]   w-full rounded-lg"  />
+      </div>
+
+
+
+
+      <div className="absolute z-[0] w-[40%] h-[35%] top-0 green__gradient" />
+      <div className="absolute z-[1] w-[80%] h-[80%] rounded-full bottom-40 white__gradient" />
+      <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20  blue__gradient" />
+
+    </div>
+
+
+      {/* <div className={`${layout.sectionImg} flex-col bg-sky-100 rounded-[20px]`}>
 
         {features.map((feature, index) => (
           <FeatureCard key={feature.id} {...feature} index={index} />
         ))}
 
 
-      </div>
+      </div> */}
 
     </section>
   )

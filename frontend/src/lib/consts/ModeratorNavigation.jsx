@@ -1,4 +1,4 @@
-import {FiAirplay, FiMusic, FiSettings} from "react-icons/fi"
+import {FiAirplay, FiMusic, FiSlack, FiBookOpen} from "react-icons/fi"
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
@@ -14,9 +14,16 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <FiMusic />
 	},
     {
-		key: 'message',
-		label: 'User Handle',
-		path: '/moderator/userhandle',
-		icon: <FiSettings />
+		key: 'meditation',
+		label: 'Meditation',
+		path: '/moderator/moderatormeditation',
+		icon: <FiSlack />
+	},
+
+	{
+		key: 'blogs',
+		label: 'Blogs',
+		path: '/moderator/moderatorblogs',
+		icon: <FiBookOpen />
 	}
 ]

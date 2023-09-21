@@ -83,7 +83,15 @@ function ClientProfileHistory() {
 
       <div className='p-2 pt-10'>
         <div>
-          <span className='font-bold '>Client History</span>
+          <span className='font-bold'>Client History</span>
+          <div className='m-10 p-5 bg-blue-100 rounded-lg'>
+            <p className='text-gray-800'>
+              <span className='font-semibold'>Session Date:</span> August 16, 2023<br />
+              <span className='font-semibold'>Session Duration:</span> 60 minutes<br /><br />
+
+              <span className='font-semibold'>Summary:</span> During today's session, Michelle expressed her feelings of overwhelm due to her workload and family responsibilities. We discussed various stress management techniques, including deep breathing exercises and time management strategies. Michelle seemed receptive to the suggestions and agreed to practice these techniques during the upcoming week.
+            </p>
+          </div>
         </div>
       </div>
 

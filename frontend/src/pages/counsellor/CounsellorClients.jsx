@@ -1,78 +1,120 @@
-import { useEffect, useState } from 'react';
-import ClientCards from '../../components/ClientCards'
-import useFetch from 'react-fetch-hook';
+import React, { useEffect, useState } from 'react';
+import ClientCards from '../../components/ClientCards';
 import { Link } from 'react-router-dom';
+import ReactModal from 'react-modal';
+import RegisterClient from './CounsellorRegisterClient';
+import axios from 'axios';
 
 const Clients = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [clients,setClients] = useState([]);
+  const [clientList, setClientList] = useState([]);
+  const [filterQuery, setFilterQuery] = useState('');
+  const [isLoading, setLoading] = useState(true);
 
-  const url = 'https://randomuser.me/api/?results=200'
-  const { isLoading, data, error } = useFetch( url )
-  const [clientList, setClientList] = useState (null)
-  const [filterQuery, setFilterQuery] = useState (null)
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-  useEffect( () => {
-    if(filterQuery) {
-      const queryString = filterQuery.toLowerCase()
-      const filteredData = data?.results?.filter(client => {
-        const fullName = `${client.name.first} ${client.name.last} `
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const fetchClientData = async () => {
+    try {
+      console.log("Fetching clients...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/client/all`, 
+          config
+        );
+
+        const fetchedClients = response.data.map(client => ({
+          id: client.id,
+          name: `${client.firstname} ${client.lastname}`
+        }))
         
-        if (queryString.length === 1 ) {
-          const firstLetter = fullName.charAt(0).toLowerCase()
-          return firstLetter === queryString
-        }
-        else {
-          return fullName.toLowerCase().includes(queryString)
-        }
+        setClients(fetchedClients);
+        setClientList(response.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error fetching clients:', error);
+      setLoading(false);
+    }
+  };
 
-      })
-      setClientList(filteredData)
+  useEffect(() => {
+    fetchClientData();
+  }, []);
+
+  useEffect(() => {
+    if (filterQuery) {
+      const queryString = filterQuery.toLowerCase();
+      const filteredData = clientList.filter(client => {
+        const fullName = `${client.fname} ${client.lname}`;
+
+        if (queryString.length === 1) {
+          const firstLetter = fullName.charAt(0).toLowerCase();
+          return firstLetter === queryString;
+        } else {
+          return fullName.toLowerCase().includes(queryString);
+        }
+      });
+      setClientList(filteredData);
     }
-    else{
-      setClientList(data?.results?.slice(0,10))
-    }
-  }, [data, filterQuery])
+  }, [filterQuery, clientList]);
 
   return (
     <div className='bg-gray-100'>
-
       <section>
-        <div className='flex flex-row w-full flex-auto'>
+        <div className='flex flex-row flex-auto w-full'>
           <div className='flex-grow'>
             <form className='flex'>
-              <input 
-                type="text" 
-                placeholder="Search..." 
-                name="search"
-                className='ml-5 mt-6 rounded-md p-2'
-                onChange={event => setFilterQuery(event.target.value)}
+              <input
+                type='text'
+                placeholder='Search...'
+                name='search'
+                className='p-2 mt-6 ml-5 rounded-md'
+                onChange={(event) => setFilterQuery(event.target.value)}
               />
             </form>
           </div>
           <div className='ml-auto'>
-            <Link
-              to={'registerclient'} >
-              <button className='bg-blue-700 mt-6 rounded-md p-2 border text-white mr-5 hover:bg-white hover:border-blue-700 hover:text-black'>
-                Add Client
-              </button>
-            </Link>
+            <button
+              onClick={openModal}
+              className='p-2 mt-6 mr-5 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black'
+            >
+              Add Client
+            </button>
+            <ReactModal
+              isOpen={isModalOpen}
+              onRequestClose={closeModal}
+              contentLabel='Add Client Modal'
+              className='fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full modal'
+              overlayClassName='overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50'
+            >
+              <RegisterClient closeModal={closeModal} />
+            </ReactModal>
           </div>
         </div>
       </section>
 
-      <section className='p-5 '>
-        {clientList?.length < 1 && (
-          <h1>No Data Matches Your Search</h1>
-        )}
-        {isLoading && (
-          <h1>Still Loading</h1>
-        )}
-        {error && (
-          <h1>Error!</h1>
-        )}
-        <ClientCards clientList={clientList}/>
+      <section className='p-5'>
+        {clientList?.length < 1 && <h1>No Data Matches Your Search</h1>}
+        <ClientCards clientList={clientList} />
       </section>
     </div>
   );
-}
+};
 
 export default Clients;

@@ -21,6 +21,7 @@ public class Counsellor {
     private String email;
     private Long licenseNo;
     private String licenseImage;
+    private Boolean status;
 
     public Long getId() {
         return id;
@@ -68,5 +69,14 @@ public class Counsellor {
 
     public void setLicenseImage(String licenseImage) {
         this.licenseImage = licenseImage;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        status = false;
+        this.status = status;
     }
 }

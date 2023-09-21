@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import MusicService from '../../services/MusicService';
+import axios from 'axios';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
-export default function AddMusic() {
+const AddMusic = () => {
     const { id } = useParams();
+
+    const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
 
     const [music, setMusic] = useState({
         title: '',
@@ -16,19 +21,61 @@ export default function AddMusic() {
         if (id === '-1') {
             return;
         } else {
-            MusicService.getMusicById(id).then((res) => {
-                let musicData = res.data;
-                setMusic({
-                    title: musicData.title,
-                    category: musicData.category,
-                    description: musicData.description,
-                    link: musicData.link
-                });
-            });
+            fetchMusicData();
         }
     }, [id]);
 
-    const saveMusic = (e) => {
+    const [updateSuccess, setUpdateSuccess] = useState(false); // New state for update success
+
+    useEffect(() => {
+        // Show toast when updateSuccess becomes true
+        if (updateSuccess) {
+          toast.success('User information updated successfully!', {
+            position: 'top-right',
+            autoClose: 3000, // Close the notification after 3 seconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+    
+          // Reset updateSuccess to false
+        setUpdateSuccess(false);
+    
+        }
+      }, [updateSuccess]);
+    
+    const fetchMusicData = async () => {
+        try {
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                const response = await axios.get(`http://localhost:8080/api/testing/music/${id}`, config);
+
+                if (response.status === 200) {
+                    const musicData = response.data;
+                    setMusic({
+                        title: musicData.title,
+                        category: musicData.category,
+                        description: musicData.description,
+                        link: musicData.link
+                    });
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching music:', error);
+        }
+    };
+
+    const saveMusic = async (e) => {
         e.preventDefault();
         const updatedMusic = {
             title: music.title,
@@ -36,14 +83,154 @@ export default function AddMusic() {
             description: music.description,
             link: music.link
         };
+        console.log(updatedMusic);
 
-        if (id === '-1') {
-            MusicService.addMusic(updatedMusic).then(() => {
-                window.location.href = '/moderator/moderatormusic';
+        try {
+            const authData = localStorage.getItem('authData');
+            if (authData) {
+                const { accessToken } = JSON.parse(authData);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                };
+
+                if (id === '-1') {
+                    await addMusicBackend(updatedMusic, config);
+                    setUpdateSuccess(true); // Set updateSuccess to true upon success
+                } else {
+                    await updateMusicBackend(updatedMusic, config);
+                    setUpdateSuccess(true); // Set updateSuccess to true upon success
+                }
+                //window.location.href = '/moderator/moderatormusic';
+            }
+        } catch (error) {
+            console.error('Error saving music:', error);
+            // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
             });
-        } else {
-            MusicService.updateMusic(updatedMusic, id).then(() => {
-                window.location.href = '/moderator/moderatormusic';
+        }
+    };
+
+    // const saveMusic = async (e) => {
+    //     e.preventDefault();
+    
+    //     // Create a new FormData object
+    //     const formData = new FormData();
+    
+    //     // Add text data to the FormData object
+    //     formData.append('title', music.title);
+    //     formData.append('category', music.category);
+    //     formData.append('description', music.description);
+    //     formData.append('link', music.link);
+    
+    //     // Add the image file to the FormData object
+    //     formData.append('image', music.imageFile);
+    
+    //     try {
+    //         const authData = localStorage.getItem('authData');
+    //         if (authData) {
+    //             const { accessToken } = JSON.parse(authData);
+    //             const config = {
+    //                 headers: {
+    //                     Authorization: `Bearer ${accessToken}`,
+    //                     // Do not set Content-Type here, it will be automatically set by FormData
+    //                 },
+    //                 withCredentials: true
+    //             };
+    
+    //             if (id === '-1') {
+    //                 await addMusicBackend(formData, config);
+    //             } else {
+    //                 await updateMusicBackend(formData, config);
+    //             }
+    //             // window.location.href = '/moderator/moderatormusic';
+    //         }
+    //     } catch (error) {
+    //         console.error('Error saving music:', error);
+    //     }
+    // };
+    
+    const addMusicBackend = async (musicData, config) => {
+        try {
+            // Include the status field with a value of true
+            musicData.status = true;
+            
+            const response = await axios.post(
+                'http://localhost:8080/api/testing/music',
+                musicData,
+                config
+            );
+
+            if (response.status === 200) {
+                console.log('Music added successfully');
+                setUpdateSuccess(true); // Set updateSuccess to true upon success
+            } else {
+                console.error('Error adding music');
+                // alert('Error updating user information. Please try again later.'); // Alert for update failure
+                toast.error('Error updating user information. Please try again later.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+            // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    };
+
+    const updateMusicBackend = async (musicData, config) => {
+        try {
+            const response = await axios.put(
+                `http://localhost:8080/api/testing/music/${id}`,
+                musicData,
+                config
+            );
+
+            if (response.status === 200) {
+                console.log('Music updated successfully');
+            } else {
+                console.error('Error updating music');
+                // alert('Error updating user information. Please try again later.'); // Alert for update failure
+                toast.error('Error updating user information. Please try again later.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+             // alert('Error updating user information. Please try again later.'); // Alert for update failure
+            toast.error('Error updating user information. Please try again later.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
             });
         }
     };
@@ -56,13 +243,11 @@ export default function AddMusic() {
         }));
     };
 
-    const getTitle = () => {
-        if (id === '-1') {
-            return <h3 className="text-2xl font-semibold mb-4">Add Music</h3>;
-        } else {
-            return <h3 className="text-2xl font-semibold mb-4">Update Music</h3>;
-        }
-    };
+    const getTitle = () => (
+        <h3 className="text-2xl font-semibold mb-4">
+            {id === '-1' ? 'Add Music' : 'Update Music'}
+        </h3>
+    );
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -81,13 +266,19 @@ export default function AddMusic() {
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600">Category:</label>
-                        <input
-                            placeholder="Category"
+                        <select
                             name="category"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.category}
                             onChange={handleInputChange}
-                        />
+                        >
+                            <option value="">Select a category</option>
+                            {categories.map((category) => (
+                                <option key={category} value={category}>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600">Description:</label>
@@ -125,6 +316,16 @@ export default function AddMusic() {
                     </div>
                 </form>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+                draggable={true}
+            />
         </div>
     );
 }
+
+export default AddMusic;
