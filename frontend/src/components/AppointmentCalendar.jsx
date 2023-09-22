@@ -3,6 +3,10 @@ import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
+import Logo from '../assets/logo.png'
+import StripeCheckout from 'react-stripe-checkout';
+
+
 
 const localizer = momentLocalizer(moment);
 
@@ -85,37 +89,35 @@ function AppointmentCalendar() {
   };
 
 
-  const handleModalConfirm = async () => {
-    if (selectedSlot) { // Ensure selectedSlot is defined
-      const formattedDate = selectedSlot.start.toISOString();
-      localStorage.setItem('appointmentDate', formattedDate); // Store the selected date in local storage
+  const handleModalCancel = () => {
+    setSelectedSlot(null);
+    setIsModalOpen(false);
+  };
 
+  const handlePaymentSuccess = async (token) => {
+    // Handle successful payment here
+    console.log('Payment successful:', token);
+  
+    try {
+      // Call the function to add the appointment to the backend
+      await addApoinmentBackend(selectedSlot);
+      
+      // Add the new appointment to the events array
       const newAppointment = {
         id: events.length + 1,
         title: 'Appointment',
         start: selectedSlot.start,
         end: selectedSlot.end,
       };
-
-      try {
-        await addApoinmentBackend(selectedSlot); // Call the function
-        setEvents([...events, newAppointment]);
-        setSelectedSlot(null);
-        setIsModalOpen(false);
-
-        // Navigate to day view with selected date
-        setViewDate(selectedSlot.start);
-      } catch (error) {
-        console.error('Error creating appointment:', error);
-      }
-    } else {
-      console.error('selectedSlot is not defined'); // Handle the case where selectedSlot is not defined
+    
+      setEvents([...events, newAppointment]);
+    
+      // Close the modal and reset state as needed
+      setSelectedSlot(null);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error creating appointment:', error);
     }
-  };
-
-  const handleModalCancel = () => {
-    setSelectedSlot(null);
-    setIsModalOpen(false);
   };
 
   const setViewDate = (date) => {
@@ -202,13 +204,16 @@ function AppointmentCalendar() {
                 >
                   Cancel
                 </button>
-                <button
-                  type="button"
-                  className="px-3 py-1 bg-blue-500 text-white rounded"
-                  onClick={handleModalConfirm}
-                >
-                  Pay Appointment fee
-                </button>
+                {/* Stripe payment button */}
+                <StripeCheckout
+                  token={handlePaymentSuccess}
+                  name="Mind Talk"
+                  image={Logo}
+                  label="Pay Appointment Fee"
+                  currency="LKR"
+                  amount={200000} 
+                  stripeKey="pk_test_51Nrk0OSFDUE54MtAFhY0fKuF4xN7ecdMr9CIIp41qjbrKDGnYEvCc0TGgL0sgXDQ8CQ7Jg8wTRVal2GTo2OGRR1q00zw9XTipk"
+                />
               </div>
             </div>
           </div>
