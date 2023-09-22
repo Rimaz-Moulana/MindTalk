@@ -3,7 +3,7 @@ import React from 'react';
 function ProfileDetails() {
   return (
     <>
-      <div className="relative bg-center bg-cover rounded-t-lg h-60" style={{ backgroundImage: 'url("https://source.unsplash.com/1500x250?mountain")' }}>
+      <div className="relative h-64 bg-center bg-cover rounded-t-lg" style={{ backgroundImage: 'url("https://source.unsplash.com/1500x250?mountain")' }}>
         <div className="absolute top-2 right-2">
           {/* You can add an SVG or other content here */}
         </div>
@@ -67,15 +67,31 @@ function ProfileDetails() {
               <p className="text-sm text-gray-600">Languages Spoken</p>
               <p className="text-gray-800">English, Spanish</p>
             </div>
-            <div>
+            {/* <div>
               <p className="text-sm text-gray-600">Social Profiles</p>
               <div className="space-y-2">
                 <a href="#" className="text-blue-500 hover:underline">LinkedIn</a>
                 <a href="#" className="text-blue-500 hover:underline">Twitter</a>
                 <a href="#" className="text-blue-500 hover:underline">GitHub</a>
               </div>
+            </div> */}
+
+          <div>
+              <p className="text-sm text-gray-600">Years of Experience</p>
+              <p className="text-gray-800">5 years</p>
             </div>
-          </div>
+
+          <div>
+              <p className="text-sm text-gray-600">Degree</p>
+              <p className="text-gray-800">MBA in Psychology</p>
+            </div>
+        
+        
+        <div>
+              <p className="text-sm text-gray-600">Current Workplace</p>
+              <p className="text-gray-800">Colombo</p>
+            </div>
+        </div>
         </div>
 
         <hr className="my-4 border-t border-gray-300" />

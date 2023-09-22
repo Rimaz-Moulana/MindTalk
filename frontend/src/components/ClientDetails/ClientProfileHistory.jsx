@@ -194,7 +194,7 @@ const ClientProfileHistory = () => {
               <span className="ml-8 font-bold">Add Notes</span>
             </div>
 
-              <form onSubmit={saveNote} className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
+              <form onSubmit={saveNote} className="px-8 pt-6 pb-8 mb-4 bg-white rounded ">
               <div className="mb-4">
                 <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="Date">
                   Session Date:
