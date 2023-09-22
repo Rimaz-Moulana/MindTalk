@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import CounsellorSidebar from './CounsellorSidebar';
-import CounsellorHeader from './Header';
+import CounsellorHeader from './CounsellorHeader';
 
 export default function Layout() {
   return (
