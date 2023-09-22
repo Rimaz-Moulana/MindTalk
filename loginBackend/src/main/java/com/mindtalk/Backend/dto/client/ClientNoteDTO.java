@@ -11,5 +11,5 @@ public class ClientNoteDTO {
 
     private String date;
     private String duration;
-    private String summary;
+    private String note;
 }
