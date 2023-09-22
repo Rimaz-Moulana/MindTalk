@@ -21,6 +21,7 @@ public class Counsellor {
     private String email;
     private Long licenseNo;
     private String licenseImage;
+   
     private Boolean status;
 
     public Long getId() {
