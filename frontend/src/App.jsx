@@ -20,8 +20,8 @@ import Wallet from './components/Payments/wallet'
 import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
-import Blogs from './pages/Blogs'
 import BlogView from './pages/BlogView'
+import Blogs from './pages/Blogs'
 import Landingpage from './pages/Landingpage'
 import PostBlog from './pages/PostBlog'
 import ClientAppointments from './pages/client/ClientAppointments'
@@ -44,7 +44,6 @@ import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
 import AdminCrudModerators from './pages/Admin/AdminCrudModerators'
 import AdminCrudUser from './pages/Admin/AdminCrudUser'
 import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppointments'
-import CounsellorAddDetails from './pages/counsellor/CounsellorAddDetalils'
 import CounsellorDetailsAdd from './pages/counsellor/CounsellorDetailsAdd'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
@@ -53,9 +52,9 @@ import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 
-import RequireAuth from './components/LoginSignup/RequireAuth'
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
+import RequireAuth from './components/LoginSignup/RequireAuth'
 import AddMeditation from './components/moderator/AddMeditation'
 import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
@@ -81,8 +80,8 @@ const App = () => (
                     <Route path="/checkout" element={<Checkout />} />
 
                     <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
-                    <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} />
-                    <Route path="/counsellor/addDetails" element={<CounsellorDetailsAdd />} />
+                    {/* <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} /> */}
+                    <Route path="/addDetails" element={<CounsellorDetailsAdd />} />
 
                     {/* <Route path="/table" element={<TableData />}  /> */}
                     {/* Routes that require authentication */}
