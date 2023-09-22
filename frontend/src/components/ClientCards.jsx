@@ -6,8 +6,8 @@ const ClientCards = ({ clientList }) => {
   clientList && console.log(clientList);
 
   return (
-    <div className='w-full mx-auto bg-white border border-gray-200 rounded-md shadow-lg'>
-      <table className="w-full border-collapse">
+    <div className='w-full mx-auto bg-white border border-gray-200 rounded-md shadow-lg overflow-x-auto'>
+      <table className="w-full border-collapse table-auto">
         <tbody className='divide-y divide-gray-200'>
           {clientList?.map((client, index) => (
             <tr key={clientList.id}>
