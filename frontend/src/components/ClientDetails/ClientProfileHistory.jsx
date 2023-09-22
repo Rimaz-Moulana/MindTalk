@@ -191,7 +191,7 @@ const ClientProfileHistory = () => {
         <div className="col-span-2 p-2">
           <div className="overflow-hidden">
             <div className="pt-5">
-              <span className="font-bold">Add Notes</span>
+              <span className="ml-8 font-bold">Add Notes</span>
             </div>
 
               <form onSubmit={saveNote} className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
