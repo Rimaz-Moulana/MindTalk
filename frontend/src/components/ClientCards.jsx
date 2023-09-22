@@ -6,15 +6,15 @@ const ClientCards = ({ clientList }) => {
   clientList && console.log(clientList);
 
   return (
-    <div className='w-full mx-auto bg-white shadow-lg rounded-md border border-gray-200'>
-      <table className="border-collapse w-full">
+    <div className='w-full mx-auto bg-white border border-gray-200 rounded-md shadow-lg'>
+      <table className="w-full border-collapse">
         <tbody className='divide-y divide-gray-200'>
           {clientList?.map((client, index) => (
             <tr key={clientList.id}>
               <td className="p-4">
                 <img
                   alt="user"
-                  className='w-20 h-20 rounded-full mx-auto'
+                  className='w-20 h-20 mx-auto rounded-full'
                   src={avatarPNG}
                   onError={(e) => {
                     e.target.src = avatarPNG;
@@ -22,20 +22,20 @@ const ClientCards = ({ clientList }) => {
                 />
               </td>
               <td className="p-4 whitespace-nowrap">
-                <span className='text-gray-800 font-semibold'>
+                <span className='font-semibold text-gray-800'>
                   {client.fname} {client.lname}
                 </span>
               </td>
-              <td className="p-4 flex space-x-2">
-                <Link
+              <td className="flex p-4 space-x-2">
+                {/* <Link
                   to={"profile"}
-                  className="bg-blue-700 text-white px-4 py-2 rounded-md border font-semibold hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
+                  className="flex items-center justify-center px-4 py-2 font-semibold text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black"
                 >
                   View Profile
-                </Link>
+                </Link> */}
                 <Link
                   to={`/counsellor/view-client/${client.id}`}
-                  className="bg-blue-700 text-white px-4 py-2 rounded-md border font-semibold hover:bg-white hover:border-blue-700 hover:text-black flex items-center justify-center"
+                  className="flex items-center justify-center px-4 py-2 mt-4 font-semibold text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black"
                 >
                   View Profile
                 </Link>

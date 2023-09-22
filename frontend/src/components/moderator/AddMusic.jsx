@@ -259,7 +259,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Title"
                             name="title"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.title}
                             onChange={handleInputChange}
                         />
@@ -268,7 +268,7 @@ const AddMusic = () => {
                         <label className="block text-sm font-medium text-gray-600">Category:</label>
                         <select
                             name="category"
-                            className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-select mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.category}
                             onChange={handleInputChange}
                         >
@@ -285,7 +285,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Description"
                             name="description"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.description}
                             onChange={handleInputChange}
                         />
@@ -295,7 +295,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Link"
                             name="link"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.link}
                             onChange={handleInputChange}
                         />

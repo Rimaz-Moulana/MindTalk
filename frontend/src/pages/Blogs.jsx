@@ -50,7 +50,7 @@ const Blogs = () => { // Define a functional component named Blogs
   }, []); // The empty dependency array [] ensures that this effect runs only once when the component mounts
 
   return ( // Return JSX for rendering the component
-    <div className='w-full py-8 bg-white rounded-xl'>
+    <div className='w-full py-8 bg-slate-50 rounded-xl'>
       <div className='mx-10 mb-8 text-center'>
         <h2 className='text-4xl font-bold text-gray-800'>Blogs</h2>
         <p className='my-3 text-gray-600'>Empowering Minds, Elevating Spirits: Your Path to Positivity!</p>
@@ -85,11 +85,11 @@ const Blogs = () => { // Define a functional component named Blogs
           <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md '>
             <img className='object-cover w-full h-52' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt={blog.title} />
             <div className='p-4'>
-              <h6 className='text-gray-700 font-semibold'>{blog.category}</h6>
+              <h6 className='font-semibold text-gray-700'>{blog.category}</h6>
               <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
               <p className='mt-2 text-gray-600 line-clamp-3'>{blog.content}</p>
 
-              <Link to={`/counsellor/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
+              <Link to={`/client/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
                 <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
                   <span className="hidden sm:inline">See more...</span>
                 </button>

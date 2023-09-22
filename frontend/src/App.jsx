@@ -11,6 +11,7 @@ import ClientCounsellors from './pages/client/ClientCounsellors'
 import ClientMeditation from './pages/client/ClientMeditation'
 import ClientMusic from './pages/client/ClientMusic'
 import ClientProfile from './pages/client/ClientProfile'
+import Checkout from './components/Payments/Checkout'
 // import CounsellorDashboard from './pages/counsellor/CounsellorDashboard'
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import TransHistory from './components/Payments/TransactionHistory'
@@ -76,6 +77,7 @@ const App = () => (
                     <Route path="/login" element={<Loginn />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/registermoderator" element={<Registermoderator />} />
+                    <Route path="/checkout" element={<Checkout />} />
 
                     <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
                     {/* <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} /> */}
@@ -97,17 +99,20 @@ const App = () => (
                             <Route path="clientmusic" element={<ClientMusic />} />
                             <Route path="clientmeditation" element={<ClientMeditation />} />
                             <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/blogview/:blogId" element={<BlogView />} />
+                            <Route path="blogs/blogview/:id" element={<BlogView />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             <Route path="clientappointments" element={<ClientAppointments />} />
+                           
                             <Route path="clientcounsellors/appointments" element={<ClientCounsellorAppointments />} />
                             <Route path="calls" element={<Dash />} />
                         </Route>
                     </Route>
 
                     <Route path="/wallet" element={<WalletLayout />}>
+                        <Route  element={<Wallet />} />
                         <Route index element={<Wallet />} />
-                        <Route path="/wallet/transhistory" element={<TransHistory />} />
+                        <Route path="transhistory" element={<TransHistory />} />
+                        <Route />
                     </Route>
 
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
