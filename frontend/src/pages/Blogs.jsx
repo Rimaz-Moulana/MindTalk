@@ -87,7 +87,7 @@ const Blogs = () => { // Define a functional component named Blogs
             <div className='p-4'>
               <h6 className='font-semibold text-gray-700'>{blog.category}</h6>
               <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
-              <p className='mt-2 text-gray-600 line-clamp-3'>{blog.content}</p>
+              <p className='mt-2 text-gray-600 line-clamp-3' dangerouslySetInnerHTML={{ __html: blog.content }} />
 
               <Link to={`/client/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
                 <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
