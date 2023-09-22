@@ -599,7 +599,7 @@ const Profile = () => {
             style={{background: 'url("https://source.unsplash.com/650x200?sky")'}}>
           </div>
           <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto -mt-10" />
-          <span className="font-bold text-xl text-blue-900">John Doe</span>
+          <span className="font-bold text-xl text-blue-900">{user.fname} {user.lname}</span>
 
         </div>
 
