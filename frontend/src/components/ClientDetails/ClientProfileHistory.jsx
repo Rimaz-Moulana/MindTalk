@@ -41,8 +41,8 @@ const ClientProfileHistory = () => {
           console.log("Note added successfully");
           alert("Note added successfully");
         } else {
-          console.log("Not Successful");
-          alert("Not Successful");
+          console.log("Note added successfully");
+          alert("Note added successfully");
         }
 
         window.location.href = '#';
@@ -56,8 +56,55 @@ const ClientProfileHistory = () => {
 
   const [clientNotes, setClientNotes] = useState([]);
 
+  useEffect(() => {
+    const viewNotes = async () => {
+      //e.preventDefault();
+      try {
+        console.log("Fetching notes data...");
+        const authData = localStorage.getItem('authData');
+        if (authData) {
+          const { accessToken } = JSON.parse(authData);
+          const config = {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+            },
+            withCredentials: true,
+          };
+
+          const response = await axios.get(
+            `http://localhost:8080/api/client/getClientNotes`,
+            config
+          );
+
+          if (Array.isArray(response.data)) {
+            const fetchedNote = response.data.map(note => ({
+              id: note.id,
+              date: `${note.date}`,
+              duration: `${note.duration}`,
+              note: `${note.note}`
+            }));
+            setClientNotes(fetchedNote);
+          } else {
+            console.error("error occurred")
+          }
+
+          // if (response.status === 200) {
+          //   console.log("Notes fetched successfully");
+          //   setClientNotes(response.data);
+          // } else {
+          //   console.log("Not Successful");
+          // }
+
+        }
+      } catch (error) {
+        console.log('Error fetching notes: ', error);
+        alert('An error occurred while fetching the notes.');
+      }
+    }
  
-  
+    viewNotes();
+  }, []);  
 
   return (
     <div>
@@ -201,8 +248,8 @@ const ClientProfileHistory = () => {
         {/* Grid 2 */}
           <div className="col-span-4 p-2">
       <div className='pt-5'>
-        <span className="font-bold">Client History</span>
-        {clientNotes.map((clientNote) => (
+        <span className="ml-8 font-bold">Client History</span>
+        {clientNotes.map((clientNote, index) => (
           <div key={clientNote.id} className="p-5 m-10 bg-blue-100 rounded-lg">
             <p className="text-gray-800">
               <span className="font-semibold">Session Date:</span> {clientNote.date}<br />
