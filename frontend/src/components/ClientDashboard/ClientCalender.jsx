@@ -32,14 +32,9 @@ function ClientCalendar() {
 
         if (response.status === 200) {
           const appointments = response.data.map((appointment) => {
-            const startTime = moment(appointment.date + 'T' + appointment.timeSlot).format('hh:mma');
-            const endTime = moment(appointment.date + 'T' + appointment.timeSlot)
-              .add(1, 'hour')
-              .format('hh:mma');
-            const title = `${startTime}-${endTime} Appointment `;
             return {
               id: appointment.id,
-              title: title,
+              title: 'Appointment',
               start: new Date(appointment.date + 'T' + appointment.timeSlot),
               end: new Date(appointment.date + 'T' + appointment.timeSlot),
             };
@@ -53,11 +48,12 @@ function ClientCalendar() {
   };
 
   return (
-    <div className="h-screen">
-      <div className="mt-4 h-full">
+    <div className="">
+      <h4 className="text-xl font-semibold "> Calendar</h4>
+      <div className="mt-4">
         <Calendar
           localizer={localizer}
-          events={events}
+          events={events} // Use the events state here
           startAccessor="start"
           endAccessor="end"
           style={{ height: 500 }} // Set the height of the calendar
