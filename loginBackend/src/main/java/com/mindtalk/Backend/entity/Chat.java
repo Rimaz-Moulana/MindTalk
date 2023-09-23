@@ -16,7 +16,8 @@ import java.util.List;
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int chatId;
+    private  String name;
 
     @ManyToOne
     private User user;
