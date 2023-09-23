@@ -1,30 +1,23 @@
 package com.mindtalk.Backend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Table(name = "message")
+@ToString
+@Entity
+@Table(name = "_message")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    private User receiver;
-
+    private int messageId;
+    private int chatId;
+    private String senderName;
     private String content;
-    private LocalDateTime timestamp;
+//    private MessageType type;
 }
