@@ -27,7 +27,8 @@ function AppointmentCalendar() {
     try {
       const authData = localStorage.getItem('authData');
       if (authData) {
-        const { accessToken, id } = JSON.parse(authData);
+        const { accessToken} = JSON.parse(authData);
+        const appCounsellorId = localStorage.getItem('appcounsellorId');
         const config = {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -36,7 +37,7 @@ function AppointmentCalendar() {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/client/appointment/get-appointments/${id}`,
+          `http://localhost:8080/api/client/appointment/get-appointments/counsellors/${appCounsellorId}`,
           config
         );
 
