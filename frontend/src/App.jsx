@@ -33,6 +33,7 @@ import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
 import CounsellorAvailability from './pages/counsellor/CounsellorAvailability'
+import DateSlotSelector from './pages/counsellor/DateSlotSelector'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import TestResult from './components/Diagnose Test/TestResult'
@@ -144,6 +145,7 @@ const App = () => (
                             <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
                             <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+                            <Route path="bookedslots" element={<DateSlotSelector />} />
                             <Route path="blogs" element={<Blogs />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}

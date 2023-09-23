@@ -21,8 +21,14 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	},
 	{
 		key: 'availability',
-		label: ' Set Availability',
+		label: ' Weekly Availability',
 		path: '/counsellor/availability',
+		icon: <FiPhone />
+	},
+	{
+		key: 'bookedslots',
+		label: ' Booked Slots',
+		path: '/counsellor/bookedslots',
 		icon: <FiPhone />
 	},
 	{
