@@ -47,7 +47,7 @@ const CounsellorAvailability = () => {
       <h2 className="text-xl font-semibold mb-4 text-center">Set Your Availability</h2>
       {daysInOrder.map((day) => renderDayAvailability(day))}
       <button
-        className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600 block mx-auto"
+        className="bg-blue-700 text-white rounded-full px-4 py-2 hover:bg-blue-600 block mx-auto"
         onClick={() => console.log(availability)}
       >
         Save
