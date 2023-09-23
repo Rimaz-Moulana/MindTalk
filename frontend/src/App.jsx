@@ -51,7 +51,7 @@ import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
-import ClientCalender from './components/ClientDashboard/ClientCalender'
+import ClientFullCalender from './components/ClientDashboard/ClientCalender'
 
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
@@ -103,7 +103,7 @@ const App = () => (
                             <Route path="blogs/blogview/:id" element={<BlogView />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             <Route path="clientappointments" element={<ClientAppointments />} />
-                            <Route path="clientcalender" element={<ClientCalender />} />
+                            <Route path="clientcalender" element={<ClientFullCalender />} />
                             <Route path="clientcounsellors/appointments" element={<ClientCounsellorAppointments />} />
                             <Route path="calls" element={<Dash />} />
                         </Route>
