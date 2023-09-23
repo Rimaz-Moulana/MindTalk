@@ -77,7 +77,7 @@ const Clients = () => {
   return (
     <div className='bg-gray-100'>
       <section>
-        <div className='flex flex-row flex-auto w-full'>
+        <div className='sm:flex sm:flex-row sm:w-full'>
           <div className='flex-grow'>
             <form className='flex'>
               <input
@@ -92,7 +92,7 @@ const Clients = () => {
           <div className='ml-auto'>
             <button
               onClick={openModal}
-              className='p-2 mt-6 mr-5 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black'
+              className='p-2 mt-6 ml-5 sm:mr-5 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black'
             >
               Add Client
             </button>

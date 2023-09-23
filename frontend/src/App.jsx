@@ -99,7 +99,7 @@ const App = () => (
                             <Route path="clientmusic" element={<ClientMusic />} />
                             <Route path="clientmeditation" element={<ClientMeditation />} />
                             <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/blogview/:blogId" element={<BlogView />} />
+                            <Route path="blogs/blogview/:id" element={<BlogView />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             <Route path="clientappointments" element={<ClientAppointments />} />
                            

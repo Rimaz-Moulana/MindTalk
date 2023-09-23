@@ -1,9 +1,16 @@
-import React from 'react';
+import { React, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
-function ProfileDetails() {
+
+function ProfileDetails({counsellorData}) {
+
+  const { firstname, lastname, email, city, address, phone, jobRole, degree, workplace, coreServices, scopeOfPractice, experience, ageGroup, language, joinDate} = counsellorData
+  
+
   return (
     <>
-      <div className="relative bg-center bg-cover rounded-t-lg h-60" style={{ backgroundImage: 'url("https://source.unsplash.com/1500x250?mountain")' }}>
+      <div className="relative h-64 bg-center bg-cover rounded-t-lg" style={{ backgroundImage: 'url("https://source.unsplash.com/1500x250?mountain")' }}>
         <div className="absolute top-2 right-2">
           {/* You can add an SVG or other content here */}
         </div>
@@ -14,11 +21,11 @@ function ProfileDetails() {
         />
       </div>
 
-      <div className="relative flex justify-center mt-28">
+      <div className="relative flex justify-center mt-20 ">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-gray-800">Pathum Lakshan Dissanayake</h1>
-          <p className="text-gray-500">Software Engineer</p>
-          <p className="text-gray-500">San Francisco, CA</p>
+          <h1 className="text-3xl font-semibold text-gray-800">{firstname} {lastname}</h1>
+          <p className="text-gray-500">{jobRole}</p>
+          <p className="text-gray-500">{city}</p>
           <p className="text-blue-500">Verified</p>
         </div>
       </div>
@@ -28,60 +35,108 @@ function ProfileDetails() {
       {/* <div className="flex flex-col w-full 2xl:w-2/3"> */}
         <div className="flex-1 p-8 bg-white rounded-lg ">
           <h4 className="text-xl font-bold text-gray-900">About</h4>
-          <p className="mt-2 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt voluptates obcaecati numquam error et ut fugiat asperiores. Sunt nulla ad incidunt laboriosam, laudantium est unde natus cum numquam, neque facere. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, magni odio magnam commodi sunt ipsum eum! Voluptas eveniet aperiam at maxime, iste id dicta autem odio laudantium eligendi commodi distinctio!
-          </p>
+        {/* <p className="my-2 text-gray-700">{about}</p> */}
+         <p className="my-2 text-gray-700" dangerouslySetInnerHTML={{ __html: counsellorData.about }} />
         </div>
 
         <hr className="my-4 border-t border-gray-300" />
 
         {/* Personal Info */}
-        <div className="px-8 mt-10">
-          <h2 className="text-xl font-semibold text-gray-800">Personal Info</h2>
-          <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2">
+        <div className="px-8 mt-8">
+          <h2 className="text-xl font-semibold text-gray-800">Personal Information</h2>
+          <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 sm:grid-cols-1">
             <div>
               <p className="text-sm text-gray-600">Full Name</p>
-              <p className="text-gray-800">John Doe</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Birthday</p>
-              <p className="text-gray-800">January 1, 1980</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Join Date</p>
-              <p className="text-gray-800">January 15, 2010</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-600">Mobile Number</p>
-              <p className="text-gray-800">+1 (123) 456-7890</p>
-            </div>
-            <div>
+              <p className="text-gray-800">{firstname} {lastname}</p>
+          </div>
+
+          <div>
+              <p className="text-sm text-gray-600">Address</p>
+              <p className="text-gray-800">{address}</p>
+          </div>
+          
+          <div>
               <p className="text-sm text-gray-600">Email</p>
-              <p className="text-gray-800">johndoe@example.com</p>
-            </div>
+              <p className="text-gray-800">{email}</p>
+          </div>
+          
+          <div>
+              <p className="text-sm text-gray-600">Mobile Number</p>
+              <p className="text-gray-800">{phone}</p>
+          </div>
+
+          <div>
+              <p className="text-sm text-gray-600">Degree</p>
+              <p className="text-gray-800">{degree}</p>
+          </div>
+          
+          <div>
+              <p className="text-sm text-gray-600">Current Workplace</p>
+              <p className="text-gray-800">{workplace}</p>
+          </div>
+        </div>
+        
+        <hr className="my-4 border-t border-gray-300" />
+
+
+         <div className='mt-8 '>
+        <h2 className="col-span-2 mt-6 text-xl font-semibold text-gray-800">Professional Information</h2>
+        <div className='grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 sm:grid-cols-1'>
+          
             <div>
-              <p className="text-sm text-gray-600">Location</p>
-              <p className="text-gray-800">San Francisco, CA</p>
+              <p className="text-sm text-gray-600">Core Services</p>
+              <p className="text-gray-800">{coreServices}</p>
             </div>
+
+            <div>
+              <p className="text-sm text-gray-600">Scope of Practices</p>
+              <p className="text-gray-800">{scopeOfPractice}</p>
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-600">Age Groups</p>
+              <p className="text-gray-800">{ageGroup}</p>
+            </div>
+
             <div>
               <p className="text-sm text-gray-600">Languages Spoken</p>
-              <p className="text-gray-800">English, Spanish</p>
+              <p className="text-gray-800">{language}</p>
             </div>
+            
             <div>
+                <p className="text-sm text-gray-600">Years of Experience</p>
+                <p className="text-gray-800">{experience}</p>
+            </div>
+            
+            <div>
+                <p className="text-sm text-gray-600">Join Date</p>
+                <p className="text-gray-800">{joinDate}</p>
+            </div>
+          
+          
+
+            
+            
+            
+          
+            
+            
+            {/* <div>
               <p className="text-sm text-gray-600">Social Profiles</p>
               <div className="space-y-2">
                 <a href="#" className="text-blue-500 hover:underline">LinkedIn</a>
                 <a href="#" className="text-blue-500 hover:underline">Twitter</a>
                 <a href="#" className="text-blue-500 hover:underline">GitHub</a>
               </div>
-            </div>
-          </div>
+            </div> */}
+        </div> 
+        </div>
         </div>
 
         <hr className="my-4 border-t border-gray-300" />
 
         {/* Activity Log */}
-        <div className="mt-6">
+        <div className="mt-10">
           <h2 className="px-8 text-xl font-semibold text-gray-800">Activity Log</h2>
           <div className="px-8 mt-4">
             {/* Timeline entries */}
