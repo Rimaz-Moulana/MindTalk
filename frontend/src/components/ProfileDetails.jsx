@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function ProfileDetails({counsellorData}) {
 
-  const { firstname, lastname, email, city, about, address, phone, jobRole, degree, workplace, coreServices, scopeOfPractice, experience, ageGroup, language, joinDate} = counsellorData
+  const { firstname, lastname, email, city, address, phone, jobRole, degree, workplace, coreServices, scopeOfPractice, experience, ageGroup, language, joinDate} = counsellorData
   
 
   return (
@@ -79,8 +79,8 @@ function ProfileDetails({counsellorData}) {
         <hr className="my-4 border-t border-gray-300" />
 
 
-         <div className=' mt-8'>
-        <h2 className="text-xl font-semibold text-gray-800 mt-6 col-span-2">Professional Information</h2>
+         <div className='mt-8 '>
+        <h2 className="col-span-2 mt-6 text-xl font-semibold text-gray-800">Professional Information</h2>
         <div className='grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 sm:grid-cols-1'>
           
             <div>

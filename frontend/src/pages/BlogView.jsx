@@ -62,7 +62,7 @@ const BlogView = () => {
   }
 
   return (
-    <div className='w-full h-[52rem] bg-white rounded-2xl'>
+    <div className='w-full bg-white rounded-2xl'>
     <div className="max-w-screen-lg mx-auto ">
       <main className="w-full p-8">
         {isLoading ? (
