@@ -1,10 +1,10 @@
 import React from 'react'
-import AppointmentCalendar from '../../components/AppointmentCalendar'
+import CounsellorAppointmentFullCalender from '../../components/CounsellorDashboard/CounsellorAppointmentFullCalender'
 
 function CounsellorAppointments() {
   return (
-    <div className='bg-white rounded-xl p-5'>
-      <AppointmentCalendar />
+    <div className=''>
+      <CounsellorAppointmentFullCalender />
     </div>
   )
 }
