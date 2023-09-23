@@ -20,6 +20,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 		icon: <FiPhone />
 	},
 	{
+		key: 'availability',
+		label: ' Set Availability',
+		path: '/counsellor/availability',
+		icon: <FiPhone />
+	},
+	{
 		key: 'appointments',
 		label: 'Appointments',
 		path: '/counsellor/counsellorappointments',

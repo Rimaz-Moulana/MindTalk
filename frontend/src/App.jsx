@@ -32,6 +32,7 @@ import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import CounsellorAvailability from './pages/counsellor/CounsellorAvailability'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import TestResult from './components/Diagnose Test/TestResult'
@@ -141,6 +142,7 @@ const App = () => (
                             {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
                             <Route path="view-client/:id" element={<CounsellorClientProfile />} />
                             <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
+                            <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
                             <Route path="blogs" element={<Blogs />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
