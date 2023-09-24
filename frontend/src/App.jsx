@@ -111,12 +111,7 @@ const App = () => (
                         </Route>
                     </Route>
 
-                    <Route path="/wallet" element={<WalletLayout />}>
-                        <Route  element={<Wallet />} />
-                        <Route index element={<Wallet />} />
-                        <Route path="transhistory" element={<TransHistory />} />
-                        <Route />
-                    </Route>
+                  
 
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route element={<AdminLayout />}>
@@ -151,6 +146,13 @@ const App = () => (
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
                         </Route>
+
+                        <Route path="wallet" element={<WalletLayout />}>
+                        <Route  element={<Wallet />} />
+                        <Route index element={<Wallet />} />
+                        <Route path="transhistory" element={<TransHistory />} />
+                        <Route />
+                    </Route>
                     </Route>
 
                     <Route path="/moderator" element={<RequireAuth allowedRoles={[ROLES.Moderator]} />}>
