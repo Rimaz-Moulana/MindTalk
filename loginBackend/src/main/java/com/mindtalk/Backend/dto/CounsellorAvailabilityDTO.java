@@ -12,18 +12,18 @@ import java.time.LocalTime;
 @Data
 public class CounsellorAvailabilityDTO {
     private Integer CounsellorId;
-    private LocalDate Mon_D;
-    private LocalTime Mon_T;
-    private LocalDate Tue_D;
-    private LocalTime Tue_T;
-    private LocalDate Wed_D;
-    private LocalTime Wed_T;
-    private LocalDate Thur_D;
-    private LocalTime Thur_T;
-    private LocalDate Fri_D;
-    private LocalTime Fri_T;
-    private LocalDate Sat_D;
-    private LocalTime Sat_T;
-    private LocalDate Sun_D;
-    private LocalTime Sun_T;
+    private LocalTime Mon_S;
+    private LocalTime Mon_E;
+    private LocalTime Tue_S;
+    private LocalTime Tue_E;
+    private LocalTime Wed_S;
+    private LocalTime Wed_E;
+    private LocalTime Thur_S;
+    private LocalTime Thur_E;
+    private LocalTime Fri_S;
+    private LocalTime Fri_E;
+    private LocalTime Sat_S;
+    private LocalTime Sat_E;
+    private LocalTime Sun_S;
+    private LocalTime Sun_E;
 }

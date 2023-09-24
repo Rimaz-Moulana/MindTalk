@@ -1,16 +1,12 @@
 package com.mindtalk.Backend.controller.counsellor;
 
-import com.mindtalk.Backend.dto.AppointmentDTO;
 import com.mindtalk.Backend.dto.CounsellorAvailabilityDTO;
-import com.mindtalk.Backend.dto.ExternalBookedDTO;
 import com.mindtalk.Backend.service.CounsellorAvailabilityService;
-import com.mindtalk.Backend.service.ExternalBookedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -33,23 +29,23 @@ public class CounsellorAvailabilityController {
         try {
             for (CounsellorAvailabilityDTO counsellorAvailabilityDTO : counsellorAvailabilityDTOList) {
                 Integer CounsellorId = counsellorAvailabilityDTO.getCounsellorId();
-                LocalDate Mon_D =counsellorAvailabilityDTO.getMon_D();
-                LocalTime Mon_T = counsellorAvailabilityDTO.getMon_T();
-                LocalDate Tue_D =counsellorAvailabilityDTO.getTue_D();
-                LocalTime Tue_T = counsellorAvailabilityDTO.getTue_T();
-                LocalDate Wed_D =counsellorAvailabilityDTO.getWed_D();
-                LocalTime Wed_T = counsellorAvailabilityDTO.getWed_T();
-                LocalDate Thur_D =counsellorAvailabilityDTO.getThur_D();
-                LocalTime Thur_T = counsellorAvailabilityDTO.getThur_T();
-                LocalDate Fri_D =counsellorAvailabilityDTO.getFri_D();
-                LocalTime Fri_T = counsellorAvailabilityDTO.getFri_T();
-                LocalDate Sat_D =counsellorAvailabilityDTO.getSat_D();
-                LocalTime Sat_T = counsellorAvailabilityDTO.getSat_T();
-                LocalDate Sun_D =counsellorAvailabilityDTO.getSun_D();
-                LocalTime Sun_T = counsellorAvailabilityDTO.getSun_T();
+                LocalTime Mon_S =counsellorAvailabilityDTO.getMon_S();
+                LocalTime Mon_E = counsellorAvailabilityDTO.getMon_E();
+                LocalTime Tue_S =counsellorAvailabilityDTO.getTue_S();
+                LocalTime Tue_E = counsellorAvailabilityDTO.getTue_E();
+                LocalTime Wed_S =counsellorAvailabilityDTO.getWed_S();
+                LocalTime Wed_E = counsellorAvailabilityDTO.getWed_E();
+                LocalTime Thur_S =counsellorAvailabilityDTO.getThur_S();
+                LocalTime Thur_E = counsellorAvailabilityDTO.getThur_E();
+                LocalTime Fri_S =counsellorAvailabilityDTO.getFri_S();
+                LocalTime Fri_E = counsellorAvailabilityDTO.getFri_E();
+                LocalTime Sat_S =counsellorAvailabilityDTO.getSat_S();
+                LocalTime Sat_E = counsellorAvailabilityDTO.getSat_E();
+                LocalTime Sun_S =counsellorAvailabilityDTO.getSun_S();
+                LocalTime Sun_E = counsellorAvailabilityDTO.getSun_E();
 
-                counsellorAvailabilityService.addAvailabilityDays(CounsellorId, Mon_D, Mon_T, Tue_D, Tue_T,Wed_D,Wed_T,
-                        Thur_D,Thur_T,Fri_D,Fri_T,Sat_D,Sat_T,Sun_D,Sun_T);
+                counsellorAvailabilityService.addAvailabilityDays(CounsellorId, Mon_S, Mon_E, Tue_S, Tue_E,Wed_S,Wed_E,
+                        Thur_S,Thur_E,Fri_S,Fri_E,Sat_S,Sat_E,Sun_S,Sun_E);
             }
 
             return ResponseEntity.ok("Availability Slots added successfully");

@@ -20,25 +20,25 @@ public class CounsellorAvailabilityService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void addAvailabilityDays(Integer CounsellorId, LocalDate Mon_D, LocalTime Mon_T, LocalDate Tue_D, LocalTime Tue_T,LocalDate Wed_D,
-                                    LocalTime Wed_T,LocalDate Thur_D, LocalTime Thur_T, LocalDate Fri_D, LocalTime Fri_T,
-                                    LocalDate Sat_D, LocalTime Sat_T,LocalDate Sun_D, LocalTime Sun_T) {
+    public void addAvailabilityDays(Integer CounsellorId, LocalTime Mon_S, LocalTime Mon_E, LocalTime Tue_S, LocalTime Tue_E,LocalTime Wed_S,
+                                    LocalTime Wed_E,LocalTime Thur_S, LocalTime Thur_E, LocalTime Fri_S, LocalTime Fri_E,
+                                    LocalTime Sat_S, LocalTime Sat_E,LocalTime Sun_S, LocalTime Sun_E) {
         CounsellorAvailability counsellorAvailability = new CounsellorAvailability();
         counsellorAvailability.setCounsellorId(CounsellorId);
-        counsellorAvailability.setMon_D(Mon_D);
-        counsellorAvailability.setMon_T(Mon_T);
-        counsellorAvailability.setTue_D(Tue_D);
-        counsellorAvailability.setTue_T(Tue_T);
-        counsellorAvailability.setWed_D(Wed_D);
-        counsellorAvailability.setWed_T(Wed_T);
-        counsellorAvailability.setThur_D(Thur_D);
-        counsellorAvailability.setSun_T(Thur_T);
-        counsellorAvailability.setFri_D(Fri_D);
-        counsellorAvailability.setFri_T(Fri_T);
-        counsellorAvailability.setSat_D(Sat_D);
-        counsellorAvailability.setSat_T(Sat_T);
-        counsellorAvailability.setSun_D(Sun_D);
-        counsellorAvailability.setSun_T(Sun_T);
+        counsellorAvailability.setMon_S(Mon_S);
+        counsellorAvailability.setMon_E(Mon_E);
+        counsellorAvailability.setTue_S(Tue_S);
+        counsellorAvailability.setTue_E(Tue_E);
+        counsellorAvailability.setWed_S(Wed_S);
+        counsellorAvailability.setWed_E(Wed_E);
+        counsellorAvailability.setThur_S(Thur_S);
+        counsellorAvailability.setThur_E(Thur_E);
+        counsellorAvailability.setFri_S(Fri_S);
+        counsellorAvailability.setFri_E(Fri_E);
+        counsellorAvailability.setSat_S(Sat_S);
+        counsellorAvailability.setSat_E(Sat_E);
+        counsellorAvailability.setSun_S(Sun_S);
+        counsellorAvailability.setSun_E(Sun_E);
         counsellorAvailabilityRepository.save(counsellorAvailability);
     }
 
