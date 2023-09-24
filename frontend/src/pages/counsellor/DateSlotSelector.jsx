@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const DateSlotSelector = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [selectedSlots, setSelectedSlots] = useState([]);
+
+
 
   const handleAddSlot = () => {
     if (selectedDate && startTime && endTime) {
@@ -27,12 +30,48 @@ const DateSlotSelector = () => {
     setSelectedSlots(updatedSlots);
   };
 
+
   const isAddAllSlotsButtonVisible = selectedSlots.length > 0;
 
-  const handleAddAllSlots = () => {
-    // Add logic to add all selected slots here
-    console.log("Adding all slots:", selectedSlots);
+  const handleAddAllSlots = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken, id } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+
+        const slotsData = selectedSlots.map((slot) => ({
+          counsellorId: id,
+          date: slot.date,
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+        }));
+
+        const response = await axios.post(
+          'http://localhost:8080/api/v1/external-booked/add',
+          slotsData,
+          config
+        );
+
+        if (response.status === 200) {
+          console.log('All selected slots added successfully');
+          // Optionally, you can clear the selectedSlots array here
+          setSelectedSlots([]);
+        } else {
+          console.error('Error adding slots');
+        }
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
+
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-md">
