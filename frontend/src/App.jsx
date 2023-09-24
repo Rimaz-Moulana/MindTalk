@@ -16,7 +16,7 @@ import Checkout from './components/Payments/Checkout'
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import TransHistory from './components/Payments/TransactionHistory'
 import WalletLayout from './components/Payments/WalletLayout'
-import Wallet from './components/Payments/wallet'
+import CounsellorWallet from './pages/counsellor/CounsellorWallet'
 import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
@@ -148,8 +148,8 @@ const App = () => (
                         </Route>
 
                         <Route path="wallet" element={<WalletLayout />}>
-                        <Route  element={<Wallet />} />
-                        <Route index element={<Wallet />} />
+                        <Route  element={<CounsellorWallet />} />
+                        <Route index element={<CounsellorWallet />} />
                         <Route path="transhistory" element={<TransHistory />} />
                         <Route />
                     </Route>
