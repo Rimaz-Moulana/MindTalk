@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,12 +20,13 @@ public class PaymentsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void createPayment(Long payment_id, Integer userId, Integer amount, String payment_type) {
+    public void createPayment(Long payment_id, Integer userId, Integer amount, String payment_type, LocalDateTime timeline) {
         Payments payments = new Payments();
         payments.setPayment_id(payment_id);
         payments.setUserId(userId);
         payments.setAmount(amount);
         payments.setPayment_type(payment_type);
+        payments.setTimeline(timeline);
         paymentsRepository.save(payments);
     }
 

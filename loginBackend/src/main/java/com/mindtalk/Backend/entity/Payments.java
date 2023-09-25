@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,5 +24,6 @@ public class Payments {
     private Long payment_id;
     private Integer userId;
     private Integer amount;
-    private String Payment_type;
+    private String payment_type;
+    private LocalDateTime timeline;
 }

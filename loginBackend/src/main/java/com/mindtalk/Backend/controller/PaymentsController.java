@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @RestController
 @RequestMapping("/api/v1/payments")
@@ -34,7 +35,9 @@ public class PaymentsController {
 
             String payment_type=paymentsDTO.getPayment_type();
 
-            paymentsService.createPayment(payment_id, userId, amount, payment_type);
+            LocalDateTime timeline = paymentsDTO.getTimeline();
+
+            paymentsService.createPayment(payment_id, userId, amount, payment_type, timeline);
 
             return ResponseEntity.ok("Appointment added successfully");
         } catch (Exception e) {
