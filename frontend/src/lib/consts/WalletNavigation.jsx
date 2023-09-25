@@ -13,12 +13,7 @@ export const WALLET_SIDEBAR_LINKS = [
 		path: '/counsellor/wallet/transhistory',
 		icon: <FiDollarSign />
 	},
-	{
-		key: 'withdraw',
-		label: 'Withdraw',
-		path: '/withdraw',
-		icon: <FiCreditCard />
-	},
+	
 	{
 		key: 'dashoboard',
 		label: 'Dashboard',
