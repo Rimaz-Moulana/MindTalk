@@ -1,5 +1,6 @@
 package com.mindtalk.Backend.dto.entertainment;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ public class BlogsDTO {
 
     private String title;
     private String category;
+    @Column(length = 10000000)
     private String content;
     private int status;
 

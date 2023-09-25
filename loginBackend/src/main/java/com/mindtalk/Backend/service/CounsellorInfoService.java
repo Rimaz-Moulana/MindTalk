@@ -36,4 +36,17 @@ public class CounsellorInfoService {
     public List<Counsellor> getAllCounsellors() {
         return counsellorRepository.findAll();
     }
+
+
+
+
+    //Pathum's Service
+
+    public List<Counsellor> getAllCounsellor(){
+        return counsellorRepository.findAll();
+    }
+
+    public Counsellor getCounsellorById(Long id){
+        return counsellorRepository.findById(id).orElse(null);
+    }
 }

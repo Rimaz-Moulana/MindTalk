@@ -19,9 +19,21 @@ public class Counsellor {
     private String firstname;
     private String lastname;
     private String email;
+    @Column(length = 100000)
+    private String about;
     private Long licenseNo;
     private String licenseImage;
-   
+    private String jobRole;
+    private String address;
+    private String phone;
+    private String degree;
+    private String workplace;
+    private String coreServices;
+    private String scopeOfPractice;
+    private String experience;
+    private String ageGroup;
+    private String language;
+    private String joinDate;
     private Boolean status;
 
     public Long getId() {

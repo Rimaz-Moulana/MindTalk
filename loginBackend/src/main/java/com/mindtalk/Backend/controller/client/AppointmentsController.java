@@ -54,4 +54,10 @@ public class AppointmentsController {
     public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
         return appointmentService.getAppointmentsForUser(userId);
     }
+
+    @GetMapping("/get-appointments/counsellors/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<AppointmentDTO> getAppointmentsForCounsellors(@PathVariable Integer counsellorId) {
+        return appointmentService.getAppointmentsForCounsellors(counsellorId);
+    }
 }

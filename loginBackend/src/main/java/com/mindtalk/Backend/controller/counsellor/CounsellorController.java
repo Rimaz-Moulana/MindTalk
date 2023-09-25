@@ -3,6 +3,7 @@ package com.mindtalk.Backend.controller.counsellor;
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
 
 import com.mindtalk.Backend.entity.Counsellor;
+import com.mindtalk.Backend.entity.client.ClientNoteEntity;
 import com.mindtalk.Backend.service.CounsellorInfoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,34 @@ public class CounsellorController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+
+    //Pathum's Controller
+
+    @GetMapping("/getCounsellor/{id}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<Counsellor> getCounsellorById(@PathVariable Long id){
+        Counsellor counsellor = counsellorInfoService.getCounsellorById(id);
+
+        if(counsellor != null){
+            return ResponseEntity.ok(counsellor);
+        } else {
+            return (ResponseEntity<Counsellor>) ResponseEntity.noContent();
+        }
+    }
+
+    @GetMapping("/allCounsellor")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<List<Counsellor>> getAllCounsellor(){
+        List<Counsellor> allCounsellor = counsellorInfoService.getAllCounsellor();
+
+        if(!allCounsellor.isEmpty()){
+            return ResponseEntity.ok(allCounsellor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

@@ -39,4 +39,9 @@ public class AppointmentService {
         List<Appointments> appointments = appointmentRepository.findByUserId(userId);
         return modelMapper.map(appointments, new TypeToken<List<AppointmentDTO>>(){}.getType());
     }
+
+    public List<AppointmentDTO> getAppointmentsForCounsellors(Integer counsellorId) {
+        List<Appointments> appointments = appointmentRepository.findByCounsellorId(counsellorId);
+        return modelMapper.map(appointments, new TypeToken<List<AppointmentDTO>>(){}.getType());
+    }
 }

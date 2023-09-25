@@ -28,7 +28,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'appointments',
 		label: 'Appointments',
-		path: 'clientappointments',
+		path: 'clientcalender',
 		icon: <FiCalendar />
 	},
 	{

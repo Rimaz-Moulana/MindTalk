@@ -62,16 +62,17 @@ const BlogView = () => {
   }
 
   return (
-    <div className='w-full h-[52rem] bg-white rounded-2xl'>
+    <div className='w-full bg-white rounded-2xl'>
     <div className="max-w-screen-lg mx-auto ">
       <main className="w-full p-8">
         {isLoading ? (
           <p>Loading...</p>
         ) : (
           <div>
-            <h2 className="mb-4 text-4xl font-semibold text-gray-800">{blogData.title}</h2>
-            <div className="mb-4 text-sm text-gray-600">{blogData.category}</div>
-            <div className="prose prose-lg text-gray-800">{blogData.content}</div>
+            <h2 className="mb-3 text-3xl font-semibold text-gray-900">{blogData.title}</h2>
+            <div className="mb-4 text-sm font-bold text-gray-500">{blogData.category}</div>
+            <div className="prose prose-lg text-gray-800" dangerouslySetInnerHTML={{ __html: blogData.content }} />
+            {/* <div className="prose prose-lg text-gray-800">{blogData.content}</div> */}
           </div>
         )}
       </main>
