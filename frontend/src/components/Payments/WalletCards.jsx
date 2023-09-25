@@ -6,6 +6,7 @@ import axios from 'axios';
 export default function WalletCards() {
     const [balance, setBalance] = useState(null);
     const [monthlyBalance, setMonthlyBalance] = useState(null);
+    const [withdraw, setWithdraw] = useState(null);
     const [activeCard, setActiveCard] = useState(1); // Initial active card is 1
 
     const handleCardClick = (cardNumber) => {
@@ -36,6 +37,12 @@ export default function WalletCards() {
                     );
                     console.log('API Response:', Monthlyresponse.data);
                     setMonthlyBalance(Monthlyresponse.data);
+
+                    const Withdrawresponse = await axios.get(`http://localhost:8080/api/v1/withdraws/sumWithdraws/${id}`,
+                    config
+                );
+                console.log('API Response:', Withdrawresponse.data);
+                setWithdraw(Withdrawresponse.data);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -81,7 +88,9 @@ export default function WalletCards() {
                     </div>
                     <div className="content mt-4 flex flex-col justify-end">
                         <p className="text-s">Total Withdraw</p>
-                        <p className="font-bold text-2xl">$1000.00</p>
+                        <p className="font-bold text-2xl">
+                            {withdraw !== undefined && withdraw !== null ? `Rs.${withdraw.toFixed(2)}` : 'Loading...'}
+                        </p>
                     </div>
                 </div>
             </div>
