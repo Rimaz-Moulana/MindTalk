@@ -13,4 +13,8 @@ public interface PaymentsRepository extends JpaRepository <Payments, Integer> {
     @Query("SELECT SUM(p.amount) FROM Payments p WHERE p.counsellorId = :counsellorId")
     Integer sumAmountsForCounselors(@Param("counsellorId") Integer counsellorId);
 
+    @Query("SELECT SUM(p.amount) FROM Payments p WHERE p.counsellorId = :counsellorId AND MONTH(p.timeline) = MONTH(CURRENT_DATE())")
+    Integer sumAmountsForCounselorsCurrentMonth(@Param("counsellorId") Integer counsellorId);
+
+
 }

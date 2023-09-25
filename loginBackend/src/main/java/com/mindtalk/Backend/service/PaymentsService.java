@@ -39,4 +39,8 @@ public class PaymentsService {
     public Integer sumAmountsForCounselors(Integer counsellorId) {
         return paymentsRepository.sumAmountsForCounselors(counsellorId);
     }
+
+    public Integer sumAmountsForCounselorsCurrentMonth(Integer counsellorId) {
+        return paymentsRepository.sumAmountsForCounselorsCurrentMonth(counsellorId);
+    }
 }

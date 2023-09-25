@@ -64,5 +64,16 @@ public class PaymentsController {
         }
     }
 
+    @GetMapping("/sumMonthlyAmounts/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<Integer> sumAmountsForCounselorsCurrentMonth(@PathVariable Integer counsellorId) {
+        try {
+            Integer sumMonthlyAmount = paymentsService.sumAmountsForCounselorsCurrentMonth(counsellorId);
+            return ResponseEntity.ok(sumMonthlyAmount);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(-1); // You can choose an appropriate error code or response here.
+        }
+    }
+
 
 }
