@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiDollarSign, FiPocket, FiHome } from 'react-icons/fi';
 import graph1Image from '../../components/Payments/graph1.png';
 import axios from 'axios';
@@ -24,10 +24,11 @@ export default function WalletCards() {
                         },
                         withCredentials: true,
                     };
-                    const response = await axios.get(`http://localhost:8080/api/v1/payments/get/${id}`,
+                    const response = await axios.get(`http://localhost:8080/api/v1/payments/sumAmounts/${id}`,
                         config
                     );
-                    setBalance(response.data.balance);
+                    console.log('API Response:', response.data);
+                    setBalance(response.data);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -55,7 +56,7 @@ export default function WalletCards() {
                     <div className="content mt-4 flex flex-col justify-end">
                         <p className="text-s">Total Balance</p>
                         <p className="font-bold text-2xl">
-                            {balance !== null ? `Rs.${balance.toFixed(2)}` : 'Loading...'}
+                            {balance !== undefined && balance !== null ? `Rs.${balance.toFixed(2)}` : 'Loading...'}
                         </p>
                     </div>
                 </div>
