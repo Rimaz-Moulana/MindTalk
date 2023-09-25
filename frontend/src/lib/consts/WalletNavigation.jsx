@@ -4,25 +4,20 @@ export const WALLET_SIDEBAR_LINKS = [
 	{
 		key: 'wallet',
 		label: 'Wallet',
-		path: '/wallet',
+		path: '/counsellor/wallet',
 		icon: <FiPocket />
 	},
 	{
 		key: 'transhistory',
 		label: 'Transaction History',
-		path: '/wallet/transhistory',
+		path: '/counsellor/wallet/transhistory',
 		icon: <FiDollarSign />
 	},
-	{
-		key: 'withdraw',
-		label: 'Withdraw',
-		path: '/withdraw',
-		icon: <FiCreditCard />
-	},
+	
 	{
 		key: 'dashoboard',
 		label: 'Dashboard',
-		path: '/',
+		path: '/counsellor',
 		icon: <FiAirplay />
 	}
 ]

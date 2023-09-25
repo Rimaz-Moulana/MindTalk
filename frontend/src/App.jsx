@@ -16,7 +16,7 @@ import Checkout from './components/Payments/Checkout'
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import TransHistory from './components/Payments/TransactionHistory'
 import WalletLayout from './components/Payments/WalletLayout'
-import Wallet from './components/Payments/wallet'
+import CounsellorWallet from './pages/counsellor/CounsellorWallet'
 import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
@@ -32,6 +32,8 @@ import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import CounsellorAvailability from './pages/counsellor/CounsellorAvailability'
+import DateSlotSelector from './pages/counsellor/DateSlotSelector'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import TestResult from './components/Diagnose Test/TestResult'
@@ -51,6 +53,7 @@ import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import ClientFullCalender from './components/ClientDashboard/ClientFullCalender'
 
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
@@ -102,18 +105,13 @@ const App = () => (
                             <Route path="blogs/blogview/:id" element={<BlogView />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             <Route path="clientappointments" element={<ClientAppointments />} />
-                           
+                            <Route path="clientcalender" element={<ClientFullCalender />} />
                             <Route path="clientcounsellors/appointments" element={<ClientCounsellorAppointments />} />
                             <Route path="calls" element={<Dash />} />
                         </Route>
                     </Route>
 
-                    <Route path="/wallet" element={<WalletLayout />}>
-                        <Route  element={<Wallet />} />
-                        <Route index element={<Wallet />} />
-                        <Route path="transhistory" element={<TransHistory />} />
-                        <Route />
-                    </Route>
+                  
 
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route element={<AdminLayout />}>
@@ -140,12 +138,21 @@ const App = () => (
                             {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
                             <Route path="view-client/:id" element={<CounsellorClientProfile />} />
                             <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
+                            <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
+                            <Route path="bookedslots" element={<DateSlotSelector />} />
                             <Route path="blogs" element={<Blogs />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
                         </Route>
+
+                        <Route path="wallet" element={<WalletLayout />}>
+                        <Route  element={<CounsellorWallet />} />
+                        <Route index element={<CounsellorWallet />} />
+                        <Route path="transhistory" element={<TransHistory />} />
+                        <Route />
+                    </Route>
                     </Route>
 
                     <Route path="/moderator" element={<RequireAuth allowedRoles={[ROLES.Moderator]} />}>
