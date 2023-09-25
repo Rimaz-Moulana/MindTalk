@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 
-// eslint-disable-next-line react/prop-types
-const CounsellorDetailsAdd = ({onSubmit}) => {
+
+const CounsellorDetailsAdd = () => {
   const [detailsData, setDetailsData] = useState([]);
   const [idCounter, setIdCounter] = useState(1);
   const [firstname, setFirstname] = useState('');
@@ -11,24 +11,52 @@ const CounsellorDetailsAdd = ({onSubmit}) => {
   const [licenseNo, setLicenseNo] = useState('');
   const [licenseImage, setLicenseImage] = useState('');
 
+  // const [images, setImages] = useState([]);
+
+  // const [imageUrl, setImageUrl] = useState();
+
+  // const cloud_name = "dnwpu6fhy";
+  // const upload_preset = "mlkfiprl";
+  
+  // const {files} = document.querySelector(".app_uploadInput");
+  // const formData = new FormData();
+
   const handeleSubmit = (e) => {
     if(firstname && lastname && email && licenseNo && licenseImage){
       const newData = {id: idCounter, firstname, lastname,email,licenseNo,licenseImage};
       setIdCounter(idCounter+1);
       setDetailsData([...detailsData, newData]);
-
+      
       //save data to localStorage
       localStorage.setItem('detailsData',JSON.stringify(detailsData));
       
         e.preventDefault();
-        onSubmit({firstname, lastname, email , licenseNo, licenseImage});
-        setFirstname("");
-        setLastname("");
-        setEmail("");
-        setLicenseNo("");
-        setLicenseImage("");
-
+        // onSubmit({firstname, lastname, email , licenseNo, licenseImage});
+        // setFirstname("");
+        // setLastname("");
+        // setEmail("");
+        // setLicenseNo("");
+        // setLicenseImage("");
+        console.log(newData)
       }
+
+      // formData.append("file", files[0]);
+      // formData.append("upload_preset", upload_preset);
+      // const options = {
+      //   method: "POST",
+      //   body: formData,
+      // }
+
+      // console.log(setImageUrl);
+      // return fetch(`https://api.Cloudinary.com/v1_1/${cloud_name}/image/upload`, 
+      //   options
+      //   )
+      //   .then((res)=> res.json())
+      //   .then((res)=> {setImageUrl(res.secure_url);
+      //   })
+      //   .catch((err) => console.log(err));
+
+        
   };
 
   return (
@@ -48,7 +76,7 @@ const CounsellorDetailsAdd = ({onSubmit}) => {
               {/* <!-- Right column container --> */}
               <div className="mb-12 p-14 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12 flex flex-col">
               <h1 className='text-2xl font-bold mb-4'>Add Your Details</h1>
-              <form onSubmit={handeleSubmit}>
+              <form >
           <div className='mb-4'>
           <label htmlFor='firstName' className='block text-sm font-medium mb-1'>First Name</label>
           <input
@@ -106,13 +134,14 @@ const CounsellorDetailsAdd = ({onSubmit}) => {
                 accept="image/*"
                 value={licenseImage}
                 onChange={(e) => setLicenseImage(e.target.value)}
-                className="px-3 py-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                className=""
               />
             </div>
             <div className='lg:w-96'>
             <button
               type="submit"
               className="bg-blue-500 lg:w-[400px] text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              onClick={handeleSubmit}
             >
               Submit
             </button>
