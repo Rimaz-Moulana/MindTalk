@@ -1,0 +1,50 @@
+package com.mindtalk.Backend.controller;
+
+import com.mindtalk.Backend.dto.AppointmentDTO;
+import com.mindtalk.Backend.dto.PaymentsDTO;
+import com.mindtalk.Backend.service.PaymentsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+@RestController
+@RequestMapping("/api/v1/payments")
+public class PaymentsController {
+    @Autowired
+    private PaymentsService paymentsService;
+
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public PaymentsController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
+    @PostMapping("/create")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<String> createPayment(@RequestBody PaymentsDTO paymentsDTO) {
+        try {
+            Long payment_id=paymentsDTO.getPayment_id();
+
+            Integer userId=paymentsDTO.getUserId();
+
+            Integer amount=paymentsDTO.getAmount();
+
+            String payment_type=paymentsDTO.getPayment_type();
+
+            paymentsService.createPayment(payment_id, userId, amount, payment_type);
+
+            return ResponseEntity.ok("Appointment added successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred");
+        }
+    }
+
+    @GetMapping("/get/{userId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<PaymentsDTO> getPaymentsForCounsellors(@PathVariable Integer userId) {
+        return paymentsService.getPaymentsForCounsellors(userId);
+    }
+}
