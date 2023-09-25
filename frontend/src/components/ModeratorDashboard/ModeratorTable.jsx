@@ -1,15 +1,35 @@
 // import React from 'react';
 import { useEffect, useState } from 'react';
-import ModeratorButton from './ModeratorButton';
 
 export default function RequestTable() {
     // const [showModal, setShowModal] = React.useState(false);
     
     // data from the database will store here
     const data = JSON.parse(localStorage.getItem("detailsData"));
-    // console.log(data);
 
     const [date,setDate] = useState('');
+    const [isHovered,setIsHovered] = useState(false);
+    
+    
+
+    const handleMouseEnter = () =>{
+        setIsHovered(true);
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    }
+    // console.log(data.length)
+    // console.log(data[0].licenseImage)
+    // for(let i = 0;i < data.length ; i++)
+    // {
+    //     console.log(data[i].licenseImage);
+    //     if(data[i].licenseImage){
+    //         data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\','');
+    //         console.log(data[i].licenseImage);
+    //     }
+    // }
+
 
     useEffect( ()=>{
         const currentDate = new Date();
@@ -21,7 +41,16 @@ export default function RequestTable() {
         const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
         setDate(formattedDate);
+
+
     })
+
+    // const removeItem = ()=>{
+    //     const updateArray =
+    // }
+
+   
+    
     //     const Requests = [
     //     {
     //         id: 1,
@@ -77,6 +106,12 @@ export default function RequestTable() {
                                         Date
                                     </th>
                                     <th scope="col" className="px-6 py-4">
+                                        License Number
+                                    </th>
+                                    <th scope="col" className="px-6 py-4">
+                                        License Image
+                                    </th>
+                                    <th scope="col" className="text-center px-6 py-4">
                                         Status
                                     </th>
                                 </tr>
@@ -85,22 +120,49 @@ export default function RequestTable() {
                             <tbody>
                                 {data.map((request,index) => (
                                     <tr
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}
                                         key={index}
                                         className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50 hover:bg-neutral-300"
                                     >
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium">
+                                        <td className="whitespace-nowrap px-1 py-1 font-medium">
                                             <img src='../../../src/assets/dp.png' alt="" className="w-10 h-10 rounded-full" />
                                         </td>
-                                        <td className="whitespace-nowrap px-6 py-4">{request.firstname +' '+request.lastname}</td>
-                                        <td className="whitespace-nowrap px-6 py-4">{date}</td>
-                                        <td className="whitespace-nowrap px-6 py-4">
-                                            <ModeratorButton />
+                                        <td className="whitespace-nowrap px-2 py-2">{request.firstname +' '+request.lastname}</td>
+                                        <td className="whitespace-nowrap px-2 py-2">{date}</td>
+                                        <td className="whitespace-nowrap px-2 py-2">{request.licenseNo}</td>
+                                        <td 
+                                        className="whitespace-nowrap px-1 py-1" 
+                                       
+                                        >
+                                        {/* {console.log(request.licenseImage)} */}
+                                        {isHovered ? (
+                                        <img
+                                            className='w-[400px]'
+                                            src={`../../../src/assets/${request.licenseImage}`}
+                                            alt="Zoomed Image"
+                                            style={{ width: '600px', height: '200px' }}
+                                        />
+                                        ) : (
+                                        <img
+                                            src={`../../../src/assets/${request.licenseImage}`}
+                                            alt="Original Image"
+                                            style={{ width: '10px', height: '10px' }}
+                                        />
+                                        )}
                                         </td>
+                                        <td className="whitespace-nowrap px-6 py-4">
+                                            <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
+                                            <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
+                                        </td>
+                                        {/* <td className="whitespace-nowrap px-6 py-4">
+                                            
+                                        </td> */}
                                     </tr>
                                 ))}
                             </tbody>
                             ):<div>
-                                <h1 className="text-xl font-semibold text-center ml-5 mt-48 ml-48">Counsellors Added details not yet!</h1>
+                                <h1 className="text-xl font-semibold ml-1 mt-48 ml-14">Counsellors Added details not yet!</h1>
                             </div>}
                         </table>
                     </div>
