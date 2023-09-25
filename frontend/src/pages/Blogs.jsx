@@ -91,7 +91,7 @@ const Blogs = () => { // Define a functional component named Blogs
 
               <Link to={`/client/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
                 <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
-                  <span className="hidden sm:inline">See more...</span>
+                  <span className="hidden sm:inline">Read...</span>
                 </button>
               </Link>
             </div>
