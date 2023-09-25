@@ -22,6 +22,8 @@ public class Payments {
     @GeneratedValue
     private Integer id;
     private Long payment_id;
+
+    private Integer counsellorId;
     private Integer userId;
     private Integer amount;
     private String payment_type;

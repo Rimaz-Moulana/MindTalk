@@ -20,9 +20,10 @@ public class PaymentsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void createPayment(Long payment_id, Integer userId, Integer amount, String payment_type, LocalDateTime timeline) {
+    public void createPayment(Long payment_id, Integer counsellorId,Integer userId, Integer amount, String payment_type, LocalDateTime timeline) {
         Payments payments = new Payments();
         payments.setPayment_id(payment_id);
+        payments.setCounsellorId(counsellorId);
         payments.setUserId(userId);
         payments.setAmount(amount);
         payments.setPayment_type(payment_type);
@@ -33,5 +34,9 @@ public class PaymentsService {
     public List<PaymentsDTO> getPaymentsForCounsellors(Integer userId) {
         List<Payments> payments = paymentsRepository.findByUserId(userId);
         return modelMapper.map(payments, new TypeToken<List<PaymentsDTO>>(){}.getType());
+    }
+
+    public Integer sumAmountsForCounselors(Integer counsellorId) {
+        return paymentsRepository.sumAmountsForCounselors(counsellorId);
     }
 }

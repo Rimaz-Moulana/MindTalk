@@ -1,6 +1,5 @@
 package com.mindtalk.Backend.controller;
 
-import com.mindtalk.Backend.dto.AppointmentDTO;
 import com.mindtalk.Backend.dto.PaymentsDTO;
 import com.mindtalk.Backend.service.PaymentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,8 @@ public class PaymentsController {
         try {
             Long payment_id=paymentsDTO.getPayment_id();
 
+            Integer counsellorId=paymentsDTO.getCounsellorId();
+
             Integer userId=paymentsDTO.getUserId();
 
             Integer amount=paymentsDTO.getAmount();
@@ -37,7 +38,8 @@ public class PaymentsController {
 
             LocalDateTime timeline = paymentsDTO.getTimeline();
 
-            paymentsService.createPayment(payment_id, userId, amount, payment_type, timeline);
+
+            paymentsService.createPayment(payment_id, counsellorId,userId, amount, payment_type, timeline);
 
             return ResponseEntity.ok("Appointment added successfully");
         } catch (Exception e) {
@@ -50,4 +52,17 @@ public class PaymentsController {
     public List<PaymentsDTO> getPaymentsForCounsellors(@PathVariable Integer userId) {
         return paymentsService.getPaymentsForCounsellors(userId);
     }
+
+    @GetMapping("/sumAmounts/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<Integer> sumAmountsForCounselors(@PathVariable Integer counsellorId) {
+        try {
+            Integer sumAmount = paymentsService.sumAmountsForCounselors(counsellorId);
+            return ResponseEntity.ok(sumAmount);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(-1); // You can choose an appropriate error code or response here.
+        }
+    }
+
+
 }
