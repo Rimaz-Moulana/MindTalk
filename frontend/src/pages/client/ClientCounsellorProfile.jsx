@@ -19,7 +19,6 @@ export default function ClientCounsellorProfile() {
 
   const [counsellor, setCounsellor] = useState({
     firstname: '',
-    joinDate: '',
     about:'',
     lastname: '',
     email: '',
