@@ -1,9 +1,198 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import sky from '../../assets/sky.jpg';
 import logo from '../../assets/logo.png';
 import IconComponent from '../../components/IconComponent';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const CounsellorProfile = () => {
+  const { id } = useParams();
+
+  const [user, setUser] = useState({
+    firstname: '',
+    joinDate: '',
+    about:'',
+    lastname: '',
+    email: '',
+    city:'',
+    address:'',
+    phone: '',
+    jobRole:'',
+    degree: '',
+    workplace: '',
+    coreServices: '',
+    scopeOfPractice: '',
+    experience: '',
+    ageGroup: '',
+    language: '',
+  });
+
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+
+  useEffect(() => {
+    // Show toast when updateSuccess becomes true
+    if (updateSuccess) {
+      toast.success('User information updated successfully!', {
+        position: 'top-right',
+        autoClose: 3000, // Close the notification after 3 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Reset updateSuccess to false
+    setUpdateSuccess(false);
+
+    }
+  }, [updateSuccess]);
+
+  useEffect(() => {
+    fetchProfileData();
+  }, [id]);
+
+  const fetchProfileData = async () => {
+    try{
+      console.log(id);
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        };
+
+        const response = await axios.get(`http://localhost:8080/api/counsellor/details/getCounsellor/${id}`, config);
+
+        if (response.status === 200) {
+          const userData = response.data;
+          setUser({
+            firstname: userData.firstname,
+            lastname: userData.lastname,
+            about: userData.about,
+            email: userData.email,
+            city: userData.city,
+            address: userData.address,
+            phone: userData.phone,
+            jobRole: userData.jobRole,
+            degree: userData.degree,
+            workplace: userData.workplace,
+            coreServices: userData.coreServices,
+            scopeOfPractice: userData.scopeOfPractice,
+            experience: userData.experience,
+            ageGroup: userData.ageGroup,
+            language: userData.language,
+            joinDate: userData.joinDate
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching counsellor profile:', error);
+    }
+  };
+
+  const saveUser = async (e) => {
+    e.preventDefault();
+    const updatedUser = {
+      firstname: user.firstname,
+      lastname: user.lastname,
+      about: user.about,
+      email: user.email,
+      city: user.city,
+      address: user.address,
+      phone: user.phone,
+      jobRole: user.jobRole,
+      degree: user.degree,
+      workplace: user.workplace,
+      coreServices: user.coreServices,
+      scopeOfPractice: user.scopeOfPractice,
+      experience: user.experience,
+      ageGroup: user.ageGroup,
+      language: user.language,
+      joinDate: user.joinDate,
+    };
+    console.log(updatedUser);
+
+    try{
+      const authData = localStorage.getItem('authData');
+          if (authData) {
+              const { accessToken } = JSON.parse(authData);
+              const config = {
+                  headers: {
+                      Authorization: `Bearer ${accessToken}`,
+                      'Content-Type': 'application/json'
+                  },
+                  withCredentials: true
+              };
+            await updateUserBackend(updatedUser, config);
+            setUpdateSuccess(true); // Set updateSuccess to true upon success
+          }
+    } catch (error) {
+      console.error('Error saving user:', error);
+      // alert('Error updating user information. Please try again later.'); // Alert for update failure
+      toast.error('Error updating user information. Please try again later.', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  const updateUserBackend = async (userData, config) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/api/${id}`,
+        userData,
+        config
+      );
+
+      if (response.status === 200) {
+        console.log('User updated successfully');
+      } else {
+          console.error('Error updating user');
+          // alert('Error updating user information. Please try again later.'); // Alert for update failure
+          toast.error('Error updating user information. Please try again later.', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        }
+    } catch (error) {
+        console.error('An error occurred:', error);
+        // alert('Error updating user information. Please try again later.'); // Alert for update failure
+        toast.error('Error updating user information. Please try again later.', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+        ...prevUser,
+        [name]: value
+    }));
+  };
+
+  
+
   return (
     <>
       <div className="flex grid flex-col w-full gap-4 md:grid-cols-4">
