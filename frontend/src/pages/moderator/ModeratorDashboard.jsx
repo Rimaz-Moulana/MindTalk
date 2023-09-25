@@ -14,14 +14,14 @@ const ModeratorDashboard = () => {
                 </div>
 
                 <div className="flex flex-wrap">
-                    <div className="flex-1">
+                    <div className="flex-0">
                         <div className="bg-white rounded-xl shadow-md overflow-hidden text-center h-full mr-4">
                             <RequestTable />
                         </div>
                     </div>
 
                     <div className="flex-1">
-                        <div className="min-w-[100%] bg-white rounded-xl shadow-md overflow-hidden text-center p-5">
+                        <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5">
                             <Piechart />
                         </div>
                     </div>

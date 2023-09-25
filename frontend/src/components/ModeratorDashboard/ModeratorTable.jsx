@@ -19,17 +19,6 @@ export default function RequestTable() {
     const handleMouseLeave = () => {
         setIsHovered(false);
     }
-    // console.log(data.length)
-    // console.log(data[0].licenseImage)
-    // for(let i = 0;i < data.length ; i++)
-    // {
-    //     console.log(data[i].licenseImage);
-    //     if(data[i].licenseImage){
-    //         data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\','');
-    //         console.log(data[i].licenseImage);
-    //     }
-    // }
-
 
     useEffect( ()=>{
         const currentDate = new Date();
@@ -44,6 +33,20 @@ export default function RequestTable() {
 
 
     })
+
+    console.log(data.length)
+    console.log(data[0].licenseImage)
+    for(let i = 0;i < data.length ; i++)
+    {
+        console.log(data[i].licenseImage);
+        if(data[i].licenseImage){
+            data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\','');
+            console.log(data[i].licenseImage);
+        }
+        else{
+            const data1 = JSON.parse(localStorage.getItem("detailsData"));
+        }
+    }
 
     // const removeItem = ()=>{
     //     const updateArray =
@@ -98,14 +101,14 @@ export default function RequestTable() {
                         <table className="min-w-full text-left text-sm font-light">
                             <thead className="border-b border-gray-200 font-medium dark:border-neutral-300">
                                 <tr>
-                                    <th scope="col" className="px-6 py-4"></th>
-                                    <th scope="col" className="px-6 py-4">
+                                    <th scope="col" className="px-2 py-2"></th>
+                                    <th scope="col" className="px-2 py-2">
                                         Name
                                     </th>
-                                    <th scope="col" className="px-6 py-4">
+                                    <th scope="col" className="px-2 py-2">
                                         Date
                                     </th>
-                                    <th scope="col" className="px-6 py-4">
+                                    <th scope="col" className="px-2 py-2">
                                         License Number
                                     </th>
                                     <th scope="col" className="px-6 py-4">
@@ -141,7 +144,7 @@ export default function RequestTable() {
                                             className='w-[400px]'
                                             src={`../../../src/assets/${request.licenseImage}`}
                                             alt="Zoomed Image"
-                                            style={{ width: '600px', height: '200px' }}
+                                            style={{ width: '600px', height: '400px' }}
                                         />
                                         ) : (
                                         <img
@@ -163,7 +166,8 @@ export default function RequestTable() {
                             </tbody>
                             ):<div>
                                 <h1 className="text-xl font-semibold ml-1 mt-48 ml-14">Counsellors Added details not yet!</h1>
-                            </div>}
+                            </div>
+                            }
                         </table>
                     </div>
                 </div>
