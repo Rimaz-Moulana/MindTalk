@@ -10,7 +10,17 @@ export default function RequestTable() {
     const [date,setDate] = useState('');
     const [isHovered,setIsHovered] = useState(false);
     
+     console.log(data.length)
+    console.log(data[0].licenseImage);
     
+        for(let i = 0;i < data.length ; i++)
+        {
+        console.log(data[i].licenseImage);
+        if(data[i].licenseImage){
+            data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\','');
+            console.log(data[i].licenseImage);
+        }
+    }
 
     const handleMouseEnter = () =>{
         setIsHovered(true);
@@ -33,20 +43,7 @@ export default function RequestTable() {
 
 
     })
-
-    console.log(data.length)
-    console.log(data[0].licenseImage)
-    for(let i = 0;i < data.length ; i++)
-    {
-        console.log(data[i].licenseImage);
-        if(data[i].licenseImage){
-            data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\','');
-            console.log(data[i].licenseImage);
-        }
-        else{
-            const data1 = JSON.parse(localStorage.getItem("detailsData"));
-        }
-    }
+    
 
     // const removeItem = ()=>{
     //     const updateArray =
@@ -150,7 +147,7 @@ export default function RequestTable() {
                                         <img
                                             src={`../../../src/assets/${request.licenseImage}`}
                                             alt="Original Image"
-                                            style={{ width: '10px', height: '10px' }}
+                                            style={{ width: '50px', height: '50px' }}
                                         />
                                         )}
                                         </td>
