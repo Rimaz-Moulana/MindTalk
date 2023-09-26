@@ -58,6 +58,7 @@ import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import RequireAuth from './components/LoginSignup/RequireAuth'
+import GoogleSheetData from './components/ModeratorDashboard/CounsellorDetails'
 import AddMeditation from './components/moderator/AddMeditation'
 import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
@@ -87,6 +88,7 @@ const App = () => (
                     {/* <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} /> */}
                     <Route path="/addDetails" element={<CounsellorDetailsAdd />} />
                     <Route path="/addcounsellordetails" element={<FormComponent />} />
+                    <Route path="/counsellordetails" element={<GoogleSheetData />} />
 
                     {/* <Route path="/table" element={<TableData />}  /> */}
                     {/* Routes that require authentication */}

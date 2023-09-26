@@ -34,6 +34,7 @@
     "jsonfile": "^6.1.0",
     "lottie-web": "^5.12.2",
     "moment": "^2.29.4",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-big-calendar": "^1.8.2",
