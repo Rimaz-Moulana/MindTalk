@@ -3,34 +3,36 @@ import React, { useState } from 'react';
 
 
 const CounsellorDetailsAdd = () => {
-  const [detailsData, setDetailsData] = useState([]);
-  const [idCounter, setIdCounter] = useState(1);
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
-  const [licenseNo, setLicenseNo] = useState('');
-  const [licenseImage, setLicenseImage] = useState('');
+  const [formData,setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    email:'',
+    licenseNo:'',
+    licenseImage:'',
+  })
 
-
-
-  const handeleSubmit = (e) => {
-    if(firstname && lastname && email && licenseNo && licenseImage){
-      const newData = {id: idCounter, firstname, lastname,email,licenseNo,licenseImage};
-      setIdCounter(idCounter+1);
-      setDetailsData([...detailsData, newData]);
-      
-      //save data to localStorage
-      localStorage.setItem('detailsData',JSON.stringify(detailsData));
-      
-        e.preventDefault();
-
-        console.log(newData)
-      }
-
-      
-
-        
+  const handleChange = (e) => {
+    const { name, value} = e.target;
+    setFormData({ ...formData, [name]: value});
   };
+
+  const handeleSubmit = async (e) => {
+    e.preventDefault();
+
+    try{
+        await axios.post('/api/post-data-to-google-sheets', formData);
+        alert('Data posted successfully!');
+
+    }catch(error){
+        console.log('Error posting data: ', error);
+    }
+
+  }
+   
+
+      
+
+ 
 
   return (
     <>
@@ -49,7 +51,7 @@ const CounsellorDetailsAdd = () => {
               {/* <!-- Right column container --> */}
               <div className="mb-12 p-14 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12 flex flex-col">
               <h1 className='text-2xl font-bold mb-4'>Add Your Details</h1>
-              <form >
+              <form onSubmit={handeleSubmit}>
           <div className='mb-4'>
           <label htmlFor='firstName' className='block text-sm font-medium mb-1'>First Name</label>
           <input
