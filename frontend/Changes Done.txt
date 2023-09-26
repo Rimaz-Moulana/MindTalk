@@ -32,9 +32,8 @@ npm i react-modal
 npm install stompjs
 npm install sockjs-client
 npm install react-toastify
-npm install axios google-spreadsheet
-npm install axios google-spreadsheet
-npm install express google-spreadsheet axios
+
+
 
 
 

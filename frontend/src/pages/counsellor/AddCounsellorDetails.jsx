@@ -1,39 +1,40 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import React from 'react';
 
+// npm install axios google-spreadsheet
+// npm install axios google-spreadsheet
+// npm install express google-spreadsheet axios
+// npm install express google-spreadsheet
 
-const CounsellorDetailsAdd = () => {
-  const [formData,setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    email:'',
-    licenseNo:'',
-    licenseImage:'',
-  })
+const FormComponent = () => {
+//   const [formData,setFormData] = useState({
+//     firstname: '',
+//     lastname: '',
+//     email:'',
+//     licenseNo:'',
+//     licenseImage:'',
+//   })
 
-  const handleChange = (e) => {
-    const { name, value} = e.target;
-    setFormData({ ...formData, [name]: value});
-  };
+//   const handleChange = (e) => {
+//     const { name, value} = e.target;
+//     setFormData({ ...formData, [name]: value});
+//   };
 
-  const handeleSubmit = async (e) => {
-    e.preventDefault();
+//   const handeleSubmit = async (e) => {
+//     e.preventDefault();
+//     if(formData.licenseImage)
+//     formData.licenseImage = formData.licenseImage.replace('C:\\fakepath\\','');
+//     console.log(formData)
+//     console.log(formData.licenseImage)
+//     try{
+//         // await axios.post('/api/submit-data', formData);
+//         // alert('Data posted successfully!');
 
-    try{
-        await axios.post('/api/post-data-to-google-sheets', formData);
-        alert('Data posted successfully!');
+//     }catch(error){
+//         console.log('Error posting data: ', error);
+//     }
 
-    }catch(error){
-        console.log('Error posting data: ', error);
-    }
-
-  }
-   
-
-      
-
- 
-
+//   }
   return (
     <>
         <section className="h-screen">
@@ -50,102 +51,10 @@ const CounsellorDetailsAdd = () => {
     
               {/* <!-- Right column container --> */}
               <div className="mb-12 p-14 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12 flex flex-col">
-              <h1 className='text-2xl font-bold mb-4'>Add Your Details</h1>
-              <form onSubmit={handeleSubmit}>
-          <div className='mb-4'>
-          <label htmlFor='firstName' className='block text-sm font-medium mb-1'>First Name</label>
-          <input
-            type='text'
-            id='firstName'
-            name='firstname'
-            value={firstname}
-            onChange={(e) => setFirstname(e.target.value)}
-            className='lg:w-[400px] px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring focus:border-blue-300'
-
-          />
-          </div>
-          <div className='mb-4'>
-          <label htmlFor='lastName' className='block text-sm font-medium mb-1'>Last Name</label>
-          <input
-            type='text'
-            id='lastName'
-            name='lastname'
-            value={lastname}
-            onChange={(e) => setLastname(e.target.value)}
-            className='lg:w-[400px] px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring focus:border-blue-300'
-
-          />
-          </div>
-          <div className='mb-4'>
-          <label htmlFor='email' className='block text-sm font-medium mb-1'>Email</label>
-          <input
-            type='email'
-            id='email'
-            name='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='lg:w-[400px] px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring focus:border-blue-300'
-          />
-          </div>
-          <div className='mb-4'>
-          <label htmlFor='licenceNo' className='block text-sm font-medium mb-1'>License Number</label>
-          <input
-            type='text'
-            id='licenseNo'
-            name='licenseNo'
-            value={licenseNo}
-            onChange={(e) => setLicenseNo(e.target.value)}
-            className='lg:w-[400px] px-3 py-2 border border-gray-400 rounded-md focus:outline-none focus:ring focus:border-blue-300'
-          />
-          </div>
-          <div className="mb-4">
-              <label htmlFor="licenseImage" className="block text-sm font-medium mb-1">
-                License Image
-              </label>
-              <input
-                type="file"
-                id="licenseImage"
-                name="licenseImage"
-                accept="image/*"
-                value={licenseImage}
-                onChange={(e) => setLicenseImage(e.target.value)}
-                className=""
-              />
-            </div>
-            <div className='lg:w-96'>
-            <button
-              type="submit"
-              className="bg-blue-500 lg:w-[400px] text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-              onClick={handeleSubmit}
-            >
-              Submit
-            </button>
-          </div>
-    </form>
-    {/* <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>firstname</th>
-            <th>lastname</th>
-            <th>email</th>
-            <th>licenseNo</th>
-            <th>licenseImage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {detailsData.map((entry) => (
-            <tr key={entry.id}>
-              <td>{entry.id}</td>
-              <td>{entry.firstname}</td>
-              <td>{entry.lastname}</td>
-              <td>{entry.email}</td>
-              <td>{entry.licenseNo}</td>
-              <td>{entry.licenseImage}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+              <h1 className='text-2xl font-bold mb-4'>Click to add your details</h1>
+              <div>
+                <a href='https://forms.gle/KVieNMVcP2YcTAPr7' className='text-bold no-underline hover:underline border-l-blue-500 text-blue-500 px-20 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 border border-blue-500 hover:border-transparent rounded'>Add your details</a>
+              </div>
               </div>
             </div>
           </div>
@@ -155,4 +64,4 @@ const CounsellorDetailsAdd = () => {
 }
 
 
-export default CounsellorDetailsAdd;
+export default FormComponent;
