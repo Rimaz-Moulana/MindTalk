@@ -1,8 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
 
 const PostBlog = () => {
   const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];

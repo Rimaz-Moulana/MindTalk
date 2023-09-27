@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
+ 
 
 export default function AddTherapySession() {
   const [session, setSession] = useState({
@@ -9,29 +12,43 @@ export default function AddTherapySession() {
     typeOfSession:"",
     link:""
 
-  })
+  }, [])
 
-  // const {id} = useParams();
+  const handleChange = (e) => {
+    const {name,value} = e.target;
+    setSession(...session, [name] , value);
+  }
 
   useEffect(()=>{
     loadSession();
   })
 
+  const onSubmit=async (e) =>{
+    e.preventDefault();
+    await axios.post("http://localhost:8080/api/moderator/addtherapySession",session);
+    // eslint-disable-next-line no-undef
+    navigate("/moderator/addtherapysession");
+    loadSession();
+  }
+  
   const loadSession=async ()=>{
-    const result = await axios.get(`http://localhost:8080//api/moderator/getSession`)
+    const result = await axios.get(`http://localhost:8080/api/moderator/getSession`)
     setSession(result.data);
+    loadSession();
   }
 
   return (
     <>
     <div><h1 className='text-lg font-bold'>Add New Therapy Session</h1></div>
         <div className="w-full max-w-sm mx-auto mt-0">
-  <form>
+  <form onSubmit={onSubmit}>
     <div className="flex flex-col mb-6">
       <label className="text-lg font-medium">Date</label>
       <input
         type="date"
         id="date"
+        value={session.date}
+        onChange={handleChange}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -41,6 +58,8 @@ export default function AddTherapySession() {
       <input
         type="time"
         id="time"
+        value={session.time}
+        onChange={handleChange}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -49,6 +68,8 @@ export default function AddTherapySession() {
       <label className="text-lg font-medium">Counselors</label>
       <select
         id="counselors"
+        value={session.counselor}
+        onChange={handleChange}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="counselor1">Counselor 1</option>
@@ -61,6 +82,8 @@ export default function AddTherapySession() {
       <label  className="text-lg font-medium">Type of the Therapy Session</label>
       <select
         id="therapySession"
+        value={session.typeOfSession}
+        onChange={handleChange}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="individual">Individual</option>
@@ -74,11 +97,13 @@ export default function AddTherapySession() {
       <input
         type="text"
         id="link"
+        value={session.link}
+        onChange={handleChange}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
 
-    <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-md">Submit</button>
+    <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-md" >Submit</button>
   </form>
 </div>
 <div ><h1  className='text-lg font-bold'>Upcoming Therapy Session</h1></div>
