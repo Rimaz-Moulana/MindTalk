@@ -26,7 +26,6 @@ export default function AddTherapySession() {
   const onSubmit=async (e) =>{
     e.preventDefault();
     await axios.post("http://localhost:8080/api/moderator/addtherapySession",session);
-    // eslint-disable-next-line no-undef
     navigate("/moderator/addtherapysession");
     loadSession();
   }
@@ -41,14 +40,14 @@ export default function AddTherapySession() {
     <>
     <div><h1 className='text-lg font-bold'>Add New Therapy Session</h1></div>
         <div className="w-full max-w-sm mx-auto mt-0">
-  <form onSubmit={onSubmit}>
+  <form onSubmit={(e)=>onSubmit(e)}>
     <div className="flex flex-col mb-6">
       <label className="text-lg font-medium">Date</label>
       <input
         type="date"
         id="date"
         value={session.date}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -59,7 +58,7 @@ export default function AddTherapySession() {
         type="time"
         id="time"
         value={session.time}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -69,7 +68,7 @@ export default function AddTherapySession() {
       <select
         id="counselors"
         value={session.counselor}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="counselor1">Counselor 1</option>
@@ -83,7 +82,7 @@ export default function AddTherapySession() {
       <select
         id="therapySession"
         value={session.typeOfSession}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="individual">Individual</option>
@@ -98,7 +97,7 @@ export default function AddTherapySession() {
         type="text"
         id="link"
         value={session.link}
-        onChange={handleChange}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
