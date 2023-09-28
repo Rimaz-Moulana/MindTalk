@@ -1,8 +1,10 @@
 package com.mindtalk.Backend.service;
 
+import com.mindtalk.Backend.dto.AppointmentDTO;
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
 import com.mindtalk.Backend.dto.TherapySession.AddTherapySessionDTO;
 import com.mindtalk.Backend.entity.AddTherapySession;
+import com.mindtalk.Backend.entity.Appointments;
 import com.mindtalk.Backend.repo.AddTherapySessionRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -15,6 +17,9 @@ import java.util.List;
 public class AddTherapySessionService {
     @Autowired
     private AddTherapySessionRepository addTherapySessionRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
 //    @Autowired
 //    private ModelMapper modelMapper;
@@ -31,10 +36,9 @@ public class AddTherapySessionService {
         addTherapySessionRepository.save(addTherapySession);
     }
 
-//    public List<AddTherapySessionDTO> getAllTherapySession(){
-//        List<AddTherapySession> addTherapySessions = addTherapySessionRepository.findAll();
-//
-//        return modelMapper.map(addTherapySessions, new TypeToken<List<AddTherapySessionDTO>>(){}.getType());
-//    }
+    public List<AddTherapySessionDTO> getAllTherapySession(){
+        List<AddTherapySession> addTherapySessions = addTherapySessionRepository.findAll();
+        return modelMapper.map(addTherapySessions, new TypeToken<List<AddTherapySessionDTO>>(){}.getType());
+    }
 
 }
