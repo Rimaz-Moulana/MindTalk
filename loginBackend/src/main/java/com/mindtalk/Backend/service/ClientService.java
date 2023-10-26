@@ -1,127 +1,166 @@
-package com.mindtalk.Backend.controller.client;
+package com.mindtalk.Backend.service;
 
+//import com.example.tests.dto.ClientDTO;
+//import com.example.tests.entity.Client;
+//import com.example.tests.repo.ClientRepo;
 import com.mindtalk.Backend.dto.ClientDTO;
 import com.mindtalk.Backend.entity.Client;
-import com.mindtalk.Backend.service.ClientService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import com.mindtalk.Backend.repo.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-//@CrossOrigin
-@RestController
-@RequestMapping("/api/v1/client")
-@Tag(name = "Client")
-public class ClientController {
+@Service
+public class ClientService {
 
     @Autowired
-    private ClientService clientService;
+    private ClientRepo clientRepo;
 
-    @Operation(
-            description = "Get endpoint for client",
-            summary = "This is a summary for client get endpoint",
-            responses = {
-                    @ApiResponse(
-                            description = "Success",
-                            responseCode = "200"
-                    ),
-                    @ApiResponse(
-                            description = "Unauthorized / Invalid Token",
-                            responseCode = "403"
-                    )
-            }
+    @Value("${profile.photo.upload.path}")
+    private String profilePhotoUploadPath;
 
-    )
+    public Client createClient(ClientDTO clientDTO){
+        Client client = new Client();
+        client.setFName(clientDTO.getFName());
+        client.setLName(clientDTO.getLName());
+        client.setDob(clientDTO.getDob());
+        client.setGender(clientDTO.getGender());
+        client.setEmail(clientDTO.getEmail());
+        client.setPhone(clientDTO.getPhone());
+        client.setAddress(clientDTO.getAddress());
+        client.setCity(clientDTO.getCity());
+        client.setDistrict(clientDTO.getDistrict());
+        client.setZip(clientDTO.getZip());
+        client.setEmName1(clientDTO.getEmName1());
+        client.setEmPhone1(clientDTO.getEmPhone1());
+        client.setEmName2(clientDTO.getEmName2());
+        client.setEmPhone2(clientDTO.getEmPhone2());
+        client.setEmName3(clientDTO.getEmName3());
+        client.setEmPhone3(clientDTO.getEmPhone3());
 
-    @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO) {
-        Client createdClient = clientService.createClient(clientDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
-    }
+        //handle profile photo
+        if (clientDTO.getProfilePhoto() != null && !clientDTO.getProfilePhoto().isEmpty()){
+            try {
+                //save the profile photo to a local file
+                String fileName = System.currentTimeMillis() + "_" + clientDTO.getProfilePhoto().getOriginalFilename();
+                Path filePath = Paths.get(profilePhotoUploadPath, fileName);
+                Files.copy(clientDTO.getProfilePhoto().getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-    @GetMapping("/{user_id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> getClientByUserId(@PathVariable Integer user_id) {
-        Client client = clientService.getClientByUserId(user_id);
-
-        if (client != null) {
-            return ResponseEntity.ok(client);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/{user_id}/profilePhotoPath")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer user_id) {
-        String profilePhotoPath = clientService.getProfilePhotoPathByUserId(user_id);
-
-        if (profilePhotoPath != null) {
-            return ResponseEntity.ok(profilePhotoPath);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<List<Client>> getAllClient() {
-        List<Client> allClient = clientService.getAllClient();
-
-        if (!allClient.isEmpty()) {
-            return ResponseEntity.ok(allClient);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{user_id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> updateClient(
-            @PathVariable Integer user_id,
-            @RequestBody ClientDTO clientDTO) {
-        Client updatedClient = clientService.updateClient(user_id, clientDTO);
-
-        if (updatedClient != null) {
-            return ResponseEntity.ok(updatedClient);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{user_id}/updateProfilePhoto")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> updateProfilePhoto(
-            @PathVariable Integer user_id,
-            @RequestPart(required = false) MultipartFile profilePhoto) {
-
-        if (profilePhoto != null) {
-            String updatedProfilePhotoPath = clientService.updateProfilePhoto(user_id, profilePhoto);
-            if (updatedProfilePhotoPath != null) {
-                return ResponseEntity.ok(clientService.getClientByUserId(user_id));
+                //set the profile photo path in the database
+                client.setProfilePhotoPath(fileName);
+            } catch (IOException e){
+                e.printStackTrace(); //handle the exception
             }
         }
 
-        return ResponseEntity.badRequest().build(); //Handle errors as needed
+        return clientRepo.save(client);
+
+    }
+
+//    public Client getClientById(Integer clientId) {
+//        return clientRepo.findById(clientId).orElse(null);
+//    }
+
+    public Client getClientByUserId(Integer user_id) {
+        return clientRepo.findByUserId(user_id).orElse(null);
+    }
+
+    public String getProfilePhotoPathByUserId(Integer user_id) {
+        // Find the client by user_id
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if (existingClient != null) {
+            // Get the profile photo path from the client entity
+            return existingClient.getProfilePhotoPath();
+        }
+
+        return null; // Client not found or profile photo path not available
+    }
+
+    public List<Client> getAllClient(){
+        return clientRepo.findAll();
+    }
+
+    public Client updateClient(Integer user_id, ClientDTO clientDTO){
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if(existingClient != null){
+            existingClient.setFName(clientDTO.getFName());
+            existingClient.setLName(clientDTO.getLName());
+            existingClient.setDob(clientDTO.getDob());
+            existingClient.setGender(clientDTO.getGender());
+            existingClient.setEmail(clientDTO.getEmail());
+            existingClient.setPhone(clientDTO.getPhone());
+            existingClient.setAddress(clientDTO.getAddress());
+            existingClient.setCity(clientDTO.getCity());
+            existingClient.setDistrict(clientDTO.getDistrict());
+            existingClient.setZip(clientDTO.getZip());
+            existingClient.setEmName1(clientDTO.getEmName1());
+            existingClient.setEmPhone1(clientDTO.getEmPhone1());
+            existingClient.setEmName2(clientDTO.getEmName2());
+            existingClient.setEmPhone2(clientDTO.getEmPhone2());
+            existingClient.setEmName3(clientDTO.getEmName3());
+            existingClient.setEmPhone3(clientDTO.getEmPhone3());
+            return clientRepo.save(existingClient);
+        }
+        return null; //client not found
+    }
+
+    public String updateProfilePhoto(Integer user_id, MultipartFile profilePhoto) {
+        // Find the client by user_id
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if (existingClient != null) {
+            // Delete the existing profile photo if it exists
+            if (existingClient.getProfilePhotoPath() != null) {
+                Path existingPhotoPath = Paths.get(profilePhotoUploadPath, existingClient.getProfilePhotoPath());
+                try {
+                    Files.deleteIfExists(existingPhotoPath);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception if necessary
+                }
+            }
+
+            // Handle the new profile photo
+            if (profilePhoto != null && !profilePhoto.isEmpty()) {
+                try {
+                    // Save the new profile photo to a local file
+                    String fileName = System.currentTimeMillis() + "_" + profilePhoto.getOriginalFilename();
+                    Path filePath = Paths.get(profilePhotoUploadPath, fileName);
+                    Files.copy(profilePhoto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                    // Set the new profile photo path in the database
+                    existingClient.setProfilePhotoPath(fileName);
+
+                    // Save the updated client to update the profile photo path
+                    clientRepo.save(existingClient);
+
+                    return fileName; // Return the new profile photo path
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception
+                }
+            }
+        }
+
+        return null; // Client not found or profile photo not updated
     }
 
 
-    @DeleteMapping("/{clientId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Void> deleteClient(@PathVariable Integer clientId){
-        boolean isDeleted = clientService.deleteClient(clientId);
+    public boolean deleteClient(Integer clientId){
+        Client existingClient = clientRepo.findById(clientId).orElse(null);
 
-        if (isDeleted){
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+        if (existingClient != null ){
+            clientRepo.delete(existingClient);
+            return true; //client Deleted
         }
+        return false; //client not deleted
     }
 }

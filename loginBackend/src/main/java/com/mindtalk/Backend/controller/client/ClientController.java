@@ -58,6 +58,18 @@ public class ClientController {
         }
     }
 
+    @GetMapping("/{user_id}/profilePhotoPath")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer user_id) {
+        String profilePhotoPath = clientService.getProfilePhotoPathByUserId(user_id);
+
+        if (profilePhotoPath != null) {
+            return ResponseEntity.ok(profilePhotoPath);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/all")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<List<Client>> getAllClient() {
