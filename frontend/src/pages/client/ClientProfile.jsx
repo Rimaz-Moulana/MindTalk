@@ -6,6 +6,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import ProfilePhoto from './ClientProfilePhoto';
 
 const Profile = () => {
   const { id } = useParams();
@@ -649,83 +650,12 @@ const Profile = () => {
 
       <div className="flex flex-col gap-4 ">
 
-        <div className="pb-5 overflow-hidden text-center bg-white shadow-md rounded-xl">
-
-          {/* <img src={sky} alt="sky" className="object-cover w-full h-48" /> */}
-          <div className='w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500' 
-            style={{background: 'url("https://source.unsplash.com/650x200?sky")'}}>
-          </div>
-          <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
-          <span className="text-xl font-bold text-blue-900">John Doe</span>
-
-          <form >
-            <div className="mb-4">
-              {/* <label htmlFor="profile-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                Profile Photo
-              </label> */}
-              <div className="mt-2">
-                <input
-                  type="file"
-                  id="profilePhoto"
-                  accept="image/*"
-                  onChange={handleProfilePhotoChange}
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              onSubmit={uploadProfilePhoto}
-              className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700"
-            >
-              Upload Profile Photo
-            </button>
-          </form>
-
-
-        </div>
-
-        <div className="p-5 overflow-hidden bg-white shadow-md rounded-xl ">
-
-          <div className='pb-5 text-center '>
-            <span className="text-lg text-blue-900 ">Let us get to know about you. Upload your previous medical files if any.  </span>
-            <div className="flex justify-center px-6 m-2 border border-dashed rounded-lg border-gray-900/25 py-53">
-              <div className="text-center">
-                <FiClipboard className="w-12 h-12 mx-auto mt-2 text-gray-300" aria-hidden="true" />
-                <div className="flex mt-2 text-sm leading-6 text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative font-semibold text-blue-700 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-900"
-                  >
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-                <p className="text-xs leading-5 text-gray-600">PDF, DOC</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="pb-5 overflow-hidden ">
-            <table className="min-w-full text-sm font-light text-black">
-              <tbody>
-                {
-                  pdfData.map((item) => (
-                    <tr
-                      key={ item.id }
-                      className="transition duration-300 ease-in-out border-b border-gray-200 hover:bg-neutral-100 hover:bg-neutral-300"
-                    >
-                      <td className="px-6 py-4 text-left whitespace-nowrap">{item.title}</td>
-                      <td className="px-6 py-4 text-right whitespace-nowrap">{item.date}</td>
-                    </tr>
-                  ) )
-                }
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
+        <ProfilePhoto 
+          handleProfilePhotoChange={handleProfilePhotoChange}
+          uploadProfilePhoto={uploadProfilePhoto}
+        />
+        <FiClipboard />
+        
       </div>
 
     </div>
