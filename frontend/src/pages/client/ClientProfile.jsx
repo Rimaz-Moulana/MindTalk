@@ -229,7 +229,7 @@ const Profile = () => {
           withCredentials: true,
         };
   
-        const response = await axios.post(
+        const response = await axios.put(
           `http://localhost:8080/api/v1/client/${id}/updateProfilePhoto`,
           formData,
           config

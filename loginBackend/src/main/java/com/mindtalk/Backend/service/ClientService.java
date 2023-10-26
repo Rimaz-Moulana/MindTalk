@@ -73,6 +73,7 @@ public class ClientService {
         return clientRepo.findByUserId(user_id).orElse(null);
     }
 
+    
 
     public List<Client> getAllClient(){
         return clientRepo.findAll();
