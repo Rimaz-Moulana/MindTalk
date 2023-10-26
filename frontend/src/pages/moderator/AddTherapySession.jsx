@@ -1,37 +1,107 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
-import React, { useEffect, useParams, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+ 
 
 export default function AddTherapySession() {
+  const navigate = useNavigate();
+
   const [session, setSession] = useState({
     date:"",
     time:"",
-    counselor:"",
+    counsellor:"",
     typeOfSession:"",
     link:""
 
-  })
+  },[])
 
-  const {id} = useParams();
-
-  useEffect(()=>{
-    loadSession();
-  })
-
-  const loadSession=async ()=>{
-    const result = await axios.get(`http://localhost:8080//api/moderator/getSession`)
-    setSession(result.data);
+  const handleChange = (e) => {
+    const {name,value} = e.target;
+    setSession(...session, [name] , value);
   }
+  // const onSubmit=async () =>{
+  //   // e.preventDefault();
+  //   try{
+  //     console.log("fetching session details..");
+  //     const authData = localStorage.getItem('authData');
+  //     console.log(authData)
+  //     if(authData){
+  //       const {accessToken} = JSON.parse(authData);
+  //       console.log(accessToken);
+  //       const config = {
+  //         headers : {
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${accessToken}`
+  //         },
+  //         withCredentials: true,
+  //       };
+  //       await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
+  //       navigate("/moderator/addtherapysession");
+  //     }
+
+
+  //   }catch(error)
+  //   {
+  //     console.error("there error occured",error);
+  //   }
+
+  // }
+  
+  
+  const loadSession=async ()=>{
+    try{
+      console.log("Fetching session Details...");
+      const authData = localStorage.getItem('authData');
+      console.log(authData)
+      if(authData){
+        const {accessToken} = JSON.parse(authData);
+        console.log(accessToken)
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        };
+        console.log("ok",config)
+        const result = await axios.get(`http://localhost:8080/api/moderator/getSession`)
+
+        if(result.status === 200 ){
+          const sessionData = result.data;
+          setSession({
+            date:sessionData.data,
+            time:session.time,
+            counsellor:session.counsellor,
+            typeOfSession:session.typeOfSession,
+            link:session.link,
+          });
+        }
+      }
+    }catch(error){
+      console.error("this is the get error:",error)
+    }
+};
+
+useEffect(()=>{
+  loadSession();
+})
+
+
+
 
   return (
     <>
     <div><h1 className='text-lg font-bold'>Add New Therapy Session</h1></div>
         <div className="w-full max-w-sm mx-auto mt-0">
-  <form>
+  <form onSubmit={(e)=>onSubmit(e)}>
     <div className="flex flex-col mb-6">
       <label className="text-lg font-medium">Date</label>
       <input
         type="date"
         id="date"
+        value={session.date}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -41,6 +111,8 @@ export default function AddTherapySession() {
       <input
         type="time"
         id="time"
+        value={session.time}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -49,6 +121,8 @@ export default function AddTherapySession() {
       <label className="text-lg font-medium">Counselors</label>
       <select
         id="counselors"
+        value={session.counsellor}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="counselor1">Counselor 1</option>
@@ -61,6 +135,8 @@ export default function AddTherapySession() {
       <label  className="text-lg font-medium">Type of the Therapy Session</label>
       <select
         id="therapySession"
+        value={session.typeOfSession}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
         <option value="individual">Individual</option>
@@ -72,13 +148,15 @@ export default function AddTherapySession() {
     <div className="flex flex-col mb-6">
       <label className="text-lg font-medium">Add Zoom Link</label>
       <input
-        type="text"
+        type={'text'}
         id="link"
+        value={session.link}
+        onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
 
-    <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-md">Submit</button>
+    <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-md" >Submit</button>
   </form>
 </div>
 <div ><h1  className='text-lg font-bold'>Upcoming Therapy Session</h1></div>
@@ -97,25 +175,15 @@ export default function AddTherapySession() {
                 </tr>
               </thead>
               <tbody>
+              {/* {session.map((index,item) => ( */}
                 <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap  px-6 py-4 font-medium">{session.date}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{session.typeOfSession}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{session.time}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{session.link}</td>
+                  {/* <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.time}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.counsellor}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.typeOfSession}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.link}</td> */}
                 </tr>
-                {/* <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap  px-6 py-4 font-medium">2</td>
-                  <td className="whitespace-nowrap  px-6 py-4 ">Jacob</td>
-                  <td className="whitespace-nowrap  px-6 py-4">Thornton</td>
-                  <td className="whitespace-nowrap  px-6 py-4">@fat</td>
-                </tr>
-                <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap  px-6 py-4 font-medium">3</td>
-                  <td colSpan={2} className="whitespace-nowrap  px-6 py-4">
-                    Larry the Bird
-                  </td>
-                  <td className="whitespace-nowrap  px-6 py-4">@twitter</td>
-                </tr> */}
+                {/* ))} */}
               </tbody>
             </table>
           </div>

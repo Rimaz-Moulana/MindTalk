@@ -17,9 +17,6 @@ public class AddTherapySessionController {
 
     @Autowired
     private AddTherapySessionService addTherapySessionService;
-
-    @Autowired
-    private AddTherapySessionRepository addTherapySessionRepository;
     private final List<String> allowedOrigins;
 
     public AddTherapySessionController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
@@ -46,7 +43,7 @@ public class AddTherapySessionController {
 
     @GetMapping("/getSession")
     @CrossOrigin(origins = "${app.cors.allowed-origins}",allowCredentials = "true")
-    List<AddTherapySession> getAllSession(){
-        return addTherapySessionRepository.findAll();
+    public List<AddTherapySessionDTO> getAllSession(){
+        return addTherapySessionService.getAllTherapySession();
     }
 }
