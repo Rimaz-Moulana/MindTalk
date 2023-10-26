@@ -20,38 +20,33 @@ export default function AddTherapySession() {
     const {name,value} = e.target;
     setSession(...session, [name] , value);
   }
-  
-  useEffect(()=>{
-    loadSession();
-  }, [])
-
-  const onSubmit=async () =>{
-    // e.preventDefault();
-    try{
-      console.log("fetching session details..");
-      const authData = localStorage.getItem('authData');
-      console.log(authData)
-      if(authData){
-        const {accessToken} = JSON.parse(authData);
-        console.log(accessToken);
-        const config = {
-          headers : {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          },
-          withCredentials: true,
-        };
-        await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
-        navigate("/moderator/addtherapysession");
-      }
+  // const onSubmit=async () =>{
+  //   // e.preventDefault();
+  //   try{
+  //     console.log("fetching session details..");
+  //     const authData = localStorage.getItem('authData');
+  //     console.log(authData)
+  //     if(authData){
+  //       const {accessToken} = JSON.parse(authData);
+  //       console.log(accessToken);
+  //       const config = {
+  //         headers : {
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${accessToken}`
+  //         },
+  //         withCredentials: true,
+  //       };
+  //       await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
+  //       navigate("/moderator/addtherapysession");
+  //     }
 
 
-    }catch(error)
-    {
-      console.error("there error occured",error);
-    }
+  //   }catch(error)
+  //   {
+  //     console.error("there error occured",error);
+  //   }
 
-  }
+  // }
   
   
   const loadSession=async ()=>{
@@ -70,7 +65,7 @@ export default function AddTherapySession() {
           withCredentials: true,
         };
         console.log("ok",config)
-        const result = await axios.get(`http://localhost:8080/api/moderator/getSession`, config)
+        const result = await axios.get(`http://localhost:8080/api/moderator/getSession`)
 
         if(result.status === 200 ){
           const sessionData = result.data;
@@ -81,15 +76,20 @@ export default function AddTherapySession() {
             typeOfSession:session.typeOfSession,
             link:session.link,
           });
-          // 3
-          // setData(result.data);
-          // console.log(session)
         }
       }
     }catch(error){
       console.error("this is the get error:",error)
     }
 };
+
+useEffect(()=>{
+  loadSession();
+})
+
+
+
+
   return (
     <>
     <div><h1 className='text-lg font-bold'>Add New Therapy Session</h1></div>
