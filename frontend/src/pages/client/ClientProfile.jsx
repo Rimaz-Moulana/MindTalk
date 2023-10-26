@@ -198,6 +198,63 @@ const Profile = () => {
     }));
   };
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+  const handleProfilePhotoChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePhoto(file);
+  };
+
+  const uploadProfilePhoto = async (e) => {
+    e.preventDefault();
+  
+    if (!profilePhoto) {
+      // Handle error if no photo is selected
+      toast.error('Please select a profile photo.');
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append('profilePhoto', profilePhoto);
+  
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data', 
+          },
+          withCredentials: true,
+        };
+  
+        const response = await axios.post(
+          `http://localhost:8080/api/v1/client/${id}/updateProfilePhoto`,
+          formData,
+          config
+        );
+  
+        if (response.status === 200) {
+          toast.success('Profile photo uploaded successfully!', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        } else {
+          toast.error('Error uploading profile photo. Please try again later.');
+        }
+      }
+    } catch (error) {
+      console.error('Error uploading profile photo:', error);
+      toast.error('Error uploading profile photo. Please try again later.');
+    }
+  };
+  
+
   const pdfData = [
     {
       id: 1,
@@ -217,18 +274,18 @@ const Profile = () => {
   ];
 
   return (
-    <div className="flex flex-col-reverse gap-4 w-full grid md:grid-cols-4">
+    <div className="flex grid flex-col-reverse w-full gap-4 md:grid-cols-4">
 
       <div className="bg-white rounded-xl md:col-span-3 ">
-        <div className="mx-auto grid max-w-7xl gap-x-8 px-6 lg:px-8 py-5">
+        <div className="grid px-6 py-5 mx-auto max-w-7xl gap-x-8 lg:px-8">
 
           <form>
             <div className="">
 
-              <div className="border-b border-gray-900/10 pb-12">
+              <div className="pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Personal Information</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="fname" className="block text-sm font-medium leading-6 text-gray-900">
@@ -438,10 +495,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 1</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName1" className="block text-sm font-medium leading-6 text-gray-900">
@@ -479,10 +536,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 2</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName2" className="block text-sm font-medium leading-6 text-gray-900">
@@ -520,10 +577,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 3</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName3" className="block text-sm font-medium leading-6 text-gray-900">
@@ -564,14 +621,14 @@ const Profile = () => {
 
             </div>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
+            <div className="flex items-center justify-end mt-6 gap-x-6">
               <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
                 Cancel
               </button>
               <button
                 type="submit"
                 onClick={saveUser}
-                className="rounded-lg bg-blue-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save
               </button>
@@ -592,28 +649,51 @@ const Profile = () => {
 
       <div className="flex flex-col gap-4 ">
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden text-center pb-5">
+        <div className="pb-5 overflow-hidden text-center bg-white shadow-md rounded-xl">
 
-          {/* <img src={sky} alt="sky" className="w-full h-48 object-cover" /> */}
-          <div className='h-48 w-full bg-sky-500 bg-cover bg-no-repeat bg-center' 
+          {/* <img src={sky} alt="sky" className="object-cover w-full h-48" /> */}
+          <div className='w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500' 
             style={{background: 'url("https://source.unsplash.com/650x200?sky")'}}>
           </div>
-          <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto -mt-10" />
-          <span className="font-bold text-xl text-blue-900">{user.fname} {user.lname}</span>
+          <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
+          <span className="text-xl font-bold text-blue-900">John Doe</span>
+
+          <form onSubmit={uploadProfilePhoto}>
+            <div className="mb-4">
+              {/* <label htmlFor="profile-photo" className="block text-sm font-medium leading-6 text-gray-900">
+                Profile Photo
+              </label> */}
+              <div className="mt-2">
+                <input
+                  type="file"
+                  id="profilePhoto"
+                  accept="image/*"
+                  onChange={handleProfilePhotoChange}
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700"
+            >
+              Upload Profile Photo
+            </button>
+          </form>
+
 
         </div>
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden p-5 ">
+        <div className="p-5 overflow-hidden bg-white shadow-md rounded-xl ">
 
           <div className='pb-5 text-center '>
             <span className="text-lg text-blue-900 ">Let us get to know about you. Upload your previous medical files if any.  </span>
-            <div className="m-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-53">
+            <div className="flex justify-center px-6 m-2 border border-dashed rounded-lg border-gray-900/25 py-53">
               <div className="text-center">
-                <FiClipboard className="mt-2 mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                <div className="mt-2 flex text-sm leading-6 text-gray-600">
+                <FiClipboard className="w-12 h-12 mx-auto mt-2 text-gray-300" aria-hidden="true" />
+                <div className="flex mt-2 text-sm leading-6 text-gray-600">
                   <label
                     htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-900"
+                    className="relative font-semibold text-blue-700 bg-white rounded-md cursor-pointer focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-900"
                   >
                     <span>Upload a file</span>
                     <input id="file-upload" name="file-upload" type="file" className="sr-only" />
@@ -625,17 +705,17 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="overflow-hidden pb-5 ">
-            <table className="min-w-full text-black text-sm font-light">
+          <div className="pb-5 overflow-hidden ">
+            <table className="min-w-full text-sm font-light text-black">
               <tbody>
                 {
                   pdfData.map((item) => (
                     <tr
                       key={ item.id }
-                      className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-neutral-300"
+                      className="transition duration-300 ease-in-out border-b border-gray-200 hover:bg-neutral-100 hover:bg-neutral-300"
                     >
-                      <td className="whitespace-nowrap text-left px-6 py-4">{item.title}</td>
-                      <td className="whitespace-nowrap text-right px-6 py-4">{item.date}</td>
+                      <td className="px-6 py-4 text-left whitespace-nowrap">{item.title}</td>
+                      <td className="px-6 py-4 text-right whitespace-nowrap">{item.date}</td>
                     </tr>
                   ) )
                 }
