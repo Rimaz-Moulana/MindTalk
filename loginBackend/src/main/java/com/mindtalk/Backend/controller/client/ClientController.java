@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -40,17 +41,17 @@ public class ClientController {
 
     @PostMapping
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO){
+    public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO) {
         Client createdClient = clientService.createClient(clientDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
     }
 
-    @GetMapping("/{clientId}")
+    @GetMapping("/{user_id}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Client> getClientById(@PathVariable Integer clientId){
-        Client client = clientService.getClientById(clientId);
+    public ResponseEntity<Client> getClientByUserId(@PathVariable Integer user_id) {
+        Client client = clientService.getClientByUserId(user_id);
 
-        if(client != null ){
+        if (client != null) {
             return ResponseEntity.ok(client);
         } else {
             return ResponseEntity.notFound().build();
@@ -59,29 +60,46 @@ public class ClientController {
 
     @GetMapping("/all")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<List<Client>> getAllClient(){
+    public ResponseEntity<List<Client>> getAllClient() {
         List<Client> allClient = clientService.getAllClient();
 
-        if(!allClient.isEmpty()){
+        if (!allClient.isEmpty()) {
             return ResponseEntity.ok(allClient);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PutMapping("/{clientId}")
+    @PutMapping("/{user_id}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
     public ResponseEntity<Client> updateClient(
-            @PathVariable Integer clientId,
-            @RequestBody ClientDTO clientDTO){
-        Client updatedClient = clientService.updateClient(clientId, clientDTO);
+            @PathVariable Integer user_id,
+            @RequestBody ClientDTO clientDTO) {
+        Client updatedClient = clientService.updateClient(user_id, clientDTO);
 
-        if(updatedClient != null ){
+        if (updatedClient != null) {
             return ResponseEntity.ok(updatedClient);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/{user_id}/updateProfilePhoto")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<Client> updateProfilePhoto(
+            @PathVariable Integer user_id,
+            @RequestPart(required = false) MultipartFile profilePhoto) {
+
+        if (profilePhoto != null) {
+            String updatedProfilePhotoPath = clientService.updateProfilePhoto(user_id, profilePhoto);
+            if (updatedProfilePhotoPath != null) {
+                return ResponseEntity.ok(clientService.getClientByUserId(user_id));
+            }
+        }
+
+        return ResponseEntity.badRequest().build(); //Handle errors as needed
+    }
+
 
     @DeleteMapping("/{clientId}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
