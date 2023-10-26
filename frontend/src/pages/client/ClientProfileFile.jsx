@@ -2,6 +2,24 @@ import React from 'react';
 import { FiClipboard } from 'react-icons/fi';
 
 const FileUpload = () => {
+  const pdfData = [
+    {
+      id: 1,
+      title:'abc.pdf',
+      date: '07/07/2023'
+    },
+    {
+      id: 2,
+      title:'xyz.pdf',
+      date: '10/07/2023'
+    },
+    {
+      id: 3,
+      title:'msg.doc',
+      date: '17/07/2023'
+    },
+  ];
+
   return (
     <div className="p-5 overflow-hidden bg-white shadow-md rounded-xl">
       <div className="pb-5 text-center">
@@ -23,6 +41,25 @@ const FileUpload = () => {
           </div>
         </div>
       </div>
+
+      <div className="pb-5 overflow-hidden ">
+            <table className="min-w-full text-sm font-light text-black">
+              <tbody>
+                {
+                  pdfData.map((item) => (
+                    <tr
+                      key={ item.id }
+                      className="transition duration-300 ease-in-out border-b border-gray-200 hover:bg-neutral-100 hover:bg-neutral-300"
+                    >
+                      <td className="px-6 py-4 text-left whitespace-nowrap">{item.title}</td>
+                      <td className="px-6 py-4 text-right whitespace-nowrap">{item.date}</td>
+                    </tr>
+                  ) )
+                }
+              </tbody>
+            </table>
+          </div>
+          
     </div>
   );
 };

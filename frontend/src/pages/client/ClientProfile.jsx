@@ -7,6 +7,8 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import ProfilePhoto from './ClientProfilePhoto';
+import FileUpload from './ClientProfileFIle';
+
 
 const Profile = () => {
   const { id } = useParams();
@@ -654,7 +656,7 @@ const Profile = () => {
           handleProfilePhotoChange={handleProfilePhotoChange}
           uploadProfilePhoto={uploadProfilePhoto}
         />
-        <FiClipboard />
+        <FileUpload />
         
       </div>
 
