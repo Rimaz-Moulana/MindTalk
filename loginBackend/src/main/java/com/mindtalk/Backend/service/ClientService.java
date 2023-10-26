@@ -73,6 +73,17 @@ public class ClientService {
         return clientRepo.findByUserId(user_id).orElse(null);
     }
 
+    public String getProfilePhotoPathByUserId(Integer user_id) {
+        // Find the client by user_id
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if (existingClient != null) {
+            // Get the profile photo path from the client entity
+            return existingClient.getProfilePhotoPath();
+        }
+
+        return null; // Client not found or profile photo path not available
+    }
 
     public List<Client> getAllClient(){
         return clientRepo.findAll();

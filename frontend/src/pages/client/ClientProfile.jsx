@@ -658,7 +658,7 @@ const Profile = () => {
           <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
           <span className="text-xl font-bold text-blue-900">John Doe</span>
 
-          <form onSubmit={uploadProfilePhoto}>
+          <form >
             <div className="mb-4">
               {/* <label htmlFor="profile-photo" className="block text-sm font-medium leading-6 text-gray-900">
                 Profile Photo
@@ -674,6 +674,7 @@ const Profile = () => {
             </div>
             <button
               type="submit"
+              onSubmit={uploadProfilePhoto}
               className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700"
             >
               Upload Profile Photo
