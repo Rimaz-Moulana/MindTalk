@@ -15,10 +15,11 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User _user;
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User _user;
 
+    private Integer userId;
     private String fName;
     private String lName;
     private String dob;
@@ -35,4 +36,7 @@ public class Client {
     private String emPhone2;
     private String emName3;
     private String emPhone3;
+    @Column(name = "profile_photo_path")
+    private String profilePhotoPath;
+
 }
