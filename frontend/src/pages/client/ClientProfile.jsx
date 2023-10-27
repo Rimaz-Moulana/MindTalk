@@ -257,25 +257,6 @@ const Profile = () => {
     }
   };
   
-
-  const pdfData = [
-    {
-      id: 1,
-      title:'abc.pdf',
-      date: '07/07/2023'
-    },
-    {
-      id: 2,
-      title:'xyz.pdf',
-      date: '10/07/2023'
-    },
-    {
-      id: 3,
-      title:'msg.doc',
-      date: '17/07/2023'
-    },
-  ];
-
   return (
     <div className="flex grid flex-col-reverse w-full gap-4 md:grid-cols-4">
 
@@ -655,6 +636,7 @@ const Profile = () => {
         <ProfilePhoto 
           handleProfilePhotoChange={handleProfilePhotoChange}
           uploadProfilePhoto={uploadProfilePhoto}
+          profilePhoto={profilePhoto}
         />
         <FileUpload />
         
