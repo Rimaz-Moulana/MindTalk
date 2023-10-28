@@ -5,6 +5,7 @@ const ClientMeditation = () => {
   const [isLoading, setLoading] = useState(true);
   const [meditation, setMeditation] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all'); // Default to 'all'
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   const fetchMeditationData = async () => {
     try {
@@ -47,24 +48,42 @@ const ClientMeditation = () => {
     setSelectedCategory(category);
   };
 
+  const filterMeditationBySearch = (keyword) => {
+    setSearchKeyword(keyword);
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Meditation / Breathing Exercises</h1>
 
-        <div className="py-2 pl-5">
-          <label className="pr-2">Filter by Category:</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => filterMeditationByCategory(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="Mindfulness">Mindfulness</option>
-            <option value="Breathing Exercises">Breathing Exercises</option>
-            <option value="Guided Meditation">Guided Meditation</option>
-            <option value="Sleep Meditation">Sleep Meditation</option>
-            <option value="Stress Relief">Stress Relief</option>
-          </select>
+        <div className="flex flex-wrap gap-4 pl-5 pr-5 pb-2">
+          <div >
+            {/* <label className="pr-2">Filter by Category:</label> */}
+            <select
+              value={selectedCategory}
+              onChange={(e) => filterMeditationByCategory(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+            >
+              <option value="all">All</option>
+              <option value="Mindfulness">Mindfulness</option>
+              <option value="Breathing Exercises">Breathing Exercises</option>
+              <option value="Guided Meditation">Guided Meditation</option>
+              <option value="Sleep Meditation">Sleep Meditation</option>
+              <option value="Stress Relief">Stress Relief</option>
+            </select>
+        </div>
+
+        <div >
+            {/* <label className="pr-2">Search by Description:</label> */}
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => filterMeditationBySearch(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              placeholder="Search..."
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -72,7 +91,8 @@ const ClientMeditation = () => {
             .filter((item) => {
               return (
                 (selectedCategory === 'all' || item.category === selectedCategory) &&
-                item.status
+                item.status &&
+                (searchKeyword === '' || item.description.toLowerCase().includes(searchKeyword.toLowerCase()))
               );
             })
             .map((item, index) => (
