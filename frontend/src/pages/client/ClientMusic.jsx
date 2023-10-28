@@ -72,6 +72,7 @@ const ClientMusic = () => {
         <h1 className='text-2xl font-bold pt-5 pl-5'>Music / Videos</h1>
         <div className="flex flex-wrap gap-4 pl-5 pr-5 pb-2">
           <div>
+            {/* <label className="pr-2">Filter by Category:</label> */}
             <select
               value={selectedCategory}
               onChange={(e) => filterMusicByCategory(e.target.value)}
@@ -85,7 +86,9 @@ const ClientMusic = () => {
               <option value="Stress Releasing">Stress Releasing</option>
             </select>
           </div>
+
           <div>
+            {/* <label className="pr-2">Search by Description:</label> */}
             <input
               type="text"
               value={searchKeyword}

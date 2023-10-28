@@ -52,6 +52,17 @@ const ClientMeditation = () => {
     setSearchKeyword(keyword);
   };
 
+  // Filter the meditation based on selected category and search keyword
+  const filteredMeditation = meditation
+    .filter((item) => {
+      return (
+        (selectedCategory === 'all' || item.category === selectedCategory) &&
+        item.status &&
+        (searchKeyword === '' || item.description.toLowerCase().includes(searchKeyword.toLowerCase()))
+      );
+    });
+
+
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -86,15 +97,14 @@ const ClientMeditation = () => {
           </div>
         </div>
 
+        {filteredMeditation.length === 0 ? (
+          <div className="p-5 text-center">
+            <p className="text-gray-500 text-xl font-semibold">No matching videos found.</p>
+            <p className="text-gray-400 mt-2">Try refining your search criteria.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {meditation
-            .filter((item) => {
-              return (
-                (selectedCategory === 'all' || item.category === selectedCategory) &&
-                item.status &&
-                (searchKeyword === '' || item.description.toLowerCase().includes(searchKeyword.toLowerCase()))
-              );
-            })
+        {filteredMeditation
             .map((item, index) => (
               <div key={item.id} className="bg-white overflow-hidden shadow-sm rounded-lg">
                 <iframe
@@ -112,6 +122,7 @@ const ClientMeditation = () => {
               </div>
             ))}
         </div>
+        )}
       </div>
     </div>
   );
