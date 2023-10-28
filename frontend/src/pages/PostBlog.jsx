@@ -113,7 +113,7 @@ const PostBlog = () => {
               type="submit"
               className="w-40 px-4 py-3 mt-10 text-base font-medium text-white bg-blue-600 border border-transparent rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Post Blog
+              Post your Blog
             </button>
           </div>
         </form>
