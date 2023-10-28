@@ -4,6 +4,7 @@ import axios from 'axios';
 const ClientMeditation = () => {
   const [isLoading, setLoading] = useState(true);
   const [meditation, setMeditation] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all'); // Default to 'all'
 
   const fetchMeditationData = async () => {
     try {
@@ -42,13 +43,38 @@ const ClientMeditation = () => {
     fetchMeditationData();
   }, []);
 
+  const filterMeditationByCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Meditation / Breathing Exercises</h1>
+
+        <div className="py-2 pl-5">
+          <label className="pr-2">Filter by Category:</label>
+          <select
+            value={selectedCategory}
+            onChange={(e) => filterMeditationByCategory(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="Mindfulness">Mindfulness</option>
+            <option value="Breathing Exercises">Breathing Exercises</option>
+            <option value="Guided Meditation">Guided Meditation</option>
+            <option value="Sleep Meditation">Sleep Meditation</option>
+            <option value="Stress Relief">Stress Relief</option>
+          </select>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meditation
-            .filter(item => item.status)
+        {meditation
+            .filter((item) => {
+              return (
+                (selectedCategory === 'all' || item.category === selectedCategory) &&
+                item.status
+              );
+            })
             .map((item, index) => (
               <div key={item.id} className="bg-white overflow-hidden shadow-sm rounded-lg">
                 <iframe
