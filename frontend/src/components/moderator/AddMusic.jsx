@@ -99,24 +99,22 @@ const AddMusic = () => {
 
                 if (id === '-1') {
                     await addMusicBackend(updatedMusic, config);
-                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 } else {
                     await updateMusicBackend(updatedMusic, config);
-                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 }
-                //window.location.href = '/moderator/moderatormusic';
+                window.location.href = '/moderator/moderatormusic';
             }
         } catch (error) {
             console.error('Error saving music:', error);
             // alert('Error updating user information. Please try again later.'); // Alert for update failure
-            toast.error('Error updating user information. Please try again later.', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            // toast.error('Error updating user information. Please try again later.', {
+            //     position: 'top-right',
+            //     autoClose: 3000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            // });
         }
     };
 
@@ -212,26 +210,26 @@ const AddMusic = () => {
             } else {
                 console.error('Error updating music');
                 // alert('Error updating user information. Please try again later.'); // Alert for update failure
-                toast.error('Error updating user information. Please try again later.', {
-                    position: 'top-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                });
+                // toast.error('Error updating user information. Please try again later.', {
+                //     position: 'top-right',
+                //     autoClose: 3000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                // });
             }
         } catch (error) {
             console.error('An error occurred:', error);
              // alert('Error updating user information. Please try again later.'); // Alert for update failure
-            toast.error('Error updating user information. Please try again later.', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            // toast.error('Error updating user information. Please try again later.', {
+            //     position: 'top-right',
+            //     autoClose: 3000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            // });
         }
     };
 
@@ -316,14 +314,14 @@ const AddMusic = () => {
                     </div>
                 </form>
             </div>
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 hideProgressBar={false}
                 closeOnClick={true}
                 pauseOnHover={true}
                 draggable={true}
-            />
+            /> */}
         </div>
     );
 }
