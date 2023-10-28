@@ -53,8 +53,9 @@ public class MeditationService {
         Meditation existingMeditation = meditationRepo.findById(meditationId).orElse(null);
 
         if (existingMeditation != null){
-            meditationRepo.delete(existingMeditation);
-            return true; // meditation deleted
+            existingMeditation.setStatus(false); //set the status to false
+            meditationRepo.save(existingMeditation); //save the updated meditation entity
+            return true; // meditation status updated
         }
         return false; //meditation not deleted
     }
