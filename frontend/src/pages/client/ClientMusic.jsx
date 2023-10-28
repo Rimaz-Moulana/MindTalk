@@ -4,6 +4,7 @@ import axios from 'axios';
 const ClientMusic = () => {
   const [isLoading, setLoading] = useState(true);
   const [music, setMusic] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all'); // Default to 'all'
 
   const fetchMusicData = async () => {
     try {
@@ -46,6 +47,10 @@ const ClientMusic = () => {
     fetchMusicData();
   }, []);
 
+  const filterMusicByCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     // <div className='rounded-xl'>
     //   {/* Add filtering and other UI elements here */}
@@ -84,12 +89,29 @@ const ClientMusic = () => {
           ))}
         </div> */}
 
+        <div className="py-2 pl-5">
+          <label className="pr-2">Filter by Category:</label>
+          <select
+            value={selectedCategory}
+            onChange={(e) => filterMusicByCategory(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="Relaxing">Relaxing</option>
+            <option value="Anxiety">Anxiety</option>
+            <option value="Focus">Focus</option>
+            <option value="Sleeping">Sleeping</option>
+            <option value="Stress Releasing">Stress Releasing</option>
+          </select>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
-          {music
-          .filter(item => {
-            console.log("Filtering item:" , item);
-            return item.status;
-          })
+        {music
+            .filter((item) => {
+              return (
+                (selectedCategory === 'all' || item.category === selectedCategory) &&
+                item.status
+              );
+            })
           .map((item, index) => (
             <div key={item.id} className="bg-gray-100 p-4 rounded-lg shadow-lg">
               <div className="aspect-w-16 aspect-h-9 mb-4"> {/* Updated aspect ratio here */}
