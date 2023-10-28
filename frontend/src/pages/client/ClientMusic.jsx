@@ -5,6 +5,7 @@ const ClientMusic = () => {
   const [isLoading, setLoading] = useState(true);
   const [music, setMusic] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all'); // Default to 'all'
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   const fetchMusicData = async () => {
     try {
@@ -51,6 +52,10 @@ const ClientMusic = () => {
     setSelectedCategory(category);
   };
 
+  const filterMusicBySearch = (keyword) => {
+    setSearchKeyword(keyword);
+  };
+
   return (
     // <div className='rounded-xl'>
     //   {/* Add filtering and other UI elements here */}
@@ -89,19 +94,33 @@ const ClientMusic = () => {
           ))}
         </div> */}
 
-        <div className="py-2 pl-5">
-          <label className="pr-2">Filter by Category:</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => filterMusicByCategory(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="Relaxing">Relaxing</option>
-            <option value="Anxiety">Anxiety</option>
-            <option value="Focus">Focus</option>
-            <option value="Sleeping">Sleeping</option>
-            <option value="Stress Releasing">Stress Releasing</option>
-          </select>
+        <div className="flex flex-wrap gap-4 pl-5 pr-5 pb-2">
+          <div >
+            {/* <label className="pr-2">Filter by Category:</label> */}
+            <select
+              value={selectedCategory}
+              onChange={(e) => filterMusicByCategory(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+            >
+              <option value="all">All</option>
+              <option value="Relaxing">Relaxing</option>
+              <option value="Anxiety">Anxiety</option>
+              <option value="Focus">Focus</option>
+              <option value="Sleeping">Sleeping</option>
+              <option value="Stress Releasing">Stress Releasing</option>
+            </select>
+          </div>
+
+          <div >
+            {/* <label className="pr-2">Search by Description:</label> */}
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => filterMusicBySearch(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              placeholder="Search..."
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-5 pb-5">
@@ -109,7 +128,8 @@ const ClientMusic = () => {
             .filter((item) => {
               return (
                 (selectedCategory === 'all' || item.category === selectedCategory) &&
-                item.status
+                item.status &&
+                (searchKeyword === '' || item.description.toLowerCase().includes(searchKeyword.toLowerCase()))
               );
             })
           .map((item, index) => (
