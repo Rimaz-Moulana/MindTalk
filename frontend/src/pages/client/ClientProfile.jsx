@@ -92,6 +92,7 @@ const Profile = () => {
               city: userData.city,
               district: userData.district,
               zip: userData.zip,
+              profilePhotoPath: userData.profilePhotoPath,
               //emergency contacts
               emName1: userData.emName1,
               emName2: userData.emName2,
@@ -637,6 +638,7 @@ const Profile = () => {
           handleProfilePhotoChange={handleProfilePhotoChange}
           uploadProfilePhoto={uploadProfilePhoto}
           profilePhoto={profilePhoto}
+          profilePhotoPath={user.profilePhotoPath}
         />
         <FileUpload />
         
