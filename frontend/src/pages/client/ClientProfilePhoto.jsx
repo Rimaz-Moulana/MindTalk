@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import logo from '../../assets/logo.png';
+// import logo from '../../assets/logo.png';
 import dp from '../../assets/dp.png'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -9,23 +9,55 @@ const ProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Make an HTTP request to fetch the profile photo from your API
-    axios.get(`http://localhost:8080/api/v1/client/${id}/profilePhotoPath`)
-      .then((response) => {
-        const imageData = response.data;
+    fetchPhotoData();
+  }, [id]);
 
-        // Set the profile photo using the fetched data
-        setProfilePhoto(imageData);
-      })
-      .catch((error) => {
-        console.error('Error fetching profile photo:', error);
-      });
-  }, []);
+  const fetchPhotoData = async () => {
+    try {
+      console.log(id);
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const {accessToken} = JSON.parse(authData);
+        const config = {
+          headers: { 
+            Authorization: `Bearer ${accessToken}`,
+            
+          },
+          withCredentials: true
+        };
+
+        const response = await axios.get(`http://localhost:8080/api/v1/client/${id}/profilePhotoPath`, config);
+
+        if (response.status === 200){
+          const photoData = response.data;
+          setProfilePhoto({
+            profile_photo_path: photoData.profile_photo_path
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching profile photo:', error);
+    }
+  };
+
+  // useEffect(() => {
+  //   // Make an HTTP request to fetch the profile photo from your API
+  //   axios.get(`http://localhost:8080/api/v1/client/${id}/profilePhotoPath`)
+  //     .then((response) => {
+  //       const imageData = response.data;
+
+  //       // Set the profile photo using the fetched data
+  //       setProfilePhoto(imageData);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching profile photo:', error);
+  //     });
+  // }, []);
 
   return (
     <div className="pb-5 overflow-hidden text-center bg-white shadow-md rounded-xl">
       <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div>
-      <img src={profilePhoto ? URL.createObjectURL(profilePhoto) : dp} alt="profile photo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
+      <img src={dp} alt="profile photo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
       <span className="text-xl font-bold text-blue-900">John Doe</span>
       <form onSubmit={uploadProfilePhoto}>
         <div className="mb-4">
