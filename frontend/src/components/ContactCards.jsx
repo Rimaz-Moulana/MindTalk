@@ -10,9 +10,17 @@ const ContactCards = ({ contactList }) => {
     localStorage.setItem('appcounsellorName', name);
   };
 
-  // Filter the contactList based on the search query
-  const filteredContacts = contactList.filter((contact) => {
-    return contact.name.toLowerCase().includes(searchQuery.toLowerCase());
+   // Filter the contactList based on the search query
+   const filteredContacts = contactList.filter((contact) => {
+    const query = searchQuery.toLowerCase();
+
+    if (query.length === 1) {
+      // Display only names that start with the search query
+      return contact.name.toLowerCase().startsWith(query);
+    } else {
+      // Display names that include the search query
+      return contact.name.toLowerCase().includes(query);
+    }
   });
 
   return (
