@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 const ProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const { id } = useParams();
+  const imagePath = 'G:/final/MindTalk/loginBackend/target/profilephoto/' + profilePhoto;
 
   useEffect(() => {
     fetchPhotoData();
@@ -30,9 +31,11 @@ const ProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto }) => {
 
         if (response.status === 200){
           const photoData = response.data;
-          setProfilePhoto({
-            profile_photo_path: photoData.profile_photo_path
-          });
+          console.log('Profile photo data:', photoData);
+          console.log('profile photo path:', photoData.profilePhotoPath);
+          setProfilePhoto(
+            photoData.profile_photo_path
+          );
         }
       }
     } catch (error) {
@@ -57,8 +60,8 @@ const ProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto }) => {
   return (
     <div className="pb-5 overflow-hidden text-center bg-white shadow-md rounded-xl">
       <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div>
-      <img src={dp} alt="profile photo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
-      <span className="text-xl font-bold text-blue-900">John Doe</span>
+      <img src={imagePath || dp} alt="profile photo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
+      {/* <span className="text-xl font-bold text-blue-900">John Doe</span> */}
       <form onSubmit={uploadProfilePhoto}>
         <div className="mb-4">
           <div className="mt-2">
