@@ -11,7 +11,7 @@ const notificationList = [
   'Important update available',
 ];
 
-export default function CounsellorHeader() {
+export default function CounsellorHeader({id}) {
     const [notifications, setNotifications] = useState(notificationList);
     const [user, setUser] = useState(null); // User-related data state 
     const navigate = useNavigate()

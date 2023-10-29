@@ -189,7 +189,8 @@ function ClientProfileCard({ clientData }) {
       </figure>
 
       <div className="flex flex-col">
-           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+           <div className=" sm:mx-0.5 lg:mx-0.5"> 
+           {/* overflow-x-auto */}
              <div className="p-2 inline-block min-w-full">
                <div className="overflow-hidden ">
 
@@ -207,8 +208,8 @@ function ClientProfileCard({ clientData }) {
                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                          Phone
                        </th>
-                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                       </th>
+                       {/* <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                       </th> */}
                      </tr>
                    </thead>
 
@@ -220,9 +221,9 @@ function ClientProfileCard({ clientData }) {
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                          {emPhone1}
                        </td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
+                       {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
-                       </td>
+                       </td> */}
                      </tr>
 
                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
@@ -232,9 +233,9 @@ function ClientProfileCard({ clientData }) {
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                          {emPhone2}
                        </td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
+                       {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
-                       </td>
+                       </td> */}
                      </tr>
                     
                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
@@ -244,9 +245,9 @@ function ClientProfileCard({ clientData }) {
                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                          {emPhone3}
                        </td>
-                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
+                       {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hover:text-blue-700 cursor-pointer">
                          <FiMessageSquare />
-                       </td>
+                       </td> */}
                      </tr>
 
                    </tbody>
