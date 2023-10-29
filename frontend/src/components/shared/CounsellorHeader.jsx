@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { FiBell } from 'react-icons/fi';
 import dp from '../../assets/dp.png'
+import axios from 'axios';
 
 const notificationList = [
   'Appointment Reminder 02',
