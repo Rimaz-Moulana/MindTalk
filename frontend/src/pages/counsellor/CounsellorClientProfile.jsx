@@ -82,6 +82,44 @@ const CounsellorClientProfile = () => {
     }
   };
 
+  const [testResults, setTestResults] = useState({
+    score:'',
+    timestamp: ''
+  });
+
+  useEffect(() => {
+    fetchClientTestResults();
+  }, [id]);
+
+  const fetchClientTestResults = async () => {
+    try{
+      console.log("fetching test results...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+          const { accessToken } = JSON.parse(authData);
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json'
+              },
+              withCredentials: true
+          };
+
+          const response = await axios.get(`http://localhost:8080/api/v1/test/${id}`, config);
+
+          if (response.status === 200) {
+            const resultData = response.data;
+            setTestResults({
+              score: resultData.score ? resultData.score : '',
+              timestamp: resultData.timestamp ? resultData.timestamp : ''
+            });
+          }
+      }
+    } catch (error) {
+      console.error('Error fetching test results:', error);
+    }
+  };
+
   return (
     <div className='grid grid-cols-4 gap-5'>
 
@@ -90,7 +128,7 @@ const CounsellorClientProfile = () => {
       </div>
 
       <div className='col-span-3 bg-white rounded-xl'>
-        <ClientProfileHistory />
+        <ClientProfileHistory testData={testResults}/>
       </div>
 
     </div>
