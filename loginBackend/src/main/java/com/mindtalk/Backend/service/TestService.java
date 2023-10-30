@@ -34,13 +34,13 @@ public class TestService {
         return user.getEmail();
     }
 
-    public Test getTestByUserId(Integer user_id){
-        return testRepository.findByUserId(user_id).orElse(null);
-    }
-
-//    public List<Test> getTestsResultsByUserId(Integer user_id) {
-//        // Use the userId to retrieve all records with the given userId
-//        return testRepository.findByUserId(user_id);
+//    public Test getTestByUserId(Integer user_id){
+//        return testRepository.findByUserId(user_id).orElse(null);
 //    }
+
+    public List<Test> getTestsResultsByUserId(Integer user_id) {
+        // Use the userId to retrieve all records with the given userId
+        return testRepository.findAllByUserId(user_id);
+    }
 
 }
