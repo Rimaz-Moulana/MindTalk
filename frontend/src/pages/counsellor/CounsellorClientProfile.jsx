@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment/moment';
+import moment from 'moment';
 import ClientProfileCard from '../../components/ClientDetails/ClientProfileCard'
 import ClientProfileHistory from '../../components/ClientDetails/ClientProfileHistory'
 
@@ -109,8 +109,11 @@ const CounsellorClientProfile = () => {
             const resultData = response.data.map(resultData => ({
               id: resultData.id,
               score: resultData.score,
-              timestamp: moment(new Date(parseInt(resultData.timestamp))).format('MMM Do YY')
-            }))
+              timestamp: moment(resultData.timestamp).format('MMM Do YY')
+            }));
+
+            // Sort the test results in descending order based on the timestamp
+            resultData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
             setTestResults(resultData);
             setTestResultsList(response.data);

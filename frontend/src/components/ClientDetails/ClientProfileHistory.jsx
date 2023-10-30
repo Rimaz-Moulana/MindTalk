@@ -171,7 +171,7 @@ const ClientProfileHistory = ({testDataList}) => {
                   <tbody>
 
                     {sortedTestDataList?.map((testData, index) => (
-                      <tr key={testDataList.id}
+                      <tr key={testData.id}
                         className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
                         <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
                           {testData.score}
