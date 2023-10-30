@@ -137,7 +137,7 @@ const App = () => (
                             {/* Wrap the layout */}
                             <Route index element={<CounsellorHome />} />
                             {/* <Route path="l" element={<CounsellorHome />} /> */}
-                            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+                            <Route path="counsellorprofile/:id" element={<CounsellorProfile />} />
                             <Route path="counsellorclients" element={<CounsellorClients />} />
                             {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
                             <Route path="view-client/:id" element={<CounsellorClientProfile />} />
