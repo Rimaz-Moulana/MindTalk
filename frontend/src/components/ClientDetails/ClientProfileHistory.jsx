@@ -3,12 +3,40 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import moment from 'moment';
   
+function getLevel(score) {
+  if (score >= 0 && score <= 10) {
+    return "Mild";
+  } else if (score > 10 && score <= 20) {
+    return "Moderate";
+  } else if (score > 20 && score <= 30) {
+    return "Severe";
+  } else {
+    return "Unknown";
+  }
+}
+
+function getColorClass(level) {
+  switch (level) {
+    case 'Mild':
+      return 'text-green-500'; // You can use any color class from your CSS framework
+    case 'Moderate':
+      return 'text-yellow-500';
+    case 'Severe':
+      return 'text-red-500';
+    default:
+      return 'text-gray-500';
+  }
+}
+
 
 const ClientProfileHistory = ({testDataList}) => {
 
   //const { score, timestamp } = testDataList;
 
   testDataList && console.log(testDataList);
+
+  // Sort testDataList by timestamp in descending order
+  const sortedTestDataList = testDataList.slice().sort((a, b) => b.timestamp - a.timestamp);
 
   const [notes, setNotes] = useState({
     date: '',
@@ -142,14 +170,14 @@ const ClientProfileHistory = ({testDataList}) => {
 
                   <tbody>
 
-                    {testDataList?.map((testData, index) => (
+                    {sortedTestDataList?.map((testData, index) => (
                       <tr key={testDataList.id}
                         className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
                         <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
                           {testData.score}
                         </td>
-                        <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                          
+                        <td className={`px-6 py-2 text-sm font-light whitespace-nowrap ${getColorClass(getLevel(testData.score))}`}>
+                          {getLevel(testData.score)}
                         </td>
                         <td className="px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap">
                           {moment(testData.timestamp).format('MMM Do YYYY')} {/* Display date part */}
