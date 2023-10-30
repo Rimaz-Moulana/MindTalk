@@ -384,14 +384,15 @@ const CounsellorProfile = () => {
                 <div className="grid grid-cols-1 mt-8 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="yearsofexperience" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="experience" className="block text-sm font-medium leading-6 text-gray-900">
                       Years of Experience
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="yearsofexperience"
-                        id="yearsofexperience"
+                        name="experience"
+                        id="experience"
+                        value={user.experience}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -403,9 +404,10 @@ const CounsellorProfile = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
                         name="degree"
-                        id="degree"
+                          id="degree"
+                          value={user.degree}
+                          onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -421,9 +423,10 @@ const CounsellorProfile = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
                         name="workplace"
                         id="workplace"
+                        value={user.workplace}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -438,13 +441,51 @@ const CounsellorProfile = () => {
                         type="text"
                         name="specialize"
                         id="specialize"
+                        value={user.workplace}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   </div>
+                  
+                  <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="workplace" className="block text-sm font-medium leading-6 text-gray-900">
+                      Current Workplace
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="workplace"
+                        id="workplace"
+                        value={user.workplace}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                   </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="specialize" className="block text-sm font-medium leading-6 text-gray-900">
+                      Specialized In
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        name="specialize"
+                        id="specialize"
+                        value={user.workplace}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
               
 
             </div>
