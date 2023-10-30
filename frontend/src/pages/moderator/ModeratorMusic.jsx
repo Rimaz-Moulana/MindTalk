@@ -218,7 +218,7 @@ const ModeratorMusic = () => {
                 </button>
               </div>
               {deleteConfirmation === item.id && (
-                <div className="text-center mt-2">
+                <div className="mt-2 text-center">
                   <p>Confirm deletion?</p>
                   <button
                     onClick={() => handleDeleteConfirmation(item.id)}

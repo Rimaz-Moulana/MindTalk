@@ -4,6 +4,8 @@ import axios from 'axios';
 const ClientMeditation = () => {
   const [isLoading, setLoading] = useState(true);
   const [meditation, setMeditation] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all'); // Default to 'all'
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   const fetchMeditationData = async () => {
     try {
@@ -42,13 +44,67 @@ const ClientMeditation = () => {
     fetchMeditationData();
   }, []);
 
+  const filterMeditationByCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filterMeditationBySearch = (keyword) => {
+    setSearchKeyword(keyword);
+  };
+
+  // Filter the meditation based on selected category and search keyword
+  const filteredMeditation = meditation
+    .filter((item) => {
+      return (
+        (selectedCategory === 'all' || item.category === selectedCategory) &&
+        item.status &&
+        (searchKeyword === '' || item.description.toLowerCase().includes(searchKeyword.toLowerCase()))
+      );
+    });
+
+
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Meditation / Breathing Exercises</h1>
+
+        <div className="flex flex-wrap gap-4 pl-5 pr-5 pb-2">
+          <div >
+            {/* <label className="pr-2">Filter by Category:</label> */}
+            <select
+              value={selectedCategory}
+              onChange={(e) => filterMeditationByCategory(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+            >
+              <option value="all">All</option>
+              <option value="Mindfulness">Mindfulness</option>
+              <option value="Breathing Exercises">Breathing Exercises</option>
+              <option value="Guided Meditation">Guided Meditation</option>
+              <option value="Sleep Meditation">Sleep Meditation</option>
+              <option value="Stress Relief">Stress Relief</option>
+            </select>
+        </div>
+
+        <div >
+            {/* <label className="pr-2">Search by Description:</label> */}
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => filterMeditationBySearch(e.target.value)}
+              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              placeholder="Search..."
+            />
+          </div>
+        </div>
+
+        {filteredMeditation.length === 0 ? (
+          <div className="p-5 text-center">
+            <p className="text-gray-500 text-xl font-semibold">No matching videos found.</p>
+            <p className="text-gray-400 mt-2">Try refining your search criteria.</p>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {meditation
-            .filter(item => item.status)
+        {filteredMeditation
             .map((item, index) => (
               <div key={item.id} className="bg-white overflow-hidden shadow-sm rounded-lg">
                 <iframe
@@ -66,6 +122,7 @@ const ClientMeditation = () => {
               </div>
             ))}
         </div>
+        )}
       </div>
     </div>
   );

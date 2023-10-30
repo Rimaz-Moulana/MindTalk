@@ -64,4 +64,24 @@ public class BlogsService {
         }
         return false;
     }
+
+    public BlogsEntity acceptBlog(Integer blogsId) {
+        BlogsEntity existingBlog = blogsRepo.findById(blogsId).orElse(null);
+
+        if (existingBlog != null) {
+            existingBlog.setStatus(1); // Change the status to 1 to accept the blog
+            return blogsRepo.save(existingBlog);
+        }
+        return null; // Blog not found
+    }
+
+    public BlogsEntity rejectBlog(Integer blogsId) {
+        BlogsEntity existingBlog = blogsRepo.findById(blogsId).orElse(null);
+
+        if (existingBlog != null) {
+            existingBlog.setStatus(2); // Change the status to 2 to reject the blog
+            return blogsRepo.save(existingBlog);
+        }
+        return null; // Blog not found
+    }
 }

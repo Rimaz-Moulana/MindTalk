@@ -7,8 +7,15 @@ import com.mindtalk.Backend.dto.ClientDTO;
 import com.mindtalk.Backend.entity.Client;
 import com.mindtalk.Backend.repo.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -16,6 +23,9 @@ public class ClientService {
 
     @Autowired
     private ClientRepo clientRepo;
+
+    @Value("${profile.photo.upload.path}")
+    private String profilePhotoUploadPath;
 
     public Client createClient(ClientDTO clientDTO){
         Client client = new Client();
@@ -36,20 +46,51 @@ public class ClientService {
         client.setEmName3(clientDTO.getEmName3());
         client.setEmPhone3(clientDTO.getEmPhone3());
 
+        //handle profile photo
+        if (clientDTO.getProfilePhoto() != null && !clientDTO.getProfilePhoto().isEmpty()){
+            try {
+                //save the profile photo to a local file
+                String fileName = System.currentTimeMillis() + "_" + clientDTO.getProfilePhoto().getOriginalFilename();
+                Path filePath = Paths.get(profilePhotoUploadPath, fileName);
+                Files.copy(clientDTO.getProfilePhoto().getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                //set the profile photo path in the database
+                client.setProfilePhotoPath(fileName);
+            } catch (IOException e){
+                e.printStackTrace(); //handle the exception
+            }
+        }
+
         return clientRepo.save(client);
 
     }
 
-    public Client getClientById(Integer clientId) {
-        return clientRepo.findById(clientId).orElse(null);
+//    public Client getClientById(Integer clientId) {
+//        return clientRepo.findById(clientId).orElse(null);
+//    }
+
+    public Client getClientByUserId(Integer user_id) {
+        return clientRepo.findByUserId(user_id).orElse(null);
+    }
+
+    public String getProfilePhotoPathByUserId(Integer user_id) {
+        // Find the client by user_id
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if (existingClient != null) {
+            // Get the profile photo path from the client entity
+            return existingClient.getProfilePhotoPath();
+        }
+
+        return null; // Client not found or profile photo path not available
     }
 
     public List<Client> getAllClient(){
         return clientRepo.findAll();
     }
 
-    public Client updateClient(Integer clientId, ClientDTO clientDTO){
-        Client existingClient = clientRepo.findById(clientId).orElse(null);
+    public Client updateClient(Integer user_id, ClientDTO clientDTO){
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
 
         if(existingClient != null){
             existingClient.setFName(clientDTO.getFName());
@@ -72,6 +113,46 @@ public class ClientService {
         }
         return null; //client not found
     }
+
+    public String updateProfilePhoto(Integer user_id, MultipartFile profilePhoto) {
+        // Find the client by user_id
+        Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
+
+        if (existingClient != null) {
+            // Delete the existing profile photo if it exists
+            if (existingClient.getProfilePhotoPath() != null) {
+                Path existingPhotoPath = Paths.get(profilePhotoUploadPath, existingClient.getProfilePhotoPath());
+                try {
+                    Files.deleteIfExists(existingPhotoPath);
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception if necessary
+                }
+            }
+
+            // Handle the new profile photo
+            if (profilePhoto != null && !profilePhoto.isEmpty()) {
+                try {
+                    // Save the new profile photo to a local file
+                    String fileName = System.currentTimeMillis() + "_" + profilePhoto.getOriginalFilename();
+                    Path filePath = Paths.get(profilePhotoUploadPath, fileName);
+                    Files.copy(profilePhoto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                    // Set the new profile photo path in the database
+                    existingClient.setProfilePhotoPath(fileName);
+
+                    // Save the updated client to update the profile photo path
+                    clientRepo.save(existingClient);
+
+                    return fileName; // Return the new profile photo path
+                } catch (IOException e) {
+                    e.printStackTrace(); // Handle the exception
+                }
+            }
+        }
+
+        return null; // Client not found or profile photo not updated
+    }
+
 
     public boolean deleteClient(Integer clientId){
         Client existingClient = clientRepo.findById(clientId).orElse(null);

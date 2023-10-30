@@ -18,6 +18,9 @@ function AppointmentCalendar() {
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [appointmentFee, setAppointmentFee] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+const [errorVisible, setErrorVisible] = useState(false);
+
 
   useEffect(() => {
     fetchAppointments();
@@ -64,8 +67,12 @@ function AppointmentCalendar() {
   };
 
   const handleSlotSelect = (slotInfo) => {
+    const selectedDate = moment(slotInfo.start);
+    const currentDate = moment();
     setSelectedSlot(slotInfo);
-
+  
+    if (selectedDate.isSameOrAfter(currentDate, 'minute')) {
+      setSelectedSlot(slotInfo);
     // Extract the selected date and time from the slotInfo
     const selectedDate = slotInfo.start.toISOString();
     const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
@@ -87,7 +94,11 @@ function AppointmentCalendar() {
     localStorage.setItem('appointmentTime', selectedTime);
 
     setIsModalOpen(true);
-  };
+  }else {
+      // Handle the case where the selected date is in the past
+      setErrorMessage('Please select a valid time slot.');
+      setErrorVisible(true);
+  }};
 
 
   const handleModalCancel = () => {
@@ -219,9 +230,26 @@ function AppointmentCalendar() {
             </div>
           </div>
         )}
+        {/* Error Modal */}
+        {errorVisible && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded">
+              <h2 className="text-lg font-bold mb-2">Error</h2>
+              <p>{errorMessage}</p>
+              <button
+                type="button"
+                className="px-3 py-1 bg-gray-300 rounded mt-2"
+                onClick={() => setErrorVisible(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
+  
 }
 
 export default AppointmentCalendar;

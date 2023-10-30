@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TestService {
@@ -32,4 +33,14 @@ public class TestService {
 
         return user.getEmail();
     }
+
+//    public Test getTestByUserId(Integer user_id){
+//        return testRepository.findByUserId(user_id).orElse(null);
+//    }
+
+    public List<Test> getTestsResultsByUserId(Integer user_id) {
+        // Use the userId to retrieve all records with the given userId
+        return testRepository.findAllByUserId(user_id);
+    }
+
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment/moment';
 import ClientProfileCard from '../../components/ClientDetails/ClientProfileCard'
 import ClientProfileHistory from '../../components/ClientDetails/ClientProfileHistory'
 
@@ -82,6 +83,44 @@ const CounsellorClientProfile = () => {
     }
   };
 
+  const [testResults, setTestResults] = useState([]);
+  const [testResultsList, setTestResultsList] = useState([]);
+
+  useEffect(() => {
+    fetchClientTestResults();
+  }, [id]);
+
+  const fetchClientTestResults = async () => {
+    try{
+      console.log("fetching test results...");
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+          const { accessToken } = JSON.parse(authData);
+          const config = {
+              headers: {
+                  Authorization: `Bearer ${accessToken}`,
+                  'Content-Type': 'application/json'
+              },
+              withCredentials: true
+          };
+
+          const response = await axios.get(`http://localhost:8080/api/v1/test/all/${id}`, config);
+
+            const resultData = response.data.map(resultData => ({
+              id: resultData.id,
+              score: resultData.score,
+              timestamp: moment(new Date(parseInt(resultData.timestamp))).format('MMM Do YY')
+            }))
+
+            setTestResults(resultData);
+            setTestResultsList(response.data);
+          }
+
+    } catch (error) {
+      console.error('Error fetching test results:', error);
+    }
+  };
+
   return (
     <div className='grid grid-cols-4 gap-5'>
 
@@ -90,7 +129,7 @@ const CounsellorClientProfile = () => {
       </div>
 
       <div className='col-span-3 bg-white rounded-xl'>
-        <ClientProfileHistory />
+        <ClientProfileHistory testDataList={testResultsList}/>
       </div>
 
     </div>

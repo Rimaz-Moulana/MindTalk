@@ -150,7 +150,7 @@ const CounsellorProfile = () => {
   const updateUserBackend = async (userData, config) => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/${id}`,
+        `http://localhost:8080/api/counsellor/details/updateCounsellor/${id}`,
         userData,
         config
       );
@@ -191,7 +191,61 @@ const CounsellorProfile = () => {
     }));
   };
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+  const handleProfilePhotoChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePhoto(file);
+  };
+
+  const uploadProfilePhoto = async (e) => {
+    e.preventDefault();
   
+    if (!profilePhoto) {
+      // Handle error if no photo is selected
+      toast.error('Please select a profile photo.');
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append('profilePhoto', profilePhoto);
+  
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data', 
+          },
+          withCredentials: true,
+        };
+  
+        const response = await axios.put(
+          `http://localhost:8080/api/v1/counsellor/${id}/updateProfilePhoto`,
+          formData,
+          config
+        );
+  
+        if (response.status === 200) {
+          toast.success('Profile photo uploaded successfully!', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        } else {
+          toast.error('Error uploading profile photo. Please try again later.');
+        }
+      }
+    } catch (error) {
+      console.error('Error uploading profile photo:', error);
+      toast.error('Error uploading profile photo. Please try again later.');
+    }
+  };
 
   return (
     <>
@@ -207,69 +261,107 @@ const CounsellorProfile = () => {
                 <h1 className="ml-8 text-2xl font-bold text-gray-900">Personal Information</h1>
 
                 <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-6 sm:grid-cols-6">
-
-                  <div className="sm:col-span-6">
-                    <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
-                      Full Name
+                    
+                    <div className="sm:col-span-3">
+                    <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">
+                      First Name
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="full-name"
-                        id="full-name"
+                        name="firstname"
+                        id="firstname"
                         autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.firstname}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
-                  <div className="sm:col-span-6">
-                    <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
-                      Home Address
+                  <div className="sm:col-span-3">
+                    <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900">
+                      Last Name
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="address"
-                        id="address"
+                        name="lastname"
+                        id="lastname"
                         autoComplete="family-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label htmlFor="mobilephone" className="block text-sm font-medium leading-6 text-gray-900">
-                      Mobile Phone
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="tel"
-                        name="mobilephone"
-                        id="mobilephone"
-                        autoComplete='mobilephone'
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label htmlFor="fixedphone" className="block text-sm font-medium leading-6 text-gray-900">
-                      Fixed Phone
-                    </label>
-                    <div className="mt-2">
-                        <input
-                        type="tel"
-                        id="fixedphone"
-                        name="fixedphone"
-                        autoComplete="fixedphone"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.lastname}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       >
                       </input>
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
+                    <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
+                      Home Address
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="address"
+                        id="address"
+                          autoComplete="address"
+                          value={user.address}
+                          onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="language" className="block text-sm font-medium leading-6 text-gray-900">
+                      Languages Spoken
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="language"
+                        id="language"
+                        autoComplete="family-name"
+                        value={user.language}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      >
+                      </input>
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
+                      Mobile Phone
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="phone"
+                        id="phone"
+                        autoComplete='phone'
+                        value={user.phone}
+                        onClick={handleInputChange}  
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                      Email
+                    </label>
+                    <div className="mt-2">
+                        <input
+                        id="email"
+                        name="email"
+                        autoComplete="email"
+                        value={user.email}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      >
+                      </input>
+                    </div>
+                  </div>
+
+                  {/* <div className="sm:col-span-3">
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                       Email Address
                     </label>
@@ -282,9 +374,9 @@ const CounsellorProfile = () => {
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="sm:col-span-3">
+                  {/* <div className="sm:col-span-3">
                     <label htmlFor="district" className="block text-sm font-medium leading-6 text-gray-900">
                       District
                     </label>
@@ -297,7 +389,7 @@ const CounsellorProfile = () => {
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                 </div>
 
@@ -309,15 +401,16 @@ const CounsellorProfile = () => {
                 <div className="grid grid-cols-1 mt-8 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="yearsofexperience" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="experience" className="block text-sm font-medium leading-6 text-gray-900">
                       Years of Experience
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="yearsofexperience"
-                        id="yearsofexperience"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="experience"
+                        id="experience"
+                        value={user.experience}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -328,10 +421,11 @@ const CounsellorProfile = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
                         name="degree"
-                        id="degree"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                          id="degree"
+                          value={user.degree}
+                          onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -346,30 +440,68 @@ const CounsellorProfile = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
                         name="workplace"
                         id="workplace"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        value={user.workplace}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="specialize" className="block text-sm font-medium leading-6 text-gray-900">
-                      Specialized In
+                    <label htmlFor="coreServices" className="block text-sm font-medium leading-6 text-gray-900">
+                      Core Services
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="specialize"
-                        id="specialize"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        name="coreServices"
+                        id="coreServices"
+                        value={user.coreServices}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   </div>
+                  
+                  <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="scopeOfPractice" className="block text-sm font-medium leading-6 text-gray-900">
+                      Scope Of Practice
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="scopeOfPractice"
+                        id="scopeOfPractice"
+                        value={user.scopeOfPractice}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                   </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="ageGroup" className="block text-sm font-medium leading-6 text-gray-900">
+                      Age Group
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        name="ageGroup"
+                        id="ageGroup"
+                        value={user.ageGroup}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
               
 
             </div>
@@ -379,7 +511,8 @@ const CounsellorProfile = () => {
                 Cancel
               </button>
               <button
-                type="submit"
+                  type="submit"
+                  onClick={saveUser}
                 className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save
@@ -389,47 +522,85 @@ const CounsellorProfile = () => {
           </form>
 
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
       </div>
 
       <div className="flex flex-col gap-4 ">
 
         <div className="pb-5 overflow-hidden h-[52rem] text-center bg-white shadow-md rounded-xl">
 
-          <img src={sky} alt="sky" className="object-cover w-full h-48" />
+          {/* <img src={sky} alt="sky" className="object-cover w-full h-48" /> */}
+          <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div>
           <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
-            <span className="text-xl font-bold text-blue-900">John Doe</span>
+            <span className="text-xl font-bold text-blue-900">{user.firstname} {user.lastname}</span>
             
             <div className="mt-1 text-center">
-              <div className="mt-0 mb-2 text-sm font-bold leading-normal uppercase text-blueGray-400">
+              {/* <div className="mt-0 mb-2 text-sm font-bold leading-normal uppercase text-blueGray-400">
                 <i className="mr-2 text-lg fas fa-map-marker-alt text-blueGray-400"></i>
                 Los Angeles, California
-              </div>
+              </div> */}
               <div className='flex items-center justify-center mt-2'>
                 <IconComponent />
               </div>
-              <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
+              {/* <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
                 Solution Manager - Creative Team Officer
               </div>
               <div className="mb-2 text-blueGray-600">
                 <i className="mr-2 text-lg fas fa-university text-blueGray-400"></i>
                 University of Computer Science
-              </div>
+              </div> */}
             </div>
             <div className="py-10 mt-10 text-center border-t border-blueGray-200">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-1 lg:w-9/12">
-                  <p className="mb-4 text-lg leading-relaxed text-justify text-blueGray-700">
-                    An artist of considerable range, Jenna the name taken
-                    by Melbourne-raised, Brooklyn-based Nick Murphy
-                    writes, performs and records all of his own music,
-                    giving it a warm, intimate feel with a solid groove
-                    structure. An artist of considerable range.
-                  </p>
-                  <a href="javascript:void(0);" className="font-normal text-pink-500">
+                  <form>
+                    {/* <p className="mb-4 text-lg leading-relaxed text-justify text-blueGray-700">
+                      An artist of considerable range, Jenna the name taken
+                      by Melbourne-raised, Brooklyn-based Nick Murphy
+                      writes, performs and records all of his own music,
+                      giving it a warm, intimate feel with a solid groove
+                      structure. An artist of considerable range.
+                    </p> */}
+                    <textarea
+                      name="about"
+                      id="about"
+                      value={user.about}
+                      onChange={handleInputChange}
+                      className="p-5 block w-full rounded-md border-2 border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-blue-700 focus:border-blue-700 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                      rows={10}
+                      placeholder="Tell us about yourself..." // Add a placeholder text
+                      style={{
+                        resize: "none", // Disable resizing of the textarea
+                      }}
+                    />
+                  </form>
+                  {/* <a href="javascript:void(0);" className="font-normal text-pink-500">
                     Show more
-                  </a>
+                  </a> */}
                 </div>
+                
               </div>
+              
+              <div className="flex items-center justify-center mt-6 gap-x-6">
+                <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                  Cancel
+                </button>
+                <button
+                    type="submit"
+                    onClick={saveUser}
+                  className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Save
+                </button>
+            </div>
+
             </div>
 
         </div>

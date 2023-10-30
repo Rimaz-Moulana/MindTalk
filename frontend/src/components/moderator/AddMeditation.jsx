@@ -149,7 +149,7 @@ const AddMeditation = () => {
                         <input
                             placeholder="Title"
                             name="title"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-mdpx-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={meditation.title}
                             onChange={handleInputChange}
                         />
@@ -158,7 +158,7 @@ const AddMeditation = () => {
                         <label className="block text-sm font-medium text-gray-600">Category:</label>
                         <select
                             name="category"
-                            className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-select mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={meditation.category}
                             onChange={handleInputChange}
                         >
@@ -175,7 +175,7 @@ const AddMeditation = () => {
                         <input
                             placeholder="Description"
                             name="description"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={meditation.description}
                             onChange={handleInputChange}
                         />
@@ -185,7 +185,7 @@ const AddMeditation = () => {
                         <input
                             placeholder="Link"
                             name="link"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={meditation.link}
                             onChange={handleInputChange}
                         />
