@@ -71,7 +71,7 @@ public class CounsellorController {
     //Pathum's Controller
 
     @GetMapping("/getCounsellor/{user_id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Counsellor> getCounsellorById(@PathVariable Integer user_id){
         Counsellor counsellor = counsellorInfoService.getCounsellorByUserId(user_id);
 
@@ -94,5 +94,18 @@ public class CounsellorController {
         }
     }
 
+    @PutMapping("/updateCounsellor/{user_id}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<Counsellor> updateCounsellor(
+            @PathVariable Integer user_id,
+            @RequestBody CounsellorDTO counsellorDTO) {
+        Counsellor updatedCounsellor = counsellorInfoService.updateCounsellor(user_id, counsellorDTO);
+
+        if (updatedCounsellor != null) {
+            return ResponseEntity.ok(updatedCounsellor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

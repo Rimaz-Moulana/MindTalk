@@ -1,11 +1,13 @@
 package com.mindtalk.Backend.service;
 
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
+import com.mindtalk.Backend.entity.Client;
 import com.mindtalk.Backend.entity.Counsellor;
 import com.mindtalk.Backend.repo.CounselorRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class CounsellorInfoService {
     @Autowired
     private CounselorRepository counsellorRepository;
+
+    @Value("${profile.photo.upload.path}")
+    private String profilePhotoUploadPath;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -50,4 +55,27 @@ public class CounsellorInfoService {
 
         return counsellorRepository.findByUserId(user_id).orElse(null);
     }
+
+//    public String getProfilePhotoPathByUserId(Integer user_id) {
+//        // Find the counsellor by user_id
+//        Counsellor existingCounsellor = counsellorRepository.findByUserId(user_id).orElse(null);
+//
+//        if (existingCounsellor != null) {
+//            // Get the profile photo path from the counsellor entity
+//            return existingCounsellor.getProfilePhotoPath();
+//        }
+//
+//        return null; // counsellor not found or profile photo path not available
+//    }
+
+    public Counsellor updateCounsellor(Integer user_id, CounsellorDTO counsellorDTO){
+        Counsellor existingCounsellor = counsellorRepository.findByUserId(user_id).orElse(null);
+
+        if (existingCounsellor != null){
+            existingCounsellor.setFirstname(counsellorDTO.getFirstname());
+            return counsellorRepository.save(existingCounsellor);
+        }
+        return null; //counsellor not found
+    }
+
 }
