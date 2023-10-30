@@ -25,7 +25,7 @@ const ChatApp = () => {
     const [selectedChatName, setSelectedChatName] = useState('')
 
     const authData = JSON.parse(localStorage.getItem('authData'))
-    const userRoles = authData?.roles // Assuming roles is an array
+    const userId = authData ? authData.id : null
 
     const fetchUserChats = async (userId) => {
         try {
@@ -42,10 +42,21 @@ const ChatApp = () => {
 
                 const response = await axios.get(`http://localhost:8080/api/v1/chats/all/user/${userId}`, config)
                 //console.log(response)
-                const newChats = response.data.map((chat) => ({
-                    id: chat.id // Change this to the appropriate chat ID field
-                    //name: `${chat.firstUserName} and ${chat.secondUserName}`
-                }))
+                const newChats = await Promise.all(
+                    response.data.map(async (chat) => {
+                        const counselorDetails = await fetchCounselorDetails(chat.counsellorId)
+                        return {
+                            id: chat.id,
+                            counsellorId: chat.counsellorId,
+                            counselorName: counselorDetails || 'Unknown' // Set to 'Unknown' if details not found
+                        }
+                    })
+                )
+                // const newChats = response.data.map((chat) => ({
+                //     id: chat.id, // Change this to the appropriate chat ID field
+                //     counsellorId: chat.counsellorId
+                //     //name: `${chat.firstUserName} and ${chat.secondUserName}`
+                // }))
 
                 setChats(newChats)
                 setFilteredChats(newChats)
@@ -54,7 +65,11 @@ const ChatApp = () => {
             console.error('Error fetching data:', error)
         }
     }
-    const fetchCounsellorChats = async () => {
+
+    useEffect(() => {
+        fetchUserChats(userId)
+    }, [])
+    const fetchCounselorDetails = async (counselorId) => {
         try {
             const authData = localStorage.getItem('authData')
             if (authData) {
@@ -66,38 +81,18 @@ const ChatApp = () => {
                     },
                     withCredentials: true
                 }
+
                 const response = await axios.get(
-                    `http://localhost:8080/api/v1/chats/all/counsellor/{counsellorId}`,
+                    `http://localhost:8080/api/counsellor/details/${counselorId}/counsellorName`,
                     config
                 )
-                const newChats = response.data.map((chat) => ({
-                    id: chat.id // Change this to the appropriate chat ID field
-                    //name: `${chat.firstUserName} and ${chat.secondUserName}`
-                }))
-
-                setChats(newChats)
-                setFilteredChats(newChats)
-                console.log('Counsellor chats:', newChats)
+                return response.data
             }
         } catch (error) {
-            console.error('Error fetching counsellor chats:', error)
-            // Handle the error, e.g., show an error message to the user
+            console.error('Error fetching counselor details:', error)
+            return null
         }
     }
-    if (userRoles) {
-        if (userRoles.includes('ROLE_CLIENT')) {
-            // The user is a client, so fetch user chats
-            const userId = authData ? authData.id : null
-            fetchUserChats(userId)
-        } else if (userRoles.includes('ROLE_COUNSELLOR')) {
-            // The user is a counsellor, so fetch counsellor chats
-            fetchCounsellorChats()
-        }
-    }
-    // useEffect(() => {
-    //     fetchUserChats(userId)
-    //     //fetchCounsellors()
-    // }, [])
 
     // useEffect(() => {
     //     // Filter chats based on the search term and set the filteredChats state
@@ -184,7 +179,7 @@ const ChatApp = () => {
                                 <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-warning"></span>
                             </div>
                             <div className="flex-1">
-                                <p className="font-bold mb-1">{chat.name}</p>
+                                <p className="font-bold mb-1">{chat.counselorName}</p>
                                 <p className="mb-1">Well, you're doing a..</p>
                             </div>
                             <p className="text-sm text-gray-600">5 mins ago</p>
