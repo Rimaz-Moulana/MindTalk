@@ -1,6 +1,7 @@
 package com.mindtalk.Backend.controller.test;
 
 import com.mindtalk.Backend.dto.test.TestDTO;
+import com.mindtalk.Backend.entity.Test;
 import com.mindtalk.Backend.service.EmailService;
 import com.mindtalk.Backend.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,17 @@ public class TestController {
 
         return ResponseEntity.ok("Test results saved and email sent successfully");
     }
+
+    @GetMapping("/{user_id}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<Test> getTestByUserId(@PathVariable Integer user_id){
+        Test test = testService.getTestByUserId(user_id);
+
+        if (test != null) {
+            return ResponseEntity.ok(test);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -136,11 +136,11 @@ function ProfileDetails({counsellorData}) {
         <hr className="my-4 border-t border-gray-300" />
 
         {/* Activity Log */}
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <h2 className="px-8 text-xl font-semibold text-gray-800">Activity Log</h2>
-          <div className="px-8 mt-4">
+          <div className="px-8 mt-4"> */}
             {/* Timeline entries */}
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <div className="flex-none">
                 <div className="flex items-center justify-center w-8 h-8 bg-blue-500 rounded-full">
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -171,10 +171,10 @@ function ProfileDetails({counsellorData}) {
                 <p className="text-gray-800">Wrote a new blog post</p>
                 <p className="text-sm text-gray-600">1 day ago</p>
               </div>
-            </div>
+            </div> */}
             {/* More timeline entries go here */}
-          </div>
-        </div>
+          {/* </div>
+        </div> */}
     </>
   );
 }
