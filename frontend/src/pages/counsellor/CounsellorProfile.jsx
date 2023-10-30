@@ -150,7 +150,7 @@ const CounsellorProfile = () => {
   const updateUserBackend = async (userData, config) => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/${id}`,
+        `http://localhost:8080/api/counsellor/details/updateCounsellor/${id}`,
         userData,
         config
       );
@@ -454,7 +454,8 @@ const CounsellorProfile = () => {
                 Cancel
               </button>
               <button
-                type="submit"
+                  type="submit"
+                  onClick={saveUser}
                 className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save

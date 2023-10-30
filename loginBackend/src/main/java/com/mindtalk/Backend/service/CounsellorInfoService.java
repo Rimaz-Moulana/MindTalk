@@ -73,6 +73,21 @@ public class CounsellorInfoService {
 
         if (existingCounsellor != null){
             existingCounsellor.setFirstname(counsellorDTO.getFirstname());
+            existingCounsellor.setLastname(counsellorDTO.getLastname());
+            existingCounsellor.setAddress(counsellorDTO.getAddress());
+            existingCounsellor.setEmail(counsellorDTO.getEmail());
+            existingCounsellor.setPhone(counsellorDTO.getPhone());
+            existingCounsellor.setAgeGroup(counsellorDTO.getAgeGroup());
+            existingCounsellor.setLicenseNo(counsellorDTO.getLicenseNo());
+            existingCounsellor.setLicenseImage(counsellorDTO.getLicenseImage());
+            existingCounsellor.setCoreServices(counsellorDTO.getCoreServices());
+            existingCounsellor.setDegree(counsellorDTO.getDegree());
+            existingCounsellor.setExperience(counsellorDTO.getExperience());
+            existingCounsellor.setJobRole(counsellorDTO.getJobRole());
+            existingCounsellor.setLanguage(counsellorDTO.getLanguage());
+            existingCounsellor.setScopeOfPractice(counsellorDTO.getScopeOfPractice());
+            existingCounsellor.setWorkplace(counsellorDTO.getWorkplace());
+            existingCounsellor.setAbout(counsellorDTO.getAbout());
             return counsellorRepository.save(existingCounsellor);
         }
         return null; //counsellor not found
