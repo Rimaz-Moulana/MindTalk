@@ -66,6 +66,7 @@ import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
 import BlogsCounsellor from './pages/BlogsCounsellor'
 import BlogViewCounsellor from './pages/BlogViewCounsellor'
+import PostBlogModerator from './pages/moderator/PostBlogModerator'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -173,7 +174,8 @@ const App = () => (
                             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
                             <Route path="add-meditation/:id" element={<AddMeditation />} />
                             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
-                            <Route path="moderatorblogs/blogview/:id" element={<BlogViewCounsellor />} />
+                            <Route path="moderatorblogs/blogview/:id" element={<BlogView />} />
+                            <Route path="moderatorblogs/postblogmoderator" element={<PostBlogModerator />} />
                             <Route path="addtherapysession" element={<AddTherapySession />} />
                         </Route>
                     </Route>
