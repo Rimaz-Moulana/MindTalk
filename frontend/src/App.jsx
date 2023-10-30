@@ -64,7 +64,7 @@ import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
 import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
-
+import CounsellorChat from './components/Chat/counsellorMessage'
 const ROLES = {
     Client: 'ROLE_CLIENT',
     Admin: 'ROLE_ADMIN',
@@ -115,8 +115,6 @@ const App = () => (
                         </Route>
                     </Route>
 
-                  
-
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route element={<AdminLayout />}>
                             {' '}
@@ -136,6 +134,7 @@ const App = () => (
                             {' '}
                             {/* Wrap the layout */}
                             <Route index element={<CounsellorHome />} />
+                            <Route path="message" element={<CounsellorChat />} />
                             {/* <Route path="l" element={<CounsellorHome />} /> */}
                             <Route path="counsellorprofile" element={<CounsellorProfile />} />
                             <Route path="counsellorclients" element={<CounsellorClients />} />
@@ -152,11 +151,11 @@ const App = () => (
                         </Route>
 
                         <Route path="wallet" element={<WalletLayout />}>
-                        <Route  element={<CounsellorWallet />} />
-                        <Route index element={<CounsellorWallet />} />
-                        <Route path="transhistory" element={<TransHistory />} />
-                        <Route />
-                    </Route>
+                            <Route element={<CounsellorWallet />} />
+                            <Route index element={<CounsellorWallet />} />
+                            <Route path="transhistory" element={<TransHistory />} />
+                            <Route />
+                        </Route>
                     </Route>
 
                     <Route path="/moderator" element={<RequireAuth allowedRoles={[ROLES.Moderator]} />}>
