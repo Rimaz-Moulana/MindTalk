@@ -560,18 +560,47 @@ const CounsellorProfile = () => {
             <div className="py-10 mt-10 text-center border-t border-blueGray-200">
               <div className="flex flex-wrap justify-center">
                 <div className="w-full px-1 lg:w-9/12">
-                  <p className="mb-4 text-lg leading-relaxed text-justify text-blueGray-700">
-                    An artist of considerable range, Jenna the name taken
-                    by Melbourne-raised, Brooklyn-based Nick Murphy
-                    writes, performs and records all of his own music,
-                    giving it a warm, intimate feel with a solid groove
-                    structure. An artist of considerable range.
-                  </p>
-                  <a href="javascript:void(0);" className="font-normal text-pink-500">
+                  <form>
+                    {/* <p className="mb-4 text-lg leading-relaxed text-justify text-blueGray-700">
+                      An artist of considerable range, Jenna the name taken
+                      by Melbourne-raised, Brooklyn-based Nick Murphy
+                      writes, performs and records all of his own music,
+                      giving it a warm, intimate feel with a solid groove
+                      structure. An artist of considerable range.
+                    </p> */}
+                    <textarea
+                      name="about"
+                      id="about"
+                      value={user.about}
+                      onChange={handleInputChange}
+                      className="p-5 block w-full rounded-md border-2 border-gray-300 py-2 text-gray-900 shadow-sm focus:ring-2 focus:ring-blue-700 focus:border-blue-700 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                      rows={10}
+                      placeholder="Tell us about yourself..." // Add a placeholder text
+                      style={{
+                        resize: "none", // Disable resizing of the textarea
+                      }}
+                    />
+                  </form>
+                  {/* <a href="javascript:void(0);" className="font-normal text-pink-500">
                     Show more
-                  </a>
+                  </a> */}
                 </div>
+                
               </div>
+              
+              <div className="flex items-center justify-center mt-6 gap-x-6">
+                <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+                  Cancel
+                </button>
+                <button
+                    type="submit"
+                    onClick={saveUser}
+                  className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Save
+                </button>
+            </div>
+
             </div>
 
         </div>
