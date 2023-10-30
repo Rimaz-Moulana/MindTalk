@@ -64,6 +64,8 @@ import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
 import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
+import BlogsCounsellor from './pages/BlogsCounsellor'
+import BlogViewCounsellor from './pages/BlogViewCounsellor'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -145,8 +147,9 @@ const App = () => (
                             <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
                             <Route path="bookedslots" element={<DateSlotSelector />} />
-                            <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/postblog" element={<PostBlog />} />
+                            <Route path="blogscounsellor" element={<BlogsCounsellor />} />
+                            <Route path="blogs/blogview/:id" element={<BlogViewCounsellor />} />
+                            <Route path="blogscounsellor/postblog" element={<PostBlog />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
                         </Route>
@@ -170,6 +173,7 @@ const App = () => (
                             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
                             <Route path="add-meditation/:id" element={<AddMeditation />} />
                             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
+                            <Route path="moderatorblogs/blogview/:id" element={<BlogViewCounsellor />} />
                             <Route path="addtherapysession" element={<AddTherapySession />} />
                         </Route>
                     </Route>

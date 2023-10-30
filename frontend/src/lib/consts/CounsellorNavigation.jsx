@@ -53,7 +53,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'blogs',
 		label: 'Blogs',
-		path: '/counsellor/blogs',
+		path: '/counsellor/blogscounsellor',
 		icon: <FiBookOpen />
 	}
 ]
