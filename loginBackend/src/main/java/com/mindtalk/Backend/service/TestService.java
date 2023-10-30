@@ -32,4 +32,9 @@ public class TestService {
 
         return user.getEmail();
     }
+
+    public Test getTestByUserId(Integer user_id){
+        return testRepository.findByUserId(user_id).orElse(null);
+    }
+
 }
