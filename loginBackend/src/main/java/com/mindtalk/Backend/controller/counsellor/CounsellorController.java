@@ -2,6 +2,7 @@ package com.mindtalk.Backend.controller.counsellor;
 
 import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
 
+import com.mindtalk.Backend.entity.Client;
 import com.mindtalk.Backend.entity.Counsellor;
 import com.mindtalk.Backend.entity.client.ClientNoteEntity;
 import com.mindtalk.Backend.service.CounsellorInfoService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -82,6 +84,18 @@ public class CounsellorController {
         }
     }
 
+//    @GetMapping("/profilePhotoPath/{user_id}")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+//    public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer user_id) {
+//        String profilePhotoPath = counsellorInfoService.getProfilePhotoPathByUserId(user_id);
+//
+//        if (profilePhotoPath != null) {
+//            return ResponseEntity.ok(profilePhotoPath);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
     @GetMapping("/allCounsellor")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Counsellor>> getAllCounsellor(){
@@ -107,5 +121,33 @@ public class CounsellorController {
             return ResponseEntity.notFound().build();
         }
     }
+
+//    @PutMapping("/updateProfilePhoto/{user_id}")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+//    public ResponseEntity<Counsellor> updateProfilePhoto(
+//            @PathVariable Integer user_id,
+//            @RequestPart(required = false) MultipartFile profilePhoto) {
+//
+//        if (profilePhoto != null) {
+//            String updatedProfilePhotoPath = counsellorInfoService.updateProfilePhoto(user_id, profilePhoto);
+//            if (updatedProfilePhotoPath != null) {
+//                return ResponseEntity.ok(counsellorInfoService.getClientByUserId(user_id));
+//            }
+//        }
+//
+//        return ResponseEntity.badRequest().build(); //Handle errors as needed
+//    }
+
+//    @DeleteMapping("/{counsellorId}")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+//    public ResponseEntity<Void> deleteCounsellor(@PathVariable Integer counsellorId){
+//        boolean isDeleted = counsellorInfoService.deleteCounsellor(counsellorId);
+//
+//        if (isDeleted){
+//            return ResponseEntity.noContent().build();
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
 }
