@@ -156,6 +156,17 @@ const Blogs = () => {
 
   return (
     <div className='w-full py-8 bg-white rounded-xl'>
+
+      <div className='flex items-end justify-end mr-10'>
+      <Link to="postblogmoderator"> {/* Link to another route */}
+          <button className="px-6 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-bold">
+            <span className="hidden sm:inline">Post a Blog</span>
+            <span className="md:hidden">
+              <AiOutlinePlusCircle /> {/* Render an icon */}
+            </span>
+          </button>
+        </Link>
+        </div>
       {/* ... rest of your JSX ... */}
       <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         {blogData
@@ -166,9 +177,9 @@ const Blogs = () => {
               <div className='p-4'>
               <h6 className='font-semibold text-gray-700'>{blog.category}</h6>
               <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
-              <p className='mt-2 text-gray-600 line-clamp-3'>{blog.content}</p>
+              <p className='mt-2 text-gray-600 line-clamp-3' dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-              <Link to={`/counsellor/blogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
+              <Link to={`/moderator/moderatorblogs/blogview/${blog.id}`}> {/* Link to view a specific blog */}
                 <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
                   <span className="hidden sm:inline">See more...</span>
                 </button>
