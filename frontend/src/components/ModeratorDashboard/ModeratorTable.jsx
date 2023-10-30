@@ -1,5 +1,4 @@
-// import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function RequestTable() {
     // const [showModal, setShowModal] = React.useState(false);
@@ -9,10 +8,8 @@ export default function RequestTable() {
 
     const [date,setDate] = useState('');
     const [isHovered,setIsHovered] = useState(false);
-    
-     console.log(data.length)
-    console.log(data[0].licenseImage);
-    
+    //  console.log(data.length)
+    // console.log(data[0].licenseImage);
         for(let i = 0;i < data.length ; i++)
         {
         console.log(data[i].licenseImage);
@@ -44,6 +41,56 @@ export default function RequestTable() {
 
     })
     
+    const [addData, setaddData] = useState('');
+
+    useEffect( () => {
+        const dataFromLocalStorage = JSON.parse(localStorage.getItem("detailsData"));
+        setaddData(dataFromLocalStorage);
+        console.log(addData)
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(addData);
+    // }, [addData]);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const authData = localStorage.getItem('authData')
+        const {accessToken} = JSON.parse(authData);
+        console.log(accessToken)
+        const dataToSend = {
+            data: addData,
+        };
+        console.log(JSON.stringify(dataToSend))
+        const config = {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            withCredentials: true,
+        }
+
+
+        fetch('http://localhost:8080/api/counsellor/details/add',{
+            method: 'POST',
+            headers: config.headers,
+            body: JSON.stringify(dataToSend)
+        })
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+       
+    };
+
+
+
 
     // const removeItem = ()=>{
     //     const updateArray =
@@ -152,7 +199,7 @@ export default function RequestTable() {
                                         )}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
-                                            <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
+                                            <button onClick={handleSubmit} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
                                             <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
                                         </td>
                                         {/* <td className="whitespace-nowrap px-6 py-4">

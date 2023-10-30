@@ -14,39 +14,38 @@ export default function AddTherapySession() {
     typeOfSession:"",
     link:""
 
-  },[])
+  })
 
   const handleChange = (e) => {
     const {name,value} = e.target;
-    setSession(...session, [name] , value);
+    setSession({...session, [name] : value});
   }
-  // const onSubmit=async () =>{
-  //   // e.preventDefault();
-  //   try{
-  //     console.log("fetching session details..");
-  //     const authData = localStorage.getItem('authData');
-  //     console.log(authData)
-  //     if(authData){
-  //       const {accessToken} = JSON.parse(authData);
-  //       console.log(accessToken);
-  //       const config = {
-  //         headers : {
-  //           'Content-Type': 'application/json',
-  //           Authorization: `Bearer ${accessToken}`
-  //         },
-  //         withCredentials: true,
-  //       };
-  //       await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
-  //       navigate("/moderator/addtherapysession");
-  //     }
 
+  const onSubmit=async (e) =>{
+    // e.preventDefault();
+    try{
+      console.log("fetching session details..");
+      const authData = localStorage.getItem('authData');
+      console.log(authData)
+      if(authData){
+        const {accessToken} = JSON.parse(authData);
+        console.log(accessToken);
+        const config = {
+          headers : {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          },
+          withCredentials: true,
+        };
+        await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
+        navigate("/moderator/addtherapysession");
+      }
+    }catch(error)
+    {
+      console.error("there error occured",error);
+    }
 
-  //   }catch(error)
-  //   {
-  //     console.error("there error occured",error);
-  //   }
-
-  // }
+  }
   
   
   const loadSession=async ()=>{
@@ -65,16 +64,16 @@ export default function AddTherapySession() {
           withCredentials: true,
         };
         console.log("ok",config)
-        const result = await axios.get(`http://localhost:8080/api/moderator/getSession`)
+        const result = await axios.get(`http://localhost:8080/api/moderator/getSession`,config)
 
         if(result.status === 200 ){
           const sessionData = result.data;
           setSession({
-            date:sessionData.data,
-            time:session.time,
-            counsellor:session.counsellor,
-            typeOfSession:session.typeOfSession,
-            link:session.link,
+            date: sessionData.data,
+            time: session.time,
+            counsellor: session.counsellor,
+            typeOfSession: session.typeOfSession,
+            link: session.link,
           });
         }
       }
@@ -86,8 +85,6 @@ export default function AddTherapySession() {
 useEffect(()=>{
   loadSession();
 })
-
-
 
 
   return (
