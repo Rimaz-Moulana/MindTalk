@@ -41,7 +41,7 @@ const ContactCards = ({ contactList }) => {
 
           return (
             <div key={contact.id} className="bg-white rounded-lg shadow-md pt-7 pb-7">
-              <Link to={`/client/clientcounsellors/profile/${contact.id}`}>
+              <Link to={`/client/clientcounsellors/profile/${contact.user_id}`}>
                 <img
                   alt="user"
                   className="w-32 h-32 rounded-full mx-auto"

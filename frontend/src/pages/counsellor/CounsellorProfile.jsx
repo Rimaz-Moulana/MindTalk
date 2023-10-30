@@ -273,7 +273,7 @@ const CounsellorProfile = () => {
                         autoComplete="given-name"
                         value={user.firstname}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -289,13 +289,13 @@ const CounsellorProfile = () => {
                         autoComplete="family-name"
                         value={user.lastname}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       >
                       </input>
                     </div>
                   </div>
 
-                  <div className="sm:col-span-6">
+                  <div className="sm:col-span-3">
                     <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
                       Home Address
                     </label>
@@ -306,8 +306,25 @@ const CounsellorProfile = () => {
                           autoComplete="address"
                           value={user.address}
                           onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="language" className="block text-sm font-medium leading-6 text-gray-900">
+                      Languages Spoken
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="language"
+                        id="language"
+                        autoComplete="family-name"
+                        value={user.language}
+                        onChange={handleInputChange}
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      >
+                      </input>
                     </div>
                   </div>
 
@@ -322,7 +339,7 @@ const CounsellorProfile = () => {
                         autoComplete='phone'
                         value={user.phone}
                         onClick={handleInputChange}  
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -338,7 +355,7 @@ const CounsellorProfile = () => {
                         autoComplete="email"
                         value={user.email}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       >
                       </input>
                     </div>
@@ -393,7 +410,7 @@ const CounsellorProfile = () => {
                         id="experience"
                         value={user.experience}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -408,7 +425,7 @@ const CounsellorProfile = () => {
                           id="degree"
                           value={user.degree}
                           onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -427,23 +444,22 @@ const CounsellorProfile = () => {
                         id="workplace"
                         value={user.workplace}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="specialize" className="block text-sm font-medium leading-6 text-gray-900">
-                      Specialized In
+                    <label htmlFor="coreServices" className="block text-sm font-medium leading-6 text-gray-900">
+                      Core Services
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="specialize"
-                        id="specialize"
-                        value={user.workplace}
+                        name="coreServices"
+                        id="coreServices"
+                        value={user.coreServices}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -453,32 +469,32 @@ const CounsellorProfile = () => {
                   <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="workplace" className="block text-sm font-medium leading-6 text-gray-900">
-                      Current Workplace
+                    <label htmlFor="scopeOfPractice" className="block text-sm font-medium leading-6 text-gray-900">
+                      Scope Of Practice
                     </label>
                     <div className="mt-2">
                       <input
-                        name="workplace"
-                        id="workplace"
-                        value={user.workplace}
+                        name="scopeOfPractice"
+                        id="scopeOfPractice"
+                        value={user.scopeOfPractice}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="specialize" className="block text-sm font-medium leading-6 text-gray-900">
-                      Specialized In
+                    <label htmlFor="ageGroup" className="block text-sm font-medium leading-6 text-gray-900">
+                      Age Group
                     </label>
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="specialize"
-                        id="specialize"
-                        value={user.workplace}
+                        name="ageGroup"
+                        id="ageGroup"
+                        value={user.ageGroup}
                         onChange={handleInputChange}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                        className="p-5 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
@@ -506,31 +522,40 @@ const CounsellorProfile = () => {
           </form>
 
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
       </div>
 
       <div className="flex flex-col gap-4 ">
 
         <div className="pb-5 overflow-hidden h-[52rem] text-center bg-white shadow-md rounded-xl">
 
-          <img src={sky} alt="sky" className="object-cover w-full h-48" />
+          {/* <img src={sky} alt="sky" className="object-cover w-full h-48" /> */}
+          <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div>
           <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
-            <span className="text-xl font-bold text-blue-900">John Doe</span>
+            <span className="text-xl font-bold text-blue-900">{user.firstname} {user.lastname}</span>
             
             <div className="mt-1 text-center">
-              <div className="mt-0 mb-2 text-sm font-bold leading-normal uppercase text-blueGray-400">
+              {/* <div className="mt-0 mb-2 text-sm font-bold leading-normal uppercase text-blueGray-400">
                 <i className="mr-2 text-lg fas fa-map-marker-alt text-blueGray-400"></i>
                 Los Angeles, California
-              </div>
+              </div> */}
               <div className='flex items-center justify-center mt-2'>
                 <IconComponent />
               </div>
-              <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
+              {/* <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
                 Solution Manager - Creative Team Officer
               </div>
               <div className="mb-2 text-blueGray-600">
                 <i className="mr-2 text-lg fas fa-university text-blueGray-400"></i>
                 University of Computer Science
-              </div>
+              </div> */}
             </div>
             <div className="py-10 mt-10 text-center border-t border-blueGray-200">
               <div className="flex flex-wrap justify-center">
