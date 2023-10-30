@@ -59,7 +59,7 @@ const Blogs = () => {
         withCredentials: true,
       };
 
-      const response = await axios.put(`http://localhost:8080/api/blogs/accept/` + id, config);
+      const response = await axios.put(`http://localhost:8080/api/blogs/accept/${id}`, null, config);
 
       setBlogData(prevBlogData => prevBlogData.filter(item => item.id !== id));
         setAcceptConfirmation(null); // Clear the confirmation state
@@ -67,6 +67,33 @@ const Blogs = () => {
       }
     } catch (error) {
       console.error("Error fetching accept blog:", error);
+      // setLoading(false);
+    }
+  };
+
+  const rejectBlog = async (id) => {
+    try {
+    console.log("Fetching reject blog data...");
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.put(`http://localhost:8080/api/blogs/reject/${id}`, null, config);
+
+      setBlogData(prevBlogData => prevBlogData.filter(item => item.id !== id));
+        setRejectConfirmation(null); // Clear the confirmation state
+
+      }
+    } catch (error) {
+      console.error("Error fetching reject blog:", error);
       // setLoading(false);
     }
   };
@@ -97,32 +124,32 @@ const Blogs = () => {
   //   }
   // };
 
-const rejectBlog = async (id) => {
-  try {
-    const authData = localStorage.getItem('authData');
-    if (authData) {
-      const { accessToken } = JSON.parse(authData);
+// const rejectBlog = async (id) => {
+//   try {
+//     const authData = localStorage.getItem('authData');
+//     if (authData) {
+//       const { accessToken } = JSON.parse(authData);
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      };
+//       const config = {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           'Content-Type': 'application/json',
+//         },
+//         withCredentials: true,
+//       };
 
-      const response = await axios.put(`http://localhost:8080/api/blogs/updateStatus`, { id, status: 2 }, config);
+//       const response = await axios.put(`http://localhost:8080/api/blogs/updateStatus`, { id, status: 2 }, config);
 
-      if (response.status === 200) {
-        setBlogData(blogData.map(blog => blog.id === id ? { ...blog, status: 2 } : blog));
-      } else {
-        console.error('Error updating blog status:', response.status);
-      }
-    }
-  } catch (error) {
-    console.error('Error updating blog status:', error);
-  }
-};
+//       if (response.status === 200) {
+//         setBlogData(blogData.map(blog => blog.id === id ? { ...blog, status: 2 } : blog));
+//       } else {
+//         console.error('Error updating blog status:', response.status);
+//       }
+//     }
+//   } catch (error) {
+//     console.error('Error updating blog status:', error);
+//   }
+// };
 
 
 
