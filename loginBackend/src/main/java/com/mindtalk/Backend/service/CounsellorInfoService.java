@@ -46,7 +46,8 @@ public class CounsellorInfoService {
         return counsellorRepository.findAll();
     }
 
-    public Counsellor getCounsellorById(Long id){
-        return counsellorRepository.findById(id).orElse(null);
+    public Counsellor getCounsellorByUserId(Integer user_id){
+
+        return counsellorRepository.findByUserId(user_id).orElse(null);
     }
 }

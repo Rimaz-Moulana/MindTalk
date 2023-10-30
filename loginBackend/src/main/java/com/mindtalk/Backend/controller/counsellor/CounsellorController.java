@@ -70,10 +70,10 @@ public class CounsellorController {
 
     //Pathum's Controller
 
-    @GetMapping("/getCounsellor/{id}")
+    @GetMapping("/getCounsellor/{user_id}")
     @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public ResponseEntity<Counsellor> getCounsellorById(@PathVariable Long id){
-        Counsellor counsellor = counsellorInfoService.getCounsellorById(id);
+    public ResponseEntity<Counsellor> getCounsellorById(@PathVariable Integer user_id){
+        Counsellor counsellor = counsellorInfoService.getCounsellorByUserId(user_id);
 
         if(counsellor != null){
             return ResponseEntity.ok(counsellor);
