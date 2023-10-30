@@ -8,7 +8,7 @@ import axios from 'axios'
 import AuthContext from '../../context/AuthProvider'
 import { useLocation } from 'react-router-dom'
 
-const ChatApp = () => {
+const CounsellorChat = () => {
     const { auth } = useContext(AuthContext)
     const [accessToken, setAccessToken] = useState('')
 
@@ -25,9 +25,9 @@ const ChatApp = () => {
     const [selectedChatName, setSelectedChatName] = useState('')
 
     const authData = JSON.parse(localStorage.getItem('authData'))
-    const userRoles = authData?.roles // Assuming roles is an array
+    const userId = authData ? authData.id : null
 
-    const fetchUserChats = async (userId) => {
+    const fetchCounsellorId = async (userId) => {
         try {
             const authData = localStorage.getItem('authData')
             if (authData) {
@@ -39,26 +39,23 @@ const ChatApp = () => {
                     },
                     withCredentials: true
                 }
-
-                const response = await axios.get(`http://localhost:8080/api/v1/chats/all/user/${userId}`, config)
-                //console.log(response)
-                const newChats = response.data.map((chat) => ({
-                    id: chat.id // Change this to the appropriate chat ID field
-                    //name: `${chat.firstUserName} and ${chat.secondUserName}`
-                }))
-
-                setChats(newChats)
-                setFilteredChats(newChats)
+                const response = await axios.get(`/api/v1/counsellors/${userId}/counsellorId`, config)
+                const counsellorId = response.data
+                return counsellorId
             }
         } catch (error) {
-            console.error('Error fetching data:', error)
+            console.error('Error fetching counsellorId:', error)
+            return null
         }
     }
-    const fetchCounsellorChats = async () => {
+    const fetchCounsellorChats = async (counsellorId) => {
         try {
             const authData = localStorage.getItem('authData')
             if (authData) {
                 const { accessToken } = JSON.parse(authData)
+                const userId = authData ? authData.id : null
+                const counsellorId = await fetchCounsellorId(userId)
+                console.log(counsellorId)
                 const config = {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
@@ -67,7 +64,7 @@ const ChatApp = () => {
                     withCredentials: true
                 }
                 const response = await axios.get(
-                    `http://localhost:8080/api/v1/chats/all/counsellor/{counsellorId}`,
+                    `http://localhost:8080/api/v1/chats/all/counsellor/${counsellorId}`,
                     config
                 )
                 const newChats = response.data.map((chat) => ({
@@ -84,20 +81,10 @@ const ChatApp = () => {
             // Handle the error, e.g., show an error message to the user
         }
     }
-    if (userRoles) {
-        if (userRoles.includes('ROLE_CLIENT')) {
-            // The user is a client, so fetch user chats
-            const userId = authData ? authData.id : null
-            fetchUserChats(userId)
-        } else if (userRoles.includes('ROLE_COUNSELLOR')) {
-            // The user is a counsellor, so fetch counsellor chats
-            fetchCounsellorChats()
-        }
-    }
-    // useEffect(() => {
-    //     fetchUserChats(userId)
-    //     //fetchCounsellors()
-    // }, [])
+
+    useEffect(() => {
+        fetchCounsellorChats()
+    }, [])
 
     // useEffect(() => {
     //     // Filter chats based on the search term and set the filteredChats state
@@ -243,4 +230,4 @@ const ChatApp = () => {
     )
 }
 
-export default ChatApp
+export default CounsellorChat
