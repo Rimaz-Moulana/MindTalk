@@ -191,7 +191,61 @@ const CounsellorProfile = () => {
     }));
   };
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+  const handleProfilePhotoChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePhoto(file);
+  };
+
+  const uploadProfilePhoto = async (e) => {
+    e.preventDefault();
   
+    if (!profilePhoto) {
+      // Handle error if no photo is selected
+      toast.error('Please select a profile photo.');
+      return;
+    }
+  
+    try {
+      const formData = new FormData();
+      formData.append('profilePhoto', profilePhoto);
+  
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'multipart/form-data', 
+          },
+          withCredentials: true,
+        };
+  
+        const response = await axios.put(
+          `http://localhost:8080/api/v1/counsellor/${id}/updateProfilePhoto`,
+          formData,
+          config
+        );
+  
+        if (response.status === 200) {
+          toast.success('Profile photo uploaded successfully!', {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+        } else {
+          toast.error('Error uploading profile photo. Please try again later.');
+        }
+      }
+    } catch (error) {
+      console.error('Error uploading profile photo:', error);
+      toast.error('Error uploading profile photo. Please try again later.');
+    }
+  };
 
   return (
     <>
@@ -207,19 +261,37 @@ const CounsellorProfile = () => {
                 <h1 className="ml-8 text-2xl font-bold text-gray-900">Personal Information</h1>
 
                 <div className="grid grid-cols-1 mt-10 gap-x-6 gap-y-6 sm:grid-cols-6">
-
-                  <div className="sm:col-span-6">
-                    <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
-                      Full Name
+                    
+                    <div className="sm:col-span-3">
+                    <label htmlFor="firstname" className="block text-sm font-medium leading-6 text-gray-900">
+                      First Name
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="full-name"
-                        id="full-name"
+                        name="firstname"
+                        id="firstname"
                         autoComplete="given-name"
+                        value={user.firstname}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label htmlFor="lastname" className="block text-sm font-medium leading-6 text-gray-900">
+                      Last Name
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        name="lastname"
+                        id="lastname"
+                        autoComplete="family-name"
+                        value={user.lastname}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
+                      >
+                      </input>
                     </div>
                   </div>
 
@@ -229,47 +301,50 @@ const CounsellorProfile = () => {
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
                         name="address"
                         id="address"
-                        autoComplete="family-name"
+                          autoComplete="address"
+                          value={user.address}
+                          onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="mobilephone" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">
                       Mobile Phone
                     </label>
                     <div className="mt-2">
                       <input
-                        type="tel"
-                        name="mobilephone"
-                        id="mobilephone"
-                        autoComplete='mobilephone'
+                        name="phone"
+                        id="phone"
+                        autoComplete='phone'
+                        value={user.phone}
+                        onClick={handleInputChange}  
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label htmlFor="fixedphone" className="block text-sm font-medium leading-6 text-gray-900">
-                      Fixed Phone
+                    <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                      Email
                     </label>
                     <div className="mt-2">
                         <input
-                        type="tel"
-                        id="fixedphone"
-                        name="fixedphone"
-                        autoComplete="fixedphone"
+                        id="email"
+                        name="email"
+                        autoComplete="email"
+                        value={user.email}
+                        onChange={handleInputChange}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       >
                       </input>
                     </div>
                   </div>
 
-                  <div className="sm:col-span-3">
+                  {/* <div className="sm:col-span-3">
                     <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                       Email Address
                     </label>
@@ -282,9 +357,9 @@ const CounsellorProfile = () => {
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="sm:col-span-3">
+                  {/* <div className="sm:col-span-3">
                     <label htmlFor="district" className="block text-sm font-medium leading-6 text-gray-900">
                       District
                     </label>
@@ -297,7 +372,7 @@ const CounsellorProfile = () => {
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-700 sm:text-sm sm:leading-6"
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                 </div>
 
