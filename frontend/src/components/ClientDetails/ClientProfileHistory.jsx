@@ -3,7 +3,9 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
   
 
-const ClientProfileHistory = () => {
+const ClientProfileHistory = ({testData}) => {
+
+  const { score, timestamp } = testData;
 
   const [notes, setNotes] = useState({
     date: '',

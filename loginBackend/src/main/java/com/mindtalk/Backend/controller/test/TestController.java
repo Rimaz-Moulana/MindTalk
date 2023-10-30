@@ -58,4 +58,16 @@ public class TestController {
         }
     }
 
+//    @GetMapping("/{user_id}")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+//    public ResponseEntity<List<Test>> getTestsResultsByUserId(@PathVariable Integer user_id){
+//        List<Test> allTestsResults = testService.getTestsResultsByUserId(user_id);
+//
+//        if (!allTestsResults.isEmpty()) {
+//            return ResponseEntity.ok(allTestsResults);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
 }
