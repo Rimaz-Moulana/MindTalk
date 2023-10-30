@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+import moment from 'moment';
   
 
-const ClientProfileHistory = ({testData}) => {
+const ClientProfileHistory = ({testDataList}) => {
 
-  const { score, timestamp } = testData;
+  //const { score, timestamp } = testDataList;
+
+  testDataList && console.log(testDataList);
 
   const [notes, setNotes] = useState({
     date: '',
@@ -120,69 +123,78 @@ const ClientProfileHistory = ({testData}) => {
                 <span className='font-bold '>Diagnostic Test Results</span>
               </div>
 
-              <table className="min-w-full mt-4">
+              {testDataList.length > 0 ? (
+                <table className="min-w-full mt-4">
+                  {/* Table headers */}
+                  <thead className="bg-gray-200 border-b">
+                    <tr>
+                      <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">
+                        Results
+                      </th>
+                      <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">                       
+                        Level
+                      </th>
+                      <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">
+                        Date
+                      </th>
+                    </tr>
+                  </thead>
 
-                <thead className="bg-gray-200 border-b">
-                  <tr>
-                    <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">
-                      Results
-                    </th>
-                    <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">                       
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">
+                  <tbody>
 
-                    </th>
-                  </tr>
-                </thead>
+                    {testDataList?.map((testData, index) => (
+                      <tr key={testDataList.id}
+                        className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
+                        <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                          {testData.score}
+                        </td>
+                        <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                          
+                        </td>
+                        <td className="px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap">
+                          {moment(testData.timestamp).format('MMM Do YYYY')} {/* Display date part */}
+                        </td>
+                      </tr>
+                    ))}
 
-                <tbody>
+                    {/* <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
+                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                        Average
+                      </td>
+                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                        07/07/2023
+                      </td>
+                      <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
+                        <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
+                          Open Test
+                        </button>
+                      </td>
+                    </tr> */}
+                    
+                    {/* <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
+                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                        Severe
+                      </td>
+                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
+                        07/06/2023
+                      </td>
+                      <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
+                        <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
+                          Open Test
+                        </button>
+                      </td>
+                    </tr> */}
 
-                  <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      Mild
-                    </td>
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      07/08/2023
-                    </td>
-                    <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
-                      <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
-                        Open Test
-                      </button>
-                    </td>
-                  </tr>
+                  </tbody>
 
-                  <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      Average
-                    </td>
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      07/07/2023
-                    </td>
-                    <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
-                      <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
-                        Open Test
-                      </button>
-                    </td>
-                  </tr>
-                  
-                  <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      Severe
-                    </td>
-                    <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                      07/06/2023
-                    </td>
-                    <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
-                      <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
-                        Open Test
-                      </button>
-                    </td>
-                  </tr>
-
-                </tbody>
-
-              </table>
+                </table>
+              ) : (
+                <div className="text-center mt-4">
+                  <p className="text-gray-600 text-lg font-bold">
+                    No test results to display.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

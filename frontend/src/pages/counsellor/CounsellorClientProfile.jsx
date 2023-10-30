@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment/moment';
 import ClientProfileCard from '../../components/ClientDetails/ClientProfileCard'
 import ClientProfileHistory from '../../components/ClientDetails/ClientProfileHistory'
 
@@ -82,10 +83,8 @@ const CounsellorClientProfile = () => {
     }
   };
 
-  const [testResults, setTestResults] = useState({
-    score:'',
-    timestamp: ''
-  });
+  const [testResults, setTestResults] = useState([]);
+  const [testResultsList, setTestResultsList] = useState([]);
 
   useEffect(() => {
     fetchClientTestResults();
@@ -105,16 +104,18 @@ const CounsellorClientProfile = () => {
               withCredentials: true
           };
 
-          const response = await axios.get(`http://localhost:8080/api/v1/test/${id}`, config);
+          const response = await axios.get(`http://localhost:8080/api/v1/test/all/${id}`, config);
 
-          if (response.status === 200) {
-            const resultData = response.data;
-            setTestResults({
-              score: resultData.score ? resultData.score : '',
-              timestamp: resultData.timestamp ? resultData.timestamp : ''
-            });
+            const resultData = response.data.map(resultData => ({
+              id: resultData.id,
+              score: resultData.score,
+              timestamp: moment(new Date(parseInt(resultData.timestamp))).format('MMM Do YY')
+            }))
+
+            setTestResults(resultData);
+            setTestResultsList(response.data);
           }
-      }
+
     } catch (error) {
       console.error('Error fetching test results:', error);
     }
@@ -128,7 +129,7 @@ const CounsellorClientProfile = () => {
       </div>
 
       <div className='col-span-3 bg-white rounded-xl'>
-        <ClientProfileHistory testData={testResults}/>
+        <ClientProfileHistory testDataList={testResultsList}/>
       </div>
 
     </div>
