@@ -16,6 +16,12 @@ public class Counsellor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User _user;
+
+    private Integer userId;
     private String firstname;
     private String lastname;
     private String email;
