@@ -10,7 +10,7 @@ const ClientCards = ({ clientList }) => {
       <table className="w-full border-collapse table-auto">
         <tbody className='divide-y divide-gray-200'>
           {clientList?.map((client, index) => (
-            <tr key={clientList.id}>
+            <tr key={clientList.userId}>
               <td className="p-4">
                 <img
                   alt="user"
@@ -34,7 +34,7 @@ const ClientCards = ({ clientList }) => {
                   View Profile
                 </Link> */}
                 <Link
-                  to={`/counsellor/view-client/${client.clientId}`}
+                  to={`/counsellor/view-client/${client.userId}`}
                   className="flex items-center justify-center px-4 py-2 mt-4 font-semibold text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black"
                 >
                   View Profile

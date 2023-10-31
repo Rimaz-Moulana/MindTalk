@@ -34,13 +34,13 @@ const Clients = () => {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/client/appointment/get-clientIds/2`, 
+          `http://localhost:8080/api/client/appointment/get-clientInfo/2`, 
           config
         );
 
         const fetchedClients = response.data.map(client => ({
-          id: client.id,
-          name: `${client.firstname} ${client.lastname}`
+          id: client.userId,
+          name: `${client.fname} ${client.lname}`
         }))
         
         setClients(fetchedClients);
