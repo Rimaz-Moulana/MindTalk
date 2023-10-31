@@ -23,9 +23,32 @@ const CounsellorChat = () => {
     //get selected chat's info
     //const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
     const [selectedChatName, setSelectedChatName] = useState('')
+    const [selectedChatId, setSelectedChatId] = useState(null)
+    const [counsellorId, setCounsellorId] = useState(null)
 
     const authData = JSON.parse(localStorage.getItem('authData'))
-    const userId = authData ? authData.id : null
+
+    const fetchUserDetails = async (userId) => {
+        try {
+            const authData = localStorage.getItem('authData')
+            if (authData) {
+                const { accessToken } = JSON.parse(authData)
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+
+                const response = await axios.get(`http://localhost:8080/api/v1/client/${userId}/username`, config)
+                return response.data // Assuming the response contains user details
+            }
+        } catch (error) {
+            console.error('Error fetching user details:', error)
+            return null
+        }
+    }
 
     const fetchCounsellorId = async (userId) => {
         try {
@@ -39,8 +62,12 @@ const CounsellorChat = () => {
                     },
                     withCredentials: true
                 }
-                const response = await axios.get(`/api/v1/counsellors/${userId}/counsellorId`, config)
+                const response = await axios.get(
+                    `http://localhost:8080/api/counsellor/details/${userId}/counsellorId`,
+                    config
+                )
                 const counsellorId = response.data
+                console.log('counsellorId', counsellorId)
                 return counsellorId
             }
         } catch (error) {
@@ -50,65 +77,79 @@ const CounsellorChat = () => {
     }
     const fetchCounsellorChats = async (counsellorId) => {
         try {
-            const authData = localStorage.getItem('authData')
-            if (authData) {
-                const { accessToken } = JSON.parse(authData)
+            if (counsellorId) {
+                const authData = JSON.parse(localStorage.getItem('authData'))
                 const userId = authData ? authData.id : null
-                const counsellorId = await fetchCounsellorId(userId)
-                console.log(counsellorId)
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true
-                }
-                const response = await axios.get(
-                    `http://localhost:8080/api/v1/chats/all/counsellor/${counsellorId}`,
-                    config
-                )
-                const newChats = response.data.map((chat) => ({
-                    id: chat.id // Change this to the appropriate chat ID field
-                    //name: `${chat.firstUserName} and ${chat.secondUserName}`
-                }))
+                if (authData) {
+                    const { accessToken } = authData
 
-                setChats(newChats)
-                setFilteredChats(newChats)
-                console.log('Counsellor chats:', newChats)
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${accessToken}`,
+                            'Content-Type': 'application/json'
+                        },
+                        withCredentials: true
+                    }
+
+                    const response = await axios.get(
+                        `http://localhost:8080/api/v1/chats/all/counsellor/${counsellorId}`,
+                        config
+                    )
+
+                    const newChats = await Promise.all(
+                        response.data.map(async (chat) => {
+                            const userDetails = await fetchUserDetails(chat.userId)
+                            return {
+                                id: chat.id,
+                                userId: chat.userId,
+                                userName: userDetails || 'Unknown' // Set to 'Unknown' if details not found
+                            }
+                        })
+                    )
+
+                    setChats(newChats)
+                    setFilteredChats(newChats)
+                    console.log('Counsellor chats:', newChats)
+                }
             }
         } catch (error) {
             console.error('Error fetching counsellor chats:', error)
             // Handle the error, e.g., show an error message to the user
         }
     }
-
     useEffect(() => {
-        fetchCounsellorChats()
+        ;(async () => {
+            const authData = JSON.parse(localStorage.getItem('authData'))
+            if (authData) {
+                const { accessToken } = authData
+                setAccessToken(accessToken)
+                const userId = authData ? authData.id : null
+                const fetchedCounsellorId = await fetchCounsellorId(userId)
+                if (fetchedCounsellorId) {
+                    setCounsellorId(fetchedCounsellorId)
+                    await fetchCounsellorChats(fetchedCounsellorId)
+                }
+            }
+        })()
     }, [])
-
-    // useEffect(() => {
-    //     // Filter chats based on the search term and set the filteredChats state
-    //     setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    // }, [chats, searchTerm])
-
-    //}, [])
 
     const handleSendMessage = async (message) => {
         const storedAuthData = localStorage.getItem('authData')
         if (storedAuthData) {
-            const { accessToken, id } = JSON.parse(storedAuthData)
+            const { accessToken } = JSON.parse(storedAuthData)
             setAccessToken(accessToken)
             if (message.trim() !== '') {
                 const newMessage = {
                     content: message,
-                    senderId: parseInt(id)
+                    senderId: counsellorId,
+                    chatId: selectedChatId
                 }
                 //setMessages((prevMessages) => [...prevMessages, newMessage])
                 // setMessages([...message, newMessage])
 
                 // Send the message to the backend
                 try {
-                    const response = await axios.post('http://localhost:8080/api/v1/messages/save', newMessage, {
+                    const response = await axios.post('http://localhost:8080/api/v1/messages/create', newMessage, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`
                         }
@@ -128,6 +169,7 @@ const CounsellorChat = () => {
     const handleChatItemClick = (chatId) => {
         setChatBoxOpen(true)
         setActiveChat(chatId)
+        setSelectedChatId(chatId)
         if (window.innerWidth < 700 && activeChat) {
             setShowChatList(false)
         }
@@ -137,7 +179,7 @@ const CounsellorChat = () => {
         if (selectedChat) {
             setSelectedChatName(selectedChat.name)
         } else {
-            console.log('Chat with ID ${chatId} not found')
+            console.log(`Chat with ID ${chatId} not found`)
         }
         //setSelectedChatAvatar(selectedChat.avatar)
         //setSelectedChatName(selectedChat.name)
@@ -171,7 +213,7 @@ const CounsellorChat = () => {
                                 <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-warning"></span>
                             </div>
                             <div className="flex-1">
-                                <p className="font-bold mb-1">{chat.name}</p>
+                                <p className="font-bold mb-1">{chat.userName}</p>
                                 <p className="mb-1">Well, you're doing a..</p>
                             </div>
                             <p className="text-sm text-gray-600">5 mins ago</p>
@@ -202,9 +244,7 @@ const CounsellorChat = () => {
                         {messages.map((message, index) => (
                             <div
                                 key={index}
-                                className={`${
-                                    message.senderId === parseInt(senderId) ? 'text-right' : 'text-left'
-                                } mb-2`}
+                                className={`${message.senderId === counsellorId ? 'text-right' : 'text-left'} mb-2`}
                             >
                                 <div
                                     className={`bg-blue-600 text-white font-medium py-2 px-7 rounded-2xl inline-block`}
