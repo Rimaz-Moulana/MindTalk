@@ -5,9 +5,20 @@ export default function RequestTable() {
     
     // data from the database will store here
     const data = JSON.parse(localStorage.getItem("detailsData"));
-    console.log(data)
+    
+    const [tableData,setTableData] = useState([]);
 
-    const [tableData,setTableData] = useState(data);
+    const loadDataFromLocalStorage = () => {
+        if(data){
+            setTableData(data);
+        }
+    }
+
+    useEffect(() => {
+        loadDataFromLocalStorage();
+    },[]);
+    
+    
     console.log(tableData)
     const [date,setDate] = useState('');
     const [isHovered,setIsHovered] = useState(false);
@@ -40,24 +51,20 @@ export default function RequestTable() {
         const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
         setDate(formattedDate);
-
-
     }, [])
     
    const handleSubmit = () => {
     console.log(`Sending email to: ${data.email}`)
    }
 
-   const deleteRow = (id) => {
-    setTableData((prevData) => prevData.filter((row) => row.id !== id));
+   const deleteRow = (index) => {
+    const updatedSessionData = [...tableData];
+    updatedSessionData.splice(index,1);
+    setTableData(updatedSessionData);
+    localStorage.setItem('[tableData', JSON.stringify(updatedSessionData));
+    // setTableData((prevData) => prevData.filter((row) => row.id !== id));
    }
 
-
-
-
-
-   
-    
     //     const Requests = [
     //     {
     //         id: 1,
@@ -123,13 +130,13 @@ export default function RequestTable() {
                                     </th>
                                 </tr>
                             </thead>
-                            {data ? (
+                            {/* {data ? ( */}
                             <tbody>
                                 {tableData.map((request,index) => (
                                     <tr
+                                        key={index}
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
-                                        key={index}
                                         className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50"
                                     >
                                         <td className="whitespace-nowrap px-1 py-1 font-medium">
@@ -168,10 +175,10 @@ export default function RequestTable() {
                                     </tr>
                                 ))}
                             </tbody>
-                            ):<div>
+                            {/* ):<div>
                                 <h1 className="text-xl font-semibold ml-1 mt-48">Counsellors Added details not yet!</h1>
                             </div>
-                            }
+                            } */}
                         </table>
                     </div>
                 </div>
