@@ -10,8 +10,8 @@ export default function AddTherapySession() {
   const [session, setSession] = useState({
     date:"",
     time:"",
-    counsellor:"",
-    typeOfSession:"",
+    counsellors:"",
+    sessionType:"",
     link:"",
   });
 
@@ -38,6 +38,7 @@ export default function AddTherapySession() {
           },
           withCredentials: true,
         };
+        console.log(session)
         const response  = await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
         console.log('session add successfully:',response.data)
         // navigate("/moderator/addtherapysession");
@@ -105,7 +106,7 @@ useEffect(()=>{
         id="date"
         name="date"
         value={session.date}
-        onChange={(e)=>handleChange(e)}
+        onChange={(e)=>{handleChange(e);}}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -125,9 +126,9 @@ useEffect(()=>{
     <div className="flex flex-col mb-6">
       <label className="text-lg font-medium">Counsellors</label>
       <select
-        id="counsellor"
-        value={session.counsellor}
-        name="counsellor"
+        id="counsellors"
+        value={session.counsellors}
+        name="counsellors"
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
@@ -140,9 +141,9 @@ useEffect(()=>{
     <div className="flex flex-col mb-6">
       <label  className="text-lg font-medium">Type of the Therapy Session</label>
       <select
-        id="typeOfSession"
-        name="typeOfSession"
-        value={session.typeOfSession}
+        id="sessionType"
+        name="sessionType"
+        value={session.sessionType}
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
@@ -188,8 +189,8 @@ useEffect(()=>{
                 <tr key={index} className="border-b dark:border-neutral-500">
                   <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.time}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{item.counsellor}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{item.typeOfSession}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.counsellors}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.sessionType}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.link}</td>
                 </tr>
                 ))}
