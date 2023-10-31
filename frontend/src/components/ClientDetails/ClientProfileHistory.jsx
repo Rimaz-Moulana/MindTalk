@@ -18,7 +18,7 @@ function getLevel(score) {
 function getColorClass(level) {
   switch (level) {
     case 'Mild':
-      return 'text-green-500'; // You can use any color class from your CSS framework
+      return 'text-green-500'; 
     case 'Moderate':
       return 'text-yellow-500';
     case 'Severe':

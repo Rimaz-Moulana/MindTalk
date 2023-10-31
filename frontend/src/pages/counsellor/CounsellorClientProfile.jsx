@@ -125,13 +125,13 @@ const CounsellorClientProfile = () => {
   };
 
   return (
-    <div className='grid grid-cols-4 gap-5'>
+    <div className='grid grid-cols-1 sm:gap-5 sm:grid-cols-4 '>
 
-      <div className='bg-white rounded-xl'>
+      <div className='bg-white rounded-xl mb-5'>
         <ClientProfileCard clientData={client} />
       </div>
 
-      <div className='col-span-3 bg-white rounded-xl'>
+      <div className='col-span-3 bg-white rounded-xl mb-5 '>
         <ClientProfileHistory testDataList={testResultsList}/>
       </div>
 
