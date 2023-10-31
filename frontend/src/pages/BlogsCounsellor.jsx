@@ -84,27 +84,28 @@ const BlogsCounsellor = () => {
         </Link>
       </div>
 
-      <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-        {blogData
-          .filter(blog => blog.status === 1)
-          .filter(blog => selectedCategory === "All" || blog.category === selectedCategory)
-          .map((blog, index) => (
-            <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md'>
-              <img className='object-cover w-full h-52' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt={blog.title} />
-              <div className='p-4'>
-                <h6 className='font-semibold text-gray-700'>{blog.category}</h6>
-                <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
-                <p className='mt-2 text-gray-600 line-clamp-3' dangerouslySetInnerHTML={{ __html: blog.content }} />
+      <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-[560px] overflow-y-auto'>
+          {blogData
+            .filter(blog => blog.status === 1)
+            .filter(blog => selectedCategory === "All" || blog.category === selectedCategory)
+            .map((blog, index) => (
+              <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md'>
+                <img className='object-cover w-full h-52' src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt={blog.title} />
+                <div className='p-4'>
+                  <h6 className='font-semibold text-gray-700'>{blog.category}</h6>
+                  <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
+                  <p className='mt-2 text-gray-600 line-clamp-3' dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-                <Link to={`/counsellor/blogs/blogview/${blog.id}`}>
-                  <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
-                    <span className="hidden sm:inline">Read...</span>
-                  </button>
-                </Link>
+                  <Link to={`/counsellor/blogs/blogview/${blog.id}`}>
+                    <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
+                      <span className="hidden sm:inline">Read...</span>
+                    </button>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+
     </div>
   );
 };

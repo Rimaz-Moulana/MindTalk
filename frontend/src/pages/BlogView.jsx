@@ -71,7 +71,7 @@ const BlogView = () => {
         <div className=''>
           <div className="flex justify-center mb-3 text-4xl font-semibold text-gray-900">{blogData.title}</div>
           <div className="flex justify-center mb-4 text-sm font-bold text-gray-500">{blogData.category}</div>
-          <div className="prose prose-lg text-gray-800 h-scrollable" dangerouslySetInnerHTML={{ __html: blogData.content }} />
+          <div className="prose prose-lg text-gray-800" dangerouslySetInnerHTML={{ __html: blogData.content }} style={{ textAlign: 'justify' }} />
         </div>
       )}
     </main>
