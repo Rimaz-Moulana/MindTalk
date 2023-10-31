@@ -148,7 +148,7 @@ const ClientProfileHistory = ({testDataList}) => {
             <div className="overflow-hidden ">
 
               <div className='pt-3'>
-                <span className='font-bold '>Diagnostic Test Results</span>
+                <span className='font-bold ml-8'>Diagnostic Test Results</span>
               </div>
 
               {testDataList.length > 0 ? (
