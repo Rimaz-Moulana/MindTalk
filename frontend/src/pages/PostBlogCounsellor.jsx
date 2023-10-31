@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { ToastContainer } from 'react-toastify';
+import {toast} from 'react-toastify';
 
-const PostBlogModerator = () => {
+const PostBlogCounsellor = () => {
   const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
   const [blog, setBlog] = useState({
     title: '',
@@ -37,6 +39,8 @@ const PostBlogModerator = () => {
           config
         );
 
+        toast.error('Please select a profile photo.');
+
         // if (response.status === 200) {
         //   console.log('Blog post successful!');
         //   alert("Blog post completed");
@@ -46,12 +50,13 @@ const PostBlogModerator = () => {
         // }
 
         // Optionally, you can redirect to the blogs page or clear the form here
-        window.location.href = '../ModeratorBlogs';
+        window.location.href = '../BlogsCounsellor';
         setBlog({ title: '', category: '', content: '' });
       }
     } catch (error) {
       console.error('Error saving blog: ', error);
-      alert("An error occurred while saving the blog.");
+      alert("An error occurred while saving the blog: " + error.message);
+
     }
   };
 
@@ -118,8 +123,16 @@ const PostBlogModerator = () => {
           </div>
         </form>
       </div>
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          closeOnClick={true}
+          pauseOnHover={true}
+          draggable={true}
+        />
     </div>
   );
 };
 
-export default PostBlogModerator;
+export default PostBlogCounsellor;

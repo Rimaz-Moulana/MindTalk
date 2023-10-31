@@ -37,13 +37,13 @@ const PostBlog = () => {
           config
         );
 
-        if (response.status === 202) {
-          console.log('Blog post successful!');
-          alert("Blog post completed");
-        } else {
-          console.log('Blog post failed. Please try again.');
-          alert("Blog post failed. Please try again.");
-        }
+        // if (response.status === 202) {
+        //   console.log('Blog post successful!');
+        //   alert("Blog post completed");
+        // } else {
+        //   console.log('Blog post failed. Please try again.');
+        //   alert("Blog post failed. Please try again.");
+        // }
 
         // Optionally, you can redirect to the blogs page or clear the form here
         window.location.href = '../Blogs';
