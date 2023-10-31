@@ -133,6 +133,39 @@ const CounsellorChat = () => {
         })()
     }, [])
 
+    useEffect(() => {
+        // Fetch messages only if a chat is selected
+        if (selectedChatId) {
+            const fetchMessages = async () => {
+                try {
+                    const authData = localStorage.getItem('authData')
+                    if (authData) {
+                        const { accessToken } = JSON.parse(authData)
+                        const config = {
+                            headers: {
+                                Authorization: `Bearer ${accessToken}`,
+                                'Content-Type': 'application/json'
+                            },
+                            withCredentials: true
+                        }
+
+                        const response = await axios.get(
+                            `http://localhost:8080/api/v1/messages/getMessages/${selectedChatId}`,
+                            config
+                        )
+
+                        // Assuming that the response contains messages
+                        setMessages(response.data)
+                    }
+                } catch (error) {
+                    console.error('Error fetching messages:', error)
+                }
+            }
+
+            fetchMessages()
+        }
+    }, [selectedChatId])
+
     const handleSendMessage = async (message) => {
         const storedAuthData = localStorage.getItem('authData')
         if (storedAuthData) {
@@ -247,7 +280,11 @@ const CounsellorChat = () => {
                                 className={`${message.senderId === counsellorId ? 'text-right' : 'text-left'} mb-2`}
                             >
                                 <div
-                                    className={`bg-blue-600 text-white font-medium py-2 px-7 rounded-2xl inline-block`}
+                                    className={`${
+                                        message.senderId === counsellorId
+                                            ? 'bg-blue-600 text-white'
+                                            : 'bg-white text-black'
+                                    } font-medium py-2 px-7 rounded-2xl inline-block`}
                                 >
                                     {message.content}
                                 </div>
