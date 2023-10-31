@@ -5,7 +5,10 @@ export default function RequestTable() {
     
     // data from the database will store here
     const data = JSON.parse(localStorage.getItem("detailsData"));
+    console.log(data)
 
+    const [tableData,setTableData] = useState(data);
+    console.log(tableData)
     const [date,setDate] = useState('');
     const [isHovered,setIsHovered] = useState(false);
     //  console.log(data.length)
@@ -39,62 +42,19 @@ export default function RequestTable() {
         setDate(formattedDate);
 
 
-    })
-    
-    const [addData, setaddData] = useState('');
-
-    useEffect( () => {
-        const dataFromLocalStorage = JSON.parse(localStorage.getItem("detailsData"));
-        setaddData(dataFromLocalStorage);
-        console.log(addData)
     }, [])
+    
+   const handleSubmit = () => {
+    console.log(`Sending email to: ${data.email}`)
+   }
 
-    // useEffect(() => {
-    //     console.log(addData);
-    // }, [addData]);
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const authData = localStorage.getItem('authData')
-        const {accessToken} = JSON.parse(authData);
-        console.log(accessToken)
-        const dataToSend = {
-            data: addData,
-        };
-        console.log(JSON.stringify(dataToSend))
-        const config = {
-
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`
-            },
-            withCredentials: true,
-        }
-
-
-        fetch('http://localhost:8080/api/counsellor/details/add',{
-            method: 'POST',
-            headers: config.headers,
-            body: JSON.stringify(dataToSend)
-        })
-        .then((response) => response.text())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-       
-    };
+   const deleteRow = (id) => {
+    setTableData((prevData) => prevData.filter((row) => row.id !== id));
+   }
 
 
 
 
-    // const removeItem = ()=>{
-    //     const updateArray =
-    // }
 
    
     
@@ -165,12 +125,12 @@ export default function RequestTable() {
                             </thead>
                             {data ? (
                             <tbody>
-                                {data.map((request,index) => (
+                                {tableData.map((request,index) => (
                                     <tr
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
                                         key={index}
-                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50 hover:bg-neutral-300"
+                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50"
                                     >
                                         <td className="whitespace-nowrap px-1 py-1 font-medium">
                                             <img src='../../../src/assets/dp.png' alt="" className="w-10 h-10 rounded-full" />
@@ -200,7 +160,7 @@ export default function RequestTable() {
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
                                             <button onClick={handleSubmit} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
-                                            <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
+                                            <button onClick={() => deleteRow(index)} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
                                         </td>
                                         {/* <td className="whitespace-nowrap px-6 py-4">
                                             
@@ -209,7 +169,7 @@ export default function RequestTable() {
                                 ))}
                             </tbody>
                             ):<div>
-                                <h1 className="text-xl font-semibold ml-1 mt-48 ml-14">Counsellors Added details not yet!</h1>
+                                <h1 className="text-xl font-semibold ml-1 mt-48">Counsellors Added details not yet!</h1>
                             </div>
                             }
                         </table>

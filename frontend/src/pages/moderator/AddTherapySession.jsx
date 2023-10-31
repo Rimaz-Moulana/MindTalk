@@ -12,9 +12,10 @@ export default function AddTherapySession() {
     time:"",
     counsellor:"",
     typeOfSession:"",
-    link:""
-
+    link:"",
   })
+
+  const sessions = Object.values(session);
 
   const handleChange = (e) => {
     const {name,value} = e.target;
@@ -22,7 +23,7 @@ export default function AddTherapySession() {
   }
 
   const onSubmit=async (e) =>{
-    // e.preventDefault();
+    e.preventDefault();
     try{
       console.log("fetching session details..");
       const authData = localStorage.getItem('authData');
@@ -48,7 +49,7 @@ export default function AddTherapySession() {
   }
   
   
-  const loadSession=async ()=>{
+  const loadSession= async ()=>{
     try{
       console.log("Fetching session Details...");
       const authData = localStorage.getItem('authData');
@@ -84,7 +85,8 @@ export default function AddTherapySession() {
 
 useEffect(()=>{
   loadSession();
-})
+},[])
+
 
 
   return (
@@ -172,15 +174,15 @@ useEffect(()=>{
                 </tr>
               </thead>
               <tbody>
-              {/* {session.map((index,item) => ( */}
-                <tr className="border-b dark:border-neutral-500">
-                  {/* <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
+              {sessions.map((index,item) => (
+                <tr key={index} className="border-b dark:border-neutral-500">
+                  <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.time}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.counsellor}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.typeOfSession}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{item.link}</td> */}
+                  <td className="whitespace-nowrap  px-6 py-4">{item.link}</td>
                 </tr>
-                {/* ))} */}
+                ))}
               </tbody>
             </table>
           </div>
