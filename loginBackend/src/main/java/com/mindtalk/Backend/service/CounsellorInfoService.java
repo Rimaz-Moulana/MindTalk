@@ -158,4 +158,7 @@ public class CounsellorInfoService {
         // Implement the logic to retrieve the counsellorId based on userId
         return counsellorRepository.findCounsellorIdByUserId(userId);
     }
+    public Counsellor getCounsellorById2(Long id){
+        return counsellorRepository.findById(id).orElse(null);
+    }
 }
