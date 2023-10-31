@@ -36,6 +36,10 @@ public class Counsellor {
     private String joinDate;
     private Boolean status;
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user; // Association with User
+
     public Long getId() {
         return id;
     }
@@ -92,4 +96,5 @@ public class Counsellor {
         status = false;
         this.status = status;
     }
+
 }
