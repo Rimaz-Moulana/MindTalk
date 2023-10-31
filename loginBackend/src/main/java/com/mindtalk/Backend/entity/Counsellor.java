@@ -21,7 +21,7 @@ public class Counsellor {
 //    @JoinColumn(name = "user_id")
 //    private User _user;
 
-    private Integer userId;
+    //private Integer userId;
     private String firstname;
     private String lastname;
     private String email;
