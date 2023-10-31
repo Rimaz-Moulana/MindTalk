@@ -34,7 +34,7 @@ const ClientCards = ({ clientList }) => {
                   View Profile
                 </Link> */}
                 <Link
-                  to={`/counsellor/view-client/${client.userId}`}
+                  to={`/counsellor/view-client/${client.clientId}`}
                   className="flex items-center justify-center px-4 py-2 mt-4 font-semibold text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black"
                 >
                   View Profile

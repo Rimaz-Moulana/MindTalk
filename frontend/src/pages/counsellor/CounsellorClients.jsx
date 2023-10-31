@@ -34,7 +34,7 @@ const Clients = () => {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/v1/client/all`, 
+          `http://localhost:8080/api/client/appointment/get-clientIds/2`, 
           config
         );
 
