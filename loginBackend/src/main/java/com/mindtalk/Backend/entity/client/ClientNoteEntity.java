@@ -16,8 +16,9 @@ public class ClientNoteEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int client_id;
+    private int clientId;
     private String date;
     private String duration;
     private String note;
+    private int counsellorId;
 }
