@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
+import { useParams } from 'react-router-dom';
 
 function getLevel(score) {
   if (score >= 0 && score <= 10) {
@@ -31,6 +32,10 @@ function getColorClass(level) {
 const ClientProfileHistory = ({ testDataList }) => {
   const sortedTestDataList = testDataList.slice().sort((a, b) => b.timestamp - a.timestamp);
 
+  const { id } = useParams();
+
+  const [counsellorId, setCounsellorId] = useState(null);
+
   const [notes, setNotes] = useState({
     date: '',
     duration: '',
@@ -58,13 +63,37 @@ const ClientProfileHistory = ({ testDataList }) => {
   }
 };
 
+  // // Retrieve counsellorId from local storage
+  // const authData = localStorage.getItem('authData');
+  //   if (authData) {
+  //     const { id: counsellorId } = JSON.parse(authData);
+  //     console.log("counsellor id", counsellorId)
+  //   }
+
+  // Retrieve counsellorId from local storage using useEffect
+  useEffect(() => {
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { id: CounsellorId } = JSON.parse(authData);
+      setCounsellorId(CounsellorId);
+      console.log("counsellor id hh", counsellorId)
+    }
+  }, []);
 
   const saveNote = async (e) => {
     e.preventDefault();
+    
+    // Log clientId
+    console.log("clientId", id);
+    
+
     const newNote = {
       date: notes.date,
       duration: notes.duration,
       note: CryptoJS.AES.encrypt(notes.note, 'your-secret-key').toString(),
+      clientId: id,
+      counsellorId: counsellorId,
+      
     };
 
     try {
@@ -93,7 +122,7 @@ const ClientProfileHistory = ({ testDataList }) => {
           alert("Note added successfully");
         }
 
-        window.location.href = 'CounsellorClientProfile';
+        window.location.href = '../CounsellorClients';
         setNotes({ date: '', duration: '', note: '' });
       }
     } catch (error) {
@@ -108,6 +137,10 @@ const ClientProfileHistory = ({ testDataList }) => {
     const viewNotes = async () => {
       //e.preventDefault();
       try {
+        // Log clientId
+      console.log("clientId", id);
+      console.log("counsellor id 45", counsellorId);
+
         console.log("Fetching notes data...");
         const authData = localStorage.getItem('authData');
         if (authData) {
@@ -121,7 +154,7 @@ const ClientProfileHistory = ({ testDataList }) => {
           };
 
           const response = await axios.get(
-            `http://localhost:8080/api/client/getClientNotes`,
+            `http://localhost:8080/api/client/notesByClientAndCounsellor/${id}/${counsellorId}`,
             config
           );
 
@@ -148,7 +181,7 @@ const ClientProfileHistory = ({ testDataList }) => {
         }
       } catch (error) {
         console.log('Error fetching notes: ', error);
-        alert('An error occurred while fetching the notes.');
+        // alert('An error occurred while fetching the notes.');
       }
     }
  
