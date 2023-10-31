@@ -168,7 +168,7 @@ const ClientProfileHistory = ({ testDataList }) => {
     <div>
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-          <div className="inline-block min-w-full p-2">
+          <div className="inline-block min-w-full ">
             <div className="overflow-hidden ">
               <div className='pt-3'>
                 <span className='font-bold ml-8'>Diagnostic Test Results</span>
@@ -276,20 +276,23 @@ const ClientProfileHistory = ({ testDataList }) => {
           </div>
         </div>
         <div className="col-span-4 p-2">
-    <div className='pt-5'>
-      <span className="ml-8 font-bold">Client History</span>
-      <div className="scrollable-container" style={{ maxHeight: '645px', overflowY: 'auto' }}>
-        {clientNotes.map((clientNote, index) => (
-          <div key={clientNote.id} className="p-5 m-10 bg-blue-100 rounded-lg">
-            <p className="text-gray-800">
-              <span className="font-semibold">Session Date:</span> {clientNote.date}<br />
-              <span className="font-semibold">Session Duration:</span> {clientNote.duration} minutes<br /><br />
-              <span className="font-semibold">Summary:</span> {clientNote.note}
-            </p>
+    <div className="col-span-4 p-2">
+  <div className='pt-5'>
+    <span className="ml-8 font-bold">Client History</span>
+    <div className="scrollable-container" style={{ maxHeight: '635px', overflowY: 'auto' }}>
+      {clientNotes.map((clientNote, index) => (
+        <div key={clientNote.id} className="p-2 m-8 bg-blue-100 rounded-lg">
+          <p className="text-gray-800">
+            <span className="font-semibold">Session Date:</span> {clientNote.date}<br />
+            <span className="font-semibold">Session Duration:</span> {clientNote.duration} minutes<br /><br />
+            <span className="font-semibold">Summary:</span> {clientNote.note}
+          </p>
         </div>
       ))}
     </div>
   </div>
+</div>
+
 </div>
 
       </div>

@@ -127,11 +127,11 @@ const CounsellorClientProfile = () => {
   return (
     <div className='grid grid-cols-1 sm:gap-5 sm:grid-cols-4 '>
 
-      <div className='bg-white rounded-xl mb-5'>
+      <div className='bg-white rounded-xl'>
         <ClientProfileCard clientData={client} />
       </div>
 
-      <div className='col-span-3 bg-white rounded-xl mb-5 '>
+      <div className='col-span-3 bg-white rounded-xl  '>
         <ClientProfileHistory testDataList={testResultsList}/>
       </div>
 
