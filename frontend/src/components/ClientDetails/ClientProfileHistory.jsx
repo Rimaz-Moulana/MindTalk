@@ -1,9 +1,8 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
-  
+
 function getLevel(score) {
   if (score >= 0 && score <= 10) {
     return "Mild";
@@ -19,7 +18,7 @@ function getLevel(score) {
 function getColorClass(level) {
   switch (level) {
     case 'Mild':
-      return 'text-green-500'; 
+      return 'text-green-500';
     case 'Moderate':
       return 'text-yellow-500';
     case 'Severe':
@@ -29,14 +28,7 @@ function getColorClass(level) {
   }
 }
 
-
-const ClientProfileHistory = ({testDataList}) => {
-
-  //const { score, timestamp } = testDataList;
-
-  testDataList && console.log(testDataList);
-
-  // Sort testDataList by timestamp in descending order
+const ClientProfileHistory = ({ testDataList }) => {
   const sortedTestDataList = testDataList.slice().sort((a, b) => b.timestamp - a.timestamp);
 
   const [notes, setNotes] = useState({
@@ -45,12 +37,34 @@ const ClientProfileHistory = ({testDataList}) => {
     note: ''
   });
 
+  const handleDateChange = (e) => {
+  // Parse the selected date
+  const selectedDate = new Date(e.target.value);
+  
+  // Get the current date
+  const currentDate = new Date();
+  
+  // Calculate the date that was two days ago
+  const twoDaysAgo = new Date();
+  twoDaysAgo.setDate(currentDate.getDate() - 2);
+
+  if (selectedDate >= twoDaysAgo && selectedDate <= currentDate) {
+    // The selected date is within the allowed range (today and the last two days).
+    setNotes({ ...notes, date: e.target.value });
+  } else {
+    // The selected date is outside the allowed range.
+    // You can display an error message or prevent form submission here.
+    alert('Please select a date within today and the last two days.');
+  }
+};
+
+
   const saveNote = async (e) => {
     e.preventDefault();
     const newNote = {
       date: notes.date,
       duration: notes.duration,
-      note: CryptoJS.AES.encrypt(notes.note, 'your-secret-key').toString(), // Encrypt the note
+      note: CryptoJS.AES.encrypt(notes.note, 'your-secret-key').toString(),
     };
 
     try {
@@ -90,7 +104,7 @@ const ClientProfileHistory = ({testDataList}) => {
 
   const [clientNotes, setClientNotes] = useState([]);
 
-  useEffect(() => {
+   useEffect(() => {
     const viewNotes = async () => {
       //e.preventDefault();
       try {
@@ -141,23 +155,26 @@ const ClientProfileHistory = ({testDataList}) => {
     viewNotes();
   }, []);  
 
-  
+  // Function to check if the date is within the allowed range (past two days)
+  const isDateInAllowedRange = (date) => {
+    const selectedDate = new Date(date);
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() - 2); // Subtract 2 days
+
+    return selectedDate >= currentDate;
+  };
 
   return (
     <div>
-      
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-          <div className="inline-block min-w-full p-2">
+          <div className="inline-block min-w-full ">
             <div className="overflow-hidden ">
-
               <div className='pt-3'>
                 <span className='font-bold ml-8'>Diagnostic Test Results</span>
               </div>
-
               {testDataList.length > 0 ? (
                 <table className="min-w-full mt-4">
-                  {/* Table headers */}
                   <thead className="bg-gray-200 border-b">
                     <tr>
                       <th scope="col" className="px-6 py-2 text-sm font-medium text-gray-900">
@@ -171,9 +188,7 @@ const ClientProfileHistory = ({testDataList}) => {
                       </th>
                     </tr>
                   </thead>
-
                   <tbody>
-
                     {sortedTestDataList?.map((testData, index) => (
                       <tr key={testData.id}
                         className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
@@ -184,41 +199,11 @@ const ClientProfileHistory = ({testDataList}) => {
                           {getLevel(testData.score)}
                         </td>
                         <td className="px-6 py-2 text-sm font-medium text-gray-900 whitespace-nowrap">
-                          {moment(testData.timestamp).format('MMM Do YYYY')} {/* Display date part */}
+                          {moment(testData.timestamp).format('MMM Do YYYY')}
                         </td>
                       </tr>
                     ))}
-
-                    {/* <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
-                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                        Average
-                      </td>
-                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                        07/07/2023
-                      </td>
-                      <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
-                        <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
-                          Open Test
-                        </button>
-                      </td>
-                    </tr> */}
-                    
-                    {/* <tr className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
-                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                        Severe
-                      </td>
-                      <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
-                        07/06/2023
-                      </td>
-                      <td className="px-6 py-2 text-sm font-medium text-gray-900 cursor-pointer whitespace-nowrap hover:text-blue-700">
-                        <button className="px-4 py-2 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black ">
-                          Open Test
-                        </button>
-                      </td>
-                    </tr> */}
-
                   </tbody>
-
                 </table>
               ) : (
                 <div className="text-center mt-4">
@@ -235,24 +220,22 @@ const ClientProfileHistory = ({testDataList}) => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6">
-        {/* Grid 1 */}
         <div className="col-span-2 p-2">
           <div className="overflow-hidden">
             <div className="pt-5">
               <span className="ml-8 font-bold">Add Notes</span>
             </div>
-
-              <form onSubmit={saveNote} className="px-8 pt-6 pb-8 mb-4 bg-white rounded ">
+            <form onSubmit={saveNote} className="px-8 pt-6 pb-8 mb-4 bg-white rounded ">
               <div className="mb-4">
                 <label className="block mb-2 text-sm font-bold text-gray-700" htmlFor="Date">
-                  Session Date:
+                  Session Date (within the past 2 days):
                 </label>
                 <input
                   className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   type="date"
                   id="Date"
-                  value={notes.Date}
-                  onChange={(e) => setNotes({...notes, date:e.target.value})}
+                  value={notes.date}
+                  onChange={(e) => handleDateChange(e)}
                   required
                 />
               </div>
@@ -264,8 +247,8 @@ const ClientProfileHistory = ({testDataList}) => {
                   className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   type="number"
                   id="Duration"
-                  value={notes.Duration}
-                  onChange={(e) => setNotes({...notes, duration: e.target.value})}
+                  value={notes.duration}
+                  onChange={(e) => setNotes({ ...notes, duration: e.target.value })}
                   required
                 />
               </div>
@@ -277,13 +260,13 @@ const ClientProfileHistory = ({testDataList}) => {
                   className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                   id="note"
                   value={notes.note}
-                  onChange={(e) => setNotes({...notes, note: e.target.value})}
+                  onChange={(e) => setNotes({ ...notes, note: e.target.value })}
                   required
                 />
               </div>
               <div className="flex items-center justify-between">
                 <button
-                  className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                  className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover-bg-blue-700 focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   Add Note
@@ -292,28 +275,29 @@ const ClientProfileHistory = ({testDataList}) => {
             </form>
           </div>
         </div>
-
-        {/* Grid 2 */}
-          <div className="col-span-4 p-2">
-      <div className='pt-5'>
-        <span className="ml-8 font-bold">Client History</span>
-        {clientNotes.map((clientNote, index) => (
-          <div key={clientNote.id} className="p-5 m-10 bg-blue-100 rounded-lg">
-            <p className="text-gray-800">
-              <span className="font-semibold">Session Date:</span> {clientNote.date}<br />
-              <span className="font-semibold">Session Duration:</span> {clientNote.duration} minutes<br /><br />
-              <span className="font-semibold">Summary:</span> {clientNote.note}
-            </p>
-          </div>
-        ))}
-      </div>
+        <div className="col-span-4 p-2">
+    <div className="col-span-4 p-2">
+  <div className='pt-5'>
+    <span className="ml-8 font-bold">Client History</span>
+    <div className="scrollable-container" style={{ maxHeight: '635px', overflowY: 'auto' }}>
+      {clientNotes.map((clientNote, index) => (
+        <div key={clientNote.id} className="p-2 m-8 bg-blue-100 rounded-lg">
+          <p className="text-gray-800">
+            <span className="font-semibold">Session Date:</span> {clientNote.date}<br />
+            <span className="font-semibold">Session Duration:</span> {clientNote.duration} minutes<br /><br />
+            <span className="font-semibold">Summary:</span> {clientNote.note}
+          </p>
+        </div>
+      ))}
     </div>
+  </div>
+</div>
 
 </div>
 
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ClientProfileHistory
+export default ClientProfileHistory;

@@ -13,9 +13,9 @@ export default function AddTherapySession() {
     counsellor:"",
     typeOfSession:"",
     link:"",
-  })
+  });
 
-  const sessions = Object.values(session);
+  const [sessions, setSessions] = useState([])
 
   const handleChange = (e) => {
     const {name,value} = e.target;
@@ -38,8 +38,10 @@ export default function AddTherapySession() {
           },
           withCredentials: true,
         };
-        await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
-        navigate("/moderator/addtherapysession");
+        const response  = await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
+        console.log('session add successfully:',response.data)
+        // navigate("/moderator/addtherapysession");
+        loadSession()
       }
     }catch(error)
     {
@@ -47,7 +49,6 @@ export default function AddTherapySession() {
     }
 
   }
-  
   
   const loadSession= async ()=>{
     try{
@@ -69,13 +70,16 @@ export default function AddTherapySession() {
 
         if(result.status === 200 ){
           const sessionData = result.data;
-          setSession({
-            date: sessionData.data,
-            time: session.time,
-            counsellor: session.counsellor,
-            typeOfSession: session.typeOfSession,
-            link: session.link,
-          });
+          console.log(result.data)
+          
+          // setSession({
+          //   date: sessionData.date,
+          //   time: session.time,
+          //   counsellor: session.counsellor,
+          //   typeOfSession: session.typeOfSession,
+          //   link: session.link,
+          // });
+          setSessions(result.data)
         }
       }
     }catch(error){
@@ -85,7 +89,7 @@ export default function AddTherapySession() {
 
 useEffect(()=>{
   loadSession();
-},[])
+},[ ])
 
 
 
@@ -99,6 +103,7 @@ useEffect(()=>{
       <input
         type="date"
         id="date"
+        name="date"
         value={session.date}
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
@@ -110,6 +115,7 @@ useEffect(()=>{
       <input
         type="time"
         id="time"
+        name="time"
         value={session.time}
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
@@ -117,10 +123,11 @@ useEffect(()=>{
     </div>
 
     <div className="flex flex-col mb-6">
-      <label className="text-lg font-medium">Counselors</label>
+      <label className="text-lg font-medium">Counsellors</label>
       <select
-        id="counselors"
+        id="counsellor"
         value={session.counsellor}
+        name="counsellor"
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
@@ -133,7 +140,8 @@ useEffect(()=>{
     <div className="flex flex-col mb-6">
       <label  className="text-lg font-medium">Type of the Therapy Session</label>
       <select
-        id="therapySession"
+        id="typeOfSession"
+        name="typeOfSession"
         value={session.typeOfSession}
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
@@ -150,6 +158,7 @@ useEffect(()=>{
         type={'text'}
         id="link"
         value={session.link}
+        name="link"
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       />
@@ -168,13 +177,14 @@ useEffect(()=>{
                 className="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
                 <tr>
                   <th scope="col" className=" px-6 py-4">Date</th>
-                  <th scope="col" className=" px-6 py-4">Type of therapy session</th>
                   <th scope="col" className=" px-6 py-4">Time</th>
+                  <th scope="col" className=" px-6 py-4">Counsellor</th>
+                  <th scope="col" className=" px-6 py-4">Type of therapy session</th>
                   <th scope="col" className=" px-6 py-4">Link</th>
                 </tr>
               </thead>
               <tbody>
-              {sessions.map((index,item) => (
+              {sessions.map((item, index) => (
                 <tr key={index} className="border-b dark:border-neutral-500">
                   <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.time}</td>
