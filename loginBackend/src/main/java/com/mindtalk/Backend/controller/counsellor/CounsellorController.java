@@ -122,6 +122,26 @@ public class CounsellorController {
         }
     }
 
+    @RestController
+    public class ImageUploadController {
+
+        @PostMapping("/api/upload-image")
+        public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile image) {
+            // Implement the image upload logic here
+            // You can save the image to a specific directory or perform other operations
+
+            if (image != null) {
+                // Handle the image, e.g., save it to the server or database
+                // You can use the "image" MultipartFile for processing
+                // Ensure proper error handling and validation for the uploaded image
+
+                return ResponseEntity.ok("Image uploaded successfully");
+            } else {
+                return ResponseEntity.badRequest().body("Image not provided");
+            }
+        }
+    }
+
 //    @PutMapping("/updateProfilePhoto/{user_id}")
 //    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
 //    public ResponseEntity<Counsellor> updateProfilePhoto(

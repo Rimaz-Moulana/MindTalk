@@ -63,7 +63,7 @@ const Blogs = () => {
           <select
             value={selectedCategory}
             onChange={handleCategoryChange}
-            className="p-2 text-gray-600 rounded-xl bg-blue-50 font-base border-blue focus:outline-none  focus:border-blue-300"
+            className="p-2 text-gray-600 rounded-xl bg-blue-50 font-base border-blue focus:outline-none focus:border-blue-300"
           >
             <option value="All">All Categories</option>
             <option value="Relaxing">Relaxing</option>
@@ -75,7 +75,7 @@ const Blogs = () => {
           
         </div>
 
-        <Link to="postblogcounsellor">
+        <Link to="postblog">
           <button className="px-6 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-bold">
             <span className="hidden sm:inline">Post a Blog</span>
             <span className="md:hidden">
@@ -97,7 +97,7 @@ const Blogs = () => {
                   <h3 className='text-xl font-semibold text-gray-800'>{blog.title}</h3>
                   <p className='mt-2 text-gray-600 line-clamp-3' dangerouslySetInnerHTML={{ __html: blog.content }} />
 
-                  <Link to={`/counsellor/blogs/blogview/${blog.id}`}>
+                  <Link to={`/client/blogs/blogview/${blog.id}`}>
                     <button className="justify-end px-6 py-2 text-blue-500 hover:text-blue-300">
                       <span className="hidden sm:inline">Read...</span>
                     </button>

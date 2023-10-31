@@ -7,6 +7,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import CounsellorProfilePhoto from './CounsellorProfilePhoto';
 
 const CounsellorProfile = () => {
   const { id } = useParams();
@@ -246,6 +247,20 @@ const CounsellorProfile = () => {
       toast.error('Error uploading profile photo. Please try again later.');
     }
   };
+
+  
+  // const [selectedFile, setSelectedFile] = useState(null);
+
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
+
+  // const handleUpload = () => {
+  //   const formData = new FormData();
+  //   formData.append('image', selectedFile);
+
+    
+  // };
 
   return (
     <>
@@ -537,8 +552,24 @@ const CounsellorProfile = () => {
         <div className="pb-5 overflow-hidden h-[52rem] text-center bg-white shadow-md rounded-xl">
 
           {/* <img src={sky} alt="sky" className="object-cover w-full h-48" /> */}
-          <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div>
-          <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" />
+            {/* <div className="w-full h-48 bg-center bg-no-repeat bg-cover bg-sky-500" style={{ background: 'url("https://source.unsplash.com/650x200?sky")' }}></div> */}
+
+
+
+            {/* <img src={logo} alt="Logo" className="w-20 h-20 mx-auto -mt-10 rounded-full" /> */}
+            <CounsellorProfilePhoto 
+              handleProfilePhotoChange={handleProfilePhotoChange}
+              uploadProfilePhoto={uploadProfilePhoto}
+              profilePhoto={profilePhoto}
+              profilePhotoPath={user.profilePhotoPath}
+            />
+            {/* <div>
+              <input type="file" onChange={handleFileChange} />
+              <button onClick={handleUpload}>Upload</button>
+            </div> */}
+
+
+            
             <span className="text-xl font-bold text-blue-900">{user.firstname} {user.lastname}</span>
             
             <div className="mt-1 text-center">

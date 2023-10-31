@@ -89,7 +89,7 @@ const ModeratorBlogs = () => {
 
       <div className='grid grid-cols-1 gap-4 mx-10 mt-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-[560px] overflow-y-auto'>
           {blogData
-            .filter(blog => blog.status === 1)
+            .filter(blog => blog.status === 0)
             .filter(blog => selectedCategory === "All" || blog.category === selectedCategory)
             .map((blog, index) => (
               <div key={blog.id} className='overflow-hidden bg-white rounded-lg shadow-md'>
