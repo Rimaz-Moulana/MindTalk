@@ -67,6 +67,7 @@ import AddTherapySession from './pages/moderator/AddTherapySession'
 import BlogsCounsellor from './pages/BlogsCounsellor'
 import BlogViewCounsellor from './pages/BlogViewCounsellor'
 import PostBlogModerator from './pages/moderator/PostBlogModerator'
+import PostBlogCounsellor from './pages/PostBlogCounsellor'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -150,7 +151,7 @@ const App = () => (
                             <Route path="bookedslots" element={<DateSlotSelector />} />
                             <Route path="blogscounsellor" element={<BlogsCounsellor />} />
                             <Route path="blogs/blogview/:id" element={<BlogViewCounsellor />} />
-                            <Route path="blogscounsellor/postblog" element={<PostBlog />} />
+                            <Route path="blogscounsellor/postblogcounsellor" element={<PostBlogCounsellor />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
                         </Route>
