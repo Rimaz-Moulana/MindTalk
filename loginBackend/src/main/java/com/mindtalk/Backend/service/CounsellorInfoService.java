@@ -1,22 +1,16 @@
 package com.mindtalk.Backend.service;
 
-import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
-import com.mindtalk.Backend.entity.Client;
-import com.mindtalk.Backend.entity.Counsellor;
-import com.mindtalk.Backend.repo.CounselorRepository;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.List;
+import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
+import com.mindtalk.Backend.entity.Counsellor;
+import com.mindtalk.Backend.repo.CounselorRepository;
 
 @Service
 public class CounsellorInfoService {
@@ -54,6 +48,7 @@ public class CounsellorInfoService {
     // Pathum's Service
 
     public List<Counsellor> getAllCounsellor() {
+
         return counsellorRepository.findAll();
     }
 

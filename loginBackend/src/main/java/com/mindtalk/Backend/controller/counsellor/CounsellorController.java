@@ -1,19 +1,22 @@
 package com.mindtalk.Backend.controller.counsellor;
 
-import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
-
-import com.mindtalk.Backend.entity.Client;
-import com.mindtalk.Backend.entity.Counsellor;
-import com.mindtalk.Backend.entity.client.ClientNoteEntity;
-import com.mindtalk.Backend.service.CounsellorInfoService;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.mindtalk.Backend.dto.Counsellor.CounsellorDTO;
+import com.mindtalk.Backend.entity.Counsellor;
+import com.mindtalk.Backend.service.CounsellorInfoService;
 
 @RestController
 @RequestMapping(path = "/api/counsellor/details")
@@ -110,6 +113,13 @@ public class CounsellorController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getCounsellors")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<List<Counsellor>> getCounsellors(){
+        List<Counsellor> counsellors = counsellorInfoService.getAllCounsellors();
+        return ResponseEntity.ok(counsellors);
     }
 
     // getting counsellorId from userID
