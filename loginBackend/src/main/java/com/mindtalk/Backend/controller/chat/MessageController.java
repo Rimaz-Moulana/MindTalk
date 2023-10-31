@@ -25,18 +25,19 @@ public class MessageController {
 
     @Autowired
     private ChatService chatService;
+
     @PostMapping("/create")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
-    public ResponseEntity<String> createMessage(@RequestBody MessageDTO messageDTO){
-        try{
+    public ResponseEntity<String> createMessage(@RequestBody MessageDTO messageDTO) {
+        try {
             Integer id = messageDTO.getId();
             Integer senderId = messageDTO.getSenderId();
             String content = messageDTO.getContent();
             Integer chatId = messageDTO.getChatId();
             Chat chat = chatService.getChatById(chatId);
-            messageService.createMessage(id,senderId,content,chat);
+            messageService.createMessage(id, senderId, content, chat);
             return ResponseEntity.ok("Message saved");
-        } catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(500).body("An error");
         }
 
@@ -44,20 +45,20 @@ public class MessageController {
 
     @GetMapping("/getMessages/{chatId}")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
-    public List<MessageDTO> getAllMessagesByChatId(@PathVariable Integer chatId){
+    public List<MessageDTO> getAllMessagesByChatId(@PathVariable Integer chatId) {
         return messageService.getMessagesByChatId(chatId);
     }
-    
-//    @Autowired
-//    private MessageRepository messageRepository;
-//
-//    @PostMapping
-//    public ResponseEntity<String> saveMessage(@RequestBody Message message){
-//        try{
-//            messageRepository.save(message);
-//            return ResponseEntity.ok("Message saved");
-//        } catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving message");
-//        }
-//    }
+    // @Autowired
+    // private MessageRepository messageRepository;
+    //
+    // @PostMapping
+    // public ResponseEntity<String> saveMessage(@RequestBody Message message){
+    // try{
+    // messageRepository.save(message);
+    // return ResponseEntity.ok("Message saved");
+    // } catch (Exception e){
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error
+    // saving message");
+    // }
+    // }
 }
