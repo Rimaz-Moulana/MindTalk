@@ -108,6 +108,12 @@ public class CounsellorController {
         }
     }
 
+    @GetMapping("/getCounsellors")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<List<Counsellor>> getCounsellors(){
+        List<Counsellor> counsellors = counsellorInfoService.getAllCounsellors();
+        return ResponseEntity.ok(counsellors);
+    }
     @PutMapping("/updateCounsellor/{user_id}")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Counsellor> updateCounsellor(

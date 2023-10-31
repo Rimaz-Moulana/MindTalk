@@ -49,8 +49,6 @@ public class CounsellorInfoService {
     }
 
 
-
-
     //Pathum's Service
 
     public List<Counsellor> getAllCounsellor(){

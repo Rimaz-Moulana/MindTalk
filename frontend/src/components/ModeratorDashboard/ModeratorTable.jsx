@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function RequestTable() {
@@ -5,7 +6,7 @@ export default function RequestTable() {
     
     // data from the database will store here
     const data = JSON.parse(localStorage.getItem("detailsData"));
-    
+    console.log(data)
     const [tableData,setTableData] = useState([]);
 
     const loadDataFromLocalStorage = () => {
@@ -13,6 +14,8 @@ export default function RequestTable() {
             setTableData(data);
         }
     }
+
+    console.log(tableData);
 
     useEffect(() => {
         loadDataFromLocalStorage();
@@ -53,17 +56,54 @@ export default function RequestTable() {
         setDate(formattedDate);
     }, [])
     
-   const handleSubmit = () => {
-    console.log(`Sending email to: ${data.email}`)
-   }
+//    const handleSubmit = () => {
+//     console.log(`Sending email to: ${data.email}`)
+//    }
 
    const deleteRow = (index) => {
     const updatedSessionData = [...tableData];
     updatedSessionData.splice(index,1);
     setTableData(updatedSessionData);
-    localStorage.setItem('[tableData', JSON.stringify(updatedSessionData));
-    // setTableData((prevData) => prevData.filter((row) => row.id !== id));
+    localStorage.setItem('tableData', JSON.stringify(updatedSessionData));
    }
+
+   const handleSubmit= async (index) =>{
+    const confirmed = window.confirm("Are you sure you want to accept this Counsellor?");
+    if(confirmed){
+        try{
+            const authData = localStorage.getItem('authData');
+            if(authData){
+                const {accessToken} = JSON.parse(authData);
+    
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    withCredentials : true,
+                }
+                console.log(config);
+    
+            const rowResult = tableData[index];
+            console.log(rowResult)
+            const result = await axios.post("http://localhost:8080/api/counsellor/details/add",rowResult, config);
+            console.log("successfully added",result.data);
+            }
+            
+            
+        }
+        catch(error){
+            console.error('this ids the error:',error);
+        }
+    }
+
+    // const selectedSession = tableData[index];
+
+    const updatedSessions = [...tableData];
+    updatedSessions.splice(index, 1);
+    localStorage.setItem('therapySessions', JSON.stringify(updatedSessions));
+    setTableData(updatedSessions);
+}
 
     //     const Requests = [
     //     {
@@ -166,7 +206,7 @@ export default function RequestTable() {
                                         )}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
-                                            <button onClick={handleSubmit} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
+                                            <button onClick={() => handleSubmit(index)} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
                                             <button onClick={() => deleteRow(index)} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
                                         </td>
                                         {/* <td className="whitespace-nowrap px-6 py-4">

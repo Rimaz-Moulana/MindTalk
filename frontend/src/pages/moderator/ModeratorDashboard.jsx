@@ -16,7 +16,7 @@ const ModeratorDashboard = () => {
                 <div className="flex flex-wrap">
                     <div className="flex-0">
                         <div className="bg-white rounded-xl shadow-md overflow-hidden text-center h-full mr-4">
-                            {/* <RequestTable /> */}
+                            <RequestTable />
                         </div>
                     </div>
 
