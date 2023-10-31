@@ -210,7 +210,7 @@ const CounsellorChat = () => {
         console.log(chats)
         const selectedChat = chats.find((chat) => chat.id === chatId)
         if (selectedChat) {
-            setSelectedChatName(selectedChat.name)
+            setSelectedChatName(selectedChat.userName)
         } else {
             console.log(`Chat with ID ${chatId} not found`)
         }

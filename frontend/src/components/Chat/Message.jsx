@@ -66,6 +66,7 @@ const ChatApp = () => {
     useEffect(() => {
         fetchUserChats(userId)
     }, [])
+
     useEffect(() => {
         // Fetch messages only if a chat is selected
         if (selectedChatId) {
@@ -123,14 +124,6 @@ const ChatApp = () => {
             return null
         }
     }
-
-    // useEffect(() => {
-    //     // Filter chats based on the search term and set the filteredChats state
-    //     setFilteredChats(chats.filter((chat) => chat.name.toLowerCase().includes(searchTerm.toLowerCase())))
-    // }, [chats, searchTerm])
-
-    //}, [])
-
     const handleSendMessage = async (message) => {
         const storedAuthData = localStorage.getItem('authData')
         if (storedAuthData) {
@@ -161,7 +154,6 @@ const ChatApp = () => {
             }
         }
     }
-
     const handleChatItemClick = (chatId) => {
         setChatBoxOpen(true)
         setActiveChat(chatId)
@@ -173,7 +165,8 @@ const ChatApp = () => {
         console.log(chats)
         const selectedChat = chats.find((chat) => chat.id === chatId)
         if (selectedChat) {
-            setSelectedChatName(selectedChat.name)
+            setSelectedChatName(selectedChat.counselorName)
+            console.log('Selected chat name:', selectedChat.counselorName)
         } else {
             console.log('Chat with ID ${chatId} not found')
         }
@@ -210,7 +203,7 @@ const ChatApp = () => {
                             </div>
                             <div className="flex-1">
                                 <p className="font-bold mb-1">{chat.counselorName}</p>
-                                <p className="mb-1">Well, you're doing a..</p>
+                                <p className="mb-1"></p>
                             </div>
                             <p className="text-sm text-gray-600">5 mins ago</p>
                         </div>
