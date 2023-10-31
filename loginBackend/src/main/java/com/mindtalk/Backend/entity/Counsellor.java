@@ -21,7 +21,7 @@ public class Counsellor {
 //    @JoinColumn(name = "user_id")
 //    private User _user;
 
-    private Integer userId;
+    //private Integer userId;
     private String firstname;
     private String lastname;
     private String email;
@@ -41,6 +41,10 @@ public class Counsellor {
     private String language;
     private String joinDate;
     private Boolean status;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user; // Association with User
 
     public Long getId() {
         return id;
@@ -98,4 +102,5 @@ public class Counsellor {
         status = false;
         this.status = status;
     }
+
 }
