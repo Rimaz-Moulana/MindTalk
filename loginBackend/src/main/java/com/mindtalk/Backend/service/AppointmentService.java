@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -44,4 +45,12 @@ public class AppointmentService {
         List<Appointments> appointments = appointmentRepository.findByCounsellorId(counsellorId);
         return modelMapper.map(appointments, new TypeToken<List<AppointmentDTO>>(){}.getType());
     }
+
+    public List<Integer> getClientIdsForCounsellor(Integer counsellorId) {
+        List<Appointments> appointments = appointmentRepository.findByCounsellorId(counsellorId);
+        List<Integer> clientIds = appointments.stream().map(Appointments::getUserId).collect(Collectors.toList());
+        return clientIds;
+    }
+
+
 }

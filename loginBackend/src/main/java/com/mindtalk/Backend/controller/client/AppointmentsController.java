@@ -60,4 +60,10 @@ public class AppointmentsController {
     public List<AppointmentDTO> getAppointmentsForCounsellors(@PathVariable Integer counsellorId) {
         return appointmentService.getAppointmentsForCounsellors(counsellorId);
     }
+
+    @GetMapping("/get-clientIds/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<Integer> getClientIdsForCounsellor(@PathVariable Integer counsellorId) {
+        return appointmentService.getClientIdsForCounsellor(counsellorId);
+    }
 }
