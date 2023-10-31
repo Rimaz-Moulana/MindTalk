@@ -69,5 +69,10 @@ public class TestController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/sorted-results/{userIds}")
+    public ResponseEntity<List<Test>> getTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+        List<Test> testResults = testService.getTestResultsByUserIdsSorted(userIds);
+        return ResponseEntity.ok(testResults);
+    }
 
 }
