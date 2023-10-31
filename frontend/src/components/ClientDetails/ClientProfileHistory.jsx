@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import moment from 'moment';
+import CryptoJS from 'crypto-js';
   
 function getLevel(score) {
   if (score >= 0 && score <= 10) {
@@ -49,7 +50,7 @@ const ClientProfileHistory = ({testDataList}) => {
     const newNote = {
       date: notes.date,
       duration: notes.duration,
-      note: notes.note,
+      note: CryptoJS.AES.encrypt(notes.note, 'your-secret-key').toString(), // Encrypt the note
     };
 
     try {
@@ -78,7 +79,7 @@ const ClientProfileHistory = ({testDataList}) => {
           alert("Note added successfully");
         }
 
-        window.location.href = '#';
+        window.location.href = 'CounsellorClientProfile';
         setNotes({ date: '', duration: '', note: '' });
       }
     } catch (error) {
@@ -111,16 +112,17 @@ const ClientProfileHistory = ({testDataList}) => {
           );
 
           if (Array.isArray(response.data)) {
-            const fetchedNote = response.data.map(note => ({
-              id: note.id,
-              date: `${note.date}`,
-              duration: `${note.duration}`,
-              note: `${note.note}`
-            }));
-            setClientNotes(fetchedNote);
-          } else {
-            console.error("error occurred")
-          }
+        const fetchedNote = response.data.map((note) => ({
+          id: note.id,
+          date: `${note.date}`,
+          duration: `${note.duration}`,
+          note: CryptoJS.AES.decrypt(note.note, 'your-secret-key').toString(CryptoJS.enc.Utf8), // Decrypt the note
+        }));
+        fetchedNote.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setClientNotes(fetchedNote);
+      } else {
+        console.error("error occurred");
+      }
 
           // if (response.status === 200) {
           //   console.log("Notes fetched successfully");
@@ -138,6 +140,8 @@ const ClientProfileHistory = ({testDataList}) => {
  
     viewNotes();
   }, []);  
+
+  
 
   return (
     <div>
