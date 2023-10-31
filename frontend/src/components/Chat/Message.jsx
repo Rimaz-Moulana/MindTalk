@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import Searchbar from '../shared/Searchbar'
 import placeholderPNG from '../../assets/Chat/chatting.png'
 import chatUserPNG from '../../assets/Chat/chatUser.png'
@@ -22,10 +22,12 @@ const ChatApp = () => {
     const [showChatList, setShowChatList] = useState(true)
     //get selected chat's info
     //const [selectedChatAvatar, setSelectedChatAvatar] = useState('')
+    const [selectedChatId, setSelectedChatId] = useState(null)
     const [selectedChatName, setSelectedChatName] = useState('')
 
     const authData = JSON.parse(localStorage.getItem('authData'))
     const userId = authData ? authData.id : null
+    const idRef = useRef(userId)
 
     const fetchUserChats = async (userId) => {
         try {
@@ -52,11 +54,6 @@ const ChatApp = () => {
                         }
                     })
                 )
-                // const newChats = response.data.map((chat) => ({
-                //     id: chat.id, // Change this to the appropriate chat ID field
-                //     counsellorId: chat.counsellorId
-                //     //name: `${chat.firstUserName} and ${chat.secondUserName}`
-                // }))
 
                 setChats(newChats)
                 setFilteredChats(newChats)
@@ -109,14 +106,13 @@ const ChatApp = () => {
             if (message.trim() !== '') {
                 const newMessage = {
                     content: message,
-                    senderId: parseInt(id)
+                    senderId: parseInt(idRef.current),
+                    chatId: selectedChatId
                 }
-                //setMessages((prevMessages) => [...prevMessages, newMessage])
-                // setMessages([...message, newMessage])
 
                 // Send the message to the backend
                 try {
-                    const response = await axios.post('http://localhost:8080/api/v1/messages/save', newMessage, {
+                    const response = await axios.post('http://localhost:8080/api/v1/messages/create', newMessage, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`
                         }
@@ -136,6 +132,7 @@ const ChatApp = () => {
     const handleChatItemClick = (chatId) => {
         setChatBoxOpen(true)
         setActiveChat(chatId)
+        setSelectedChatId(chatId)
         if (window.innerWidth < 700 && activeChat) {
             setShowChatList(false)
         }
@@ -211,7 +208,7 @@ const ChatApp = () => {
                             <div
                                 key={index}
                                 className={`${
-                                    message.senderId === parseInt(senderId) ? 'text-right' : 'text-left'
+                                    message.senderId === parseInt(idRef.current) ? 'text-right' : 'text-left'
                                 } mb-2`}
                             >
                                 <div
