@@ -40,7 +40,12 @@ public class TestService {
 
     public List<Test> getTestsResultsByUserId(Integer user_id) {
         // Use the userId to retrieve all records with the given userId
-        return testRepository.findAllByUserId(user_id);
+        List<Test> testResults = testRepository.findAllByUserId(user_id);
+
+        // Sort the test results by timestamp in descending order
+        testResults.sort((test1, test2) -> test2.getTimestamp().compareTo(test1.getTimestamp()));
+
+        return testResults;
     }
 
 }
