@@ -24,7 +24,7 @@ public class AddTherapySessionService {
 //    @Autowired
 //    private ModelMapper modelMapper;
 
-    public void addSession(Long id, String time, String date, String counsellors, String sessionType, String link) {
+    public void addSession(Long id, String date, String time, String counsellors, String sessionType, String link) {
 
         AddTherapySession addTherapySession = new AddTherapySession();
         addTherapySession.setId(id);
