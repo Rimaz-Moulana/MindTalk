@@ -4,6 +4,8 @@ import com.mindtalk.Backend.entity.Test;
 import com.mindtalk.Backend.entity.User;
 import com.mindtalk.Backend.repo.TestRepository;
 import com.mindtalk.Backend.repo.UserRepository;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,10 @@ public class TestService {
         testResults.sort((test1, test2) -> test2.getTimestamp().compareTo(test1.getTimestamp()));
 
         return testResults;
+    }
+    public List<Test> getTestResultsByUserIdsSorted(List<Integer> userIds) {
+        Sort sortByTimestampDesc = Sort.by(Sort.Order.desc("timestamp"));
+        return testRepository.findByUserIdIn(userIds, sortByTimestampDesc);
     }
 
 }

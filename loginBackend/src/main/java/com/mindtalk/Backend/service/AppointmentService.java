@@ -75,6 +75,10 @@ public class AppointmentService {
         return clientIds;
     }
 
+    public List<Integer> getUserIdsByCounsellorId(Integer counsellorId) {
+        return appointmentRepository.findUserIdsByCounsellorId(counsellorId);
+    }
+
     // public List<ClientDTO> getClientInfoForCounsellor(Integer counsellorId) {
     // List<Appointments> appointments =
     // appointmentRepository.findByCounsellorId(counsellorId);
