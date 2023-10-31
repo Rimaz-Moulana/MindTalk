@@ -23,6 +23,7 @@ public class CounsellorController {
     @Autowired
     private CounsellorInfoService counsellorInfoService;
 
+
     private final List<String> allowedOrigins;
 
     @Autowired
@@ -71,7 +72,7 @@ public class CounsellorController {
     //Pathum's Controller
 
     @GetMapping("/getCounsellor/{id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Counsellor> getCounsellorById(@PathVariable Long id){
         Counsellor counsellor = counsellorInfoService.getCounsellorById(id);
 
@@ -94,5 +95,25 @@ public class CounsellorController {
         }
     }
 
+    //getting counsellorId from userID
+    @GetMapping("/{userId}/counsellorId")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<Integer> getCounsellorId(@PathVariable Integer userId) {
+        Integer counsellorId = counsellorInfoService.getCounsellorIdByUserId(userId);
+        return ResponseEntity.ok(counsellorId);
+    }
+
+    //get counsellor name given id
+    @GetMapping("/{counsellorId}/counsellorName")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public  ResponseEntity<String> getCounsellById(@PathVariable("counsellorId") Long counsellorId){
+        Counsellor counsellor = counsellorInfoService.getCounsellorById(counsellorId);
+        if (counsellor != null) {
+            String fullName = counsellor.getFirstname() + " " + counsellor.getLastname();
+            return ResponseEntity.ok(fullName);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
