@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "crypto-js": "^4.2.0",
     "moment": "^2.29.4",
+    "papaparse": "^5.4.1",
     "react-toastify": "^9.1.3"
   }
 }
