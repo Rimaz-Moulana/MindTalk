@@ -54,6 +54,7 @@ import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import ModeratorBlogView from './pages/moderator/ModeratorBlogView'
 
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
@@ -175,7 +176,7 @@ const App = () => (
                             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
                             <Route path="add-meditation/:id" element={<AddMeditation />} />
                             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
-                            <Route path="moderatorblogs/blogview/:id" element={<BlogView />} />
+                            <Route path="moderatorblogs/moderatorblogview/:id" element={<ModeratorBlogView />} />
                             <Route path="moderatorblogs/postblogmoderator" element={<PostBlogModerator />} />
                             <Route path="addtherapysession" element={<AddTherapySession />} />
                         </Route>

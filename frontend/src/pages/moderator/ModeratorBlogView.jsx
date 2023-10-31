@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams to access URL parameters
 import axios from 'axios';
 
-const BlogViewCounsellor = () => {
+const ModeratorBlogView = () => {
   const { id } = useParams(); // Get the blog ID from the URL parameter
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,23 +62,23 @@ const BlogViewCounsellor = () => {
   }
 
   return (
-    <div className='w-full bg-gray-50 rounded-2xl'>
-    <div className="max-w-screen-lg mx-auto ">
-      <main className="w-full p-8">
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            <h2 className="mb-3 text-3xl font-semibold text-gray-900">{blogData.title}</h2>
-            <div className="mb-4 text-sm font-bold text-gray-500">{blogData.category}</div>
-            <div className="prose prose-3xl text-gray-800" dangerouslySetInnerHTML={{ __html: blogData.content }} style={{ textAlign: 'justify' }} />
-            {/* <div className="prose prose-lg text-gray-800">{blogData.content}</div> */}
-          </div>
-        )}
-      </main>
-      </div>
-      </div>
+    <div className='w-full h-screen bg-white rounded-2xl'>
+  <div className="max-w-screen-lg mx-auto ">
+    <main className="w-full p-8">
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className=''>
+          <div className="flex justify-center mb-3 text-4xl font-semibold text-gray-900">{blogData.title}</div>
+          <div className="flex justify-center mb-4 text-sm font-bold text-gray-500">{blogData.category}</div>
+          <div className="prose prose-lg text-gray-800" dangerouslySetInnerHTML={{ __html: blogData.content }} style={{ textAlign: 'justify' }} />
+        </div>
+      )}
+    </main>
+  </div>
+</div>
+
   );
 }
 
-export default BlogViewCounsellor;
+export default ModeratorBlogView;
