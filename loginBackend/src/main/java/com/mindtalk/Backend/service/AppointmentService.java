@@ -2,7 +2,9 @@ package com.mindtalk.Backend.service;
 
 import com.mindtalk.Backend.dto.AppointmentDTO;
 import com.mindtalk.Backend.entity.Appointments;
+import com.mindtalk.Backend.entity.Chat;
 import com.mindtalk.Backend.repo.AppointmentRepository;
+import com.mindtalk.Backend.repo.ChatRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class AppointmentService {
     private AppointmentRepository appointmentRepository;
 
     @Autowired
+    private ChatRepository chatRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     public void createAppointment(Integer userId, Integer counsellorId, LocalDate appointmentDate, LocalTime timeSlot) {
@@ -28,6 +33,14 @@ public class AppointmentService {
         appointment.setAppointmentDate(appointmentDate);
         appointment.setTimeSlot(timeSlot);
         appointmentRepository.save(appointment);
+
+        // Create a Chat associated with this appointment
+        Chat chat = new Chat();
+        chat.setUserId(userId);
+        chat.setCounsellorId(counsellorId);
+        chat.setFirstUserName("User " + userId); // Customize as needed
+        chat.setSecondUserName("Counselor " + counsellorId);
+        chatRepository.save(chat);
     }
 
     public List<AppointmentDTO> getAllAppointments() {
