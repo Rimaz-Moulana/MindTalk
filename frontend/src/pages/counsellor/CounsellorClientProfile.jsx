@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 import ClientProfileCard from '../../components/ClientDetails/ClientProfileCard'
 import ClientProfileHistory from '../../components/ClientDetails/ClientProfileHistory'
 
@@ -82,10 +83,8 @@ const CounsellorClientProfile = () => {
     }
   };
 
-  const [testResults, setTestResults] = useState({
-    score:'',
-    timestamp: ''
-  });
+  const [testResults, setTestResults] = useState([]);
+  const [testResultsList, setTestResultsList] = useState([]);
 
   useEffect(() => {
     fetchClientTestResults();
@@ -105,30 +104,35 @@ const CounsellorClientProfile = () => {
               withCredentials: true
           };
 
-          const response = await axios.get(`http://localhost:8080/api/v1/test/${id}`, config);
+          const response = await axios.get(`http://localhost:8080/api/v1/test/all/${id}`, config);
 
-          if (response.status === 200) {
-            const resultData = response.data;
-            setTestResults({
-              score: resultData.score ? resultData.score : '',
-              timestamp: resultData.timestamp ? resultData.timestamp : ''
-            });
+            const resultData = response.data.map(resultData => ({
+              id: resultData.id,
+              score: resultData.score,
+              timestamp: moment(resultData.timestamp).format('MMM Do YY')
+            }));
+
+            // Sort the test results in descending order based on the timestamp
+            resultData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            setTestResults(resultData);
+            setTestResultsList(response.data);
           }
-      }
+
     } catch (error) {
       console.error('Error fetching test results:', error);
     }
   };
 
   return (
-    <div className='grid grid-cols-4 gap-5'>
+    <div className='grid grid-cols-1 sm:gap-5 sm:grid-cols-4 '>
 
-      <div className='bg-white rounded-xl'>
+      <div className='bg-white rounded-xl mb-5'>
         <ClientProfileCard clientData={client} />
       </div>
 
-      <div className='col-span-3 bg-white rounded-xl'>
-        <ClientProfileHistory testData={testResults}/>
+      <div className='col-span-3 bg-white rounded-xl mb-5 '>
+        <ClientProfileHistory testDataList={testResultsList}/>
       </div>
 
     </div>
