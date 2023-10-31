@@ -33,8 +33,5 @@ public class MessageService {
     public List<MessageDTO> getMessagesByChatId(Integer chatId) {
         List<Message> messages = messageRepository.findByChatId(chatId);
         return modelMapper.map(messages, new TypeToken<List<MessageDTO>>(){}.getType());
-
     }
-
-
 }
