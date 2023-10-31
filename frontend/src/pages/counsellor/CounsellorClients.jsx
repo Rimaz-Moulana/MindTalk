@@ -20,7 +20,7 @@ const Clients = () => {
     setIsModalOpen(false);
   };
 
-  const fetchClientData = async () => {
+  const fetchClientData = async (counsellorId) => {
     try {
       console.log("Fetching clients...");
       const authData = localStorage.getItem('authData');
@@ -34,13 +34,13 @@ const Clients = () => {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/v1/client/all`, 
+          `http://localhost:8080/api/client/appointment/get-clientInfo/${counsellorId}`, 
           config
         );
 
         const fetchedClients = response.data.map(client => ({
-          id: client.id,
-          name: `${client.firstname} ${client.lastname}`
+          id: client.userId,
+          name: `${client.fname} ${client.lname}`
         }))
         
         setClients(fetchedClients);
@@ -54,8 +54,17 @@ const Clients = () => {
   };
 
   useEffect(() => {
-    fetchClientData();
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { id } = JSON.parse(authData);
+      console.log("counsellor id", id)
+      fetchClientData(id); // Call fetchClientData with the retrieved id
+    }
   }, []);
+
+  // useEffect(() => {
+  //   fetchClientData();
+  // }, []);
 
   useEffect(() => {
     if (filterQuery) {

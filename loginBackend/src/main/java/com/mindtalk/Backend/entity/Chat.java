@@ -1,5 +1,6 @@
 package com.mindtalk.Backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,21 +11,29 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "_chats")
+@AllArgsConstructor
+@Table(name = "chats")
 public class Chat {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private int userId;
+    private int counsellorId;
+    private String firstUserName;
+    private String secondUserName;
 
-    @ManyToOne
-    private User user;
+    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Message> messageList;
 
-    @ManyToOne
-    private Counsellor counsellor;
 
-//    @OneToMany(mappedBy = "_chats", cascade = CascadeType.ALL)
-//    private List<ChatMessage> messages = new ArrayList<>();
+    public List<Message> getMessageList() {
+        return messageList;
+    }
 
+    public void setMessageList(List<Message> messageList) {
+        this.messageList = messageList;
+    }
 }

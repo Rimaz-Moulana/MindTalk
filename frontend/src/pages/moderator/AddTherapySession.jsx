@@ -10,17 +10,27 @@ export default function AddTherapySession() {
   const [session, setSession] = useState({
     date:"",
     time:"",
-    counsellor:"",
-    typeOfSession:"",
+    counsellors:"",
+    sessionType:"",
     link:"",
   });
 
   const [sessions, setSessions] = useState([])
+  const [getCounsellor, setGetCounsellor] = useState([])
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const selectCounsellor = Object.values(getCounsellor)
+  console.log(selectCounsellor[0])
 
   const handleChange = (e) => {
     const {name,value} = e.target;
     setSession({...session, [name] : value});
   }
+
+const handleChange2 = (e) =>{
+  setSelectedOption(e.target.value);
+}
+
 
   const onSubmit=async (e) =>{
     e.preventDefault();
@@ -38,6 +48,7 @@ export default function AddTherapySession() {
           },
           withCredentials: true,
         };
+        console.log(session)
         const response  = await axios.post("http://localhost:8080/api/moderator/addtherapySession",session,config);
         console.log('session add successfully:',response.data)
         // navigate("/moderator/addtherapysession");
@@ -91,6 +102,37 @@ useEffect(()=>{
   loadSession();
 },[ ])
 
+const getCounsellorname = async () =>{
+
+  try{
+    const authdata = localStorage.getItem('authData');
+    if(authdata){
+      const {accessToken} = JSON.parse(authdata);
+
+      const config = {
+        headers: {
+          'Content-Type' : 'application/json' ,
+          Authorization : `Bearer ${accessToken}`,
+        },
+        withCredentials : true,
+      }
+      console.log(config);
+
+      const result = await axios.get(`http://localhost:8080/api/counsellor/details/all`,config);
+
+      if(result.status === 200){
+        console.log(result.data)
+        setGetCounsellor(result.data)
+      }
+    }
+  }catch(error){
+    console.error("this is the get error:",error);
+  }
+}
+
+useEffect(()=>{
+  getCounsellorname()
+},[])
 
 
   return (
@@ -105,7 +147,7 @@ useEffect(()=>{
         id="date"
         name="date"
         value={session.date}
-        onChange={(e)=>handleChange(e)}
+        onChange={(e)=>{handleChange(e)}}
         className="w-full px-4 py-2 border rounded-md"
       />
     </div>
@@ -123,26 +165,29 @@ useEffect(()=>{
     </div>
 
     <div className="flex flex-col mb-6">
-      <label className="text-lg font-medium">Counsellors</label>
-      <select
-        id="counsellor"
-        value={session.counsellor}
-        name="counsellor"
-        onChange={(e)=>handleChange(e)}
-        className="w-full px-4 py-2 border rounded-md"
-      >
-        <option value="counselor1">Counselor 1</option>
-        <option value="counselor2">Counselor 2</option>
-        <option value="counselor3">Counselor 3</option>
-      </select>
-    </div>
+  <label className="text-lg font-medium">Counsellors</label>
+  <select
+    id="counsellors"
+    value={selectedOption}
+    name="counsellors"
+    onChange={handleChange2}
+    className="w-full px-4 py-2 border rounded-md"
+  >
+    <option value="">Select a Counsellor</option>
+    {getCounsellor.map((counselor, index) => (
+      <option key={index} value={counselor.firstname + " " + counselor.lastname}>
+        {counselor.firstname + " " + counselor.lastname}
+      </option>
+    ))}
+  </select>
+</div>
 
     <div className="flex flex-col mb-6">
       <label  className="text-lg font-medium">Type of the Therapy Session</label>
       <select
-        id="typeOfSession"
-        name="typeOfSession"
-        value={session.typeOfSession}
+        id="sessionType"
+        name="sessionType"
+        value={session.sessionType}
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
@@ -185,11 +230,13 @@ useEffect(()=>{
               </thead>
               <tbody>
               {sessions.map((item, index) => (
+               
                 <tr key={index} className="border-b dark:border-neutral-500">
+                {/* {console.log(item.date)} */}
                   <td className="whitespace-nowrap  px-6 py-4 font-medium">{item.date}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.time}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{item.counsellor}</td>
-                  <td className="whitespace-nowrap  px-6 py-4">{item.typeOfSession}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.counsellors}</td>
+                  <td className="whitespace-nowrap  px-6 py-4">{item.sessionType}</td>
                   <td className="whitespace-nowrap  px-6 py-4">{item.link}</td>
                 </tr>
                 ))}

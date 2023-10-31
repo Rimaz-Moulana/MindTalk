@@ -10,7 +10,7 @@ const ClientCards = ({ clientList }) => {
       <table className="w-full border-collapse table-auto">
         <tbody className='divide-y divide-gray-200'>
           {clientList?.map((client, index) => (
-            <tr key={clientList.id}>
+            <tr key={clientList.userId}>
               <td className="p-4">
                 <img
                   alt="user"
