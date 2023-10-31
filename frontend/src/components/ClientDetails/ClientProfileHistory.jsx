@@ -18,7 +18,7 @@ function getLevel(score) {
 function getColorClass(level) {
   switch (level) {
     case 'Mild':
-      return 'text-green-500'; // You can use any color class from your CSS framework
+      return 'text-green-500'; 
     case 'Moderate':
       return 'text-yellow-500';
     case 'Severe':
@@ -148,7 +148,7 @@ const ClientProfileHistory = ({testDataList}) => {
             <div className="overflow-hidden ">
 
               <div className='pt-3'>
-                <span className='font-bold '>Diagnostic Test Results</span>
+                <span className='font-bold ml-8'>Diagnostic Test Results</span>
               </div>
 
               {testDataList.length > 0 ? (
@@ -171,7 +171,7 @@ const ClientProfileHistory = ({testDataList}) => {
                   <tbody>
 
                     {sortedTestDataList?.map((testData, index) => (
-                      <tr key={testDataList.id}
+                      <tr key={testData.id}
                         className="text-center transition duration-300 ease-in-out bg-white border-b hover:bg-gray-100">
                         <td className="px-6 py-2 text-sm font-light text-gray-900 whitespace-nowrap">
                           {testData.score}
@@ -226,6 +226,8 @@ const ClientProfileHistory = ({testDataList}) => {
             </div>
           </div>
         </div>
+        <hr />
+        <hr  />
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-6">

@@ -189,8 +189,8 @@ function ClientProfileCard({ clientData }) {
       </figure>
 
       <div className="flex flex-col">
-           <div className=" sm:mx-0.5 lg:mx-0.5"> 
-           {/* overflow-x-auto */}
+           <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5"> 
+           {/*  */}
              <div className="p-2 inline-block min-w-full">
                <div className="overflow-hidden ">
 
