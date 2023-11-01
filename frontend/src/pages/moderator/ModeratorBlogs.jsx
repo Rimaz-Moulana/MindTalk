@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiOutlinePlusCircle, AiOutlineCloseCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -51,6 +51,12 @@ const ModeratorBlogs = () => {
     fetchBlogData();
   }, []);
 
+  
+
+
+
+
+
   return (
     <div className='w-full py-8 bg-slate-50 rounded-xl'>
       <div className='mx-10 mb-8 text-center'>
@@ -72,9 +78,9 @@ const ModeratorBlogs = () => {
             <option value="Focus">Focus</option>
             <option value="Stress Releasing">Stress Releasing</option>
           </select>
-          <button className="px-4 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-bold">
+          {/* <button className="px-4 py-2 text-white bg-blue-900 rounded-full hover:bg-blue-500 hover:font-bold">
             Search
-          </button>
+          </button> */}
         </div>
 
         <Link to="postblogcounsellor">
@@ -104,6 +110,26 @@ const ModeratorBlogs = () => {
                       <span className="hidden sm:inline">Read...</span>
                     </button>
                   </Link>
+                </div>
+                <div className='flex justify-end mb-4 mr-4'>
+                  <button
+                    className="px-4 py-2 mr-2 text-white bg-green-900 rounded-full font-md hover:bg-green-500 hover:font-lg"
+                    onClick={() => acceptBlog(blog.id)}
+                  >
+                    <span className="hidden sm:inline">Accept</span>
+                    <span className="md:hidden">
+                      <AiOutlineCheckCircle />
+                    </span>
+                  </button>
+                  <button
+                    className="px-4 py-2 ml-2 text-white bg-red-900 rounded-full font-md hover:bg-red-500 hover:font-lg"
+                    onClick={() => rejectBlog(blog.id)}
+                  >
+                    <span className="hidden sm:inline">Reject</span>
+                    <span className="md:hidden">
+                      <AiOutlineCloseCircle />
+                    </span>
+                  </button>
                 </div>
               </div>
             ))}
