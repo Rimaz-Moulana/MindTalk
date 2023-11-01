@@ -26,7 +26,7 @@ export default function ClientTherapySessionSuggestion() {
             const result = await axios.get(`http://localhost:8080/api/moderator/getSession`,config)
     
             if(result.status === 200 ){
-              const sessionData = result.data;
+              // const sessionData = result.data;
               console.log(result.data)
               
               setSessions(result.data)
@@ -49,6 +49,7 @@ export default function ClientTherapySessionSuggestion() {
       slidesToShow: 3,
       slidesToScroll: 1
     };
+    
   return (
     <>
         <div className='w-3/4 m-auto'>
