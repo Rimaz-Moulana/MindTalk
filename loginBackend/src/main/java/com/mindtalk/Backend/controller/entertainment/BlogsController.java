@@ -1,12 +1,14 @@
 package com.mindtalk.Backend.controller.entertainment;
 
 import com.mindtalk.Backend.dto.entertainment.BlogsDTO;
+import com.mindtalk.Backend.entity.Client;
 import com.mindtalk.Backend.entity.entertainment.BlogsEntity;
 import com.mindtalk.Backend.service.entertainment.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -111,4 +113,35 @@ public class BlogsController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/{blogsId}/coverImagePath")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<String> getCoverImagePath(@PathVariable Integer blogsId, MultipartFile coverImage) {
+        String coverImagePath = blogsService.uploadBlogCoverImage(blogsId, coverImage);
+
+        if (coverImagePath != null) {
+            return ResponseEntity.ok(coverImagePath);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{blogsId}/updateProfilePhoto")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> updateProfilePhoto(
+            @PathVariable Integer blogsId,
+            @RequestPart(required = false) MultipartFile coverImage) {
+
+        if (coverImage != null) {
+            String updatedProfilePhotoPath = blogsService.uploadBlogCoverImage(blogsId, coverImage);
+            if (updatedProfilePhotoPath != null) {
+                return ResponseEntity.ok(blogsService.getBlogsById(blogsId));
+            }
+        }
+
+        return ResponseEntity.badRequest().build(); //Handle errors as needed
+    }
+
+
+
 }

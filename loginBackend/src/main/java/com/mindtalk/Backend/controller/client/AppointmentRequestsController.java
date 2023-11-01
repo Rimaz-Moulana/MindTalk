@@ -62,7 +62,7 @@ public class AppointmentRequestsController {
     }
 
     @PostMapping("/accept-appointment-request/{requestId}")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> acceptAppointmentRequest(@PathVariable Integer requestId) {
         try {
             appointmentRequestsService.acceptAppointmentRequest(requestId);
@@ -73,7 +73,7 @@ public class AppointmentRequestsController {
     }
 
     @PostMapping("/reject-appointment-request/{requestId}")
-    @CrossOrigin(origins = "http://127.0.0.1:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> rejectAppointmentRequest(@PathVariable Integer requestId) {
         try {
             appointmentRequestsService.rejectAppointmentRequest(requestId);

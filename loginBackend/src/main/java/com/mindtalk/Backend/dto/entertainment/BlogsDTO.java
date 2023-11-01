@@ -15,6 +15,8 @@ public class BlogsDTO {
     private String category;
     @Column(length = 10000000)
     private String content;
+    @Column(name = "cover_image_path")
+    private String CoverImagePath;
     private int status;
 
     public int getStatus() {

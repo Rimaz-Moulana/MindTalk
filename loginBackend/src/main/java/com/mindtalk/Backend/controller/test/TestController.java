@@ -1,6 +1,7 @@
 package com.mindtalk.Backend.controller.test;
 
 import com.mindtalk.Backend.dto.test.TestDTO;
+import com.mindtalk.Backend.entity.Test;
 import com.mindtalk.Backend.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
