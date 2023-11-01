@@ -3,8 +3,6 @@ import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
-import Logo from '../assets/logo.png'
-import StripeCheckout from 'react-stripe-checkout';
 
 
 
@@ -19,7 +17,8 @@ function AppointmentCalendar() {
   const [appointmentTime, setAppointmentTime] = useState('');
   const [appointmentFee, setAppointmentFee] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-const [errorVisible, setErrorVisible] = useState(false);
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [requestStatusMessage, setRequestStatusMessage] = useState('');
 
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const [errorVisible, setErrorVisible] = useState(false);
     try {
       const authData = localStorage.getItem('authData');
       if (authData) {
-        const { accessToken} = JSON.parse(authData);
+        const { accessToken } = JSON.parse(authData);
         const appCounsellorId = localStorage.getItem('appcounsellorId');
         const config = {
           headers: {
@@ -70,35 +69,36 @@ const [errorVisible, setErrorVisible] = useState(false);
     const selectedDate = moment(slotInfo.start);
     const currentDate = moment();
     setSelectedSlot(slotInfo);
-  
+
     if (selectedDate.isSameOrAfter(currentDate, 'minute')) {
       setSelectedSlot(slotInfo);
-    // Extract the selected date and time from the slotInfo
-    const selectedDate = slotInfo.start.toISOString();
-    const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
+      // Extract the selected date and time from the slotInfo
+      const selectedDate = slotInfo.start.toISOString();
+      const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
 
-    const counselorName = localStorage.getItem('appcounsellorName');
+      const counselorName = localStorage.getItem('appcounsellorName');
 
-    // Extract only the date portion (YYYY-MM-DD)
-    const dateOnly = selectedDate.substring(0, 10);
+      // Extract only the date portion (YYYY-MM-DD)
+      const dateOnly = selectedDate.substring(0, 10);
 
-    setCounselorName(counselorName);
-    setAppointmentDate(dateOnly);
-    setAppointmentTime(selectedTime);
-    setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
+      setCounselorName(counselorName);
+      setAppointmentDate(dateOnly);
+      setAppointmentTime(selectedTime);
+      setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
 
-    setIsModalOpen(true);
+      setIsModalOpen(true);
 
-    // Store the selected date and time in localStorage
-    localStorage.setItem('appointmentDate', dateOnly);
-    localStorage.setItem('appointmentTime', selectedTime);
+      // Store the selected date and time in localStorage
+      localStorage.setItem('appointmentDate', dateOnly);
+      localStorage.setItem('appointmentTime', selectedTime);
 
-    setIsModalOpen(true);
-  }else {
+      setIsModalOpen(true);
+    } else {
       // Handle the case where the selected date is in the past
       setErrorMessage('Please select a valid time slot.');
       setErrorVisible(true);
-  }};
+    }
+  };
 
 
   const handleModalCancel = () => {
@@ -109,11 +109,9 @@ const [errorVisible, setErrorVisible] = useState(false);
   const handlePaymentSuccess = async (token) => {
     // Handle successful payment here
     console.log('Payment successful:', token);
-  
+
     try {
-      // Call the function to add the appointment to the backend
-      await addApoinmentBackend(selectedSlot);
-      
+
       // Add the new appointment to the events array
       const newAppointment = {
         id: events.length + 1,
@@ -121,9 +119,9 @@ const [errorVisible, setErrorVisible] = useState(false);
         start: selectedSlot.start,
         end: selectedSlot.end,
       };
-    
+
       setEvents([...events, newAppointment]);
-    
+
       // Close the modal and reset state as needed
       setSelectedSlot(null);
       setIsModalOpen(false);
@@ -138,7 +136,8 @@ const [errorVisible, setErrorVisible] = useState(false);
     // This will make the calendar focus on the selected date
   };
 
-  const addApoinmentBackend = async () => {
+
+  const addRequestToBackend = async () => {
     try {
       const authData = localStorage.getItem('authData');
       if (authData) {
@@ -158,19 +157,23 @@ const [errorVisible, setErrorVisible] = useState(false);
           userId: id,
           counsellorId: appCounsellorId,
           date: appointmentDate, // Correct format
-          timeSlot: appointmentTime, // Correct format
+          timeSlot: appointmentTime,
+          requested: 1,
+          accepted: 0, // Correct format
         };
 
         const response = await axios.post(
-          'http://localhost:8080/api/client/appointment/create-appointment',
+          'http://localhost:8080/api/client/appointment-requests/create-request',
           requestData,
           config
         );
 
         if (response.status === 200) {
-          console.log('Appointment created successfully');
+          console.log('Request created successfully');
+          setRequestStatusMessage('Request sent to the counselor. Please wait for acceptance.');
+          handleModalCancel();
         } else {
-          console.error('Error creating appointment');
+          console.error('Error creating request');
         }
       }
     } catch (error) {
@@ -216,16 +219,13 @@ const [errorVisible, setErrorVisible] = useState(false);
                 >
                   Cancel
                 </button>
-                {/* Stripe payment button */}
-                <StripeCheckout
-                  token={handlePaymentSuccess}
-                  name="Mind Talk"
-                  image={Logo}
-                  label="Pay Appointment Fee"
-                  currency="LKR"
-                  amount={200000} 
-                  stripeKey="pk_test_51Nrk0OSFDUE54MtAFhY0fKuF4xN7ecdMr9CIIp41qjbrKDGnYEvCc0TGgL0sgXDQ8CQ7Jg8wTRVal2GTo2OGRR1q00zw9XTipk"
-                />
+                <button
+                  type="button"
+                  className="px-3 py-1 bg-blue-500 text-white rounded"
+                  onClick={addRequestToBackend}
+                >
+                  Send Request
+                </button>
               </div>
             </div>
           </div>
@@ -246,10 +246,28 @@ const [errorVisible, setErrorVisible] = useState(false);
             </div>
           </div>
         )}
+        {requestStatusMessage && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded">
+              <h2 className="text-lg font-bold mb-2">Request Status</h2>
+              <p>{requestStatusMessage}</p>
+              <button
+                type="button"
+                className="px-3 py-1 bg-gray-300 rounded mt-2"
+                onClick={() => {
+                  setRequestStatusMessage('');
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
-  
+
 }
 
 export default AppointmentCalendar;

@@ -11,19 +11,13 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Data
 public class CounsellorAvailabilityDTO {
-    private Integer CounsellorId;
-    private LocalTime Mon_S;
-    private LocalTime Mon_E;
-    private LocalTime Tue_S;
-    private LocalTime Tue_E;
-    private LocalTime Wed_S;
-    private LocalTime Wed_E;
-    private LocalTime Thur_S;
-    private LocalTime Thur_E;
-    private LocalTime Fri_S;
-    private LocalTime Fri_E;
-    private LocalTime Sat_S;
-    private LocalTime Sat_E;
-    private LocalTime Sun_S;
-    private LocalTime Sun_E;
+    private Integer Id;
+    private Integer counsellorId;
+    private Integer Day;
+    private LocalTime Timeslot1_S;
+    private LocalTime Timeslot1_E;
+    private LocalTime Timeslot2_S;
+    private LocalTime Timeslot2_E;
+    private LocalTime Timeslot3_S;
+    private LocalTime Timeslot3_E;
 }

@@ -47,7 +47,7 @@ public class ClientController {
     }
 
     @GetMapping("/{user_id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://127.0.0.1:5173"}, allowCredentials = "true")
     public ResponseEntity<Client> getClientByUserId(@PathVariable Integer user_id) {
         Client client = clientService.getClientByUserId(user_id);
 
