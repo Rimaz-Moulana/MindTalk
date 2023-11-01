@@ -52,6 +52,87 @@ const ModeratorBlogs = () => {
   }, []);
 
   
+const acceptBlog = async (blogId) => {
+  try {
+    console.log(`Accepting blog with ID ${blogId}...`);
+    const authData = localStorage.getItem('authData');
+    
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      };
+
+      // Send a PUT request to update the blog's status to 1 (accepted).
+      const response = await axios.put(`http://localhost:8080/api/blogs/accept/${blogId}`, null, config);
+
+      if (response.status === 200) {
+        console.log(`Blog with ID ${blogId} has been accepted.`);
+        
+        // You may want to update the local blogData state to reflect the change in status.
+        // You can filter the current `blogData` array and update the status for the accepted blog.
+
+        // For example, you can do something like this:
+        setBlogData((prevBlogData) =>
+          prevBlogData.map((blog) =>
+            blog.id === blogId ? { ...blog, status: 1 } : blog
+          )
+        );
+      } else {
+        console.error("Failed to accept blog:", response.data);
+      }
+    }
+  } catch (error) {
+    console.error("Error accepting blog:", error);
+  }
+  };
+  
+  const rejectBlog = async (blogId) => {
+  try {
+    console.log(`Accepting blog with ID ${blogId}...`);
+    const authData = localStorage.getItem('authData');
+    
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true
+      };
+
+      // Send a PUT request to update the blog's status to 1 (accepted).
+      const response = await axios.put(`http://localhost:8080/api/blogs/reject/${blogId}`, null, config);
+
+      if (response.status === 200) {
+        console.log(`Blog with ID ${blogId} has been accepted.`);
+        
+        // You may want to update the local blogData state to reflect the change in status.
+        // You can filter the current `blogData` array and update the status for the accepted blog.
+
+        // For example, you can do something like this:
+        setBlogData((prevBlogData) =>
+          prevBlogData.map((blog) =>
+            blog.id === blogId ? { ...blog, status: 2 } : blog
+          )
+        );
+      } else {
+        console.error("Failed to accept blog:", response.data);
+      }
+    }
+  } catch (error) {
+    console.error("Error accepting blog:", error);
+  }
+};
+
+
 
 
 
