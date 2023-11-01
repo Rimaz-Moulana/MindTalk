@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { default as React, useEffect, useState } from 'react';
-import Slider from "react-slick";
-
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function ClientTherapySessionSuggestion() {
     const [sessions, setSessions] = useState([])
@@ -43,22 +41,13 @@ export default function ClientTherapySessionSuggestion() {
     },[ ])
 
 
-    const settings = {
-      dots: true, // Display navigation dots
-      infinite: true, // Loop the carousel
-      speed: 500, // Transition speed in milliseconds
-      slidesToShow: 2, // Number of slides to show at once
-      slidesToScroll: 1, // Number of slides to scroll at a time
-      autoplay: true, // Enable autoplay
-      autoplaySpeed: 1000,
-    };
     
   return (
-        <div className='w-3/4 m-auto'>
-            <div className='mt-2'>
-            <Slider {...settings}>
-                {sessions.map((d) => (
-                    <div  className='bg-white h-[270px] rounded-xl'>
+        // <div className='w-3/4 m-auto'>
+        //     <div className='mt-2'>
+            <Carousel showArrows={true} showStatus={false} showThumbs={false} autoPlay={true} infiniteLoop={true}>
+                {sessions.map((d,i) => (
+                    <div key={i}  className='bg-white h-[270px] rounded-xl'>
                         <div  className=' text-black rounded-t-xl flex flex-col justify-center items-center'>
                             <p className='text-xl font-semibold'>Session Type:{d.sessionType}</p>
                             <p>Session Time:{d.time}</p>
@@ -69,9 +58,9 @@ export default function ClientTherapySessionSuggestion() {
                         </div>
                     </div>
                 ))}
-                </Slider>
-            </div>
-        </div>
+                </Carousel>
+        //     </div>
+        // </div>
   )
 }
 
