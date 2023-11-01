@@ -9,13 +9,14 @@ const ClientCards = ({ clientList }) => {
     <div className='w-full mx-auto bg-white border border-gray-200 rounded-md shadow-lg overflow-x-auto'>
       <table className="w-full border-collapse table-auto">
         <tbody className='divide-y divide-gray-200'>
+          
           {clientList?.map((client, index) => (
             <tr key={clientList.userId}>
               <td className="p-4">
                 <img
                   alt="user"
                   className='w-20 h-20 mx-auto rounded-full'
-                  src={avatarPNG}
+                  src={client.profilePhotoPath ? `../../../src/assets/profilephotos/${client.profilePhotoPath}` : avatarPNG}
                   onError={(e) => {
                     e.target.src = avatarPNG;
                   }}
