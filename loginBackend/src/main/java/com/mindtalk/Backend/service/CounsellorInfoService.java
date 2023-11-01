@@ -155,4 +155,12 @@ public class CounsellorInfoService {
     // }
     // return false; //client not deleted
     // }
+
+    public Integer getCounsellorIdByUserId(Integer userId) {
+        // Implement the logic to retrieve the counsellorId based on userId
+        return counsellorRepository.findCounsellorIdByUserId(userId);
+    }
+    public Counsellor getCounsellorById(Long counsellorId) {
+        return counsellorRepository.findById(counsellorId).orElse(null);
+    }
 }

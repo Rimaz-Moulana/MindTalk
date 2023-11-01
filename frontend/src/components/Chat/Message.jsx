@@ -205,7 +205,7 @@ const ChatApp = () => {
                                 <p className="font-bold mb-1">{chat.counselorName}</p>
                                 <p className="mb-1"></p>
                             </div>
-                            <p className="text-sm text-gray-600">5 mins ago</p>
+                            {/* <p className="text-sm text-gray-600">5 mins ago</p> */}
                         </div>
                     ))}
                 </div>

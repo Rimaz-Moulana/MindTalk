@@ -128,7 +128,7 @@ public class CounsellorController {
     @GetMapping("/{counsellorId}/counsellorName")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> getCounsellById(@PathVariable("counsellorId") Long counsellorId) {
-        Counsellor counsellor = counsellorInfoService.getCounsellorById2(counsellorId);
+        Counsellor counsellor = counsellorInfoService.getCounsellorById(counsellorId);
         if (counsellor != null) {
             String fullName = counsellor.getFirstname() + " " + counsellor.getLastname();
             return ResponseEntity.ok(fullName);

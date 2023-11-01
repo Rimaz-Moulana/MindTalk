@@ -247,9 +247,9 @@ const CounsellorChat = () => {
                             </div>
                             <div className="flex-1">
                                 <p className="font-bold mb-1">{chat.userName}</p>
-                                <p className="mb-1">Well, you're doing a..</p>
+                                {/* <p className="mb-1">Well, you're doing a..</p> */}
                             </div>
-                            <p className="text-sm text-gray-600">5 mins ago</p>
+                            {/* <p className="text-sm text-gray-600">5 mins ago</p> */}
                         </div>
                     ))}
                 </div>
