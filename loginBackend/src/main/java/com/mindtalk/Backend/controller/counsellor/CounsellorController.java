@@ -168,23 +168,21 @@ public class CounsellorController {
 //        }
 //    }
 
-    // @PutMapping("/updateProfilePhoto/{user_id}")
-    // @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials =
-    // "true")
-    // public ResponseEntity<Counsellor> updateProfilePhoto(
-    // @PathVariable Integer user_id,
-    // @RequestPart(required = false) MultipartFile profilePhoto) {
-    //
-    // if (profilePhoto != null) {
-    // String updatedProfilePhotoPath =
-    // counsellorInfoService.updateProfilePhoto(user_id, profilePhoto);
-    // if (updatedProfilePhotoPath != null) {
-    // return ResponseEntity.ok(counsellorInfoService.getClientByUserId(user_id));
-    // }
-    // }
-    //
-    // return ResponseEntity.badRequest().build(); //Handle errors as needed
-    // }
+     @PutMapping("/updateProfilePhoto/{user_id}")
+     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+     public ResponseEntity<Counsellor> updateProfilePhoto(
+         @PathVariable Integer user_id,
+         @RequestPart(required = false) MultipartFile profilePhoto) {
+
+     if (profilePhoto != null) {
+         String updatedProfilePhotoPath = counsellorInfoService.updateProfilePhoto(user_id, profilePhoto);
+         if (updatedProfilePhotoPath != null) {
+            return ResponseEntity.ok(counsellorInfoService.getCounsellorByUserId(user_id));
+         }
+     }
+
+     return ResponseEntity.badRequest().build(); //Handle errors as needed
+     }
 
     // @DeleteMapping("/{counsellorId}")
     // @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials =
