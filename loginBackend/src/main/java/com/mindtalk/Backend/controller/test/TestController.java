@@ -2,7 +2,6 @@ package com.mindtalk.Backend.controller.test;
 
 import com.mindtalk.Backend.dto.test.TestDTO;
 import com.mindtalk.Backend.entity.Test;
-import com.mindtalk.Backend.service.EmailService;
 import com.mindtalk.Backend.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +18,7 @@ public class TestController {
     @Autowired
     private TestService testService;
 
-    @Autowired
-    private EmailService emailService;
+
 
     private final List<String> allowedOrigins;
 
@@ -41,7 +39,6 @@ public class TestController {
 
         String subject = "Test Results";
         String content = "Your test results have been saved successfully.";
-        emailService.sendEmail(userEmail, subject, content);
 
         return ResponseEntity.ok("Test results saved and email sent successfully");
     }
@@ -74,5 +71,11 @@ public class TestController {
         List<Test> testResults = testService.getTestResultsByUserIdsSorted(userIds);
         return ResponseEntity.ok(testResults);
     }
+
+//    @GetMapping("/sorted-latest-results/{userIds}")
+//    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+//        List<Test> testResults = testService.getRecentTestResultsByUserIds(userIds);
+//        return ResponseEntity.ok(testResults);
+//    }
 
 }

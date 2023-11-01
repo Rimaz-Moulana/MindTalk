@@ -29,23 +29,15 @@ public class CounsellorAvailabilityController {
         try {
             for (CounsellorAvailabilityDTO counsellorAvailabilityDTO : counsellorAvailabilityDTOList) {
                 Integer CounsellorId = counsellorAvailabilityDTO.getCounsellorId();
-                LocalTime Mon_S =counsellorAvailabilityDTO.getMon_S();
-                LocalTime Mon_E = counsellorAvailabilityDTO.getMon_E();
-                LocalTime Tue_S =counsellorAvailabilityDTO.getTue_S();
-                LocalTime Tue_E = counsellorAvailabilityDTO.getTue_E();
-                LocalTime Wed_S =counsellorAvailabilityDTO.getWed_S();
-                LocalTime Wed_E = counsellorAvailabilityDTO.getWed_E();
-                LocalTime Thur_S =counsellorAvailabilityDTO.getThur_S();
-                LocalTime Thur_E = counsellorAvailabilityDTO.getThur_E();
-                LocalTime Fri_S =counsellorAvailabilityDTO.getFri_S();
-                LocalTime Fri_E = counsellorAvailabilityDTO.getFri_E();
-                LocalTime Sat_S =counsellorAvailabilityDTO.getSat_S();
-                LocalTime Sat_E = counsellorAvailabilityDTO.getSat_E();
-                LocalTime Sun_S =counsellorAvailabilityDTO.getSun_S();
-                LocalTime Sun_E = counsellorAvailabilityDTO.getSun_E();
+                Integer Day = counsellorAvailabilityDTO.getDay();
+                LocalTime tiimeslot1_S=counsellorAvailabilityDTO.getTimeslot1_S();
+                LocalTime tiimeslot1_E=counsellorAvailabilityDTO.getTimeslot1_E();
+                LocalTime tiimeslot2_S=counsellorAvailabilityDTO.getTimeslot2_S();
+                LocalTime tiimeslot2_E=counsellorAvailabilityDTO.getTimeslot2_E();
+                LocalTime tiimeslot3_S=counsellorAvailabilityDTO.getTimeslot3_S();
+                LocalTime tiimeslot3_E=counsellorAvailabilityDTO.getTimeslot3_E();
 
-                counsellorAvailabilityService.addAvailabilityDays(CounsellorId, Mon_S, Mon_E, Tue_S, Tue_E,Wed_S,Wed_E,
-                        Thur_S,Thur_E,Fri_S,Fri_E,Sat_S,Sat_E,Sun_S,Sun_E);
+                counsellorAvailabilityService.addAvailabilityDays(CounsellorId,Day,tiimeslot1_S,tiimeslot1_E,tiimeslot2_S,tiimeslot2_E,tiimeslot3_S,tiimeslot3_E);
             }
 
             return ResponseEntity.ok("Availability Slots added successfully");

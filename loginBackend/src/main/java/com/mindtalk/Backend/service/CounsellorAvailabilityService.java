@@ -8,7 +8,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -20,25 +19,16 @@ public class CounsellorAvailabilityService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void addAvailabilityDays(Integer CounsellorId, LocalTime Mon_S, LocalTime Mon_E, LocalTime Tue_S, LocalTime Tue_E,LocalTime Wed_S,
-                                    LocalTime Wed_E,LocalTime Thur_S, LocalTime Thur_E, LocalTime Fri_S, LocalTime Fri_E,
-                                    LocalTime Sat_S, LocalTime Sat_E,LocalTime Sun_S, LocalTime Sun_E) {
+    public void addAvailabilityDays(Integer CounsellorId, Integer Day, LocalTime timeslot1_S, LocalTime timeslot1_E,LocalTime timeslot2_S,LocalTime timeslot2_E,LocalTime timeslot3_S,LocalTime timeslot3_E) {
         CounsellorAvailability counsellorAvailability = new CounsellorAvailability();
         counsellorAvailability.setCounsellorId(CounsellorId);
-        counsellorAvailability.setMon_S(Mon_S);
-        counsellorAvailability.setMon_E(Mon_E);
-        counsellorAvailability.setTue_S(Tue_S);
-        counsellorAvailability.setTue_E(Tue_E);
-        counsellorAvailability.setWed_S(Wed_S);
-        counsellorAvailability.setWed_E(Wed_E);
-        counsellorAvailability.setThur_S(Thur_S);
-        counsellorAvailability.setThur_E(Thur_E);
-        counsellorAvailability.setFri_S(Fri_S);
-        counsellorAvailability.setFri_E(Fri_E);
-        counsellorAvailability.setSat_S(Sat_S);
-        counsellorAvailability.setSat_E(Sat_E);
-        counsellorAvailability.setSun_S(Sun_S);
-        counsellorAvailability.setSun_E(Sun_E);
+        counsellorAvailability.setDay(Day);
+        counsellorAvailability.getTimeslot1_S();
+        counsellorAvailability.getTimeslot1_E();
+        counsellorAvailability.getTimeslot2_S();
+        counsellorAvailability.getTimeslot2_E();
+        counsellorAvailability.getTimeslot3_S();
+        counsellorAvailability.getTimeslot3_E();
         counsellorAvailabilityRepository.save(counsellorAvailability);
     }
 

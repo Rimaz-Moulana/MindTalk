@@ -40,7 +40,8 @@ const ClientProfileHistory = ({ testDataList }) => {
     date: '',
     duration: '',
     note: ''
-  });
+  })
+  ;
 
   const handleDateChange = (e) => {
   // Parse the selected date
@@ -154,7 +155,8 @@ const ClientProfileHistory = ({ testDataList }) => {
           };
 
           const response = await axios.get(
-            `http://localhost:8080/api/client/notesByClientAndCounsellor/${id}/${counsellorId}`,
+            `http://localhost:8080/api/client/notesByClientAndCounsellor/${id}/9856`,
+            // `http://localhost:8080/api/client/notesByClientAndCounsellor/${id}/${counsellorId}`
             config
           );
 

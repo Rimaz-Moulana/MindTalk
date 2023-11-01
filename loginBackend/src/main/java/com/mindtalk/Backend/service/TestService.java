@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,5 +54,18 @@ public class TestService {
         Sort sortByTimestampDesc = Sort.by(Sort.Order.desc("timestamp"));
         return testRepository.findByUserIdIn(userIds, sortByTimestampDesc);
     }
+
+//    public List<Test> getRecentTestResultsByUserIds(List<Integer> userIds) {
+//        List<Test> recentTestResults = new ArrayList<>();
+//        for (Integer userId : userIds) {
+//            List<Test> userTestResults = testRepository.findByUserIdOrderByTimestampDesc(userId);
+//            if (userTestResults.size() >= 2) {
+//                recentTestResults.add(userTestResults.get(0)); // Most recent test result
+//                recentTestResults.add(userTestResults.get(1)); // Second most recent test result
+//            }
+//        }
+//        return recentTestResults;
+//    }
+
 
 }

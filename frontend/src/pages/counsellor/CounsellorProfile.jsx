@@ -89,7 +89,8 @@ const CounsellorProfile = () => {
             experience: userData.experience,
             ageGroup: userData.ageGroup,
             language: userData.language,
-            joinDate: userData.joinDate
+            joinDate: userData.joinDate,
+            profilePhotoPath: userData.profilePhotoPath,
           });
         }
       }
@@ -224,7 +225,7 @@ const CounsellorProfile = () => {
         };
   
         const response = await axios.put(
-          `http://localhost:8080/api/v1/counsellor/${id}/updateProfilePhoto`,
+          `http://localhost:8080/api/counsellor/details/updateProfilePhoto/${id}`,
           formData,
           config
         );
@@ -577,9 +578,9 @@ const CounsellorProfile = () => {
                 <i className="mr-2 text-lg fas fa-map-marker-alt text-blueGray-400"></i>
                 Los Angeles, California
               </div> */}
-              <div className='flex items-center justify-center mt-2'>
+              {/* <div className='flex items-center justify-center mt-2'>
                 <IconComponent />
-              </div>
+              </div> */}
               {/* <div className="mt-8 mb-2 italic fas fa-briefcase text- text-blueGray-600">
                 Solution Manager - Creative Team Officer
               </div>
