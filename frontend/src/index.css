@@ -194,3 +194,7 @@ background-color: #3B82F6;
   position: absolute;
   top: 0;
  }
+
+ .slick-slide > div {
+  margin: 0 10px;
+ }

@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 @Data
 public class ClientDTO {
+    private int userId;
     private String fName;
     private String lName;
     private String dob;

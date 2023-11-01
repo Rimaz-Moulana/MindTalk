@@ -1,18 +1,32 @@
-// import React from 'react';
-import { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 export default function RequestTable() {
     // const [showModal, setShowModal] = React.useState(false);
     
     // data from the database will store here
     const data = JSON.parse(localStorage.getItem("detailsData"));
+    console.log(data)
+    const [tableData,setTableData] = useState([]);
 
+    const loadDataFromLocalStorage = () => {
+        if(data){
+            setTableData(data);
+        }
+    }
+
+    console.log(tableData);
+
+    useEffect(() => {
+        loadDataFromLocalStorage();
+    },[]);
+    
+    
+    console.log(tableData)
     const [date,setDate] = useState('');
     const [isHovered,setIsHovered] = useState(false);
-    
-     console.log(data.length)
-    console.log(data[0].licenseImage);
-    
+    //  console.log(data.length)
+    // console.log(data[0].licenseImage);
         for(let i = 0;i < data.length ; i++)
         {
         console.log(data[i].licenseImage);
@@ -40,17 +54,57 @@ export default function RequestTable() {
         const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 
         setDate(formattedDate);
-
-
-    })
+    }, [])
     
+//    const handleSubmit = () => {
+//     console.log(`Sending email to: ${data.email}`)
+//    }
 
-    // const removeItem = ()=>{
-    //     const updateArray =
-    // }
+   const deleteRow = (index) => {
+    const updatedSessionData = [...tableData];
+    updatedSessionData.splice(index,1);
+    setTableData(updatedSessionData);
+    localStorage.setItem('tableData', JSON.stringify(updatedSessionData));
+   }
 
-   
+   const handleSubmit= async (index) =>{
+    const confirmed = window.confirm("Are you sure you want to accept this Counsellor?");
+    if(confirmed){
+        try{
+            const authData = localStorage.getItem('authData');
+            if(authData){
+                const {accessToken} = JSON.parse(authData);
     
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    withCredentials : true,
+                }
+                console.log(config);
+    
+            const rowResult = tableData[index];
+            console.log(rowResult)
+            const result = await axios.post("http://localhost:8080/api/counsellor/details/add",rowResult, config);
+            console.log("successfully added",result.data);
+            }
+            
+            
+        }
+        catch(error){
+            console.error('this ids the error:',error);
+        }
+    }
+
+    // const selectedSession = tableData[index];
+
+    const updatedSessions = [...tableData];
+    updatedSessions.splice(index, 1);
+    localStorage.setItem('therapySessions', JSON.stringify(updatedSessions));
+    setTableData(updatedSessions);
+}
+
     //     const Requests = [
     //     {
     //         id: 1,
@@ -116,14 +170,14 @@ export default function RequestTable() {
                                     </th>
                                 </tr>
                             </thead>
-                            {data ? (
+                            {/* {data ? ( */}
                             <tbody>
-                                {data.map((request,index) => (
+                                {tableData.map((request,index) => (
                                     <tr
+                                        key={index}
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}
-                                        key={index}
-                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50 hover:bg-neutral-300"
+                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50"
                                     >
                                         <td className="whitespace-nowrap px-1 py-1 font-medium">
                                             <img src='../../../src/assets/dp.png' alt="" className="w-10 h-10 rounded-full" />
@@ -152,8 +206,8 @@ export default function RequestTable() {
                                         )}
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">
-                                            <button className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
-                                            <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
+                                            <button onClick={() => handleSubmit(index)} className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>Accept</button>
+                                            <button onClick={() => deleteRow(index)} className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 ml-2 px-4 rounded'>Decline</button>
                                         </td>
                                         {/* <td className="whitespace-nowrap px-6 py-4">
                                             
@@ -161,10 +215,10 @@ export default function RequestTable() {
                                     </tr>
                                 ))}
                             </tbody>
-                            ):<div>
-                                <h1 className="text-xl font-semibold ml-1 mt-48 ml-14">Counsellors Added details not yet!</h1>
+                            {/* ):<div>
+                                <h1 className="text-xl font-semibold ml-1 mt-48">Counsellors Added details not yet!</h1>
                             </div>
-                            }
+                            } */}
                         </table>
                     </div>
                 </div>

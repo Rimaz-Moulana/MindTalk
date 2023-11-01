@@ -89,6 +89,10 @@ public class ClientService {
         return clientRepo.findAll();
     }
 
+//    public List<Client> getAllClientByCounsellor(){
+//        return clientRepo.findAllbyCounsellor();
+//    }
+
     public Client updateClient(Integer user_id, ClientDTO clientDTO){
         Client existingClient = clientRepo.findByUserId(user_id).orElse(null);
 

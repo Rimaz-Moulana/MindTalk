@@ -2,7 +2,9 @@ package com.mindtalk.Backend.controller.client;
 
 import com.mindtalk.Backend.dto.ClientDTO;
 import com.mindtalk.Backend.entity.Client;
+import com.mindtalk.Backend.entity.User;
 import com.mindtalk.Backend.service.ClientService;
+import com.mindtalk.Backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +24,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private UserService userService;
 
     @Operation(
             description = "Get endpoint for client",
@@ -124,4 +129,19 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    //get username by id
+    @GetMapping("/{user_id}/username")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<String> getUsernameByUserId(@PathVariable Integer user_id) {
+        String username = userService.getUsernameByUserId(user_id);
+
+        if (username != null) {
+            return ResponseEntity.ok(username);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
 }

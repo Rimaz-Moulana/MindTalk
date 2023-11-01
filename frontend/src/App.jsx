@@ -54,6 +54,7 @@ import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import ModeratorBlogView from './pages/moderator/ModeratorBlogView'
 
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
@@ -64,6 +65,11 @@ import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
 import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
+import CounsellorChat from './components/Chat/counsellorMessage'
+import BlogsCounsellor from './pages/BlogsCounsellor'
+import BlogViewCounsellor from './pages/BlogViewCounsellor'
+import PostBlogModerator from './pages/moderator/PostBlogModerator'
+import PostBlogCounsellor from './pages/PostBlogCounsellor'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -115,8 +121,6 @@ const App = () => (
                         </Route>
                     </Route>
 
-                  
-
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                         <Route element={<AdminLayout />}>
                             {' '}
@@ -136,8 +140,9 @@ const App = () => (
                             {' '}
                             {/* Wrap the layout */}
                             <Route index element={<CounsellorHome />} />
+                            <Route path="message" element={<CounsellorChat />} />
                             {/* <Route path="l" element={<CounsellorHome />} /> */}
-                            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+                            <Route path="counsellorprofile/:id" element={<CounsellorProfile />} />
                             <Route path="counsellorclients" element={<CounsellorClients />} />
                             {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
                             <Route path="view-client/:id" element={<CounsellorClientProfile />} />
@@ -145,18 +150,19 @@ const App = () => (
                             <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
                             <Route path="bookedslots" element={<DateSlotSelector />} />
-                            <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/postblog" element={<PostBlog />} />
+                            <Route path="blogscounsellor" element={<BlogsCounsellor />} />
+                            <Route path="blogs/blogview/:id" element={<BlogViewCounsellor />} />
+                            <Route path="blogscounsellor/postblogcounsellor" element={<PostBlogCounsellor />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
                         </Route>
 
                         <Route path="wallet" element={<WalletLayout />}>
-                        <Route  element={<CounsellorWallet />} />
-                        <Route index element={<CounsellorWallet />} />
-                        <Route path="transhistory" element={<TransHistory />} />
-                        <Route />
-                    </Route>
+                            <Route element={<CounsellorWallet />} />
+                            <Route index element={<CounsellorWallet />} />
+                            <Route path="transhistory" element={<TransHistory />} />
+                            <Route />
+                        </Route>
                     </Route>
 
                     <Route path="/moderator" element={<RequireAuth allowedRoles={[ROLES.Moderator]} />}>
@@ -170,6 +176,8 @@ const App = () => (
                             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
                             <Route path="add-meditation/:id" element={<AddMeditation />} />
                             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
+                            <Route path="moderatorblogs/moderatorblogview/:id" element={<ModeratorBlogView />} />
+                            <Route path="moderatorblogs/postblogmoderator" element={<PostBlogModerator />} />
                             <Route path="addtherapysession" element={<AddTherapySession />} />
                         </Route>
                     </Route>

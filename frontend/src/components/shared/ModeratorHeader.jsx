@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { Popover, Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { FiBell } from 'react-icons/fi';
+import { FiBell, FiLogOut } from 'react-icons/fi';
 import dp from '../../assets/dp.png'
 
 const notificationList = [
@@ -64,9 +64,10 @@ export default function ModeratorHeader() {
                 <div>
                     <Menu.Button className="ml-2 inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-blue-700">
                         <span className='sr-only'>open user menu</span>
-                        <div className='h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center' >
-                            <img src={dp} alt="avatar" className='w-18 h-18 rounded-full' />
-                            <span className='sr-only'> Hugh jackman</span>
+                        <div className='h-10 w-10 rounded-full bg-cover bg-no-repeat bg-center' >
+                            {/* <img src={dp} alt="avatar" className='w-18 h-18 rounded-full' />
+                            <span className='sr-only'> Hugh jackman</span> */}
+                            <FiLogOut className="w-10 h-10 rounded-full bg-cover bg-no-repeat bg-center" />
                         </div>
                     </Menu.Button>
                 </div>
@@ -80,7 +81,7 @@ export default function ModeratorHeader() {
                     leaveTo="transform opacity-0 scale-95"
                     >
                     <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-sm shadow-md p-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
+                        {/* <Menu.Item>
                             {({ active }) => (
                                 <div className={classNames(
                                     active && 'bg-gray-100',
@@ -90,7 +91,7 @@ export default function ModeratorHeader() {
                                     Your Profile 
                                 </div>
                             )}
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item>
                             {({ active }) => (
                                 <div className={classNames(

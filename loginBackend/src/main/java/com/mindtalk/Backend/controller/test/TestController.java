@@ -41,4 +41,40 @@ public class TestController {
 
         return ResponseEntity.ok("Test results saved and email sent successfully");
     }
+
+//    @GetMapping("/{user_id}")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+//    public ResponseEntity<Test> getTestByUserId(@PathVariable Integer user_id){
+//        Test test = testService.getTestByUserId(user_id);
+//
+//        if (test != null) {
+//            return ResponseEntity.ok(test);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
+    @GetMapping("/all/{user_id}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<List<Test>> getTestsResultsByUserId(@PathVariable Integer user_id){
+        List<Test> allTestsResults = testService.getTestsResultsByUserId(user_id);
+
+        if (!allTestsResults.isEmpty()) {
+            return ResponseEntity.ok(allTestsResults);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/sorted-results/{userIds}")
+    public ResponseEntity<List<Test>> getTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+        List<Test> testResults = testService.getTestResultsByUserIdsSorted(userIds);
+        return ResponseEntity.ok(testResults);
+    }
+
+//    @GetMapping("/sorted-latest-results/{userIds}")
+//    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+//        List<Test> testResults = testService.getRecentTestResultsByUserIds(userIds);
+//        return ResponseEntity.ok(testResults);
+//    }
+
 }

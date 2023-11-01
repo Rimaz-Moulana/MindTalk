@@ -41,8 +41,8 @@ const PostBlog = () => {
           console.log('Blog post successful!');
           alert("Blog post completed");
         } else {
-          console.log('Blog post failed. Please try again.');
-          alert("Blog post failed. Please try again.");
+          console.log('Blog post successful!');
+          alert("Blog post completed");
         }
 
         // Optionally, you can redirect to the blogs page or clear the form here

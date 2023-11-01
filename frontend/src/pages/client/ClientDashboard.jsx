@@ -3,6 +3,7 @@ import ClientdashCards from '../../components/ClientDashboard/ClientdashCards';
 import ClientCalender from '../../components/ClientDashboard/ClientCalender';
 import ClientHead from '../../components/ClientDashboard/ClientHead';
 import AuthContext from '../../context/AuthProvider';
+import ClientTherapySessionSuggestion from './ClientTherapySessionSuggestion';
 import StepperWithContent from '../../components/ClientDashboard/StepperWithContent';
 
 const ClientDashboard = () => {
@@ -35,6 +36,9 @@ const ClientDashboard = () => {
             <ClientCalender />
           </div>
         </div>
+      </div>
+      <div className="flex flex-wrap gap-4">
+        <ClientTherapySessionSuggestion />
       </div>
     </div>
   );

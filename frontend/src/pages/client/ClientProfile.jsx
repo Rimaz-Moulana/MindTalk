@@ -92,6 +92,7 @@ const Profile = () => {
               city: userData.city,
               district: userData.district,
               zip: userData.zip,
+              profilePhotoPath: userData.profilePhotoPath,
               //emergency contacts
               emName1: userData.emName1,
               emName2: userData.emName2,
@@ -100,10 +101,44 @@ const Profile = () => {
               emPhone2: userData.emPhone2,
               emPhone3: userData.emPhone3
             });
+        } else if (response.status === 404) {
+            // If the client does not exist, create a new client
+            createClient();
+        }
+      } 
+    }catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const createClient = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+
+        // Create a new client using the ID and default data
+        const response = await axios.post(
+          `http://localhost:8080/api/v1/client`,
+          { id },
+          config
+        );
+
+        if (response.status === 201) {
+          // Client created successfully
+          // You can optionally fetch the client data again to populate the user state
+          fetchProfileData();
         }
       }
     } catch (error) {
-        console.error('Error fetching user data:', error);
+      console.error('Error creating client:', error);
     }
   };
 
@@ -209,53 +244,53 @@ const Profile = () => {
   };
 
   const uploadProfilePhoto = async (e) => {
-    e.preventDefault();
-  
-    if (!profilePhoto) {
-      // Handle error if no photo is selected
-      toast.error('Please select a profile photo.');
-      return;
-    }
-  
-    try {
-      const formData = new FormData();
-      formData.append('profilePhoto', profilePhoto);
-  
-      const authData = localStorage.getItem('authData');
-      if (authData) {
-        const { accessToken } = JSON.parse(authData);
-        const config = {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'multipart/form-data', 
-          },
-          withCredentials: true,
-        };
-  
-        const response = await axios.put(
-          `http://localhost:8080/api/v1/client/${id}/updateProfilePhoto`,
-          formData,
-          config
-        );
-  
-        if (response.status === 200) {
-          toast.success('Profile photo uploaded successfully!', {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-        } else {
-          toast.error('Error uploading profile photo. Please try again later.');
-        }
+  e.preventDefault();
+
+  if (!profilePhoto) {
+    // Handle error if no photo is selected
+    console.error('No photo selected for upload.');
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append('profilePhoto', profilePhoto);
+
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/client/${id}/updateProfilePhoto`,
+        formData,
+        config
+      );
+
+      if (response.status === 200) {
+        toast.success('Profile photo uploaded successfully!', {
+          // Handle success
+        });
+      } else {
+        toast.error('Error uploading profile photo. Please try again later.', {
+          // Handle other errors
+        });
       }
-    } catch (error) {
-      console.error('Error uploading profile photo:', error);
-      toast.error('Error uploading profile photo. Please try again later.');
     }
-  };
+  } catch (error) {
+    console.error('Error uploading profile photo:', error);
+    toast.error('Error uploading profile photo. Please try again later.', {
+      // Handle error response
+    });
+  }
+};
+
   
   return (
     <div className="flex grid flex-col-reverse w-full gap-4 md:grid-cols-4">
@@ -637,6 +672,7 @@ const Profile = () => {
           handleProfilePhotoChange={handleProfilePhotoChange}
           uploadProfilePhoto={uploadProfilePhoto}
           profilePhoto={profilePhoto}
+          profilePhotoPath={user.profilePhotoPath}
         />
         <FileUpload />
         

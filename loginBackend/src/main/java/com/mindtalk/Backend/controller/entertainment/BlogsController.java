@@ -87,4 +87,28 @@ public class BlogsController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/accept/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> acceptBlog(
+            @PathVariable Integer blogsId) {
+        BlogsEntity acceptedBlog = blogsService.acceptBlog(blogsId);
+        if (acceptedBlog != null) {
+            return ResponseEntity.ok(acceptedBlog);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/reject/{blogsId}")
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<BlogsEntity> rejectBlog(
+            @PathVariable Integer blogsId) {
+        BlogsEntity rejectedBlog = blogsService.rejectBlog(blogsId);
+        if (rejectedBlog != null) {
+            return ResponseEntity.ok(rejectedBlog);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ClientNoteDTO {
 
+    private int clientId;
     private String date;
     private String duration;
     private String note;
+    private int counsellorId;
 }
