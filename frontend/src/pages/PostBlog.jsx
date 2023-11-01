@@ -43,10 +43,10 @@ const PostBlog = () => {
 
         if (response.status === 202) {
           console.log('Blog post successful!');
-          alert("Blog post completed");
+          alert("Blog post successful! The moderator will check and accept the blog to post");
         } else {
           console.log('Blog post successful!');
-          alert("Blog post completed");
+          alert("Blog post successful! The moderator will check and accept the blog to post");
         }
 
         // Optionally, you can redirect to the blogs page or clear the form here
