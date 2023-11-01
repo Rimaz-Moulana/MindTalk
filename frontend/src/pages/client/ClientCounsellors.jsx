@@ -28,7 +28,8 @@ const Contacts = () => {
         const fetchedCounselors = response.data.map(counsellor => ({
           id: counsellor.id,
           user_id: counsellor.userId,
-          dp: counsellor.license_image,
+          // dp: counsellor.license_image,
+          profilePhotoPath: counsellor.profilePhotoPath,
           name: `${counsellor.firstname} ${counsellor.lastname}`
         }))
 

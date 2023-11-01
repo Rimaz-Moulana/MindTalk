@@ -37,7 +37,12 @@ const ContactCards = ({ contactList }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {filteredContacts.map((contact) => {
           // Log the image path to the console
-          console.log("Image Path:", contact.license_image);
+          console.log("Image Path:", contact.profilePhotoPath);
+
+          // Assign contact.profilePhotoPath to imagePath
+          const imagePath = contact.profilePhotoPath
+            ? `../../../src/assets/profilephotos/${contact.profilePhotoPath}`
+            : avatarPNG;
 
           return (
             <div key={contact.id} className="bg-white rounded-lg shadow-md pt-7 pb-7">
@@ -45,10 +50,10 @@ const ContactCards = ({ contactList }) => {
                 <img
                   alt="user"
                   className="w-32 h-32 rounded-full mx-auto"
-                  src={contact.license_image || avatarPNG} // Use the default avatar image for all contacts
-                  onError={(e) => {
-                    e.target.src = avatarPNG;
-                  }}
+                  src={imagePath} // Use the default avatar image for all contacts
+                  // onError={(e) => {
+                  //   e.target.src = avatarPNG;
+                  // }}
                 />
                 <figcaption className="text-center mt-5 flex-wrap">
                   <p className="text-gray-700 font-semibold text-xl mb-2">
