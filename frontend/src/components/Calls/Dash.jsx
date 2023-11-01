@@ -17,21 +17,25 @@ const Dash = () => {
 
         
     });
+    const counselorName = localStorage.getItem('appcounsellorName'); // Assuming 'appcounsellorName' is the key in local storage
 
+    const storedUserData = JSON.parse(localStorage.getItem('authData'));
+    const storedUsername = storedUserData?.username || '';
     const dummyContent = [
-        {
-          title: 'Kaveesha',
-          description: 'The appointment is scheduled at 9:30am.',
-        },
-        {
-          title: 'Michelle',
-          description: 'The appointment is scheduled at 9:30am.',
-        },
-        {
-          title: 'Nikeetha',
-          description: 'The appointment is scheduled at 9:30am.',
-        },
-      ];
+      {
+        title: `${storedUsername},`,
+        description: `Now you have an appointment with counsellor ${counselorName}`,
+      }
+      // {
+      //   title: 'Michelle',
+      //   description: `Now you have an appointment with ${counselorName}`,
+      // },
+      // {
+      //   title: 'Nikeetha',
+      //   description: `Now you have an appointment with ${counselorName}`,
+      // },
+    ];
+    
 
       const filterMeditationBySearch = (keyword) => {
         setSearchKeyword(keyword);
@@ -129,7 +133,7 @@ const Dash = () => {
       </div>
     </div>
     <div className='flex justify-center '>
-    <Profile/>
+  
 
     </div>
    

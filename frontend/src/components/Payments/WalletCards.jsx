@@ -100,8 +100,8 @@ export default function WalletCards() {
                     }`}
                 onClick={() => handleCardClick(3)}
             >
-     npm install --save @progress/kendo-react-layout @progress/kendo-react-dropdowns
-           <div className={`bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40 flex flex-col justify-between ${activeCard === 3 ? 'text-blue-500' : 'text-black'
+
+                <div className={`bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40 flex flex-col justify-between ${activeCard === 3 ? 'text-blue-500' : 'text-black'
                     }`}>
                     <div className="icon-container relative">
                         <FiHome className="icon text-3xl" />
