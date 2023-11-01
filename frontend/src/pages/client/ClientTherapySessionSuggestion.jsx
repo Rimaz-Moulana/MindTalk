@@ -47,11 +47,11 @@ export default function ClientTherapySessionSuggestion() {
       infinite: true,
       speed: 500,
       slidesToShow: 3,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      autoplay: true
     };
     
   return (
-    <>
         <div className='w-3/4 m-auto'>
             <div className='mt-2'>
             <Slider {...settings}>
@@ -71,9 +71,5 @@ export default function ClientTherapySessionSuggestion() {
                 </Slider>
             </div>
         </div>
-
-
-
-    </>
   )
 }
