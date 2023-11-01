@@ -40,7 +40,8 @@ const ClientProfileHistory = ({ testDataList }) => {
     date: '',
     duration: '',
     note: ''
-  });
+  })
+  ;
 
   const handleDateChange = (e) => {
   // Parse the selected date
