@@ -101,10 +101,44 @@ const Profile = () => {
               emPhone2: userData.emPhone2,
               emPhone3: userData.emPhone3
             });
+        } else if (response.status === 404) {
+            // If the client does not exist, create a new client
+            createClient();
+        }
+      } 
+    }catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const createClient = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+
+        // Create a new client using the ID and default data
+        const response = await axios.post(
+          `http://localhost:8080/api/v1/client`,
+          { id },
+          config
+        );
+
+        if (response.status === 201) {
+          // Client created successfully
+          // You can optionally fetch the client data again to populate the user state
+          fetchProfileData();
         }
       }
     } catch (error) {
-        console.error('Error fetching user data:', error);
+      console.error('Error creating client:', error);
     }
   };
 

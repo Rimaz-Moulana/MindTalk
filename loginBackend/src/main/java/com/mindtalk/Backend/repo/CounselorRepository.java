@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface CounselorRepository extends JpaRepository<Counsellor, Long> {
-    @Query("SELECT c.id FROM Counsellor c WHERE c.user.id = :userId")
+    @Query("SELECT c.id FROM Counsellor c WHERE c.userId = :userId")
     Integer findCounsellorIdByUserId(@Param("userId") Integer userId);
 
     public Optional<Counsellor> findByUserId(Integer user_id);
