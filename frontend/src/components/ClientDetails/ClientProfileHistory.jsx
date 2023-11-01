@@ -122,8 +122,9 @@ const ClientProfileHistory = ({ testDataList }) => {
           console.log("Note added successfully");
           alert("Note added successfully");
         }
+        
 
-        window.location.href = '../CounsellorClients';
+        window.location.href = 'CounsellorClientProfile';
         setNotes({ date: '', duration: '', note: '' });
       }
     } catch (error) {
