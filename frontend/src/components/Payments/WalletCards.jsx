@@ -39,10 +39,10 @@ export default function WalletCards() {
                     setMonthlyBalance(Monthlyresponse.data);
 
                     const Withdrawresponse = await axios.get(`http://localhost:8080/api/v1/withdraws/sumWithdraws/${id}`,
-                    config
-                );
-                console.log('API Response:', Withdrawresponse.data);
-                setWithdraw(Withdrawresponse.data);
+                        config
+                    );
+                    console.log('API Response:', Withdrawresponse.data);
+                    setWithdraw(Withdrawresponse.data);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -100,7 +100,8 @@ export default function WalletCards() {
                     }`}
                 onClick={() => handleCardClick(3)}
             >
-                <div className={`bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40 flex flex-col justify-between ${activeCard === 3 ? 'text-blue-500' : 'text-black'
+     npm install --save @progress/kendo-react-layout @progress/kendo-react-dropdowns
+           <div className={`bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40 flex flex-col justify-between ${activeCard === 3 ? 'text-blue-500' : 'text-black'
                     }`}>
                     <div className="icon-container relative">
                         <FiHome className="icon text-3xl" />
@@ -108,8 +109,9 @@ export default function WalletCards() {
                     <div className="content mt-4 flex flex-col justify-end">
                         <p className="text-s">Monthly income</p>
                         <p className="font-bold text-2xl">
-                            {monthlyBalance !== undefined && monthlyBalance !== null ? `Rs.${monthlyBalance.toFixed(2)}` : 'Loading...'}
+                            {typeof monthlyBalance === 'number' ? `Rs.${monthlyBalance.toFixed(2)}` : 'Loading...'}
                         </p>
+
                     </div>
                 </div>
             </div>
