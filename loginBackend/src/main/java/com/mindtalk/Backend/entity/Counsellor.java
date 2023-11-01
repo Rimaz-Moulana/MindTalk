@@ -16,6 +16,7 @@ public class Counsellor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Integer userId;
     private String firstname;
     private String lastname;
@@ -36,6 +37,8 @@ public class Counsellor {
     private String language;
     private String joinDate;
     private Boolean status;
+    @Column(name = "profile_photo_path")
+    private String profilePhotoPath;
 
 //    @OneToOne
 //    @JoinColumn(name = "user_id")

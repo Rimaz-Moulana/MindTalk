@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +29,5 @@ public class CounsellorDTO {
     private String ageGroup;
     private String language;
     private String joinDate;
+    private MultipartFile profilePhoto;
 }
