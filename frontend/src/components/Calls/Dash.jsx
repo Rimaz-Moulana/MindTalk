@@ -88,16 +88,16 @@ const Dash = () => {
             </select>
         </div> */}
 
-        <div className='ml-8'>
+        {/* <div className='ml-8'>
             <label className="pr-2 flex my-3 ml-8">Search by Description:</label>
             <input
               type="text"
-            //   value={searchKeyword}
-            //   onChange={(e) => filterMeditationBySearch(e.target.value)}
+              value={searchKeyword}
+              onChange={(e) => filterMeditationBySearch(e.target.value)}
               className="w-40 border border-gray-300 rounded-md py-1 px-3"
               placeholder="Search..."
             />
-          </div>
+          </div> */}
         </div>
 
 
