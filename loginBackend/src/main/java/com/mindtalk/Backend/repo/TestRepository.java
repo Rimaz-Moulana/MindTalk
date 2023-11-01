@@ -17,4 +17,9 @@ public interface TestRepository extends JpaRepository<Test, Integer> {
 
     List<Test> findByUserIdIn(List<Integer> userIds, Sort sort);
 
+    List<Test> findTop2ByUserIdAndIdNotOrderByTimestampDesc(Integer userId, Integer newTestId);
+
+    List<Test> findTop2ByUserIdOrderByTimestampDesc(Integer userId);
+
+
 }
