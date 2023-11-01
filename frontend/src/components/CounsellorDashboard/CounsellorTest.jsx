@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios' // Import the axios library
+import chatUserPNG from '../../assets/Chat/chatUser.png'
 
 export default function CounsellorTest() {
     const [counsellorId, setCounsellorId] = useState(null)
@@ -101,6 +102,31 @@ export default function CounsellorTest() {
                     // Set testResults and potentially sort it here
                     setTestResults(processedTestResults)
                     console.log('Test Results:', processedTestResults)
+
+                    const resultToDisplay = []
+                    for (let i = 0; i < processedTestResults.length; i += 2) {
+                        if (i + 1 < processedTestResults.length) {
+                            const result1 = processedTestResults[i]
+                            const result2 = processedTestResults[i + 1]
+
+                            const status =
+                                result1.score < result2.score
+                                    ? 'Improved'
+                                    : result1.score > result2.score
+                                    ? 'Worsned'
+                                    : 'No change'
+
+                            resultToDisplay.push({
+                                id: result2.id,
+                                userName: result2.userName || 'Unknown',
+                                date: result2.date,
+                                score: result2.score,
+                                status: status
+                            })
+                        }
+                    }
+                    setTestResults(resultToDisplay)
+                    console.log('Result to display', resultToDisplay)
                 }
             }
         } catch (error) {
@@ -164,6 +190,7 @@ export default function CounsellorTest() {
             return null
         }
     }
+
     useEffect(() => {
         ;(async () => {
             const authData = JSON.parse(localStorage.getItem('authData'))
@@ -205,16 +232,19 @@ export default function CounsellorTest() {
                                 {testResults.map((item) => (
                                     <tr
                                         key={item.id}
-                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50 hover:bg-neutral-300"
+                                        className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-50 hover:bg-neutral-300 py-1"
                                     >
-                                        <td className="whitespace-nowrap px-6 py-4 font-medium">
+                                        {/* <td className="whitespace-nowrap px-6 py-4 font-medium">
                                             <div className="flex items-center">
                                                 <img src={item.avatar} alt="" className="w-10 h-10 rounded-full" />
                                             </div>
+                                        </td> */}
+                                        <td>
+                                            <img src={chatUserPNG} alt="avatar" className="w-12 h-12 rounded-full" />
                                         </td>
                                         <td className="whitespace-nowrap px-6 py-4">{item.userName}</td>
                                         <td className="whitespace-nowrap px-6 py-4">{item.date}</td>
-                                        <td className="whitespace-nowrap px-6 py-4">{item.score}</td>
+                                        <td className="whitespace-nowrap px-6 py-4">{item.status}</td>
                                     </tr>
                                 ))}
                             </tbody>
