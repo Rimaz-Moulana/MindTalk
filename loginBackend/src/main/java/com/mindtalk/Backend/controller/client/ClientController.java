@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,13 @@ public class ClientController {
     @Autowired
     private UserService userService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public ClientController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @Operation(
             description = "Get endpoint for client",
             summary = "This is a summary for client get endpoint",
@@ -45,14 +53,14 @@ public class ClientController {
     )
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Client> createClient(@RequestBody ClientDTO clientDTO) {
         Client createdClient = clientService.createClient(clientDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdClient);
     }
 
     @GetMapping("/{user_id}")
-    @CrossOrigin(origins = {"http://localhost:5173", "http://127.0.0.1:5173"}, allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Client> getClientByUserId(@PathVariable Integer user_id) {
         Client client = clientService.getClientByUserId(user_id);
 
@@ -64,7 +72,7 @@ public class ClientController {
     }
 
     @GetMapping("/{user_id}/profilePhotoPath")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer user_id) {
         String profilePhotoPath = clientService.getProfilePhotoPathByUserId(user_id);
 
@@ -76,7 +84,7 @@ public class ClientController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Client>> getAllClient() {
         List<Client> allClient = clientService.getAllClient();
 
@@ -88,7 +96,7 @@ public class ClientController {
     }
 
     @PutMapping("/{user_id}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Client> updateClient(
             @PathVariable Integer user_id,
             @RequestBody ClientDTO clientDTO) {
@@ -102,7 +110,7 @@ public class ClientController {
     }
 
     @PutMapping("/{user_id}/updateProfilePhoto")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Client> updateProfilePhoto(
             @PathVariable Integer user_id,
             @RequestPart(required = false) MultipartFile profilePhoto) {
@@ -119,7 +127,7 @@ public class ClientController {
 
 
     @DeleteMapping("/{clientId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Void> deleteClient(@PathVariable Integer clientId){
         boolean isDeleted = clientService.deleteClient(clientId);
 

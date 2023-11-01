@@ -5,6 +5,7 @@ import com.mindtalk.Backend.entity.Client;
 import com.mindtalk.Backend.entity.entertainment.BlogsEntity;
 import com.mindtalk.Backend.service.entertainment.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +20,22 @@ public class BlogsController {
     @Autowired
     private BlogsService blogsService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public BlogsController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> createBlogs(@RequestBody BlogsDTO blogsDTO){
         BlogsEntity createdBlogs = blogsService.createBlogs(blogsDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBlogs);
     }
 
     @GetMapping("/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> getBlogsById(@PathVariable Integer blogsId){
         BlogsEntity blogs = blogsService.getBlogsById(blogsId);
 
@@ -39,7 +47,7 @@ public class BlogsController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<BlogsEntity>> getAllBlogs(){
         List<BlogsEntity> allBlogs = blogsService.getAllBlogs();
 
@@ -51,7 +59,7 @@ public class BlogsController {
     }
 
     @PutMapping("/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> updateBlogs(
             @PathVariable Integer blogsId,
             @RequestBody BlogsDTO blogsDTO){
@@ -65,7 +73,7 @@ public class BlogsController {
     }
 
     @PutMapping("/remove/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> removeBlogs(
             @PathVariable Integer blogsId,
             @RequestBody BlogsDTO blogsDTO){
@@ -79,7 +87,7 @@ public class BlogsController {
     }
 
     @DeleteMapping("/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> deleteBlogs(@PathVariable Integer blogsId){
         boolean isDeleted = blogsService.deleteBlogs(blogsId);
 
@@ -91,7 +99,7 @@ public class BlogsController {
     }
 
     @PutMapping("/accept/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> acceptBlog(
             @PathVariable Integer blogsId) {
         BlogsEntity acceptedBlog = blogsService.acceptBlog(blogsId);
@@ -103,7 +111,7 @@ public class BlogsController {
     }
 
     @PutMapping("/reject/{blogsId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> rejectBlog(
             @PathVariable Integer blogsId) {
         BlogsEntity rejectedBlog = blogsService.rejectBlog(blogsId);
@@ -115,7 +123,7 @@ public class BlogsController {
     }
 
     @GetMapping("/{blogsId}/coverImagePath")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<String> getCoverImagePath(@PathVariable Integer blogsId, MultipartFile coverImage) {
         String coverImagePath = blogsService.uploadBlogCoverImage(blogsId, coverImage);
 
@@ -127,7 +135,7 @@ public class BlogsController {
     }
 
     @PutMapping("/{blogsId}/updateProfilePhoto")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<BlogsEntity> updateProfilePhoto(
             @PathVariable Integer blogsId,
             @RequestPart(required = false) MultipartFile coverImage) {

@@ -50,26 +50,27 @@ import ClientCounsellorAppointments from './pages/client/ClientCounsellorAppoint
 import CounsellorDetailsAdd from './pages/counsellor/CounsellorDetailsAdd'
 import CounsellorRegForm from './pages/counsellor/CounsellorRegForm'
 import RegisterClient from './pages/counsellor/CounsellorRegisterClient'
+import ModeratorBlogView from './pages/moderator/ModeratorBlogView'
 import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
-import ModeratorBlogView from './pages/moderator/ModeratorBlogView'
 
 import Dash from './components/Calls/Dash'
+import CounsellorChat from './components/Chat/counsellorMessage'
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import RequireAuth from './components/LoginSignup/RequireAuth'
 import GoogleSheetData from './components/ModeratorDashboard/CounsellorDetails'
 import AddMeditation from './components/moderator/AddMeditation'
 import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
+import BlogViewCounsellor from './pages/BlogViewCounsellor'
+import BlogsCounsellor from './pages/BlogsCounsellor'
+import PostBlogCounsellor from './pages/PostBlogCounsellor'
+import ClientTherapySessionSuggestion from './pages/client/ClientTherapySessionSuggestion'
 import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
-import CounsellorChat from './components/Chat/counsellorMessage'
-import BlogsCounsellor from './pages/BlogsCounsellor'
-import BlogViewCounsellor from './pages/BlogViewCounsellor'
 import PostBlogModerator from './pages/moderator/PostBlogModerator'
-import PostBlogCounsellor from './pages/PostBlogCounsellor'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -79,8 +80,7 @@ const ROLES = {
 }
 
 const App = () => (
-    <>
-        <AuthProvider>
+    <AuthProvider>
             <Router>
                 <Routes>
                     {/* Routes that don't require authentication */}
@@ -95,13 +95,14 @@ const App = () => (
                     <Route path="/addDetails" element={<CounsellorDetailsAdd />} />
                     <Route path="/addcounsellordetails" element={<FormComponent />} />
                     <Route path="/counsellordetails" element={<GoogleSheetData />} />
+                    <Route path="/carosal" element={<ClientTherapySessionSuggestion />} />
 
                     {/* <Route path="/table" element={<TableData />}  /> */}
                     {/* Routes that require authentication */}
 
                     <Route path="/client" element={<RequireAuth allowedRoles={[ROLES.Client]} />}>
                         <Route element={<ClientLayout />}>
-                            {' '}
+                            {/* {' '} */}
                             {/* Wrap the layout */}
                             <Route index element={<ClientDashboard />} />
                             <Route path="message" element={<ChatApp />} />
@@ -192,7 +193,6 @@ const App = () => (
                 </Routes>
             </Router>
         </AuthProvider>
-    </>
 )
 
 export default App

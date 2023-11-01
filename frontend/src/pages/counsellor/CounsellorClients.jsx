@@ -40,7 +40,8 @@ const Clients = () => {
 
         const fetchedClients = response.data.map(client => ({
           id: client.userId,
-          name: `${client.fname} ${client.lname}`
+          name: `${client.fname} ${client.lname}`,
+          profilePhotoPath: client.profilePhotoPath
         }))
         
         setClients(fetchedClients);

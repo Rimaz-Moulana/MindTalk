@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Popover, Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
@@ -32,6 +32,64 @@ export default function Header({id}) {
         }
     };
     
+    useEffect(() => {
+        fetchProfileData();
+      }, [id]);
+
+      const fetchProfileData = async () => {
+        try{
+          console.log("clinet id", id);
+          const authData = localStorage.getItem('authData');
+          if (authData) {
+            const { accessToken } = JSON.parse(authData);
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            };
+    
+            const response = await axios.get(`http://localhost:8080/api/v1/client/${id}`, config);
+    
+            if (response.status === 200) {
+                const userData = response.data;
+                setUser({
+                  fname: userData.fname,
+                  lname: userData.lname ,
+                  dob: userData.dob,
+                  gender: userData.gender,
+                  email: userData.email,
+                  phone: userData.phone,
+                  address: userData.address,
+                  city: userData.city,
+                  district: userData.district,
+                  zip: userData.zip,
+                  profilePhotoPath: userData.profilePhotoPath,
+                  //emergency contacts
+                  emName1: userData.emName1,
+                  emName2: userData.emName2,
+                  emName3: userData.emName3,
+                  emPhone1: userData.emPhone1,
+                  emPhone2: userData.emPhone2,
+                  emPhone3: userData.emPhone3
+                });
+            } 
+          } 
+
+        }catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+
+    // Assign user.profilePhotoPath to imagePath
+    // const imagePath = user.profilePhotoPath
+    // ? '../../../src/assets/profilephotos/${user.profilePhotoPath}'
+    // : dp;
+
+     // Assign user.profilePhotoPath to imagePath
+    const imagePath = user ? `../../../src/assets/profilephotos/${user.profilePhotoPath}` : dp;
+
 
   return (
     <div className='top-0 z-50 w-full bg-white'>
@@ -83,7 +141,7 @@ export default function Header({id}) {
                         <Menu.Button className="inline-flex ml-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-700">
                             <span className='sr-only'>open user menu</span>
                             <div className='w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full bg-sky-500' >
-                                <img src={dp} alt="avatar" className='rounded-full w-18 h-18' />
+                                <img src={imagePath} alt="avatar" className='rounded-full w-18 h-18' />
                                 <span className='sr-only'> Hugh jackman</span>
                             </div>
                         </Menu.Button>

@@ -23,6 +23,7 @@ function AppointmentCalendar() {
 
   useEffect(() => {
     fetchAppointments();
+    fetchBooked();
   }, []);
 
   const fetchAppointments = async () => {
@@ -106,35 +107,6 @@ function AppointmentCalendar() {
     setIsModalOpen(false);
   };
 
-  const handlePaymentSuccess = async (token) => {
-    // Handle successful payment here
-    console.log('Payment successful:', token);
-
-    try {
-
-      // Add the new appointment to the events array
-      const newAppointment = {
-        id: events.length + 1,
-        title: 'Appointment',
-        start: selectedSlot.start,
-        end: selectedSlot.end,
-      };
-
-      setEvents([...events, newAppointment]);
-
-      // Close the modal and reset state as needed
-      setSelectedSlot(null);
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-    }
-  };
-
-  const setViewDate = (date) => {
-    // Implement this function to change the calendar view and navigate to the selected date
-    // For example, you can use the defaultDate prop of Calendar component
-    // This will make the calendar focus on the selected date
-  };
 
 
   const addRequestToBackend = async () => {
@@ -180,7 +152,50 @@ function AppointmentCalendar() {
       console.error('An error occurred:', error);
     }
   };
-
+  const fetchBooked = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const appCounsellorId = localStorage.getItem('appcounsellorId');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/external-booked/get-booked-slots/${appCounsellorId}`,
+          config
+        );
+  
+        if (response.status === 200) {
+          const bookedSlots = response.data;
+  
+          // Convert the booked slots data into events
+          const bookedEvents = bookedSlots.map((slot) => {
+            const start = moment(slot.date + 'T' + slot.startTime);
+            const end = moment(slot.date + 'T' + slot.endTime);
+            return {
+              id: slot.bookedId,
+              title: 'Not Available', // You can customize the title
+              start: start.toDate(),
+              end: end.toDate(),
+            };
+          });
+  
+          // Merge the booked events with existing events
+          const allEvents = [...events, ...bookedEvents];
+  
+          setEvents(allEvents);
+        }
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+  
 
   return (
     <div className="h-screen">
