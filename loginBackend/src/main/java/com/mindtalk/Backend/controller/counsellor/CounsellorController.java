@@ -82,20 +82,17 @@ public class CounsellorController {
         }
     }
 
-    // @GetMapping("/profilePhotoPath/{user_id}")
-    // @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials =
-    // "true")
-    // public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer
-    // user_id) {
-    // String profilePhotoPath =
-    // counsellorInfoService.getProfilePhotoPathByUserId(user_id);
-    //
-    // if (profilePhotoPath != null) {
-    // return ResponseEntity.ok(profilePhotoPath);
-    // } else {
-    // return ResponseEntity.notFound().build();
-    // }
-    // }
+     @GetMapping("/profilePhotoPath/{user_id}")
+     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+     public ResponseEntity<String> getProfilePhotoPath(@PathVariable Integer user_id) {
+        String profilePhotoPath = counsellorInfoService.getProfilePhotoPathByUserId(user_id);
+
+     if (profilePhotoPath != null) {
+     return ResponseEntity.ok(profilePhotoPath);
+     } else {
+     return ResponseEntity.notFound().build();
+     }
+     }
 
     @GetMapping("/allCounsellor")
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")

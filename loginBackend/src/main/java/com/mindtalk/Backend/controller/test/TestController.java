@@ -75,10 +75,10 @@ public class TestController {
         return ResponseEntity.ok(testResults);
     }
 
-    @GetMapping("/sorted-latest-results/{userIds}")
-    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
-        List<Test> testResults = testService.getRecentTestResultsByUserIds(userIds);
-        return ResponseEntity.ok(testResults);
-    }
+//    @GetMapping("/sorted-latest-results/{userIds}")
+//    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+//        List<Test> testResults = testService.getRecentTestResultsByUserIds(userIds);
+//        return ResponseEntity.ok(testResults);
+//    }
 
 }

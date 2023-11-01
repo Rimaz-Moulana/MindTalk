@@ -55,17 +55,17 @@ public class TestService {
         return testRepository.findByUserIdIn(userIds, sortByTimestampDesc);
     }
 
-    public List<Test> getRecentTestResultsByUserIds(List<Integer> userIds) {
-        List<Test> recentTestResults = new ArrayList<>();
-        for (Integer userId : userIds) {
-            List<Test> userTestResults = testRepository.findByUserIdOrderByTimestampDesc(userId);
-            if (userTestResults.size() >= 2) {
-                recentTestResults.add(userTestResults.get(0)); // Most recent test result
-                recentTestResults.add(userTestResults.get(1)); // Second most recent test result
-            }
-        }
-        return recentTestResults;
-    }
+//    public List<Test> getRecentTestResultsByUserIds(List<Integer> userIds) {
+//        List<Test> recentTestResults = new ArrayList<>();
+//        for (Integer userId : userIds) {
+//            List<Test> userTestResults = testRepository.findByUserIdOrderByTimestampDesc(userId);
+//            if (userTestResults.size() >= 2) {
+//                recentTestResults.add(userTestResults.get(0)); // Most recent test result
+//                recentTestResults.add(userTestResults.get(1)); // Second most recent test result
+//            }
+//        }
+//        return recentTestResults;
+//    }
 
 
 }
