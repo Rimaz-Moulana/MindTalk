@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Dash.css'; // Import the CSS file for additional styling (if needed)
 import videoCallPNG from '../../assets/videocall.png'
+import Profile from '../../pages/client/Feedback';
 
 
 const Dash = () => {
@@ -64,6 +65,7 @@ const Dash = () => {
     //};
 
     return (
+      <>
         <div className="dashboard-container flex justify-center items-start h-screen bg-gray-100 py-2 w-full">
              
       <div className="text-center">
@@ -126,6 +128,12 @@ const Dash = () => {
      
       </div>
     </div>
+    <div className='flex justify-center '>
+    <Profile/>
+
+    </div>
+   
+    </>
         
     );
 }
