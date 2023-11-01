@@ -4,6 +4,7 @@ import com.mindtalk.Backend.dto.entertainment.MusicDTO;
 import com.mindtalk.Backend.entity.entertainment.Music;
 import com.mindtalk.Backend.service.entertainment.MusicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,22 @@ public class MusicController {
     @Autowired
     private MusicService musicService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public MusicController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Music> createMusic(@RequestBody MusicDTO musicDTO){
         Music createdMusic = musicService.createMusic(musicDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMusic);
     }
 
     @GetMapping("/{musicId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Music> getMusicById(@PathVariable Integer musicId){
         Music music = musicService.getMusicById(musicId);
 
@@ -38,7 +46,7 @@ public class MusicController {
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Music>> getAllMusic(){
         List<Music> allMusic = musicService.getAllMusic();
 
@@ -50,7 +58,7 @@ public class MusicController {
     }
 
     @PutMapping("/{musicId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Music> updateMusic(
             @PathVariable Integer musicId,
             @RequestBody MusicDTO musicDTO){
@@ -64,7 +72,7 @@ public class MusicController {
     }
 
 //    @PutMapping("/remove/{musicId}")
-//    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
 //    public  ResponseEntity<Music> removeMusic(
 //            @PathVariable Integer musicId,
 //            @RequestBody MusicDTO musicDTO) {
@@ -78,7 +86,7 @@ public class MusicController {
 //    }
 
     @DeleteMapping("/{musicId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Void> deleteMusic(@PathVariable Integer musicId){
         boolean isUpdated = musicService.deleteMusic(musicId);
 

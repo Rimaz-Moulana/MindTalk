@@ -7,13 +7,14 @@ import com.mindtalk.Backend.dto.entertainment.MeditationDTO;
 import com.mindtalk.Backend.entity.entertainment.Meditation;
 import com.mindtalk.Backend.service.entertainment.MeditationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("api/testing/meditation")
 public class MeditationController {
@@ -21,15 +22,22 @@ public class MeditationController {
     @Autowired
     private MeditationService meditationService;
 
+    private final List<String> allowedOrigins;
+
+    @Autowired
+    public MeditationController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
+        this.allowedOrigins = allowedOrigins;
+    }
+
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Meditation> createMeditation(@RequestBody MeditationDTO meditationDTO){
         Meditation createdMeditation = meditationService.createMeditation(meditationDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMeditation);
     }
 
     @GetMapping("/all")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Meditation>> getAllMeditation(){
         List<Meditation> allMeditation = meditationService.getAllMeditation();
 
@@ -41,7 +49,7 @@ public class MeditationController {
     }
 
     @GetMapping("/{meditationId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Meditation> getMeditationById(@PathVariable Integer meditationId){
         Meditation meditation = meditationService.getMeditationById(meditationId);
 
@@ -53,7 +61,7 @@ public class MeditationController {
     }
 
     @PutMapping("/{meditationId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Meditation> updateMeditation(
             @PathVariable Integer meditationId,
             @RequestBody MeditationDTO meditationDTO){
@@ -67,7 +75,7 @@ public class MeditationController {
     }
 
     @DeleteMapping("/{meditationId}")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<Void> deleteMeditation(@PathVariable Integer meditationId){
         boolean isDeleted = meditationService.deleteMeditation(meditationId);
 

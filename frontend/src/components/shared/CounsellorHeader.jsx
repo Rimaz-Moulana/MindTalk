@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Popover, Transition, Menu } from '@headlessui/react';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +31,62 @@ export default function CounsellorHeader({id}) {
             // Handle any error that might occur during the logout process
         }
     };
+
+    useEffect(() => {
+        fetchProfileData();
+      }, [id]);
+
+      const fetchProfileData = async () => {
+        try{
+          console.log(id);
+          const authData = localStorage.getItem('authData');
+          if (authData) {
+            const { accessToken } = JSON.parse(authData);
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            };
+    
+            const response = await axios.get(`http://localhost:8080/api/counsellor/details/getCounsellor/${id}`, config);
+    
+            if (response.status === 200) {
+              const userData = response.data;
+              setUser({
+                firstname: userData.firstname,
+                lastname: userData.lastname,
+                about: userData.about,
+                email: userData.email,
+                city: userData.city,
+                address: userData.address,
+                phone: userData.phone,
+                jobRole: userData.jobRole,
+                degree: userData.degree,
+                workplace: userData.workplace,
+                coreServices: userData.coreServices,
+                scopeOfPractice: userData.scopeOfPractice,
+                experience: userData.experience,
+                ageGroup: userData.ageGroup,
+                language: userData.language,
+                joinDate: userData.joinDate,
+                profilePhotoPath: userData.profilePhotoPath,
+              });
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching counsellor profile:', error);
+        }
+      };
+
+    // Assign user.profilePhotoPath to imagePath
+    // const imagePath = user.profilePhotoPath
+    // ? '../../../src/assets/profilephotos/${user.profilePhotoPath}'
+    // : dp;
+
+     // Assign user.profilePhotoPath to imagePath
+    const imagePath = user ? `../../../src/assets/profilephotos/${user.profilePhotoPath}` : dp;
     
   return (
     <div className='top-0 z-50 w-full bg-white'>
@@ -82,7 +138,7 @@ export default function CounsellorHeader({id}) {
                     <Menu.Button className="inline-flex ml-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-700">
                         <span className='sr-only'>open user menu</span>
                         <div className='w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full bg-sky-500' >
-                            <img src={dp} alt="avatar" className='rounded-full w-18 h-18' />
+                            <img src={imagePath} alt="avatar" className='rounded-full w-18 h-18' />
                             <span className='sr-only'> Hugh jackman</span>
                         </div>
                     </Menu.Button>

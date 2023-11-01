@@ -75,6 +75,7 @@ export default function ClientCounsellorProfile() {
             ageGroup: counsellorData.ageGroup,
             language: counsellorData.language,
             joinDate: counsellorData.joinDate,
+            profilePhotoPath: counsellorData.profilePhotoPath,
           });
         }
       }
