@@ -12,6 +12,7 @@ const PostBlog = () => {
     title: '',
     category: '', // This should match the backend DTO
     content: '',
+    coverImage: null,
   });
 
   const saveBlog = async (e) => {

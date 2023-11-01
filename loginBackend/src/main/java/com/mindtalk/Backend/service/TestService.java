@@ -55,6 +55,21 @@ public class TestService {
         return testRepository.findByUserIdIn(userIds, sortByTimestampDesc);
     }
 
+    public List<Test> getLastTwoTestResultsForUser(List<Integer> userIds) {
+        List<Test> latestTestResults = new ArrayList<>();
+
+        for (Integer userId : userIds) {
+            List<Test> userTestResults = testRepository.findTop2ByUserIdOrderByTimestampDesc(userId);
+
+            // Add the latest two test results for the user to the result list
+            latestTestResults.addAll(userTestResults);
+        }
+
+        return latestTestResults;
+    }
+
+
+
 //    public List<Test> getRecentTestResultsByUserIds(List<Integer> userIds) {
 //        List<Test> recentTestResults = new ArrayList<>();
 //        for (Integer userId : userIds) {
