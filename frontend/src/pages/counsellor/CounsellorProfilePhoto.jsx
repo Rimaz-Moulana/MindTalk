@@ -7,9 +7,10 @@ import { useParams } from 'react-router-dom';
 const CounsellorProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto, profilePhotoPath }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const { id } = useParams();
-  const imagePath = profilePhotoPath ? '../../assets/profilephoto/' + profilePhotoPath : dp;
+  const imagePath = profilePhotoPath ? '../../../src/assets/profilephotos/' + profilePhotoPath : dp;
+  //const imagePath = '../../../src/assets/profilephotos/' + profilePhotoPath ;
 
-  console.log("profile photo path passed:", profilePhotoPath)
+  console.log("profile photo path passed: gg", profilePhotoPath)
 
   useEffect(() => {
     fetchPhotoData();
@@ -29,7 +30,7 @@ const CounsellorProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto, 
           withCredentials: true
         };
 
-        const response = await axios.get(`http://localhost:8080/api/v1/client/${id}/profilePhotoPath`, config);
+        const response = await axios.get(`http://localhost:8080/api/counsellor/details/profilePhotoPath/${id}`, config);
 
         if (response.status === 200){
           const photoData = response.data;

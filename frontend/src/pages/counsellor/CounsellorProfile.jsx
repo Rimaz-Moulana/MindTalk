@@ -89,7 +89,8 @@ const CounsellorProfile = () => {
             experience: userData.experience,
             ageGroup: userData.ageGroup,
             language: userData.language,
-            joinDate: userData.joinDate
+            joinDate: userData.joinDate,
+            profilePhotoPath: userData.profilePhotoPath,
           });
         }
       }
@@ -224,7 +225,7 @@ const CounsellorProfile = () => {
         };
   
         const response = await axios.put(
-          `http://localhost:8080/api/v1/counsellor/${id}/updateProfilePhoto`,
+          `http://localhost:8080/api/counsellor/details/updateProfilePhoto/${id}`,
           formData,
           config
         );

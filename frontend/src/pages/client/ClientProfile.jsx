@@ -9,7 +9,6 @@ import { ToastContainer } from 'react-toastify';
 import ProfilePhoto from './ClientProfilePhoto';
 import FileUpload from './ClientProfileFIle';
 
-
 const Profile = () => {
   const { id } = useParams();
 
