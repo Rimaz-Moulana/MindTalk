@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 const ProfilePhoto = ({ handleProfilePhotoChange, uploadProfilePhoto, profilePhotoPath }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const { id } = useParams();
-  const imagePath = profilePhotoPath ? '../../assets/profilephoto/' + profilePhotoPath : dp;
+  const imagePath = profilePhotoPath ? '../../../src/assets/profilephotos/' + profilePhotoPath : dp;
 
   console.log("profile photo path passed:", profilePhotoPath)
 
