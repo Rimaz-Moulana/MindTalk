@@ -23,7 +23,7 @@ const ClientDashboard = () => {
     <div className="flex flex-col gap-4 w-full">
       <ClientHead username={username || auth.username} />
       <div className="flex flex-wrap gap-4">
-        <ClientdashCards />
+       
       </div>
       <div className="flex flex-wrap gap-4">
         <div className="flex-1 max-w-md">

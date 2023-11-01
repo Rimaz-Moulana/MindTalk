@@ -73,4 +73,26 @@ public class AppointmentsController {
     public List<ClientDTO> getClientInfoForCounsellor(@PathVariable Integer counsellorId) {
         return appointmentService.getClientInfoForCounsellor(counsellorId);
     }
+
+    @GetMapping("/get-latest-appointment/{userId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<AppointmentDTO> getLatestAppointmentForUser(@PathVariable Integer userId) {
+        AppointmentDTO latestAppointment = appointmentService.getLatestAppointmentForUser(userId);
+        if (latestAppointment != null) {
+            return ResponseEntity.ok(latestAppointment);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("/get-latest-appointed-counsellor/{userId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public Integer getLatestAppointmentCounsellor(@PathVariable Integer userId) {
+        AppointmentDTO latestAppointment = appointmentService.getLatestAppointmentForUser(userId);
+        if (latestAppointment != null) {
+            return latestAppointment.getCounsellorId();
+        } else {
+            return null;
+        }
+    }
+
 }

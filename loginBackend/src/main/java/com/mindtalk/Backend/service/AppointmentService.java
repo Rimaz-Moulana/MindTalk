@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -152,4 +153,20 @@ public class AppointmentService {
         }
     }
 
+    public AppointmentDTO getLatestAppointmentForUser(Integer userId) {
+        // Fetch the most recent appointment for the user
+        Optional<Appointments> latestAppointmentOptional = appointmentRepository.findTop1ByUserIdOrderByAppointmentDateDescTimeSlotDesc(userId);
+
+        if (latestAppointmentOptional.isPresent()) {
+            // Extract the Appointment from the Optional
+            Appointments latestAppointment = latestAppointmentOptional.get();
+
+            // Map the Appointment to an AppointmentDTO
+            AppointmentDTO appointmentDTO = modelMapper.map(latestAppointment, AppointmentDTO.class);
+            return appointmentDTO;
+        } else {
+            // Handle the case where no appointment was found for the user
+            return null; // or throw an exception, return a default value, etc.
+        }
+    }
 }

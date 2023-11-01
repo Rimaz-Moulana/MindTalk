@@ -33,14 +33,8 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         icon: <FiPhone />
     },
     {
-        key: 'availability',
-        label: ' Weekly Availability',
-        path: '/counsellor/availability',
-        icon: <FiActivity />
-    },
-    {
         key: 'bookedslots',
-        label: ' Booked Slots',
+        label: ' Not Availability',
         path: '/counsellor/bookedslots',
         icon: <FiCheckCircle />
     },

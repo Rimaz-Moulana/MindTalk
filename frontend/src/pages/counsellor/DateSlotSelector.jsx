@@ -49,8 +49,8 @@ const DateSlotSelector = () => {
         const slotsData = selectedSlots.map((slot) => ({
           counsellorId: id,
           date: slot.date,
-          startTime: slot.startTime,
-          endTime: slot.endTime,
+          startTime: `${slot.startTime < 10 ? '0' : ''}${slot.startTime}:00`, // Format as "HH:mm:00"
+          endTime: `${slot.endTime < 10 ? '0' : ''}${slot.endTime}:00`,   
         }));
 
         const response = await axios.post(
@@ -75,7 +75,7 @@ const DateSlotSelector = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4 text-center">Add Externally Booked Slots</h2>
+      <h2 className="text-xl font-semibold mb-4 text-center">Add Not Available Slots</h2>
       <div className="mb-4 flex items-center space-x-4">
         <label className="block font-semibold mb-2">Select Date:</label>
         <input
@@ -88,16 +88,22 @@ const DateSlotSelector = () => {
       <div className="mb-4 flex items-center space-x-4">
         <label className="block font-semibold mb-2">Select Time:</label>
         <input
-          type="time"
+          type="number"
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
+          min="7"
+          max="13"
+          step="1" // Allow only whole numbers
           className="border rounded-md p-2"
         />
         <span className="mx-2">to</span>
         <input
-          type="time"
+          type="number"
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
+          min="8"
+          max="13"
+          step="1" // Allow only whole numbers
           className="border rounded-md p-2"
         />
       </div>
@@ -114,7 +120,7 @@ const DateSlotSelector = () => {
             {selectedSlots.map((slot, index) => (
               <li key={index} className="flex justify-between">
                 <span>
-                  {slot.date} | {slot.startTime} to {slot.endTime}
+                  {slot.date} | {slot.startTime}:00 to {slot.endTime}:00
                 </span>
                 <button
                   className="text-red-500 hover:text-red-700"
