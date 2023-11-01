@@ -51,6 +51,9 @@ const Blogs = () => {
     fetchBlogData();
   }, []);
 
+
+  
+
   return (
     <div className='w-full py-8 bg-slate-50 rounded-xl'>
       <div className='mx-10 mb-8 text-center'>
