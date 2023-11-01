@@ -161,7 +161,7 @@ import avatarPNG from '../../assets/Chat/chatUser.png';
 // }
 
 function ClientProfileCard({ clientData }) {
-  const { fname, lname, email, phone, city, emName1, emName2, emName3, emPhone1, emPhone2, emPhone3} = clientData;
+  const { profilePhotoPath, fname, lname, email, phone, city, emName1, emName2, emName3, emPhone1, emPhone2, emPhone3} = clientData;
 
   return (
     <div>
@@ -169,7 +169,7 @@ function ClientProfileCard({ clientData }) {
       <img
             alt="client"
             className='w-28 h-28 rounded-full mx-auto'
-            src= {avatarPNG}
+            src={profilePhotoPath ? `../../../src/assets/profilephotos/${profilePhotoPath}` : avatarPNG}
           />
         <figcaption className='text-center mt-5 flex-wrap'>
           <p className='text-gray-700 font-semibold text-xl mb-2'>
