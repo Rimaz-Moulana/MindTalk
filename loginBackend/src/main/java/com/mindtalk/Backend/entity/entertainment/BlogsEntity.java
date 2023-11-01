@@ -17,7 +17,10 @@ public class BlogsEntity {
     private int id;
     private String title;
     private String category;
+    @Column(length = 10000000)
     private String content;
+    @Column(name = "cover_image_path")
+    private String CoverImagePath;
     @Column(columnDefinition = "INT DEFAULT 0")
     private int status;
 }

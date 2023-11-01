@@ -99,24 +99,22 @@ const AddMusic = () => {
 
                 if (id === '-1') {
                     await addMusicBackend(updatedMusic, config);
-                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 } else {
                     await updateMusicBackend(updatedMusic, config);
-                    setUpdateSuccess(true); // Set updateSuccess to true upon success
                 }
-                //window.location.href = '/moderator/moderatormusic';
+                window.location.href = '/moderator/moderatormusic';
             }
         } catch (error) {
             console.error('Error saving music:', error);
             // alert('Error updating user information. Please try again later.'); // Alert for update failure
-            toast.error('Error updating user information. Please try again later.', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            // toast.error('Error updating user information. Please try again later.', {
+            //     position: 'top-right',
+            //     autoClose: 3000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            // });
         }
     };
 
@@ -212,26 +210,26 @@ const AddMusic = () => {
             } else {
                 console.error('Error updating music');
                 // alert('Error updating user information. Please try again later.'); // Alert for update failure
-                toast.error('Error updating user information. Please try again later.', {
-                    position: 'top-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                });
+                // toast.error('Error updating user information. Please try again later.', {
+                //     position: 'top-right',
+                //     autoClose: 3000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                // });
             }
         } catch (error) {
             console.error('An error occurred:', error);
              // alert('Error updating user information. Please try again later.'); // Alert for update failure
-            toast.error('Error updating user information. Please try again later.', {
-                position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+            // toast.error('Error updating user information. Please try again later.', {
+            //     position: 'top-right',
+            //     autoClose: 3000,
+            //     hideProgressBar: false,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            // });
         }
     };
 
@@ -259,7 +257,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Title"
                             name="title"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.title}
                             onChange={handleInputChange}
                         />
@@ -268,7 +266,7 @@ const AddMusic = () => {
                         <label className="block text-sm font-medium text-gray-600">Category:</label>
                         <select
                             name="category"
-                            className="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-select mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.category}
                             onChange={handleInputChange}
                         >
@@ -285,7 +283,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Description"
                             name="description"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.description}
                             onChange={handleInputChange}
                         />
@@ -295,7 +293,7 @@ const AddMusic = () => {
                         <input
                             placeholder="Link"
                             name="link"
-                            className="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            className="form-input mt-1 block w-full rounded-md px-4 py-2 border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             value={music.link}
                             onChange={handleInputChange}
                         />
@@ -316,14 +314,14 @@ const AddMusic = () => {
                     </div>
                 </form>
             </div>
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 hideProgressBar={false}
                 closeOnClick={true}
                 pauseOnHover={true}
                 draggable={true}
-            />
+            /> */}
         </div>
     );
 }

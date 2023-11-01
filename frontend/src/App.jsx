@@ -4,6 +4,7 @@ import ChatApp from './components/Chat/Message'
 import DiagnosticTestPage from './components/Diagnose Test/DiagnosticTestPage'
 import TestEmail from './components/Diagnose Test/TestEmail'
 import TestQuestion from './components/Diagnose Test/TestQuestion'
+import Checkout from './components/Payments/Checkout'
 import ClientLayout from './components/shared/ClientLayout'
 import CounsellorLayout from './components/shared/CounsellorLayout'
 import ClientCounsellorProfile from './pages/client/ClientCounsellorProfile'
@@ -15,7 +16,6 @@ import ClientProfile from './pages/client/ClientProfile'
 import AdminLayout from './components/AdminDashboard/AdminLayout'
 import TransHistory from './components/Payments/TransactionHistory'
 import WalletLayout from './components/Payments/WalletLayout'
-import Wallet from './components/Payments/wallet'
 import ModeratorLayout from './components/shared/ModeratorLayout'
 import AdminDashboard from './pages/Admin/AdminDashboard'
 import UserHandle from './pages/Admin/UserHandle'
@@ -26,17 +26,21 @@ import PostBlog from './pages/PostBlog'
 import ClientAppointments from './pages/client/ClientAppointments'
 import ClientDashboard from './pages/client/ClientDashboard'
 import CounsellorAppointments from './pages/counsellor/CounsellorAppointments'
+import CounsellorAvailability from './pages/counsellor/CounsellorAvailability'
 import CounsellorClientProfile from './pages/counsellor/CounsellorClientProfile'
 import CounsellorClients from './pages/counsellor/CounsellorClients'
 import CounsellorDoctors from './pages/counsellor/CounsellorDoctors'
 import CounsellorHome from './pages/counsellor/CounsellorHome'
 import CounsellorProfile from './pages/counsellor/CounsellorProfile'
+import CounsellorWallet from './pages/counsellor/CounsellorWallet'
+import DateSlotSelector from './pages/counsellor/DateSlotSelector'
 import ModeratorDashboard from './pages/moderator/ModeratorDashboard'
 // import Login2 from './pages/Loging2'
 import TestResult from './components/Diagnose Test/TestResult'
 import Loginn from './components/LoginSignup/Loginn'
 import Register from './components/LoginSignup/register'
 
+import ClientFullCalender from './components/ClientDashboard/ClientFullCalender'
 import AdminCrudClient from './pages/Admin/AdminCrudClient'
 import AdminCrudCounselors from './pages/Admin/AdminCrudCounselors'
 import AdminCrudDoctors from './pages/Admin/AdminCrudDoctors'
@@ -50,14 +54,22 @@ import ModeratorBlogs from './pages/moderator/ModeratorBlogs'
 import ModeratorMeditation from './pages/moderator/ModeratorMeditation'
 import ModeratorMusic from './pages/moderator/ModeratorMusic'
 import ModeratorUserHandle from './pages/moderator/ModeratorUserHandle'
+import ModeratorBlogView from './pages/moderator/ModeratorBlogView'
 
 import Dash from './components/Calls/Dash'
 import Registermoderator from './components/LoginSignup/Registermoderator'
 import RequireAuth from './components/LoginSignup/RequireAuth'
+import GoogleSheetData from './components/ModeratorDashboard/CounsellorDetails'
 import AddMeditation from './components/moderator/AddMeditation'
 import AddMusic from './components/moderator/AddMusic'
 import { AuthProvider } from './context/AuthProvider'
+import FormComponent from './pages/counsellor/AddCounsellorDetails'
 import AddTherapySession from './pages/moderator/AddTherapySession'
+import CounsellorChat from './components/Chat/counsellorMessage'
+import BlogsCounsellor from './pages/BlogsCounsellor'
+import BlogViewCounsellor from './pages/BlogViewCounsellor'
+import PostBlogModerator from './pages/moderator/PostBlogModerator'
+import PostBlogCounsellor from './pages/PostBlogCounsellor'
 
 const ROLES = {
     Client: 'ROLE_CLIENT',
@@ -76,10 +88,13 @@ const App = () => (
                     <Route path="/login" element={<Loginn />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/registermoderator" element={<Registermoderator />} />
+                    <Route path="/checkout" element={<Checkout />} />
 
                     <Route path="/counsellor/regform" element={<CounsellorRegForm />} />
                     {/* <Route path="/counsellor/detailsadd" element={<CounsellorAddDetails />} /> */}
                     <Route path="/addDetails" element={<CounsellorDetailsAdd />} />
+                    <Route path="/addcounsellordetails" element={<FormComponent />} />
+                    <Route path="/counsellordetails" element={<GoogleSheetData />} />
 
                     {/* <Route path="/table" element={<TableData />}  /> */}
                     {/* Routes that require authentication */}
@@ -97,17 +112,13 @@ const App = () => (
                             <Route path="clientmusic" element={<ClientMusic />} />
                             <Route path="clientmeditation" element={<ClientMeditation />} />
                             <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/blogview/:blogId" element={<BlogView />} />
+                            <Route path="blogs/blogview/:id" element={<BlogView />} />
                             <Route path="blogs/postblog" element={<PostBlog />} />
                             <Route path="clientappointments" element={<ClientAppointments />} />
+                            <Route path="clientcalender" element={<ClientFullCalender />} />
                             <Route path="clientcounsellors/appointments" element={<ClientCounsellorAppointments />} />
                             <Route path="calls" element={<Dash />} />
                         </Route>
-                    </Route>
-
-                    <Route path="/wallet" element={<WalletLayout />}>
-                        <Route index element={<Wallet />} />
-                        <Route path="/wallet/transhistory" element={<TransHistory />} />
                     </Route>
 
                     <Route path="/admin" element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
@@ -129,17 +140,28 @@ const App = () => (
                             {' '}
                             {/* Wrap the layout */}
                             <Route index element={<CounsellorHome />} />
+                            <Route path="message" element={<CounsellorChat />} />
                             {/* <Route path="l" element={<CounsellorHome />} /> */}
-                            <Route path="counsellorprofile" element={<CounsellorProfile />} />
+                            <Route path="counsellorprofile/:id" element={<CounsellorProfile />} />
                             <Route path="counsellorclients" element={<CounsellorClients />} />
                             {/* <Route path="counsellorclients/profile" element={<CounsellorClientProfile />} /> */}
                             <Route path="view-client/:id" element={<CounsellorClientProfile />} />
                             <Route path="counsellorclients/profile/doctors" element={<CounsellorDoctors />} />
+                            <Route path="availability" element={<CounsellorAvailability />} />
                             <Route path="counsellorappointments" element={<CounsellorAppointments />} />
-                            <Route path="blogs" element={<Blogs />} />
-                            <Route path="blogs/postblog" element={<PostBlog />} />
+                            <Route path="bookedslots" element={<DateSlotSelector />} />
+                            <Route path="blogscounsellor" element={<BlogsCounsellor />} />
+                            <Route path="blogs/blogview/:id" element={<BlogViewCounsellor />} />
+                            <Route path="blogscounsellor/postblogcounsellor" element={<PostBlogCounsellor />} />
                             {/* <Route path="home" element={<CounsellorHome />} /> */}
                             <Route path="counsellorclients/registerclient" element={<RegisterClient />} />
+                        </Route>
+
+                        <Route path="wallet" element={<WalletLayout />}>
+                            <Route element={<CounsellorWallet />} />
+                            <Route index element={<CounsellorWallet />} />
+                            <Route path="transhistory" element={<TransHistory />} />
+                            <Route />
                         </Route>
                     </Route>
 
@@ -154,6 +176,8 @@ const App = () => (
                             <Route path="moderatormeditation" element={<ModeratorMeditation />} />
                             <Route path="add-meditation/:id" element={<AddMeditation />} />
                             <Route path="moderatorblogs" element={<ModeratorBlogs />} />
+                            <Route path="moderatorblogs/moderatorblogview/:id" element={<ModeratorBlogView />} />
+                            <Route path="moderatorblogs/postblogmoderator" element={<PostBlogModerator />} />
                             <Route path="addtherapysession" element={<AddTherapySession />} />
                         </Route>
                     </Route>

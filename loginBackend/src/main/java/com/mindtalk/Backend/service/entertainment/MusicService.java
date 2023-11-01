@@ -47,15 +47,15 @@ public class MusicService {
         return null; //Music not found
     }
 
-    public Music removeMusic(Integer musicId, MusicDTO musicDTO){
-        Music existingMusic = musicRepo.findById(musicId).orElse(null);
-
-        if(existingMusic != null) {
-            existingMusic.setStatus(musicDTO.getStatus());
-            return musicRepo.save(existingMusic);
-        }
-        return null;
-    }
+//    public Music removeMusic(Integer musicId, MusicDTO musicDTO){
+//        Music existingMusic = musicRepo.findById(musicId).orElse(null);
+//
+//        if(existingMusic != null) {
+//            existingMusic.setStatus(musicDTO.getStatus());
+//            return musicRepo.save(existingMusic);
+//        }
+//        return null;
+//    }
 
     public boolean deleteMusic(Integer musicId){
         Music existingMusic = musicRepo.findById(musicId).orElse(null);

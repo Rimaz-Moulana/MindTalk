@@ -20,7 +20,7 @@ const Clients = () => {
     setIsModalOpen(false);
   };
 
-  const fetchClientData = async () => {
+  const fetchClientData = async (counsellorId) => {
     try {
       console.log("Fetching clients...");
       const authData = localStorage.getItem('authData');
@@ -34,13 +34,13 @@ const Clients = () => {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/v1/client/all`, 
+          `http://localhost:8080/api/client/appointment/get-clientInfo/${counsellorId}`, 
           config
         );
 
         const fetchedClients = response.data.map(client => ({
-          id: client.id,
-          name: `${client.firstname} ${client.lastname}`
+          id: client.userId,
+          name: `${client.fname} ${client.lname}`
         }))
         
         setClients(fetchedClients);
@@ -54,8 +54,17 @@ const Clients = () => {
   };
 
   useEffect(() => {
-    fetchClientData();
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { id } = JSON.parse(authData);
+      console.log("counsellor id", id)
+      fetchClientData(id); // Call fetchClientData with the retrieved id
+    }
   }, []);
+
+  // useEffect(() => {
+  //   fetchClientData();
+  // }, []);
 
   useEffect(() => {
     if (filterQuery) {
@@ -77,7 +86,7 @@ const Clients = () => {
   return (
     <div className='bg-gray-100'>
       <section>
-        <div className='flex flex-row flex-auto w-full'>
+        <div className='sm:flex sm:flex-row sm:w-full'>
           <div className='flex-grow'>
             <form className='flex'>
               <input
@@ -92,7 +101,7 @@ const Clients = () => {
           <div className='ml-auto'>
             <button
               onClick={openModal}
-              className='p-2 mt-6 mr-5 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black'
+              className='p-2 mt-6 ml-5 sm:mr-5 text-white bg-blue-700 border rounded-md hover:bg-white hover:border-blue-700 hover:text-black'
             >
               Add Client
             </button>

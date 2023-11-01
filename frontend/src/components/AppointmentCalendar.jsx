@@ -4,6 +4,8 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
 
+
+
 const localizer = momentLocalizer(moment);
 
 function AppointmentCalendar() {
@@ -14,6 +16,10 @@ function AppointmentCalendar() {
   const [appointmentDate, setAppointmentDate] = useState('');
   const [appointmentTime, setAppointmentTime] = useState('');
   const [appointmentFee, setAppointmentFee] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errorVisible, setErrorVisible] = useState(false);
+  const [requestStatusMessage, setRequestStatusMessage] = useState('');
+
 
   useEffect(() => {
     fetchAppointments();
@@ -23,7 +29,8 @@ function AppointmentCalendar() {
     try {
       const authData = localStorage.getItem('authData');
       if (authData) {
-        const { accessToken, id } = JSON.parse(authData);
+        const { accessToken } = JSON.parse(authData);
+        const appCounsellorId = localStorage.getItem('appcounsellorId');
         const config = {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -32,7 +39,7 @@ function AppointmentCalendar() {
           withCredentials: true,
         };
         const response = await axios.get(
-          `http://localhost:8080/api/client/appointment/get-appointments/${id}`,
+          `http://localhost:8080/api/client/appointment/get-appointments/counsellors/${appCounsellorId}`,
           config
         );
 
@@ -59,37 +66,53 @@ function AppointmentCalendar() {
   };
 
   const handleSlotSelect = (slotInfo) => {
+    const selectedDate = moment(slotInfo.start);
+    const currentDate = moment();
     setSelectedSlot(slotInfo);
 
-    // Extract the selected date and time from the slotInfo
-    const selectedDate = slotInfo.start.toISOString();
-    const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
+    if (selectedDate.isSameOrAfter(currentDate, 'minute')) {
+      setSelectedSlot(slotInfo);
+      // Extract the selected date and time from the slotInfo
+      const selectedDate = slotInfo.start.toISOString();
+      const selectedTime = moment(slotInfo.start).format('HH:mm'); // Format time as 'HH:mm'
 
-    const counselorName = localStorage.getItem('appcounsellorName');
+      const counselorName = localStorage.getItem('appcounsellorName');
 
-    // Extract only the date portion (YYYY-MM-DD)
-    const dateOnly = selectedDate.substring(0, 10);
+      // Extract only the date portion (YYYY-MM-DD)
+      const dateOnly = selectedDate.substring(0, 10);
 
-    setCounselorName(counselorName);
-    setAppointmentDate(dateOnly);
-    setAppointmentTime(selectedTime);
-    setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
+      setCounselorName(counselorName);
+      setAppointmentDate(dateOnly);
+      setAppointmentTime(selectedTime);
+      setAppointmentFee('Rs.2000'); // Replace with the actual appointment fee
 
-    setIsModalOpen(true);
+      setIsModalOpen(true);
 
-    // Store the selected date and time in localStorage
-    localStorage.setItem('appointmentDate', dateOnly);
-    localStorage.setItem('appointmentTime', selectedTime);
+      // Store the selected date and time in localStorage
+      localStorage.setItem('appointmentDate', dateOnly);
+      localStorage.setItem('appointmentTime', selectedTime);
 
-    setIsModalOpen(true);
+      setIsModalOpen(true);
+    } else {
+      // Handle the case where the selected date is in the past
+      setErrorMessage('Please select a valid time slot.');
+      setErrorVisible(true);
+    }
   };
 
 
-  const handleModalConfirm = async () => {
-    if (selectedSlot) { // Ensure selectedSlot is defined
-      const formattedDate = selectedSlot.start.toISOString();
-      localStorage.setItem('appointmentDate', formattedDate); // Store the selected date in local storage
+  const handleModalCancel = () => {
+    setSelectedSlot(null);
+    setIsModalOpen(false);
+  };
 
+  const handlePaymentSuccess = async (token) => {
+    // Handle successful payment here
+    console.log('Payment successful:', token);
+
+    try {
+
+      // Add the new appointment to the events array
       const newAppointment = {
         id: events.length + 1,
         title: 'Appointment',
@@ -97,25 +120,14 @@ function AppointmentCalendar() {
         end: selectedSlot.end,
       };
 
-      try {
-        await addApoinmentBackend(selectedSlot); // Call the function
-        setEvents([...events, newAppointment]);
-        setSelectedSlot(null);
-        setIsModalOpen(false);
+      setEvents([...events, newAppointment]);
 
-        // Navigate to day view with selected date
-        setViewDate(selectedSlot.start);
-      } catch (error) {
-        console.error('Error creating appointment:', error);
-      }
-    } else {
-      console.error('selectedSlot is not defined'); // Handle the case where selectedSlot is not defined
+      // Close the modal and reset state as needed
+      setSelectedSlot(null);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error creating appointment:', error);
     }
-  };
-
-  const handleModalCancel = () => {
-    setSelectedSlot(null);
-    setIsModalOpen(false);
   };
 
   const setViewDate = (date) => {
@@ -124,7 +136,8 @@ function AppointmentCalendar() {
     // This will make the calendar focus on the selected date
   };
 
-  const addApoinmentBackend = async () => {
+
+  const addRequestToBackend = async () => {
     try {
       const authData = localStorage.getItem('authData');
       if (authData) {
@@ -144,19 +157,23 @@ function AppointmentCalendar() {
           userId: id,
           counsellorId: appCounsellorId,
           date: appointmentDate, // Correct format
-          timeSlot: appointmentTime, // Correct format
+          timeSlot: appointmentTime,
+          requested: 1,
+          accepted: 0, // Correct format
         };
 
         const response = await axios.post(
-          'http://localhost:8080/api/client/appointment/create-appointment',
+          'http://localhost:8080/api/client/appointment-requests/create-request',
           requestData,
           config
         );
 
         if (response.status === 200) {
-          console.log('Appointment created successfully');
+          console.log('Request created successfully');
+          setRequestStatusMessage('Request sent to the counselor. Please wait for acceptance.');
+          handleModalCancel();
         } else {
-          console.error('Error creating appointment');
+          console.error('Error creating request');
         }
       }
     } catch (error) {
@@ -205,17 +222,52 @@ function AppointmentCalendar() {
                 <button
                   type="button"
                   className="px-3 py-1 bg-blue-500 text-white rounded"
-                  onClick={handleModalConfirm}
+                  onClick={addRequestToBackend}
                 >
-                  Pay Appointment fee
+                  Send Request
                 </button>
               </div>
             </div>
           </div>
         )}
+        {/* Error Modal */}
+        {errorVisible && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded">
+              <h2 className="text-lg font-bold mb-2">Error</h2>
+              <p>{errorMessage}</p>
+              <button
+                type="button"
+                className="px-3 py-1 bg-gray-300 rounded mt-2"
+                onClick={() => setErrorVisible(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+        {requestStatusMessage && (
+          <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded">
+              <h2 className="text-lg font-bold mb-2">Request Status</h2>
+              <p>{requestStatusMessage}</p>
+              <button
+                type="button"
+                className="px-3 py-1 bg-gray-300 rounded mt-2"
+                onClick={() => {
+                  setRequestStatusMessage('');
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
+
 }
 
 export default AppointmentCalendar;

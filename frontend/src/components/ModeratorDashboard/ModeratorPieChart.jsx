@@ -11,7 +11,7 @@ const customColorScale = [
 ]
 const Piechart = () => {
     return (
-        <div className="">
+        <div className="min-w-full text-left text-sm font-light">
             <h4 className="text-xl font-semibold">Registerd Counsellors</h4>
             <div className="mt-4">
                 <VictoryPie data={chartData} colorScale={customColorScale} radius={100} />

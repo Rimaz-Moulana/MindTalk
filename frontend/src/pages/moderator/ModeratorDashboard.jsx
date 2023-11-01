@@ -1,7 +1,7 @@
-import ModeratorCards from '../../components/ModeratorDashboard/ModeratorCards'
 import React from 'react'
-import RequestTable from '../../components/ModeratorDashboard/ModeratorTable'
+import ModeratorCards from '../../components/ModeratorDashboard/ModeratorCards'
 import Piechart from '../../components/ModeratorDashboard/ModeratorPieChart'
+import RequestTable from '../../components/ModeratorDashboard/ModeratorTable'
 // import PieChart from '../../components/ModeratorDashboard/ModeratorPieChart'
 // import { Pie } from 'react-chartjs-2'
 
@@ -14,13 +14,13 @@ const ModeratorDashboard = () => {
                 </div>
 
                 <div className="flex flex-wrap">
-                    <div className="flex-1">
+                    <div className="flex-0">
                         <div className="bg-white rounded-xl shadow-md overflow-hidden text-center h-full mr-4">
                             <RequestTable />
                         </div>
                     </div>
 
-                    <div className="flex-2">
+                    <div className="flex-1">
                         <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5">
                             <Piechart />
                         </div>

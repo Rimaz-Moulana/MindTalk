@@ -1,37 +1,180 @@
-import React, { useEffect, useState } from 'react';
-import MusicService from '../../services/MusicService';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function ClientMusic() {
+const CounsellorAvailability = () => {
+  const [selectedDay, setSelectedDay] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [selectedSlots, setSelectedSlots] = useState([]);
+  const [selectedDaySlots, setSelectedDaySlots] = useState([]);
 
-  const [music, setMusic] = useState([]);
+  const handleSelectDay = (e) => {
+    setSelectedDay(e.target.value); // Update the selectedDay state
+  };
 
-  useEffect(() => {
-    MusicService.getMusic().then(res => {
-        setMusic(res.data);
-    });
-  }, []);
+  const handleAddSlot = () => {
+    if (selectedDay && startTime && endTime) {
+      const newSlot = {
+        day: selectedDay,
+        startTime,
+        endTime,
+      };
+      setSelectedDaySlots([...selectedDaySlots, newSlot]);
+      setStartTime('');
+      setEndTime('');
+    }
+  };
+
+  const handleAddDaySlots = () => {
+    setSelectedSlots([...selectedSlots, ...selectedDaySlots]);
+    setSelectedDay('');
+    setSelectedDaySlots([]);
+  };
+
+  const handleRemoveSlot = (index) => {
+    const updatedSlots = [...selectedDaySlots];
+    updatedSlots.splice(index, 1);
+    setSelectedDaySlots(updatedSlots);
+  };
+
+  const isAddAllSlotsButtonVisible = selectedSlots.length > 0;
+
+  const handleAddAllSlots = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken, id } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+
+        const slotsData = selectedSlots.map((slot) => ({
+          counsellorId: id,
+          day: slot.day,
+          startTime: slot.startTime,
+          endTime: slot.endTime,
+        }));
+
+        const response = await axios.post(
+          'http://localhost:8080/api/v1/external-booked/add',
+          slotsData,
+          config
+        );
+
+        if (response.status === 200) {
+          console.log('All selected slots added successfully');
+          // Optionally, you can clear the selectedSlots array here
+          setSelectedSlots([]);
+        } else {
+          console.error('Error adding slots');
+        }
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
+  const isWeekday = (date) => {
+    const day = new Date(date).getDay();
+    return day >= 1 && day <= 5;
+  };
+
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   return (
-    <div className='flex-flex-row'>
-
-      <div className="flex flex-col gap-4 w-full bg-white rounded-xl mb-5">
-        <h1 className='text-xl font-bold pt-5 pl-5'>Music / Videos</h1>
-        <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 gap-y-8 p-5 pt-0'>
-          {music.map((item, index) => (
-            <iframe 
-              key={index} 
-              className='w-full aspect-[3/2]' 
-              src={item.link} 
-              title={`video${index + 1}`} 
-              allowFullScreen
-            > 
-            </iframe>
-          ))}
-        </div>
+    <div className="max-w-md mx-auto mt-8 p-4 border rounded-lg shadow-md">
+      <h2 className="text-xl font-semibold mb-4 text-center">Add Externally Booked Slots</h2>
+      <div className="mb-4 flex items-center space-x-4">
+        <label className="block font-semibold mb-2">Select Day:</label>
+        <select onChange={handleSelectDay} className="border rounded-md p-2">
+          <option value="">Select a weekday</option>
+          {weekdays.map((day, index) => (
+            <option key={index} value={day} disabled={!isWeekday(day)}>
+              {day}
+            </option>
+          )}
+        </select>
       </div>
-  
+
+      <div className="mb-4 flex items-center space-x-4">
+        <label className="block font-semibold mb-2">Select Time:</label>
+        <input
+          type="time"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          className="border rounded-md p-2"
+        />
+        <span className="mx-2">to</span>
+        <input
+          type="time"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          className="border rounded-md p-2"
+        />
+      </div>
+
+      <button
+        className="bg-blue-700 text-white rounded-full px-4 py-2 hover:bg-blue-600"
+        onClick={handleAddSlot}
+      >
+        Select Slot
+      </button>
+
+      {selectedDaySlots.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold mb-2">Selected Slots for {selectedDay}:</h3>
+          <ul>
+            {selectedDaySlots.map((slot, index) => (
+              <li key={index} className="flex justify-between">
+                <span>
+                  {slot.startTime} to {slot.endTime}
+                </span>
+                <button
+                  className="text-red-500 hover:text-red-700"
+                  onClick={() => handleRemoveSlot(index)}
+                >
+                  X
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button
+            className="bg-blue-700 text-white rounded-full px-4 py-2 hover:bg-blue-600"
+            onClick={handleAddDaySlots}
+          >
+            Add Day Slots
+          </button>
+        </div>
+      )}
+
+      {selectedSlots.length > 0 && (
+        <div className="mt-4">
+          <h3 className="text-lg font-semibold mb-2">Selected Slots:</h3>
+          <ul>
+            {selectedSlots.map((slot, index) => (
+              <li key={index} className="flex justify-between">
+                <span>
+                  {slot.day} | {slot.startTime} to {slot.endTime}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {isAddAllSlotsButtonVisible && (
+            <button
+              className="bg-blue-700 text-white rounded-full px-4 py-2 hover:bg-blue-600"
+              onClick={handleAddAllSlots}
+            >
+              Add All Slots
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default ClientMusic;
+export default CounsellorAvailability;

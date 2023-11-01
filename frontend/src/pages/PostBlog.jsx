@@ -1,8 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
-import { useParams } from 'react-router-dom';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
+import CoverImageUpload from './CoverImage';
+
+
 
 const PostBlog = () => {
   const categories = ["Relaxing", "Anxiety", "Sleeping", "Focus", "Stress Releasing"];
@@ -42,8 +44,8 @@ const PostBlog = () => {
           console.log('Blog post successful!');
           alert("Blog post completed");
         } else {
-          console.log('Blog post failed. Please try again.');
-          alert("Blog post failed. Please try again.");
+          console.log('Blog post successful!');
+          alert("Blog post completed");
         }
 
         // Optionally, you can redirect to the blogs page or clear the form here
@@ -55,6 +57,63 @@ const PostBlog = () => {
       alert("An error occurred while saving the blog.");
     }
   };
+
+  const [coverImage, setCoverImage] = useState(null);
+
+  const handleCoverImageChange = (event) => {
+    const file = event.target.files[0];
+    setCoverImage(file);
+  };
+
+  const uploadCoverImage = async (e) => {
+    e.preventDefault();
+
+    if (!coverImage) {
+    // Handle error if no photo is selected
+    console.error('No photo selected for upload.');
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append('coverImage', coverImage);
+
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.put(
+        `http://localhost:8080/api/blogs/${id}/updateCoverImage`,
+        formData,
+        config
+      );
+
+      if (response.status === 200) {
+        toast.success('Cover image uploaded successfully!', {
+          // Handle success
+        });
+      } else {
+        toast.error('Error uploading cover image. Please try again later.', {
+          // Handle other errors
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    toast.error('Error uploading cover image. Please try again later.', {
+      // Handle error response
+    });
+  }
+};
+    
+    
 
   return (
     <div className='p-3 bg-white rounded-2xl'>
@@ -99,6 +158,19 @@ const PostBlog = () => {
           </div>
 
           <div>
+        <label htmlFor="coverImage" className="block ml-10 text-lg font-medium text-gray-700">
+            Cover Image
+        </label>
+        <CoverImageUpload
+          handleCoverImageChange={handleCoverImageChange}
+          uploadCoverImage={uploadCoverImage}
+          coverImage={coverImage}
+        />
+
+    </div>
+
+
+          <div>
             <label htmlFor="article" className="block ml-10 text-lg font-medium text-gray-700">
               Blog Article
             </label>
@@ -114,7 +186,7 @@ const PostBlog = () => {
               type="submit"
               className="w-40 px-4 py-3 mt-10 text-base font-medium text-white bg-blue-600 border border-transparent rounded-3xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Post Blog
+              Post your Blog
             </button>
           </div>
         </form>

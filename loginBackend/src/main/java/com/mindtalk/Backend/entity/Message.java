@@ -6,25 +6,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Table(name = "message")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    private User sender;
-
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    private User receiver;
-
+    private int senderId;
     private String content;
-    private LocalDateTime timestamp;
+    private Date time = new Date(System.currentTimeMillis());
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "chat_id" ,referencedColumnName = "id")
+    private Chat chat;
 }

@@ -27,7 +27,9 @@ const Contacts = () => {
 
         const fetchedCounselors = response.data.map(counsellor => ({
           id: counsellor.id,
-          dp: counsellor.license_image,
+          user_id: counsellor.userId,
+          // dp: counsellor.license_image,
+          profilePhotoPath: counsellor.profilePhotoPath,
           name: `${counsellor.firstname} ${counsellor.lastname}`
         }))
 
@@ -103,7 +105,7 @@ const Contacts = () => {
 
       </section>
 
-      { <section className='grid gap-6 pt-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      { <section >
         {/* {contactList?.length < 1 && (
           <h1>No Data Matches Your Search</h1>
         )}

@@ -10,37 +10,37 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'message',
 		label: 'Message',
-		path: 'message',
+		path: '/client/message',
 		icon: <FiMessageCircle />
 	},
 	{
 		key: 'calls',
 		label: 'Calls',
-		path: 'calls',
+		path: '/client/calls',
 		icon: <FiPhone />
 	},
 	{
 		key: 'counsellors',
 		label: 'Counsellors',
-		path: 'clientcounsellors',
+		path: '/client/clientcounsellors',
 		icon: <FiUsers />
 	},
 	{
 		key: 'appointments',
 		label: 'Appointments',
-		path: 'clientappointments',
+		path: '/client/clientcalender',
 		icon: <FiCalendar />
 	},
 	{
 		key: 'music',
 		label: 'Music / Videos',
-		path: 'clientmusic',
+		path: '/client/clientmusic',
 		icon: <FiMusic />
 	},
 	{
 		key: 'meditation',
 		label: 'Meditation',
-		path: 'clientmeditation',
+		path: '/client/clientmeditation',
 		icon: <FiSlack />
 	},
 	{
@@ -52,7 +52,7 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 	{
 		key: 'blogs',
 		label: 'Blogs',
-		path: 'blogs',
+		path: '/client/blogs',
 		icon: <FiBookOpen />
 	}
 ]

@@ -17,9 +17,6 @@ public class AddTherapySessionController {
 
     @Autowired
     private AddTherapySessionService addTherapySessionService;
-
-    @Autowired
-    private AddTherapySessionRepository addTherapySessionRepository;
     private final List<String> allowedOrigins;
 
     public AddTherapySessionController(@Value("#{'${app.cors.allowed-origins}'.split(',')}") List<String> allowedOrigins) {
@@ -31,13 +28,13 @@ public class AddTherapySessionController {
     public ResponseEntity<String> addTherapySession(@RequestBody AddTherapySessionDTO addTherapySessionDTO){
         try {
             Long id = addTherapySessionDTO.getId();
-            String date = addTherapySessionDTO.getDate();
             String time = addTherapySessionDTO.getTime();
-            String link = addTherapySessionDTO.getLink();
+            String date = addTherapySessionDTO.getDate();
             String counsellors = addTherapySessionDTO.getCounsellors();
             String sessionType = addTherapySessionDTO.getSessionType();
+            String link = addTherapySessionDTO.getLink();
 
-            addTherapySessionService.addSession(id, date, time, link, counsellors, sessionType);
+            addTherapySessionService.addSession(id, date, time, counsellors, sessionType, link);
             return ResponseEntity.ok("adding successfully");
         }catch(Exception e){
             return ResponseEntity.status(500).body("An error occurred");
@@ -46,7 +43,7 @@ public class AddTherapySessionController {
 
     @GetMapping("/getSession")
     @CrossOrigin(origins = "${app.cors.allowed-origins}",allowCredentials = "true")
-    List<AddTherapySession> getAllSession(){
-        return addTherapySessionRepository.findAll();
+    public List<AddTherapySessionDTO> getAllSession(){
+        return addTherapySessionService.getAllTherapySession();
     }
 }

@@ -6,6 +6,8 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import ProfilePhoto from './ClientProfilePhoto';
+import FileUpload from './ClientProfileFIle';
 
 const Profile = () => {
   const { id } = useParams();
@@ -89,6 +91,7 @@ const Profile = () => {
               city: userData.city,
               district: userData.district,
               zip: userData.zip,
+              profilePhotoPath: userData.profilePhotoPath,
               //emergency contacts
               emName1: userData.emName1,
               emName2: userData.emName2,
@@ -97,10 +100,44 @@ const Profile = () => {
               emPhone2: userData.emPhone2,
               emPhone3: userData.emPhone3
             });
+        } else if (response.status === 404) {
+            // If the client does not exist, create a new client
+            createClient();
+        }
+      } 
+    }catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  const createClient = async () => {
+    try {
+      const authData = localStorage.getItem('authData');
+      if (authData) {
+        const { accessToken } = JSON.parse(authData);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        };
+
+        // Create a new client using the ID and default data
+        const response = await axios.post(
+          `http://localhost:8080/api/v1/client`,
+          { id },
+          config
+        );
+
+        if (response.status === 201) {
+          // Client created successfully
+          // You can optionally fetch the client data again to populate the user state
+          fetchProfileData();
         }
       }
     } catch (error) {
-        console.error('Error fetching user data:', error);
+      console.error('Error creating client:', error);
     }
   };
 
@@ -198,37 +235,75 @@ const Profile = () => {
     }));
   };
 
-  const pdfData = [
-    {
-      id: 1,
-      title:'abc.pdf',
-      date: '07/07/2023'
-    },
-    {
-      id: 2,
-      title:'xyz.pdf',
-      date: '10/07/2023'
-    },
-    {
-      id: 3,
-      title:'msg.doc',
-      date: '17/07/2023'
-    },
-  ];
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
+  const handleProfilePhotoChange = (event) => {
+    const file = event.target.files[0];
+    setProfilePhoto(file);
+  };
+
+  const uploadProfilePhoto = async (e) => {
+  e.preventDefault();
+
+  if (!profilePhoto) {
+    // Handle error if no photo is selected
+    console.error('No photo selected for upload.');
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append('profilePhoto', profilePhoto);
+
+    const authData = localStorage.getItem('authData');
+    if (authData) {
+      const { accessToken } = JSON.parse(authData);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      };
+
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/client/${id}/updateProfilePhoto`,
+        formData,
+        config
+      );
+
+      if (response.status === 200) {
+        toast.success('Profile photo uploaded successfully!', {
+          // Handle success
+        });
+      } else {
+        toast.error('Error uploading profile photo. Please try again later.', {
+          // Handle other errors
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error uploading profile photo:', error);
+    toast.error('Error uploading profile photo. Please try again later.', {
+      // Handle error response
+    });
+  }
+};
+
+  
   return (
-    <div className="flex flex-col-reverse gap-4 w-full grid md:grid-cols-4">
+    <div className="flex grid flex-col-reverse w-full gap-4 md:grid-cols-4">
 
       <div className="bg-white rounded-xl md:col-span-3 ">
-        <div className="mx-auto grid max-w-7xl gap-x-8 px-6 lg:px-8 py-5">
+        <div className="grid px-6 py-5 mx-auto max-w-7xl gap-x-8 lg:px-8">
 
           <form>
             <div className="">
 
-              <div className="border-b border-gray-900/10 pb-12">
+              <div className="pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Personal Information</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="fname" className="block text-sm font-medium leading-6 text-gray-900">
@@ -438,10 +513,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 1</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName1" className="block text-sm font-medium leading-6 text-gray-900">
@@ -479,10 +554,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 2</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName2" className="block text-sm font-medium leading-6 text-gray-900">
@@ -520,10 +595,10 @@ const Profile = () => {
 
               </div>
 
-              <div className="border-b border-gray-900/10 pb-12 pt-5">
+              <div className="pt-5 pb-12 border-b border-gray-900/10">
                 <h1 className="text-lg font-bold text-gray-900">Emergency Contact 3</h1>
 
-                <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                <div className="grid grid-cols-1 mt-5 gap-x-6 gap-y-6 sm:grid-cols-6">
 
                   <div className="sm:col-span-3">
                     <label htmlFor="emName3" className="block text-sm font-medium leading-6 text-gray-900">
@@ -564,14 +639,14 @@ const Profile = () => {
 
             </div>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
+            <div className="flex items-center justify-end mt-6 gap-x-6">
               <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
                 Cancel
               </button>
               <button
                 type="submit"
                 onClick={saveUser}
-                className="rounded-lg bg-blue-900 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="px-5 py-2 text-sm font-semibold text-white bg-blue-900 rounded-lg shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save
               </button>
@@ -592,59 +667,14 @@ const Profile = () => {
 
       <div className="flex flex-col gap-4 ">
 
-        <div className="bg-white rounded-xl shadow-md overflow-hidden text-center pb-5">
-
-          {/* <img src={sky} alt="sky" className="w-full h-48 object-cover" /> */}
-          <div className='h-48 w-full bg-sky-500 bg-cover bg-no-repeat bg-center' 
-            style={{background: 'url("https://source.unsplash.com/650x200?sky")'}}>
-          </div>
-          <img src={logo} alt="Logo" className="rounded-full h-20 w-20 mx-auto -mt-10" />
-          <span className="font-bold text-xl text-blue-900">John Doe</span>
-
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md overflow-hidden p-5 ">
-
-          <div className='pb-5 text-center '>
-            <span className="text-lg text-blue-900 ">Let us get to know about you. Upload your previous medical files if any.  </span>
-            <div className="m-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-53">
-              <div className="text-center">
-                <FiClipboard className="mt-2 mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
-                <div className="mt-2 flex text-sm leading-6 text-gray-600">
-                  <label
-                    htmlFor="file-upload"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-blue-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-700 focus-within:ring-offset-2 hover:text-blue-900"
-                  >
-                    <span>Upload a file</span>
-                    <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                  </label>
-                  <p className="pl-1">or drag and drop</p>
-                </div>
-                <p className="text-xs leading-5 text-gray-600">PDF, DOC</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="overflow-hidden pb-5 ">
-            <table className="min-w-full text-black text-sm font-light">
-              <tbody>
-                {
-                  pdfData.map((item) => (
-                    <tr
-                      key={ item.id }
-                      className="border-b border-gray-200 transition duration-300 ease-in-out hover:bg-neutral-100 hover:bg-neutral-300"
-                    >
-                      <td className="whitespace-nowrap text-left px-6 py-4">{item.title}</td>
-                      <td className="whitespace-nowrap text-right px-6 py-4">{item.date}</td>
-                    </tr>
-                  ) )
-                }
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
+        <ProfilePhoto 
+          handleProfilePhotoChange={handleProfilePhotoChange}
+          uploadProfilePhoto={uploadProfilePhoto}
+          profilePhoto={profilePhoto}
+          profilePhotoPath={user.profilePhotoPath}
+        />
+        <FileUpload />
+        
       </div>
 
     </div>

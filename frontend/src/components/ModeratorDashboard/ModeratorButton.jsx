@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiCheck } from 'react-icons/fi';
 
 export default function ModeratorButton() {
     const [setModal, setModalOpen] = useState(false);
-
-
     const data = JSON.parse(localStorage.getItem('detailsData'));
 
+
+
+    useEffect(()=>{
+
+        for(let i = 0 ; i < data.length; i++){
+            if(data[i].licenseImage){
+                data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\', '');
+                console.log(data[i].licenseImage);
+            }
+        }
+        
+    })
+    
     // console.log(data[0].licenseImage)
 
-    for(let i = 0 ; i < data.length; i++){
-        if(data[i].licenseImage){
-            data[i].licenseImage = data[i].licenseImage.replace('C:\\fakepath\\', '');
-            console.log(data[i].licenseImage);
-        }
-    }
+    
 
     const path = 'C:\\Users\\Moulana\\Downloads\\';
     return (
@@ -89,15 +95,10 @@ export default function ModeratorButton() {
                                             <label key={index}>Email: {item.email}</label>
                                             </div>
                                             <div>
-                                            <label key={index}>License Image:<img src={path+item.licenseImage} /></label>
+                                            <label key={index}>License Image:<img className="w-12 h-10" src={`../../../src/assets/${item.licenseImage}`} /></label>
                                             </div>
-                                            {console.log(path)}
-                                            
                                             </div>
-                                       
-                                           
-                                        ))} 
-                                       
+                                        ))}
                                         </div>
                                         ):null
                                         

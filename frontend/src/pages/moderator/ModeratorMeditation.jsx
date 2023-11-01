@@ -3,14 +3,26 @@ import MeditationService from '../../services/MeditationService';
 import { Link } from 'react-router-dom';
 import { FiEdit3, FiTrash2 } from "react-icons/fi"
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 const ModeratorMeditation = () => {
   const [isLoading, setLoading] = useState(true);
   const [meditation, setMeditation] = useState([]);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null); // State to track which video to delete
+
+  const handleDeleteConfirmation = (id) => {
+    const result = window.confirm("Are you sure you want to delete this video?");
+    if (result) {
+      deleteMeditation(id);
+    } else {
+      setDeleteConfirmation(null); // Clear the confirmation state
+    }
+  };
 
   const deleteMeditation = async (id) => {
     try{
-      const authData = localStorage.getItem('bauthData');
+      console.log("Fetching delete mediation data...");
+      const authData = localStorage.getItem('authData');
       if(authData) {
         const { accessToken } = JSON.parse(authData);
         const config = {
@@ -20,22 +32,17 @@ const ModeratorMeditation = () => {
           },
           withCredentials: true
         };
+        console.log(`Deleting meditation...`+id);
         //Send a request to update the status to "false"
         const response = await axios.delete(`http://localhost:8080/api/testing/meditation/${id}`, config);
 
-        //check if status update was successful
-        if (response.status === 200){
-          setMeditation((prevMeditation) => 
-          prevMeditation.map((item) =>
-            item.id === id ? { ...item, status: false } : item 
-          )
-        );
-      } else {
-        console.error('Error deleting meditation');
-      }
+        setMeditation(prevMeditation => prevMeditation.filter(item => item.id !== id));
+        setDeleteConfirmation(null); // Clear the confirmation state
+
     }
   } catch (error) {
-    console.error('Error updating meditation status:' , error);
+    console.error('Error deleting meditation data:' , error);
+    setLoading(false);
   }
 };
 
@@ -114,15 +121,40 @@ const ModeratorMeditation = () => {
                   <FiEdit3 />
                 </Link>
                 <button
-                  onClick={() => deleteMeditation(item.id)} 
+                  onClick={() => setDeleteConfirmation(item.id)} 
                   className='p-2 font-thin text-white bg-red-700 border rounded-md text-md hover:bg-white hover:border-red-700 hover:text-black'
                 >
                   <FiTrash2 />
                 </button>
               </div>
+              {deleteConfirmation === item.id && (
+                <div className="text-center mt-2">
+                  <p>Confirm deletion?</p>
+                  <button
+                    onClick={() => handleDeleteConfirmation(item.id)}
+                    className='p-2 font-thin text-white bg-red-700 border rounded-md text-md hover:bg-white hover:border-red-700 hover:text-black'
+                  >
+                    Yes
+                  </button>
+                  <button
+                    onClick={() => setDeleteConfirmation(null)}
+                    className='p-2 ml-2 font-thin text-white bg-blue-700 border rounded-md text-md hover:bg-white hover:border-blue-700 hover:text-black'
+                  >
+                    No
+                  </button>
+                </div>
+              )}
             </div>
         ))}
       </div>
+      <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+                draggable={true}
+            />
     </div>
   );
 }

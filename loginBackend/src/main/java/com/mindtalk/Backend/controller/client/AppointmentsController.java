@@ -1,6 +1,7 @@
 package com.mindtalk.Backend.controller.client;
 
 import com.mindtalk.Backend.dto.AppointmentDTO;
+import com.mindtalk.Backend.dto.ClientDTO;
 import com.mindtalk.Backend.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,5 +54,23 @@ public class AppointmentsController {
     @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
         return appointmentService.getAppointmentsForUser(userId);
+    }
+
+    @GetMapping("/get-appointments/counsellors/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<AppointmentDTO> getAppointmentsForCounsellors(@PathVariable Integer counsellorId) {
+        return appointmentService.getAppointmentsForCounsellors(counsellorId);
+    }
+
+    @GetMapping("/get-clientIds/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<Integer> getClientIdsForCounsellor(@PathVariable Integer counsellorId) {
+        return appointmentService.getClientIdsForCounsellor(counsellorId);
+    }
+
+    @GetMapping("/get-clientInfo/{counsellorId}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public List<ClientDTO> getClientInfoForCounsellor(@PathVariable Integer counsellorId) {
+        return appointmentService.getClientInfoForCounsellor(counsellorId);
     }
 }

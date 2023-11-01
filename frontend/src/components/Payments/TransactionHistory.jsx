@@ -105,9 +105,7 @@ export default function TransHistory() {
         </div>
   
         <div className="bg-white rounded-xl md:col-span-3">
-          <div className="bg-white rounded-xl shadow-md overflow-hidden text-center p-5 h-40">
-            {/* Content for the middle area goes here */}
-          </div>
+          
         </div>
   
         <div className="bg-white rounded-xl md:col-span-3 flex-grow">

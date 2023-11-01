@@ -16,12 +16,33 @@ public class Counsellor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Integer userId;
     private String firstname;
     private String lastname;
     private String email;
+    @Column(length = 100000)
+    private String about;
     private Long licenseNo;
     private String licenseImage;
+    private String jobRole;
+    private String address;
+    private String phone;
+    private String degree;
+    private String workplace;
+    private String coreServices;
+    private String scopeOfPractice;
+    private String experience;
+    private String ageGroup;
+    private String language;
+    private String joinDate;
     private Boolean status;
+    @Column(name = "profile_photo_path")
+    private String profilePhotoPath;
+
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    private User user; // Association with User
 
     public Long getId() {
         return id;
@@ -79,4 +100,5 @@ public class Counsellor {
         status = false;
         this.status = status;
     }
+
 }
