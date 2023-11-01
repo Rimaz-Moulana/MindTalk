@@ -40,6 +40,7 @@ public class TestController {
         String subject = "Test Results";
         String content = "Your test results have been saved successfully.";
 
+
         return ResponseEntity.ok("Test results saved and email sent successfully");
     }
 
@@ -67,15 +68,18 @@ public class TestController {
         }
     }
     @GetMapping("/sorted-results/{userIds}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
     public ResponseEntity<List<Test>> getTestResultsByUserIds(@PathVariable List<Integer> userIds) {
         List<Test> testResults = testService.getTestResultsByUserIdsSorted(userIds);
         return ResponseEntity.ok(testResults);
     }
 
-//    @GetMapping("/sorted-latest-results/{userIds}")
-//    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
-//        List<Test> testResults = testService.getRecentTestResultsByUserIds(userIds);
-//        return ResponseEntity.ok(testResults);
-//    }
+
+    @GetMapping("/latest-results/{userIds}")
+    @CrossOrigin(origins = "${app.cors.allowed-origins}", allowCredentials = "true")
+    public ResponseEntity<List<Test>> getRecentTestResultsByUserIds(@PathVariable List<Integer> userIds) {
+        List<Test> testResults = testService.getLastTwoTestResultsForUser(userIds);
+        return ResponseEntity.ok(testResults);
+    }
 
 }
