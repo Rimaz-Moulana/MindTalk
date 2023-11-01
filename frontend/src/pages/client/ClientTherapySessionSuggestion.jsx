@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { default as React, default as React, useEffect, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 export default function ClientTherapySessionSuggestion() {
     const [sessions, setSessions] = useState([])
@@ -26,13 +29,6 @@ export default function ClientTherapySessionSuggestion() {
               const sessionData = result.data;
               console.log(result.data)
               
-              // setSession({
-              //   date: sessionData.date,
-              //   time: session.time,
-              //   counsellor: session.counsellor,
-              //   typeOfSession: session.typeOfSession,
-              //   link: session.link,
-              // });
               setSessions(result.data)
             }
           }
@@ -44,22 +40,34 @@ export default function ClientTherapySessionSuggestion() {
     useEffect(()=>{
       loadSession();
     },[ ])
+
+
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    };
   return (
     <>
         <div className='w-3/4 m-auto'>
-            <div className='mt-20'>
-                {sessions.map((d) => (
-                    <div className='bg-white h-[450px] text-black rounded-xl'>
-                        <div className='h-56 rounded-t-xl bg-indigo-500 flex flex-col items-center gap-4 p-4'>
-                            <p className='text-xl font-semibold'>{d.sessionType}</p>
-                            <p>{d.time}</p>
-                            <p>{d.date}</p>
-                            <p>{d.counsellors}</p>
-                            <p>{d.link}</p>
-                            <button className='bg-indogo-500'>Reserve</button>
+            <div className='mt-2'>
+            <Slider {...settings}>
+                {sessions.map((d,i) => (
+                    <div key={i} className='bg-white h-[270px] rounded-xl'>
+                        <div  className='h-56  text-black rounded-t-xl flex flex-col items-center gap-4 p-4'>
+                            <p className='text-xl font-semibold'>Session Type:{d.sessionType}</p>
+                            <p>Session Time:{d.time}</p>
+                            <p>Session Date:{d.date}</p>
+                            <p>Counsellor:{d.counsellors}</p>
+                            <a className='text-blue-500' href={d.link}>Call Link</a>
+                            <button className='bg-blue-700 w-[200px] rounded-xl p-2 text-white font-semibold flex flex-col items-center'>Reserve</button>
                         </div>
+                       
                     </div>
                 ))}
+                </Slider>
             </div>
         </div>
 
