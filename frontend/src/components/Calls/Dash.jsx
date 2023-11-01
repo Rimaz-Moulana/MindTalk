@@ -20,16 +20,16 @@ const Dash = () => {
 
     const dummyContent = [
         {
-          title: 'Appointment 1',
-          description: 'This is the description for Card 1.',
+          title: 'Kaveesha',
+          description: 'The appointment is scheduled at 9:30am.',
         },
         {
-          title: 'Appointment 2',
-          description: 'This is the description for Card 2.',
+          title: 'Michelle',
+          description: 'The appointment is scheduled at 9:30am.',
         },
         {
-          title: 'Appointment 3',
-          description: 'This is the description for Card 3.',
+          title: 'Nikeetha',
+          description: 'The appointment is scheduled at 9:30am.',
         },
       ];
 
