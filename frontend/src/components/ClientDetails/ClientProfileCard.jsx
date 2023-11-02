@@ -164,7 +164,7 @@ function ClientProfileCard({ clientData }) {
   const { profilePhotoPath, fname, lname, email, phone, city, emName1, emName2, emName3, emPhone1, emPhone2, emPhone3} = clientData;
 
   return (
-    <div>
+    <div className='h-vh'>
       <figure className='pt-5 border-b-2'>
       <img
             alt="client"
@@ -258,7 +258,7 @@ function ClientProfileCard({ clientData }) {
            </div>
          </div>
 
-         <div className="flex flex-col">
+         {/* <div className="flex flex-col">
            <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
              <div className="p-2 inline-block min-w-full">
                <div className="overflow-hidden border-t-2">
@@ -304,7 +304,7 @@ function ClientProfileCard({ clientData }) {
                </div>
              </div>
            </div>
-         </div>
+         </div> */}
     </div>
   );
 }

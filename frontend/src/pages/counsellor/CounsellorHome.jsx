@@ -1,12 +1,11 @@
 import React from 'react';
 
-import CounsellorHead from '../../components/CounsellorDashboard/CounsellorHead';
-import CounsellorCards from '../../components/CounsellorDashboard/CounsellorCards';
 import CounsellorAppoinments from '../../components/CounsellorDashboard/CounsellorAppoinments';
-import CounsellorTest from '../../components/CounsellorDashboard/CounsellorTest';
 import CounsellorCalender from '../../components/CounsellorDashboard/CounsellorCalender';
 import CounsellorGraph from '../../components/CounsellorDashboard/CounsellorGraph';
+import CounsellorTest from '../../components/CounsellorDashboard/CounsellorTest';
 import Users from '../../components/Users';
+import CounsellorTherapy from './CounsellorTherapySession';
 
 const CounsellorHome = () => {
     return (
@@ -39,6 +38,9 @@ const CounsellorHome = () => {
          
                 <div className="flex flex-col gap-4 w-full">
                     <CounsellorGraph />
+                </div>
+                <div className="flex flex-col gap-4 w-full">
+                    <CounsellorTherapy />
                 </div>
             </div>
         </>

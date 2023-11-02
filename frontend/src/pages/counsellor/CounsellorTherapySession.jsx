@@ -3,7 +3,7 @@ import { default as React, useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-const ReviewCarousel = () => {
+const CounsellorTherapy = () => {
 
   const [sessions, setSessions] = useState([])
 
@@ -70,7 +70,7 @@ console.log(sessions.data)
                             <p className='p-1 text-lg'>Session Date: {d.date}</p>
                             <p className='p-1 text-lg'>Counsellor: {d.counsellors}</p>
                             <a className='text-white bg-blue-500 p-2 rounded-lg w-[200px] ' href={d.link}>Call Link</a>
-                            <p className='p-1 text-lg text-red-500'>Please join the session using <span className='text-blue-700'>call link</span> above mentioned time!!!</p>
+                            <p className='p-1 text-lg text-red-500'>Please start the session using <span className='text-blue-700'>call link</span> above mentioned time!!!</p>
         </div>
         </div>
         ) )}
@@ -80,4 +80,4 @@ console.log(sessions.data)
   );
 };
 
-export default ReviewCarousel;
+export default CounsellorTherapy;

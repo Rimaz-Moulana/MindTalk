@@ -95,7 +95,10 @@ const App = () => (
                     <Route path="/addDetails" element={<CounsellorDetailsAdd />} />
                     <Route path="/addcounsellordetails" element={<FormComponent />} />
                     <Route path="/counsellordetails" element={<GoogleSheetData />} />
+                    <Route element={<ClientLayout />}>
                     <Route path="/carosal" element={<ClientTherapySessionSuggestion />} />
+                    </Route>
+                    
 
                     {/* <Route path="/table" element={<TableData />}  /> */}
                     {/* Routes that require authentication */}
