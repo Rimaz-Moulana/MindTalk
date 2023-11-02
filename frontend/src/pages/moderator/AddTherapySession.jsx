@@ -27,9 +27,9 @@ export default function AddTherapySession() {
     setSession({...session, [name] : value});
   }
 
-const handleChange2 = (e) =>{
-  setSelectedOption(e.target.value);
-}
+// const handleChange2 = (e) =>{
+//   setSelectedOption(e.target.value);
+// }
 
 
   const onSubmit=async (e) =>{
@@ -170,7 +170,7 @@ useEffect(()=>{
     id="counsellors"
     value={selectedOption}
     name="counsellors"
-    onChange={handleChange2}
+    onChange={(e)=>{handleChange(e)}}
     className="w-full px-4 py-2 border rounded-md"
   >
     <option value="">Select a Counsellor</option>
@@ -191,8 +191,8 @@ useEffect(()=>{
         onChange={(e)=>handleChange(e)}
         className="w-full px-4 py-2 border rounded-md"
       >
-        <option value="individual">Individual</option>
-        <option value="couples">Couples</option>
+        {/* <option value="individual">Individual</option> */}
+        <option value="couples">Select Session Type</option>
         <option value="group">Group</option>
       </select>
     </div>

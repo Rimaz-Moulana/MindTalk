@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ClientdashCards from '../../components/ClientDashboard/ClientdashCards';
 import ClientCalender from '../../components/ClientDashboard/ClientCalender';
 import ClientHead from '../../components/ClientDashboard/ClientHead';
-import AuthContext from '../../context/AuthProvider';
-import ClientTherapySessionSuggestion from './ClientTherapySessionSuggestion';
 import StepperWithContent from '../../components/ClientDashboard/StepperWithContent';
+import AuthContext from '../../context/AuthProvider';
+import ReviewCarousel from './ReviewCarousel';
 
 const ClientDashboard = () => {
   const { auth } = useContext(AuthContext);
@@ -37,9 +36,11 @@ const ClientDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap gap-4">
-        <ClientTherapySessionSuggestion />
-      </div>
+      {/* <div className="flex flex-wrap gap-4"> */}
+        {/* <ClientTherapySessionSuggestion /> */}
+        {/* <ClientCarousel /> */}
+        <ReviewCarousel />
+      {/* </div> */}
     </div>
   );
 };

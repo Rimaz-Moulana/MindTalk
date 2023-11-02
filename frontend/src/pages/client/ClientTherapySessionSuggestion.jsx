@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { default as React, useEffect, useState } from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 export default function ClientTherapySessionSuggestion() {
     const [sessions, setSessions] = useState([])
@@ -42,22 +41,14 @@ export default function ClientTherapySessionSuggestion() {
     },[ ])
 
 
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true
-    };
     
   return (
-        <div className='w-3/4 m-auto'>
-            <div className='mt-2'>
-            <Slider {...settings}>
+        // <div className='w-3/4 m-auto'>
+        //     <div className='mt-2'>
+            <Carousel showArrows={true} showStatus={false} showThumbs={false} autoPlay={true} infiniteLoop={true}>
                 {sessions.map((d,i) => (
-                    <div key={i} className='bg-white h-[270px] rounded-xl'>
-                        <div  className='h-56  text-black rounded-t-xl flex flex-col items-center gap-4 p-4'>
+                    <div key={i}  className='bg-white h-[270px] rounded-xl'>
+                        <div  className=' text-black rounded-t-xl flex flex-col justify-center items-center'>
                             <p className='text-xl font-semibold'>Session Type:{d.sessionType}</p>
                             <p>Session Time:{d.time}</p>
                             <p>Session Date:{d.date}</p>
@@ -65,11 +56,11 @@ export default function ClientTherapySessionSuggestion() {
                             <a className='text-blue-500' href={d.link}>Call Link</a>
                             <button className='bg-blue-700 w-[200px] rounded-xl p-2 text-white font-semibold flex flex-col items-center'>Reserve</button>
                         </div>
-                       
                     </div>
                 ))}
-                </Slider>
-            </div>
-        </div>
+                </Carousel>
+        //     </div>
+        // </div>
   )
 }
+

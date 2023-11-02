@@ -1,11 +1,12 @@
 import { React, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import dp from '../assets/dp.png'
 
 
 function ProfileDetails({counsellorData}) {
 
-  const { firstname, lastname, email, city, address, phone, jobRole, degree, workplace, coreServices, scopeOfPractice, experience, ageGroup, language, joinDate} = counsellorData
+  const { profilePhotoPath, firstname, lastname, email, city, address, phone, jobRole, degree, workplace, coreServices, scopeOfPractice, experience, ageGroup, language, joinDate} = counsellorData
   
 
   return (
@@ -16,7 +17,7 @@ function ProfileDetails({counsellorData}) {
         </div>
         <img
           className="absolute w-40 h-40 transform -translate-x-1/2 -translate-y-1/2 rounded-full mt-60 left-1/2"
-          src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg"
+          src={profilePhotoPath ? `../../../src/assets/profilephotos/${profilePhotoPath}` : dp}
           alt="User's Profile"
         />
       </div>

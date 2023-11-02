@@ -37,7 +37,8 @@ const CounsellorClientProfile = () => {
       emName3: '',
       emPhone1: '',
       emPhone2: '',
-      emPhone3: ''
+      emPhone3: '',
+      profilePhotoPath: ''
   });
 
   useEffect(() => {
@@ -74,7 +75,8 @@ const CounsellorClientProfile = () => {
                   emName3: clientData.emName3,
                   emPhone1: clientData.emPhone1,
                   emPhone2: clientData.emPhone2,
-                  emPhone3: clientData.emPhone3
+                  emPhone3: clientData.emPhone3,
+                  profilePhotoPath: clientData.profilePhotoPath,
               });
           }
       }
@@ -82,6 +84,11 @@ const CounsellorClientProfile = () => {
         console.error('Error fetching client profile:', error);
     }
   };
+
+  // Assign clientData.profilePhotoPath to imagePath
+  // const imagePath = client.profilePhotoPath
+  //   ? `../../../src/assets/profilephotos/${client.profilePhotoPath}`
+  //   : dp; 
 
   const [testResults, setTestResults] = useState([]);
   const [testResultsList, setTestResultsList] = useState([]);
