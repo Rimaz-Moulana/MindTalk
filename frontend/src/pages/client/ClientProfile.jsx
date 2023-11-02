@@ -673,7 +673,7 @@ const Profile = () => {
           profilePhoto={profilePhoto}
           profilePhotoPath={user.profilePhotoPath}
         />
-        <FileUpload />
+        {/* <FileUpload /> */}
         
       </div>
 

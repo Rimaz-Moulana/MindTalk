@@ -8,8 +8,6 @@ const Navbar = () => {
 
 
 
-
-
     return (
         <nav className="flex items-center justify-between w-full py-6 navbar">
             <img src={logodark} alt="MindTalk" className="w-[80px] h-[80px] flex rounded-full " />
@@ -22,7 +20,7 @@ const Navbar = () => {
                         key={nav.id}
                         className={`font-poppins text-xl font-semibold cursor-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mr-10'} text-darkblue `}
                     >
-                        <a href={`#${nav.id}`} >
+                        <a href={`${nav.id}`} >
                             {nav.title}
 
                         </a>
@@ -53,19 +51,14 @@ const Navbar = () => {
                                 key={nav.id}
                                 className={`font-poppins font-normal cursor-pointer text-[16px] ${index === navLinks.length - 1 ? 'mr-0' : 'mb-4'} text-darkblue `}
                             >
-                                <a href={`#${nav.id}`} >
+                                <a href={`${nav.id}`} >
                                     {nav.title}
 
                                 </a>
                             </li>
                         ))}
                     </ul>
-
-
-
-
-
-
+                    
                 </div>
 
             </div>

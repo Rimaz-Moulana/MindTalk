@@ -1,4 +1,4 @@
-import { people01, people02, people03, facebook, instagram, linkedin, twitter, who, medicaid, healthline, dropbox, send, shield, star, img1, img2, img3 } from "../assets";
+import { dropbox, facebook, healthline, img1, img2, img3, instagram, linkedin, medicaid, people01, people02, people03, send, shield, star, twitter, who } from "../assets";
 
 export const navLinks = [
   {
@@ -10,12 +10,12 @@ export const navLinks = [
     title: "Testimonials",
   },
   {
-    id: "features",
-    title: "Diagnostic Test",
+    id: "adddetails",
+    title: "Join as counsellor",
   },
  
   {
-    id: "product",
+    id: "",
     title: "Join",
   },
 

@@ -22,6 +22,8 @@ const CounsellorDetailsAdd = () => {
   // const formData = new FormData();
 
   const handeleSubmit = (e) => {
+    const confirmed = window.confirm("your details have been sent.");
+    if(confirmed){
     if(firstname && lastname && email && licenseNo && licenseImage){
       const newData = {id: idCounter, firstname, lastname,email,licenseNo,licenseImage};
       setIdCounter(idCounter+1);
@@ -55,7 +57,7 @@ const CounsellorDetailsAdd = () => {
       //   .then((res)=> {setImageUrl(res.secure_url);
       //   })
       //   .catch((err) => console.log(err));
-
+    }
         
   };
 
