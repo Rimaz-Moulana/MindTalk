@@ -17,11 +17,33 @@ export default function WalletGraph() {
     };
 
     const handleWithdraw = () => {
-        // Implement your withdrawal logic here
-        // You can access withdrawalData.amount, withdrawalData.bankName, etc. here
-        // Send this data to your API or perform any other necessary actions
-        console.log('Withdrawal Data:', withdrawalData);
+        // Check if all form fields are filled
+        if (
+            withdrawalData.amount &&
+            withdrawalData.bankName &&
+            withdrawalData.accountName &&
+            withdrawalData.receiverName
+        ) {
+            // Store the amount in local storage
+            localStorage.setItem('amount', withdrawalData.amount);
+    
+            // Clear the form fields by resetting the state
+            setWithdrawalData({
+                amount: '',
+                bankName: '',
+                accountName: '',
+                receiverName: '',
+            });
+    
+            // Show an alert when the form is submitted
+            window.alert('Successfully withdraw money');
+        } else {
+            // Show an alert if any of the form fields are not filled
+            window.alert('Please fill out all form fields');
+        }
     };
+    
+    
 
     return (
         <div className="col-span-1 row-span-2">
@@ -48,15 +70,20 @@ export default function WalletGraph() {
                     <label htmlFor="bankName" className="block text-m font-medium text-gray-700">
                         Bank Name
                     </label>
-                    <input
-                        type="text"
+                    <select
                         id="bankName"
                         name="bankName"
                         value={withdrawalData.bankName}
                         onChange={handleChange}
-                        placeholder="Enter bank name"
                         className="mt-1 p-2 border rounded-md w-64"
-                    />
+                    >
+                        <option value="">Select a bank</option>
+                        <option value="1">Bank of Ceylon</option>
+                        <option value="2">Commercial Bank</option>
+                        <option value="3">NDB Bank</option>
+                        <option value="4">People's Bank</option>
+                        <option value="5">Sampath Bank</option>
+                    </select>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="accountName" className="block text-m font-medium text-gray-700">
