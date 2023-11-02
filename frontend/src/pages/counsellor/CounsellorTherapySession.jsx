@@ -13,7 +13,7 @@ const CounsellorTherapy = () => {
         const authData = localStorage.getItem('authData');
         console.log(authData)
         if(authData){
-          const {accessToken} = JSON.parse(authData);
+          const {accessToken , id } = JSON.parse(authData);
           console.log(accessToken)
           const config = {
             headers: {
