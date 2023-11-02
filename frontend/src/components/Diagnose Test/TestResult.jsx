@@ -60,7 +60,7 @@ const TestResult = () => {
         </p>
         <br />
         <div className="text-center">
-          <Link to="/client" className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200">
+          <Link to="/diagnostictest" className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200">
             Go Back
           </Link>
         </div>

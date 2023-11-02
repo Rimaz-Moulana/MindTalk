@@ -7,12 +7,6 @@ export const WALLET_SIDEBAR_LINKS = [
 		path: '/counsellor/wallet',
 		icon: <FiPocket />
 	},
-	{
-		key: 'transhistory',
-		label: 'Transaction History',
-		path: '/counsellor/wallet/transhistory',
-		icon: <FiDollarSign />
-	},
 	
 	{
 		key: 'dashoboard',

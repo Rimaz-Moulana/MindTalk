@@ -46,4 +46,10 @@ public class AddTherapySessionController {
     public List<AddTherapySessionDTO> getAllSession(){
         return addTherapySessionService.getAllTherapySession();
     }
+
+//    @GetMapping("/{sessionID}/getSession")
+//    @CrossOrigin(origins = "${app.cors.allowed-origins}",allowCredentials = "true")
+//    public List<AddTherapySessionDTO> getAllSession(){
+//        return addTherapySessionService.getAllTherapySession();
+//    }
 }
