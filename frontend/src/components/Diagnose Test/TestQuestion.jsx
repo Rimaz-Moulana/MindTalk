@@ -49,23 +49,58 @@ const TestQuestion = () => {
                     },
                     withCredentials: true
                 };
-
+    
                 const requestData = {
                     userId: id,
                     score: totalScore
                 };
+    
                 const response = await axios.post(
                     'http://localhost:8080/api/v1/test/send-test-results',
-                    requestData, // Pass the request data directly
-                    config // Pass the config object
+                    requestData,
+                    config
                 );
-
+    
+                let emailMessage = "Invalid depression level.";
+    
+                switch (true) {
+                    case totalScore >= 0 && totalScore <= 4:
+                        emailMessage = "You might not need depression treatments. If you feel the need, you can connect with counselors for guidance.";
+                        break;
+                    case totalScore >= 5 && totalScore <= 9:
+                        emailMessage = "It's a good idea to use clinical judgment about treatment, based on your duration of symptoms and functional impairment. Connecting with counselors can help guide you.";
+                        break;
+                    case totalScore >= 10 && totalScore <= 14:
+                        emailMessage = "It's advisable to use clinical judgment about treatment, based on your duration of symptoms and functional impairment. Counselors can provide guidance in this regard.";
+                        break;
+                    case totalScore >= 15 && totalScore <= 19:
+                        emailMessage = "Treatment options include antidepressants, psychotherapy, or a combination of both. Connecting with counselors can help you decide the best approach.";
+                        break;
+                    case totalScore >= 20 && totalScore <= 27:
+                        emailMessage = "Considering treatment options like antidepressants with or without psychotherapy is recommended. Counselors can provide valuable insights and support.";
+                        break;
+                }
+    
+                const requestMailData = {
+                    recipient: "kanishkasewwandi380@gmail.com",
+                    msgBody: emailMessage + "We recomended you to join to our community.",
+                    subject: "Mind Talk - Depression Diagnostic Test Results"
+                };
+    
+                const mailResponse = await axios.post(
+                    'http://localhost:8080/sendMail',
+                    requestMailData,
+                    config
+                );
+    
                 console.log(response.data);
+                console.log(mailResponse.data);
             }
         } catch (error) {
             console.error('Error sending test results:', error);
         }
     };
+    
 
 
     if (questions.length === 0) {

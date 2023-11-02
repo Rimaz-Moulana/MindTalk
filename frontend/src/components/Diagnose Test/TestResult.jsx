@@ -51,13 +51,7 @@ const TestResult = () => {
           We have sent the results to your email.<br />
           Check your email.
         </p>
-        <p className="text-xl font-semibold mt-4 text-center">Your score is: {score}/28</p>
-        <p className="text-center mt-2">
-          <span className="text-xl font-bold text-blue-500">Depression level: {depressionLevel}</span><br />
-          <br>
-          </br>
-          <span className="text-m font-semibold ">{action}</span>
-        </p>
+        
         <br />
         <div className="text-center">
           <Link to="/diagnostictest" className="h-12 px-4 text-lg bg-white text-black border border-blue-500 rounded-md cursor-pointer hover:bg-gray-200">
