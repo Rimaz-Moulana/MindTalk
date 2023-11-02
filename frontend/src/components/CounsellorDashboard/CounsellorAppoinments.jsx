@@ -6,8 +6,17 @@ export default function CounsellorAppointments() {
   const [userFullNames, setUserFullNames] = useState({});
 
   useEffect(() => {
-    fetchAppointmentRequests();
+    fetchAppointmentRequests(); // Initial fetch
+  
+    // Set up a timer to fetch data every 100 milliseconds
+    const intervalId = setInterval(fetchAppointmentRequests, 100);
+  
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
+  
 
   const fetchAppointmentRequests = async () => {
     try {

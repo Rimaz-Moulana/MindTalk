@@ -23,6 +23,12 @@ function StepperWithContent() {
 
   useEffect(() => {
     fetchRequests();
+    const intervalId = setInterval(fetchRequests, 100);
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const fetchRequests = async () => {
