@@ -41,4 +41,9 @@ public class AddTherapySessionService {
         return modelMapper.map(addTherapySessions, new TypeToken<List<AddTherapySessionDTO>>(){}.getType());
     }
 
+//    public List<AddTherapySessionDTO> getTherapySessionByID(Long user_id){
+//        List<AddTherapySession> addTherapySessions = addTherapySessionRepository.findAllById(user_id);
+//    }
+
+
 }

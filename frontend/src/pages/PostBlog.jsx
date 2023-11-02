@@ -158,7 +158,7 @@ const PostBlog = () => {
             </select>
           </div>
 
-          <div>
+          {/* <div>
         <label htmlFor="coverImage" className="block ml-10 text-lg font-medium text-gray-700">
             Cover Image
         </label>
@@ -168,7 +168,7 @@ const PostBlog = () => {
           coverImage={coverImage}
         />
 
-    </div>
+    </div> */}
 
 
           <div>
