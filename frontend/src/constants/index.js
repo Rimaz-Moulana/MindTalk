@@ -15,7 +15,7 @@ export const navLinks = [
   },
  
   {
-    id: "product",
+    id: "",
     title: "Join",
   },
 
