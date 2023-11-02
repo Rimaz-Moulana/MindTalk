@@ -8,8 +8,6 @@ const Navbar = () => {
 
 
 
-
-
     return (
         <nav className="flex items-center justify-between w-full py-6 navbar">
             <img src={logodark} alt="MindTalk" className="w-[80px] h-[80px] flex rounded-full " />
@@ -60,12 +58,7 @@ const Navbar = () => {
                             </li>
                         ))}
                     </ul>
-
-
-
-
-
-
+                    
                 </div>
 
             </div>
