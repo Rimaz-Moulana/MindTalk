@@ -67,38 +67,84 @@ const ChatApp = () => {
         fetchUserChats(userId)
     }, [])
 
-    useEffect(() => {
-        // Fetch messages only if a chat is selected
-        if (selectedChatId) {
-            const fetchMessages = async () => {
-                try {
-                    const authData = localStorage.getItem('authData')
-                    if (authData) {
-                        const { accessToken } = JSON.parse(authData)
-                        const config = {
-                            headers: {
-                                Authorization: `Bearer ${accessToken}`,
-                                'Content-Type': 'application/json'
-                            },
-                            withCredentials: true
-                        }
-
-                        const response = await axios.get(
-                            `http://localhost:8080/api/v1/messages/getMessages/${selectedChatId}`,
-                            config
-                        )
-
-                        // Assuming that the response contains messages
-                        setMessages(response.data)
-                    }
-                } catch (error) {
-                    console.error('Error fetching messages:', error)
+    // Define the fetchMessages function outside the useEffect
+    const fetchMessages = async (selectedChatId) => {
+        try {
+            const authData = localStorage.getItem('authData')
+            if (authData) {
+                const { accessToken } = JSON.parse(authData)
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
                 }
-            }
 
-            fetchMessages()
+                const response = await axios.get(
+                    `http://localhost:8080/api/v1/messages/getMessages/${selectedChatId}`,
+                    config
+                )
+
+                // Assuming that the response contains messages
+                setMessages(response.data)
+            }
+        } catch (error) {
+            console.error('Error fetching messages:', error)
+        }
+    }
+
+    useEffect(() => {
+        // Fetch messages initially
+        if (selectedChatId) {
+            fetchMessages(selectedChatId)
+        }
+
+        // Set up an interval to fetch messages every 100 milliseconds
+        const intervalId = setInterval(() => {
+            if (selectedChatId) {
+                fetchMessages(selectedChatId)
+            }
+        }, 100)
+
+        // Clean up the interval when the component unmounts or when selectedChatId changes
+        return () => {
+            clearInterval(intervalId)
         }
     }, [selectedChatId])
+
+    // useEffect(() => {
+    //     // Fetch messages only if a chat is selected
+    //     if (selectedChatId) {
+    //         const fetchMessages = async () => {
+    //             try {
+    //                 const authData = localStorage.getItem('authData')
+    //                 if (authData) {
+    //                     const { accessToken } = JSON.parse(authData)
+    //                     const config = {
+    //                         headers: {
+    //                             Authorization: `Bearer ${accessToken}`,
+    //                             'Content-Type': 'application/json'
+    //                         },
+    //                         withCredentials: true
+    //                     }
+
+    //                     const response = await axios.get(
+    //                         `http://localhost:8080/api/v1/messages/getMessages/${selectedChatId}`,
+    //                         config
+    //                     )
+
+    //                     // Assuming that the response contains messages
+    //                     setMessages(response.data)
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Error fetching messages:', error)
+    //             }
+    //         }
+
+    //         fetchMessages()
+    //     }
+    // }, [selectedChatId])
 
     const fetchCounselorDetails = async (counselorId) => {
         try {
