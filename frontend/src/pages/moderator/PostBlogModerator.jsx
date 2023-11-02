@@ -37,13 +37,13 @@ const PostBlogModerator = () => {
           config
         );
 
-        // if (response.status === 200) {
-        //   console.log('Blog post successful!');
-        //   alert("Blog post completed");
-        // } else {
-        //   console.log('Blog post failed. Please try again.');
-        //   alert("Blog post failed. Please try again.");
-        // }
+        if (response.status === 200) {
+          console.log('Blog post successful!');
+          alert("Blog post successful! The moderator will check and accept the blog to post");
+        } else {
+          console.log('Blog post failed. Please try again.');
+          alert("Blog post successful! The moderator will check and accept the blog to post.");
+        }
 
         // Optionally, you can redirect to the blogs page or clear the form here
         window.location.href = '../ModeratorBlogs';
